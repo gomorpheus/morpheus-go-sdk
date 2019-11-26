@@ -7,7 +7,7 @@ import (
 	"os"
 	_ "strconv"
 	_ "encoding/json"
-	"github.com/gomorpheus/morpheusapi"
+	"github.com/gomorpheus/morpheus-go/morpheusapi"
 )
 
 var (

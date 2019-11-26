@@ -2,7 +2,7 @@ package morpheusapi_test
 
 import (
 	"testing"
-	"github.com/gomorpheus/morpheusapi"
+	"github.com/gomorpheus/morpheus-go/morpheusapi"
 )
 
 func TestListClouds(t *testing.T) {

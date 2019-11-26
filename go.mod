@@ -1,4 +1,4 @@
-module github.com/gomorpheus/morpheusapi
+module github.com/gomorpheus/morpheus-go/morpheusapi
 
 go 1.13
 

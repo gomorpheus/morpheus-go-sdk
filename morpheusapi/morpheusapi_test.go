@@ -9,7 +9,7 @@ import (
 	_ "os"
 	"reflect"
 	"testing"
-	"github.com/gomorpheus/morpheusapi"
+	"github.com/gomorpheus/morpheus-go/morpheusapi"
 )
 
 //‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
