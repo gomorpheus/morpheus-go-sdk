@@ -32,7 +32,7 @@ export PATH=$PATH:$GOPATH/bin
 Install this package using `go get`.
 
 ```bash
-go get -v github.com/gomorpheus/morpheusapi/...
+go get -v github.com/gomorpheus/morpheus-go/morpheusapi/...
 ```
 
 ## Example Usage
@@ -90,7 +90,7 @@ fmt.Sprintf("Found %d Instances.", instancesCount)
 You can execute the latest tests using:
 
 ```bash
-git clone github.com/gomorpheus/morpheusapi
+git clone github.com/gomorpheus/morpheus-go/morpheusapi
 cd morpheusapi
 go test
 ```
@@ -100,7 +100,7 @@ The above command will (ideally) print results like this:
 ```
 Initializing test client for tfplugin @ https://yourmorpheus
 PASS
-ok      github.com/gomorpheus/morpheusapi   1.098s
+ok      github.com/gomorpheus/morpheus-go/morpheusapi   1.098s
 ```
 
 Running `go test` will fail with a panic right away if you have not yet setup your test environment variables.  
