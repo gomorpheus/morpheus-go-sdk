@@ -185,7 +185,7 @@ group_policies | n/a
 groups | [Groups](groups.go)
 image_builder | n/a
 instance_types | n/a
-instances [Instances](instances.go)
+instances | [Instances](instances.go)
 key_pairs | n/a
 library_compute_type_layouts | n/a
 library_container_scripts | n/a
