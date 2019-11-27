@@ -89,7 +89,7 @@ func assertResponse(t *testing.T, resp *morpheus.Response, err error) {
 	} else {
 		if resp.Success != true {
 			t.Errorf("API Response Error [%v]", err)
-			printApiFailure(t, resp, err)
+			logFailure(t, resp, err)
 		} else {
 			// success
 			// logResponse(t, resp)
@@ -123,7 +123,7 @@ func assertResponseStatusCode(t *testing.T, resp *morpheus.Response, statusCode 
 //todo: make this pretty
 // just use logResponse always probably
 
-func printApiFailure(t *testing.T, resp *morpheus.Response, err error) {
+func logFailure(t *testing.T, resp *morpheus.Response, err error) {
 	t.Logf("API FAILUREt: %v", resp)
 	if err != nil {
 		t.Logf("ERROR: %v", err)
