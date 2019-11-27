@@ -73,6 +73,8 @@ if err != nil {
 fmt.Println("WHOAMI RESPONSE:", resp)
 ```
 
+**NOTE** It is not necessary to call `client.Login()` explicitely. The client will attempt to authenticate, if needed, whenever `Execute()` is called.
+
 ### Execute Any Request
 
 You can also use the `Execute` method to execute an arbitrary api request, using any http method, path parameters, and body.
