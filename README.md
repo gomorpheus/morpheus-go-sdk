@@ -50,6 +50,7 @@ Here are some examples of how to use `morpheus.Client`.
 Instantiate a new client and authenticate.
 
 ```go
+import "github.com/gomorpheus/morpheus-go-sdk"
 client := morpheus.NewClient("https://yourmorpheus.com")
 client.SetUsernameAndPassword("username", "password")
 resp, err := client.Login()
@@ -57,6 +58,19 @@ if err != nil {
     fmt.Println("LOGIN ERROR: ", err)
 }
 fmt.Println("LOGIN RESPONSE:", resp)
+```
+
+You can also create a client with a valid access token, instead of authenticating with a username and password.
+
+```go
+import "github.com/gomorpheus/morpheus-go-sdk"
+client := morpheus.NewClient("https://yourmorpheus.com")
+client.SetAccessToken("a3a4c6ea-fb54-42af-109b-63bdd19e5ae1", "", 0, "write")
+resp, err := client.Whoami()
+if err != nil {
+    fmt.Println("WHOAMI ERROR: ", err)
+}
+fmt.Println("WHOAMI RESPONSE:", resp)
 ```
 
 ### Execute Any Request
@@ -68,7 +82,7 @@ resp, err := client.Execute(&morpheus.Request{
     Method: "GET",
     Path: "/api/instances",
     QueryParams:map[string]string{
-        "name": name,
+        "name": "tftest",
     },
 })
 if err != nil {
