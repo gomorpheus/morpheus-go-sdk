@@ -12,7 +12,7 @@ This is being developed in conjunction with the [Morpheus Terraform Provider](ht
 
 ## Setup
 
-Install Go, export environment variables, go get morpheus and being executing requests.
+Install Go, export environment variables, go get the morpheus package and begin executing requests.
 
 ## Requirements
 
