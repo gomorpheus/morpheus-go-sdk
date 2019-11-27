@@ -1,7 +1,7 @@
 // Morpheus option source endpoints.
 // This provides data for driving select options, for example during provisioning.
 
-package morpheusapi
+package morpheus
 
 import (
     "fmt"

@@ -1,5 +1,5 @@
 // Defines types that are commonly used in api request and responses
-package morpheusapi
+package morpheus
 
 import (
     _ "fmt"

@@ -1,7 +1,7 @@
 // Provides logging functions for use like logDebug("foobar") and logInfo("baz")
-// Use `export MORPHEUS_API_LOG_LEVEL=DEBUG to print more output
+// Use `export MORPHEUS_LOG_LEVEL=DEBUG to print more output
 // The default log level is INFO
-package morpheusapi
+package morpheus
 
 import (
 	"fmt"
@@ -20,14 +20,14 @@ var (
 	DefaultLogLevel = "INFO"
 	logLevel string
 	logLevelValue int
-	// MORPHEUS_API_LOG_LEVEL = strings.ToUpper(os.Getenv("MORPHEUS_API_LOG_LEVEL"))
+	// MORPHEUS_LOG_LEVEL = strings.ToUpper(os.Getenv("MORPHEUS_LOG_LEVEL"))
 
-	// DEBUG = (MORPHEUS_API_LOG_LEVEL == "DEBUG")
+	// DEBUG = (MORPHEUS_LOG_LEVEL == "DEBUG")
 	// logger = Logger{Level:"DEBUG"}
 )
 
 func init() {
-	envLogLevel := strings.ToUpper(os.Getenv("MORPHEUS_API_LOG_LEVEL"))
+	envLogLevel := strings.ToUpper(os.Getenv("MORPHEUS_LOG_LEVEL"))
 	if envLogLevel != "" {
 		SetLogLevel(envLogLevel)
 	} else {

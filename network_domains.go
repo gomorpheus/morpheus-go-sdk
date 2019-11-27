@@ -1,5 +1,5 @@
 // Morpheus API types and Client methods for Network Domains
-package morpheusapi
+package morpheus
 
 import (
     "fmt"

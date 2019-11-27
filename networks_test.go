@@ -1,4 +1,4 @@
-package morpheusapi_test
+package morpheus_test
 
 import (
 	"testing"
@@ -6,31 +6,31 @@ import (
 )
 
 var (
-	testNetworkName = "morpheusapi-test-network"
+	testNetworkName = "golangtest-network"
 )
 
 func TestListNetworks(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.ListNetworks(req)
 	assertResponse(t, resp, err)
 }
 
 func TestGetNetwork(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.ListNetworks(req)
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
 
-	result := resp.Result.(*morpheusapi.ListNetworksResult)
+	result := resp.Result.(*morpheus.ListNetworksResult)
 	recordCount := result.Meta.Total
 	t.Logf("Found %d Network Domains.", recordCount)
 	if recordCount != 0 {
 		// Get by ID
 		record := (*result.Networks)[0]
-		resp, err = client.GetNetwork(record.ID, &morpheusapi.Request{})
+		resp, err = client.GetNetwork(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
 
 		// List by name
@@ -44,7 +44,7 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 	client := getTestClient()
 	//create
 	// this has no uniqueness check on name, it probably should..
-	req := &morpheusapi.Request{
+	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"network": map[string]interface{}{
 				"name": testNetworkName,
@@ -57,7 +57,7 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 		},
 	}
 	resp, err := client.CreateNetwork(req)
-	result := resp.Result.(*morpheusapi.CreateNetworkResult)
+	result := resp.Result.(*morpheus.CreateNetworkResult)
 	assertResponse(t, resp, err)
 	assertNotNil(t, result)
 	assertEqual(t, result.Success, true)
@@ -66,7 +66,7 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 	assertEqual(t, result.Network.Name, testNetworkName)
 
 	// update
-	updateReq := &morpheusapi.Request{
+	updateReq := &morpheus.Request{
 		Body: map[string]interface{}{
 			"network": map[string]interface{}{
 				"description": "my new description",
@@ -74,7 +74,7 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 		},
 	}
 	updateResp, updateErr := client.UpdateNetwork(result.Network.ID, updateReq)
-	updateResult := updateResp.Result.(*morpheusapi.UpdateNetworkResult)
+	updateResult := updateResp.Result.(*morpheus.UpdateNetworkResult)
 	assertResponse(t, updateResp, updateErr)
 	assertNotNil(t, updateResult)
 	assertEqual(t, updateResult.Success, true)
@@ -83,9 +83,9 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 	assertEqual(t, updateResult.Network.Description, "my new description")
 	
 	// delete
-	deleteReq := &morpheusapi.Request{}
+	deleteReq := &morpheus.Request{}
 	deleteResp, deleteErr := client.DeleteNetwork(result.Network.ID, deleteReq)
-	deleteResult := deleteResp.Result.(*morpheusapi.DeleteNetworkResult)
+	deleteResult := deleteResp.Result.(*morpheus.DeleteNetworkResult)
 	assertResponse(t, deleteResp, deleteErr)
 	assertNotNil(t, deleteResult)
 	assertEqual(t, deleteResult.Success, true)

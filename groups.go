@@ -1,5 +1,5 @@
 // Morpheus API types and Client methods for Groups (Sites)
-package morpheusapi
+package morpheus
 
 import (
     "fmt"

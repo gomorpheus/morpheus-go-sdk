@@ -1,5 +1,5 @@
-// This provides common functions for all morpheusapi.Client tests.
-package morpheusapi_test
+// This provides common functions for all morpheus.Client tests.
+package morpheus_test
 
 import (
 	"testing"
@@ -11,14 +11,14 @@ import (
 )
 
 var (
-	// DEBUG = (os.Getenv("MORPHEUS_API_DEBUG") == "true")
-	testUrl = os.Getenv("MORPHEUS_API_TEST_URL")
-	testUsername = os.Getenv("MORPHEUS_API_TEST_USERNAME")
-	testPassword = os.Getenv("MORPHEUS_API_TEST_PASSWORD")
+	// DEBUG = (os.Getenv("MORPHEUS_DEBUG") == "true")
+	testUrl = os.Getenv("MORPHEUS_TEST_URL")
+	testUsername = os.Getenv("MORPHEUS_TEST_USERNAME")
+	testPassword = os.Getenv("MORPHEUS_TEST_PASSWORD")
 	// testUrl                  string
 	// testUsername             string
 	// testPassword             string
-	sharedTestClient         *morpheusapi.Client
+	sharedTestClient         *morpheus.Client
 )
 
 
@@ -42,38 +42,38 @@ var (
 // 	}
 // }
 
-func getNewClient() (*morpheusapi.Client) {
+func getNewClient() (*morpheus.Client) {
 	if testUrl == "" {
-		panic("MORPHEUS_API_TEST_URL must be set to to run tests")
+		panic("MORPHEUS_TEST_URL must be set to to run tests")
 	}
-	// testUsername = os.Getenv("MORPHEUS_API_TEST_USERNAME")
+	// testUsername = os.Getenv("MORPHEUS_TEST_USERNAME")
 	// if testUsername == "" {
-	// 	panic("MORPHEUS_API_TEST_USERNAME must be set to to run tests")
+	// 	panic("MORPHEUS_TEST_USERNAME must be set to to run tests")
 	// }
-	// testPassword = os.Getenv("MORPHEUS_API_TEST_PASSWORD")
+	// testPassword = os.Getenv("MORPHEUS_TEST_PASSWORD")
 	// if testUsername == "" {
-	// 	panic("MORPHEUS_API_TEST_PASSWORD must be set to to run tests")
+	// 	panic("MORPHEUS_TEST_PASSWORD must be set to to run tests")
 	// }
 	//fmt.Println(fmt.Sprintf("Initializing new client for %v @ %v", testUrl, testUsername))
-	client := morpheusapi.NewClient(testUrl)
+	client := morpheus.NewClient(testUrl)
 	return client
 }
 
 // this does not work for some reason...
 // a client to be shared between requests.
-func getTestClient() (*morpheusapi.Client) {
+func getTestClient() (*morpheus.Client) {
 	if sharedTestClient == nil {
 		if testUrl == "" {
-			panic("MORPHEUS_API_TEST_URL must be set to to run tests.")
+			panic("MORPHEUS_TEST_URL must be set to to run tests.")
 		}
 		if testUsername == "" {
-			panic("MORPHEUS_API_TEST_USERNAME must be set to to run tests")
+			panic("MORPHEUS_TEST_USERNAME must be set to to run tests")
 		}
 		if testPassword == "" {
-			panic("MORPHEUS_API_TEST_PASSWORD must be set to to run tests")
+			panic("MORPHEUS_TEST_PASSWORD must be set to to run tests")
 		}
 		fmt.Println(fmt.Sprintf("Initializing test client for %v @ %v", testUsername, testUrl))
-		sharedTestClient = morpheusapi.NewClient(testUrl)
+		sharedTestClient = morpheus.NewClient(testUrl)
 		sharedTestClient.SetUsernameAndPassword(testUsername, testPassword)
 	}
 	return sharedTestClient
@@ -86,7 +86,7 @@ func getTestClient() (*morpheusapi.Client) {
 
 func TestGet(t *testing.T) {
 	client := getNewClient()
-	testRequest := &morpheusapi.Request{
+	testRequest := &morpheus.Request{
 		Method: "GET",
 		Path: "/api/setup/check",
 		QueryParams:map[string]string{

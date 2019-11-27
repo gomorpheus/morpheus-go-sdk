@@ -1,4 +1,4 @@
-package morpheusapi_test
+package morpheus_test
 
 import (
 	"testing"
@@ -6,31 +6,31 @@ import (
 )
 
 var (
-	testNetworkDomainName = "morpheusapi.gomorpheus.com"
+	testNetworkDomainName = "golangtest.gomorpheus.com"
 )
 
 func TestListNetworkDomains(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.ListNetworkDomains(req)
 	assertResponse(t, resp, err)
 }
 
 func TestGetNetworkDomain(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.ListNetworkDomains(req)
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
 
-	result := resp.Result.(*morpheusapi.ListNetworkDomainsResult)
+	result := resp.Result.(*morpheus.ListNetworkDomainsResult)
 	recordCount := result.Meta.Total
 	t.Logf("Found %d Network Domains.", recordCount)
 	if recordCount != 0 {
 		// Get by ID
 		record := (*result.NetworkDomains)[0]
-		resp, err = client.GetNetworkDomain(record.ID, &morpheusapi.Request{})
+		resp, err = client.GetNetworkDomain(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
 
 		// List by name
@@ -44,7 +44,7 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 	client := getTestClient()
 	//create
 	// this has no uniqueness check on name, it probably should..
-	req := &morpheusapi.Request{
+	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"networkDomain": map[string]interface{}{
 				"name": testNetworkDomainName,
@@ -56,7 +56,7 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 		},
 	}
 	resp, err := client.CreateNetworkDomain(req)
-	result := resp.Result.(*morpheusapi.CreateNetworkDomainResult)
+	result := resp.Result.(*morpheus.CreateNetworkDomainResult)
 	assertResponse(t, resp, err)
 	assertNotNil(t, result)
 	assertEqual(t, result.Success, true)
@@ -65,7 +65,7 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 	assertEqual(t, result.NetworkDomain.Name, testNetworkDomainName)
 
 	// update
-	updateReq := &morpheusapi.Request{
+	updateReq := &morpheus.Request{
 		Body: map[string]interface{}{
 			"networkDomain": map[string]interface{}{
 				"description": "my new description",
@@ -73,7 +73,7 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 		},
 	}
 	updateResp, updateErr := client.UpdateNetworkDomain(result.NetworkDomain.ID, updateReq)
-	updateResult := updateResp.Result.(*morpheusapi.UpdateNetworkDomainResult)
+	updateResult := updateResp.Result.(*morpheus.UpdateNetworkDomainResult)
 	assertResponse(t, updateResp, updateErr)
 	assertNotNil(t, updateResult)
 	assertEqual(t, updateResult.Success, true)
@@ -82,9 +82,9 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 	assertEqual(t, updateResult.NetworkDomain.Description, "my new description")
 	
 	// delete
-	deleteReq := &morpheusapi.Request{}
+	deleteReq := &morpheus.Request{}
 	deleteResp, deleteErr := client.DeleteNetworkDomain(result.NetworkDomain.ID, deleteReq)
-	deleteResult := deleteResp.Result.(*morpheusapi.DeleteNetworkDomainResult)
+	deleteResult := deleteResp.Result.(*morpheus.DeleteNetworkDomainResult)
 	assertResponse(t, deleteResp, deleteErr)
 	assertNotNil(t, deleteResult)
 	assertEqual(t, deleteResult.Success, true)

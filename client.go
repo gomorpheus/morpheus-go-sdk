@@ -1,5 +1,5 @@
 // Client is the driver for interfacing with the Morpheus API
-package morpheusapi
+package morpheus
 
 import (
     "fmt"

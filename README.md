@@ -12,7 +12,7 @@ This is being developed in conjunction with the [Morpheus Terraform Provider](ht
 
 ## Setup
 
-Install GO, export environment variables, go get morpheusapi and being executing requests.
+Install Go, export environment variables, go get morpheus and being executing requests.
 
 ## Requirements
 
@@ -37,14 +37,14 @@ go get -v github.com/gomorpheus/morpheus-go-sdk...
 
 ## Example Usage
 
-Here are some examples of how to use `morpheusapi.Client`.
+Here are some examples of how to use `morpheus.Client`.
 
 ### New Client
 
 Instantiate a new client and authenticate.
 
 ```go
-client := morpheusapi.NewClient("https://yourmorpheus")
+client := morpheus.NewClient("https://yourmorpheus")
 client.SetUsernameAndPassword("username", "password")
 resp, err := client.Login()
 if err != nil {
@@ -58,7 +58,7 @@ fmt.Println("LOGIN RESPONSE:", resp)
 You can also use the `Execute` method to execute an arbitrary api request, using any http method, path parameters, and body.
 
 ```go
-resp, err := client.Execute(&morpheusapi.Request{
+resp, err := client.Execute(&morpheus.Request{
     Method: "GET",
     Path: "/api/instances",
     QueryParams:map[string]string{
@@ -76,9 +76,9 @@ fmt.Println("API RESPONSE:", resp)
 Fetch a list of instances.
 
 ```go
-resp, err := client.ListInstances(&morpheusapi.Request{})
+resp, err := client.ListInstances(&morpheus.Request{})
 // parse JSON and fetch the first one by ID
-listInstancesResult := resp.Result.(*morpheusapi.ListInstancesResult)
+listInstancesResult := resp.Result.(*morpheus.ListInstancesResult)
 instancesCount := listInstancesResult.Meta.Total
 fmt.Sprintf("Found %d Instances.", instancesCount)
 ```
@@ -91,7 +91,6 @@ You can execute the latest tests using:
 
 ```bash
 git clone github.com/gomorpheus/morpheus-go-sdk
-cd morpheusapi
 go test
 ```
 
@@ -106,11 +105,11 @@ ok      github.com/gomorpheus/morpheus-go-sdk   1.098s
 Running `go test` will fail with a panic right away if you have not yet setup your test environment variables.  
 
 ```bash
-# morpheusapi go testing
-export MORPHEUSAPI_TEST_URL=https://yourmorpheus
-export MORPHEUSAPI_TEST_USERNAME=gotest
-export MORPHEUSAPI_TEST_PASSWORD=1978@0B3f489
-export MORPHEUSAPI_LOG_LEVEL=INFO
+# morpheus-go-sdk  go testing
+export MORPHEUS_TEST_URL=https://yourmorpheus
+export MORPHEUS_TEST_USERNAME=gotest
+export MORPHEUS_TEST_PASSWORD=1978@0B3f489
+export MORPHEUS_LOG_LEVEL=INFO
 ```
 **Be Careful running this test suite**. It creates and destroys data. Never point at any URL other than a test environment. Although, in reality, tests will not modify or destroy any pre-existing data. It could still orphan some test some data, or cause otherwise undesired effects.
 
@@ -124,10 +123,10 @@ go test -run TestGroupsCRUD
 
 #### Print Verbose Test Output
 
-To print more verbose output during testing, like response payloads, you can set `MORPHEUSAPI_LOG_LEVEL=DEBUG`. The default value is `INFO`.
+To print more verbose output during testing, like response payloads, you can set `MORPHEUS_LOG_LEVEL=DEBUG`. The default value is `INFO`.
 
 ```bash
-MORPHEUSAPI_LOG_LEVEL=DEBUG go test
+MORPHEUS_LOG_LEVEL=DEBUG go test
 ```
 
 ## Contribution

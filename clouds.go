@@ -1,6 +1,6 @@
 // Morpheus API types and Client methods for Clouds (Zones)
 // todo: API needs to switch from 'zone' to 'cloud'
-package morpheusapi
+package morpheus
 
 import (
     "fmt"

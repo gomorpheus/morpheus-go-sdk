@@ -3,4 +3,6 @@
 // license that can be found in the LICENSE file.
 // This file defines global things for the package
 
-package morpheusapi
+package morpheus
+
+// can put global stuff here if you want

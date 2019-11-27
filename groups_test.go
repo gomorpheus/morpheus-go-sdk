@@ -1,4 +1,4 @@
-package morpheusapi_test
+package morpheus_test
 
 import (
 	"testing"
@@ -11,26 +11,26 @@ var (
 
 func TestListGroups(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.ListGroups(req)
 	assertResponse(t, resp, err)
 }
 
 func TestGetGroup(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.ListGroups(req)
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
 
-	result := resp.Result.(*morpheusapi.ListGroupsResult)
+	result := resp.Result.(*morpheus.ListGroupsResult)
 	recordCount := result.Meta.Total
 	t.Logf("Found %d Groups.", recordCount)
 	if recordCount != 0 {
 		// Get by ID
 		record := (*result.Groups)[0]
-		resp, err = client.GetGroup(record.ID, &morpheusapi.Request{})
+		resp, err = client.GetGroup(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
 
 		// List by name
@@ -43,7 +43,7 @@ func TestGetGroup(t *testing.T) {
 func TestGroupsCRUD(t *testing.T) {
 	client := getTestClient()
 	//create
-	req := &morpheusapi.Request{
+	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"group": map[string]interface{}{
 				"name": testGroupName,
@@ -53,7 +53,7 @@ func TestGroupsCRUD(t *testing.T) {
 		},
 	}
 	resp, err := client.CreateGroup(req)
-	result := resp.Result.(*morpheusapi.CreateGroupResult)
+	result := resp.Result.(*morpheus.CreateGroupResult)
 	assertResponse(t, resp, err)
 	assertNotNil(t, result)
 	assertEqual(t, result.Success, true)
@@ -64,7 +64,7 @@ func TestGroupsCRUD(t *testing.T) {
 	assertEqual(t, result.Group.Location, "Test Bunker")
 
 	// update
-	updateReq := &morpheusapi.Request{
+	updateReq := &morpheus.Request{
 		Body: map[string]interface{}{
 			"group": map[string]interface{}{
 				"location": "Test Lab",
@@ -72,7 +72,7 @@ func TestGroupsCRUD(t *testing.T) {
 		},
 	}
 	updateResp, updateErr := client.UpdateGroup(result.Group.ID, updateReq)
-	updateResult := updateResp.Result.(*morpheusapi.UpdateGroupResult)
+	updateResult := updateResp.Result.(*morpheus.UpdateGroupResult)
 	assertResponse(t, updateResp, updateErr)
 	assertNotNil(t, updateResult)
 	assertEqual(t, updateResult.Success, true)
@@ -81,9 +81,9 @@ func TestGroupsCRUD(t *testing.T) {
 	assertEqual(t, updateResult.Group.Location, "Test Lab")
 	
 	// delete
-	deleteReq := &morpheusapi.Request{}
+	deleteReq := &morpheus.Request{}
 	deleteResp, deleteErr := client.DeleteGroup(result.Group.ID, deleteReq)
-	deleteResult := deleteResp.Result.(*morpheusapi.DeleteGroupResult)
+	deleteResult := deleteResp.Result.(*morpheus.DeleteGroupResult)
 	assertResponse(t, deleteResp, deleteErr)
 	assertNotNil(t, deleteResult)
 	assertEqual(t, deleteResult.Success, true)

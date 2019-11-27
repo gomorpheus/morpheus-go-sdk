@@ -1,7 +1,7 @@
-// Test Package for the Morpheus API (morpheusapi).
+// Test Package for the morpheus-go-sdk package.
 // This file defines global assertion methods for use in your tests.
 
-package morpheusapi_test
+package morpheus_test
 
 import (
 	_ "fmt"
@@ -82,7 +82,7 @@ func isNil(v interface{}) bool {
 	return false
 }
 
-func assertResponse(t *testing.T, resp *morpheusapi.Response, err error) {
+func assertResponse(t *testing.T, resp *morpheus.Response, err error) {
 	assertError(t, err)
 	if resp == nil {
 		t.Errorf("API Response was nil")
@@ -98,7 +98,7 @@ func assertResponse(t *testing.T, resp *morpheusapi.Response, err error) {
 	
 }
 
-func assertBadResponse(t *testing.T, resp *morpheusapi.Response, err error) {
+func assertBadResponse(t *testing.T, resp *morpheus.Response, err error) {
 	assertErrorNotNil(t, err)
 	if resp == nil {
 		t.Errorf("API Response was nil")
@@ -113,7 +113,7 @@ func assertBadResponse(t *testing.T, resp *morpheusapi.Response, err error) {
 	}
 }
 
-func assertResponseStatusCode(t *testing.T, resp *morpheusapi.Response, statusCode int) {
+func assertResponseStatusCode(t *testing.T, resp *morpheus.Response, statusCode int) {
 	if resp.StatusCode != statusCode {
 		t.Errorf("Expected API response status to be %d and got [%d]", statusCode, resp.StatusCode)
 		logResponse(t, resp)
@@ -123,7 +123,7 @@ func assertResponseStatusCode(t *testing.T, resp *morpheusapi.Response, statusCo
 //todo: make this pretty
 // just use logResponse always probably
 
-func printApiFailure(t *testing.T, resp *morpheusapi.Response, err error) {
+func printApiFailure(t *testing.T, resp *morpheus.Response, err error) {
 	t.Logf("API FAILUREt: %v", resp)
 	if err != nil {
 		t.Logf("ERROR: %v", err)
@@ -131,7 +131,7 @@ func printApiFailure(t *testing.T, resp *morpheusapi.Response, err error) {
 }
 
 
-func logResponse(t *testing.T, resp *morpheusapi.Response) {
+func logResponse(t *testing.T, resp *morpheus.Response) {
 	t.Logf("API RESPONSE: %v", resp)
 	// need resp.restyResponse for this
 	// t.Logf("Response Status: %v", resp.Status())

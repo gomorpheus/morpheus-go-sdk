@@ -1,4 +1,4 @@
-package morpheusapi_test
+package morpheus_test
 
 import (
 	"testing"
@@ -8,7 +8,7 @@ import (
 
 func TestSetupCheck(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{}
+	req := &morpheus.Request{}
 	resp, err := client.SetupCheck(req)
 	assertResponse(t, resp, err)
 }
@@ -16,7 +16,7 @@ func TestSetupCheck(t *testing.T) {
 
 // func TestSetupInit(t *testing.T) {
 // 	client := getTestClient()
-// 	req := &morpheusapi.Request{
+// 	req := &morpheus.Request{
 // 		Body: map[string]interface{}{
 // 			"accountName": "root",
 // 			"firstName": "Super",
@@ -32,7 +32,7 @@ func TestSetupCheck(t *testing.T) {
 // It should expect to be already setup
 func TestSetupInitShouldBeAlreadySetup(t *testing.T) {
 	client := getTestClient()
-	req := &morpheusapi.Request{
+	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"accountName": "root",
 			"firstName": "Super",

@@ -1,4 +1,4 @@
-package morpheusapi
+package morpheus
 
 import (
     "fmt"
