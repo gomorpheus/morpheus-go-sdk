@@ -29,13 +29,19 @@ export PATH=$PATH:$GOPATH/bin
 
 ### Installation
 
-Install this package using `go get`.
+Use go get to retrieve the SDK to add it to your GOPATH workspace, or project's Go module dependencies.
 
-```bash
-go get -v github.com/gomorpheus/morpheus-go-sdk...
+```sh
+go get github.com/gomorpheus/morpheus-go-sdk
 ```
 
-## Example Usage
+To update the SDK use go get -u to retrieve the latest version of the SDK.
+
+```sh
+go get -u github.com/gomorpheus/morpheus-go-sdk
+```
+
+## Usage
 
 Here are some examples of how to use `morpheus.Client`.
 
@@ -44,7 +50,7 @@ Here are some examples of how to use `morpheus.Client`.
 Instantiate a new client and authenticate.
 
 ```go
-client := morpheus.NewClient("https://yourmorpheus")
+client := morpheus.NewClient("https://yourmorpheus.com")
 client.SetUsernameAndPassword("username", "password")
 resp, err := client.Login()
 if err != nil {
@@ -89,15 +95,14 @@ fmt.Sprintf("Found %d Instances.", instancesCount)
 
 You can execute the latest tests using:
 
-```bash
-git clone github.com/gomorpheus/morpheus-go-sdk
+```sh
 go test
 ```
 
 The above command will (ideally) print results like this:
 
 ```
-Initializing test client for tfplugin @ https://yourmorpheus
+Initializing test client for tfplugin @ https://yourmorpheus.com
 PASS
 ok      github.com/gomorpheus/morpheus-go-sdk   1.098s
 ```
@@ -105,10 +110,9 @@ ok      github.com/gomorpheus/morpheus-go-sdk   1.098s
 Running `go test` will fail with a panic right away if you have not yet setup your test environment variables.  
 
 ```bash
-# morpheus-go-sdk  go testing
-export MORPHEUS_TEST_URL=https://yourmorpheus
+export MORPHEUS_TEST_URL=https://yourmorpheus.com
 export MORPHEUS_TEST_USERNAME=gotest
-export MORPHEUS_TEST_PASSWORD=1978@0B3f489
+export MORPHEUS_TEST_PASSWORD=19830B3f489
 export MORPHEUS_LOG_LEVEL=INFO
 ```
 **Be Careful running this test suite**. It creates and destroys data. Never point at any URL other than a test environment. Although, in reality, tests will not modify or destroy any pre-existing data. It could still orphan some test some data, or cause otherwise undesired effects.
