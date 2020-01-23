@@ -1,4 +1,5 @@
 # go-morpheus-sdk
+[![GoDoc](https://godoc.org/github.com/gomorpheus/morpheus-go-sdk?status.svg)](https://godoc.org/github.com/gomorpheus/morpheus-go-sdk)
 
 - Website: https://www.morpheusdata.com/
 - Docs: [Morpheus Documentation](https://docs.morpheusdata.com)
