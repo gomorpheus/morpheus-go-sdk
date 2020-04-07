@@ -2,9 +2,8 @@
 package morpheus
 
 import (
-    "fmt"
-    "errors"
-	_ "encoding/json"
+    _ "fmt"
+    _ "log"
 )
 
 var (
@@ -14,8 +13,14 @@ var (
 type WhoamiResult struct {
     User *WhoamiUserResult `json:"user"`
     IsMasterAccount bool `json:"isMasterAccount"`
-    Permissions map[string]string `json:"permissions"`
+    Permissions *[]WhoamiPermissionObject `json:"permissions"`
     Appliance WhoamiApplianceResult `json:"appliance"`
+}
+
+type WhoamiPermissionObject struct {
+    Name string `json:"name"`
+    Code string `json:"code"`
+    Access string `json:"access"`
 }
 
 type WhoamiUserResult struct {
@@ -29,18 +34,6 @@ type WhoamiApplianceResult struct {
 }
 
 func (client * Client) Whoami() (*Response, error) {
-	// login if needed
-	//var resp Response
-	// var resp *Response
-	// var err error
-	
-	// if (client.IsLoggedIn() == false) {
-	// 	resp, err := client.Login()
-	// 	if err != nil {
-	// 		return resp, err
-	// 	}
-	// }
-
 	whoamiRequest := &Request{
 		Method: "GET",
 		Path: WhoamiPath,
@@ -49,43 +42,22 @@ func (client * Client) Whoami() (*Response, error) {
 	}
 
 	resp, err := client.Execute(whoamiRequest)
-	
-	// parse JSON response
-	// var whoamiResult WhoamiResult
-	// err = json.Unmarshal(resp.Body, &whoamiResult)
-
-	whoamiResult := resp.Result.(*WhoamiResult)
-
-	// if err != nil {
-	//     fmt.Println(err)
+	// whoamiResult := resp.Result.(*WhoamiResult)
+	// if (whoamiResult.User != nil) {
+	// 	if  whoamiResult.User.Username != client.Username {
+	// 		client.SetUsername(whoamiResult.User.Username)
+	// 	}
+	// 	var perms []string
+	// 	for k,v := range whoamiResult.Permissions {
+	// 		perms = append(perms, fmt.Sprintf("%v (%v)", k, v))
+	// 	}
+	// 	log.Printf("Permissions: %v", strings.Join(perms, ", "))
+	// 	log.Printf("Access Token: %v", client.AccessToken)
+	// } else {
+	// 	err = errors.New("Unable to parse whoami result from api response")
+	// 	log.Fatalf(err)
 	// }
-
-	if (whoamiResult.User != nil) {
-		if  whoamiResult.User.Username != client.Username {
-			//currentAccessToken := client.AccessToken
-			//client.SetUsername(whoamiResult.User.Username)
-			//client.SetAccessToken(currentAccessToken, client.RefreshToken, client.ExpiresIn, client.Scope)
-			//client.AccessToken = currentAccessToken
-		}
-		// fmt.Println("Whoami Success")
-		//fmt.Println("Username: " + whoamiResult.User.Username)
-		//fmt.Println("Name: " + whoamiResult.User.FirstName + " " + whoamiResult.User.LastName)
-		var perms []string
-		for k,v := range whoamiResult.Permissions {
-			perms = append(perms, fmt.Sprintf("%v (%v)", k, v))
-		}
-		//fmt.Println("Permissions: " + strings.Join(perms, ", "))
-		// fmt.Println("Access Token: " + client.AccessToken)
-	} else {
-		err = errors.New("Unable to parse whoami result from api response")
-		fmt.Println(err)
-	}
-	
 	// client.setLastWhoamiResult(whoamiResult)
-	
 	return resp, err
-	
-
-	//return resp, err
 }
 

@@ -10,14 +10,14 @@ var (
 )
 
 func TestListGroups(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	req := &morpheus.Request{}
 	resp, err := client.ListGroups(req)
 	assertResponse(t, resp, err)
 }
 
 func TestGetGroup(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	req := &morpheus.Request{}
 	resp, err := client.ListGroups(req)
 	assertResponse(t, resp, err)
@@ -41,7 +41,7 @@ func TestGetGroup(t *testing.T) {
 }
 
 func TestGroupsCRUD(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	//create
 	req := &morpheus.Request{
 		Body: map[string]interface{}{

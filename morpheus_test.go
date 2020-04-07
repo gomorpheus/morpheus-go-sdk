@@ -13,7 +13,7 @@ import (
 )
 
 //‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
-// Testing Unexported methods
+// Morpehus SDK Testing Unexported methods
 //___________________________________
 
 func assertNil(t *testing.T, v interface{}) {
@@ -104,8 +104,8 @@ func assertBadResponse(t *testing.T, resp *morpheus.Response, err error) {
 		t.Errorf("API Response was nil")
 	} else {
 		if resp.Success != false {
-			t.Errorf("API Request should have failed and did not [%v]", err)
 			logResponse(t, resp)
+			t.Errorf("API Request should have failed and did not [%v]", err)
 		} else {
 			// failure
 			// logResponse(t, resp)
@@ -115,8 +115,8 @@ func assertBadResponse(t *testing.T, resp *morpheus.Response, err error) {
 
 func assertResponseStatusCode(t *testing.T, resp *morpheus.Response, statusCode int) {
 	if resp.StatusCode != statusCode {
-		t.Errorf("Expected API response status to be %d and got [%d]", statusCode, resp.StatusCode)
 		logResponse(t, resp)
+		t.Errorf("Expected API response status to be %d and got [%d]", statusCode, resp.StatusCode)
 	}
 }
 
@@ -124,7 +124,8 @@ func assertResponseStatusCode(t *testing.T, resp *morpheus.Response, statusCode 
 // just use logResponse always probably
 
 func logFailure(t *testing.T, resp *morpheus.Response, err error) {
-	t.Logf("API FAILUREt: %v", resp)
+	// logResponse(t, resp)
+	t.Logf("API FAILURE: %v", resp)
 	if err != nil {
 		t.Logf("ERROR: %v", err)
 	}
@@ -133,11 +134,10 @@ func logFailure(t *testing.T, resp *morpheus.Response, err error) {
 
 func logResponse(t *testing.T, resp *morpheus.Response) {
 	t.Logf("API RESPONSE: %v", resp)
-	// need resp.restyResponse for this
-	// t.Logf("Response Status: %v", resp.Status())
-	// t.Logf("Response Time: %v", resp.Time())
-	// t.Logf("Response Headers: %v", resp.Header())
-	// t.Logf("Response Cookies: %v", resp.Cookies())
+	// t.Logf("Response Status: %v", resp.RestyResponse.Status())
+	// t.Logf("Response Time: %v", resp.RestyResponse.Time())
+	// t.Logf("Response Headers: %v", resp.RestyResponse.Header())
+	// t.Logf("Response Cookies: %v", resp.RestyResponse.Cookies())
 	// t.Logf("Response Body: %v", resp)
 }
 

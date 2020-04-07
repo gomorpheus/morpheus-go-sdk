@@ -4,6 +4,7 @@ package morpheus_test
 import (
 	"testing"
 	"fmt"
+	"log"
 	"os"
 	_ "strconv"
 	_ "encoding/json"
@@ -15,6 +16,11 @@ var (
 	testUrl = os.Getenv("MORPHEUS_TEST_URL")
 	testUsername = os.Getenv("MORPHEUS_TEST_USERNAME")
 	testPassword = os.Getenv("MORPHEUS_TEST_PASSWORD")
+	testAccessToken = os.Getenv("MORPHEUS_TEST_TOKEN")
+	// if os.Getenv("MORPHEUS_TEST_ACCESS_TOKEN") != "" {
+	// 	testAccessToken = os.Getenv("MORPHEUS_TEST_ACCESS_TOKEN")
+	// }
+	testRefreshToken = os.Getenv("MORPHEUS_TEST_REFRESH_TOKEN")
 	// testUrl                  string
 	// testUsername             string
 	// testPassword             string
@@ -22,8 +28,7 @@ var (
 )
 
 
-// // needed to hook up setup/teardown methods
-// // this probably belongs in its own file..
+// TestMain hooks up setup/teardown methods
 // func TestMain(m *testing.M) {
 //     setup()
 //     code := m.Run() 
@@ -32,49 +37,72 @@ var (
 // }
 
 // func setup() {
-// 	//fmt.Println(fmt.Sprintf("Setup test suite..."))
+// 	//t.Logf(fmt.Sprintf("Setup test suite..."))
+// 	log.Printf(fmt.Sprintf("Setup test suite..."))
 // }
 
 // func teardown() {
-// 	//fmt.Println(fmt.Sprintf("Teardown test suite..."))
+// 	//log.Printf("Teardown test suite...")
 // 	if sharedTestClient != nil {
-// 		fmt.Println(fmt.Sprintf("Client Request Summary | Success: %d, Error: %d", sharedTestClient.RequestCount(), sharedTestClient.ErrorCount()))
+// 		// t.Logf(fmt.Sprintf("Test Client Summary | Success: %d, Error: %d", sharedTestClient.RequestCount(), sharedTestClient.ErrorCount()))
+// 		log.Printf(fmt.Sprintf("Test Client Summary | Success: %d, Error: %d", sharedTestClient.RequestCount(), sharedTestClient.ErrorCount())
 // 	}
 // }
 
-func getNewClient() (*morpheus.Client) {
+func getNewClient(t *testing.T) (*morpheus.Client) {
 	if testUrl == "" {
-		panic("MORPHEUS_TEST_URL must be set to to run tests")
+		t.Errorf("MORPHEUS_TEST_URL must be set to to run tests")
 	}
-	// testUsername = os.Getenv("MORPHEUS_TEST_USERNAME")
-	// if testUsername == "" {
-	// 	panic("MORPHEUS_TEST_USERNAME must be set to to run tests")
-	// }
-	// testPassword = os.Getenv("MORPHEUS_TEST_PASSWORD")
-	// if testUsername == "" {
-	// 	panic("MORPHEUS_TEST_PASSWORD must be set to to run tests")
-	// }
-	//fmt.Println(fmt.Sprintf("Initializing new client for %v @ %v", testUrl, testUsername))
+	t.Logf("Initializing new client for %v", testUrl)
 	client := morpheus.NewClient(testUrl)
 	return client
 }
 
-// this does not work for some reason...
-// a client to be shared between requests.
-func getTestClient() (*morpheus.Client) {
+// getTestClient returns a Client that is shared between all tests.
+// It is configured via the following environment variables.
+// MORPHEUS_TEST_URL - Morpheus Appliance URL
+// MORPHEUS_TEST_ACCESS_TOKEN - Morpheus API access token
+// MORPHEUS_TEST_USERNAME - Morpheus username
+// MORPHEUS_TEST_PASSWORD - Morpheus password
+func getTestClient(t *testing.T) (*morpheus.Client) {
 	if sharedTestClient == nil {
 		if testUrl == "" {
 			panic("MORPHEUS_TEST_URL must be set to to run tests.")
 		}
-		if testUsername == "" {
-			panic("MORPHEUS_TEST_USERNAME must be set to to run tests")
+		client := morpheus.NewClient(testUrl)
+		if testAccessToken != "" {
+			client.SetAccessToken(testAccessToken, testRefreshToken, 0, "write")
+			// validate api access token by hitting /api/whoami
+			resp, err := client.Whoami()
+			// assertResponse(t, resp, err)
+			if resp.Success == true {
+				
+				whoamiResult := resp.Result.(*morpheus.WhoamiResult)
+				currentUsername := whoamiResult.User.Username
+				// So this just sets the testUsername
+				// it might be better to error if the name does not match...
+				if testUsername != currentUsername {
+					// need to stop the test right away!
+					panic(fmt.Sprintf("MORPHEUS_TEST_USERNAME does not match that of MORPHEUS_TEST_TOKEN. Expected [%v], got [%v]", testUsername, currentUsername))
+					// t.Fatalf(fmt.Sprintf("MORPHEUS_TEST_USERNAME does not match that of MORPHEUS_TEST_TOKEN. Expected [%v], got [%v]", testUsername, currentUsername))
+				}
+				testUsername = currentUsername
+				
+			} else {
+				assertResponse(t, resp, err)
+				// panic("MORPHEUS_TEST_TOKEN could not be validated.")
+			}
+		} else {
+			// authenticate with username and password
+			if testUsername == "" || testPassword == "" {
+				panic("MORPHEUS_TEST_TOKEN or MORPHEUS_TEST_USERNAME and MORPHEUS_TEST_PASSWORD must be set to to run tests.")
+			}
+			log.Printf(fmt.Sprintf("Initializing test client for %v @ %v", testUsername, testUrl))
+			client.SetUsernameAndPassword(testUsername, testPassword)	
+			resp, err := client.Login()
+			assertResponse(t, resp, err)
 		}
-		if testPassword == "" {
-			panic("MORPHEUS_TEST_PASSWORD must be set to to run tests")
-		}
-		fmt.Println(fmt.Sprintf("Initializing test client for %v @ %v", testUsername, testUrl))
-		sharedTestClient = morpheus.NewClient(testUrl)
-		sharedTestClient.SetUsernameAndPassword(testUsername, testPassword)
+		sharedTestClient = client
 	}
 	return sharedTestClient
 }
@@ -84,8 +112,8 @@ func getTestClient() (*morpheus.Client) {
 // 	return n, err
 // }
 
-func TestGet(t *testing.T) {
-	client := getNewClient()
+func TestPing(t *testing.T) {
+	client := getNewClient(t)
 	testRequest := &morpheus.Request{
 		Method: "GET",
 		Path: "/api/setup/check",
@@ -99,14 +127,21 @@ func TestGet(t *testing.T) {
 }
 
 func TestLogin(t *testing.T) {
-	client := getNewClient()
+	client := getNewClient(t)
 	client.SetUsernameAndPassword(testUsername, testPassword)
 	resp, err := client.Login()
 	assertResponse(t, resp, err)
 }
 
+func TestLoginWithToken(t *testing.T) {
+	client := getNewClient(t)
+	client.SetAccessToken(testAccessToken, testRefreshToken, 0, "write")
+	resp, err := client.Whoami()
+	assertResponse(t, resp, err)
+}
+
 func TestLogout(t *testing.T) {
-	client := getNewClient()
+	client := getNewClient(t)
 	client.SetUsernameAndPassword(testUsername, testPassword)
 	resp, err := client.Login()
 	assertResponse(t, resp, err)
@@ -118,7 +153,7 @@ func TestLogout(t *testing.T) {
 }
 
 func TestLoginRepeated(t *testing.T) {
-	client := getNewClient()
+	client := getNewClient(t)
 	client.SetUsernameAndPassword(testUsername, testPassword)
 	resp, err := client.Login()
 	assertResponse(t, resp, err)

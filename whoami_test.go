@@ -6,7 +6,7 @@ import (
 )
 
 func TestWhoami(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	resp, err := client.Whoami()
 	assertResponse(t, resp, err)
 	result := resp.Result.(*morpheus.WhoamiResult)

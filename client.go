@@ -3,6 +3,7 @@ package morpheus
 
 import (
     "fmt"
+	"log"
     "errors"
     "time"
 	"encoding/json"
@@ -134,9 +135,9 @@ func (client * Client) Execute(req * Request) (*Response, error) {
 	// first, login if needed
 	if (req.SkipLogin != true) {
 		if (client.IsLoggedIn() != true) {
-			//fmt.Println("Autologin as " + client.Username)
+			log.Printf("Autologin as %v", client.Username)
 			if client.Username == "" {
-				// fmt.Println("Skipping login because Username is not set.")
+				log.Printf("Skipping login because Username is not set.")
 			} else {
 				loginResp, loginErr := client.Login()
 				if loginErr != nil {
@@ -144,7 +145,7 @@ func (client * Client) Execute(req * Request) (*Response, error) {
 				}
 			}
 		} else {
-			//fmt.Println("You are logged in as " + client.Username)
+			// log.Printf("You are logged in as %v", client.Username)
 		}
 	}
 
@@ -204,7 +205,7 @@ func (client * Client) Execute(req * Request) (*Response, error) {
 	if (httpMethod == "POST" || httpMethod == "PUT" || httpMethod == "PATCH") {
     	// FormData means use application/x-www-form-urlencoded
     	if req.FormData != nil {
-    		//fmt.Println("SETTING REQUEST FORM DATA:", req.FormData)
+    		//log.Printf("REQUEST FORM DATA: ", req.FormData)
     		// var formData map[string]string
     		// for k,v := range req.FormData {
     		// 	formData[k] = fmt.Sprintf("%v", v)
@@ -216,7 +217,7 @@ func (client * Client) Execute(req * Request) (*Response, error) {
 			}
     	} 
     	if req.Body != nil {
-    		//fmt.Println("SETTING REQUEST BODY:", req.Body)
+    		//log.Printf("REQUEST BODY: ", req.Body)
     		// Aways json for now...
     		// todo: use encoder
     		restyReq.SetBody(req.Body)
@@ -238,7 +239,8 @@ func (client * Client) Execute(req * Request) (*Response, error) {
 	}
 
 	// print for debugging
-    logDebug(fmt.Sprintf("Request: %s %s", req.Method, url))
+	// TODO: log me please
+    // log.Printf("API Request: %s %s", req.Method, url)
 
 	// Make the request
     if httpMethod == "GET" {
@@ -307,44 +309,43 @@ func (client * Client) Execute(req * Request) (*Response, error) {
     resp.JsonData = parsedResult
     resp.JsonParseError = jsonError
 
-    // attempt to parse json into result type
-        	//Error: restyResponse.Error()
+    // attempt to parse json into specified result type
 	// arbitrary interface{} data is parsed and stored in here
-    // if (req.Result != nil) {
-    	resp.Result = req.Result
-    	// could even just skip this and not return the error
-    	// parseJsonToResult(resp.Body, &resp.Result)
-    	jsonParseResultError := parseJsonToResult(resp.Body, &resp.Result)
-    	
-    	if jsonParseResultError != nil {
-    		logError(fmt.Sprintf("Error parsing JSON result for type %T [%v]", resp.Result, jsonParseResultError))
-    		// maybe this should be treated as a failure..
-    		// err = jsonParseResultError
-    		// resp.Success = false
-    		// return resp, jsonParseResultError
-    	} else {
-    		//fmt.Println(fmt.Sprintf("Parsed JSON result for type %T", resp.Result))
-    	}
-    // }
-
+	// The result type is specified in the request right now.
+	resp.Result = req.Result
+	if resp.Result != nil {
+		jsonParseResultError := parseJsonToResult(resp.Body, &resp.Result)
+		if jsonParseResultError != nil {
+			// maybe actually treat this as a failure..
+			log.Printf("Failed to parse JSON result for type %T. Parse Error: %v", resp.Result, jsonParseResultError)
+			//log.Errorf("Parse Error: %v", jsonParseResultError)
+			// err = jsonParseResultError
+			// resp.Success = false
+		} else {
+			// log.Printf("Parsed JSON result for type %T", resp.Result)
+		}
+	}
     
     // print for debugging
     // avoid printing request body for now, it may have secrets.
     // if req.Body != nil {
-    // 	fmt.Println(fmt.Sprintf("==> Request: %s %s JSON: %s", req.Method, url, req.Body))
+    // 	log.Printf(fmt.Sprintf("==> Request: %s %s JSON: %s", req.Method, url, req.Body))
     // } else if req.FormData != nil {
-    // 	fmt.Println(fmt.Sprintf("==> Request: %s %s BODY: %s", req.Method, url, req.FormData))
+    // 	log.Printf(fmt.Sprintf("==> Request: %s %s BODY: %s", req.Method, url, req.FormData))
     // } else {
-    // 	fmt.Println(fmt.Sprintf("==> Request: %s %s", req.Method, url))
+    // 	log.Printf(fmt.Sprintf("==> Request: %s %s", req.Method, url))
     // }
-    
-    // only print body for failures
-    if err != nil {
-    	logDebug(fmt.Sprintf("Response: %d %s", resp.StatusCode, resp.Body))
-    } else {
-    	//fmt.Println(fmt.Sprintf("Response: %d", resp.StatusCode))
-    	logDebug(fmt.Sprintf("Response: %d %s", resp.StatusCode, resp.Body))
-    }
+
+    // uncomment this for lots of output...
+    // log.Printf("API Response: [%v] %d %s", resp.Success, resp.StatusCode, resp.Body)
+    // if resp.Success {
+    // 	log.Printf("API Response: %d %s", resp.StatusCode, resp.Body)
+    // } else {
+    // 	log.Printf(fmt.Sprintf("Bad API Response: %d %s", resp.StatusCode, resp.Body))
+    // }
+    // if err != nil {
+    // 	log.Printf("API Error: %v", err)
+    // }
 
     client.incrementRequests(req, resp)
 
@@ -402,11 +403,10 @@ type LoginResult struct {
 func (client * Client) Login() (* Response, error) {
 	// already logged in
 	if (client.IsLoggedIn()) {
-		logDebug("Login skipped. Already logged in as: " + client.Username)
-		// todo: validate token at /api/whoami
+		// log.Printf("Login skipped. Already logged in as: %v", client.Username)
 		return nil, nil
 	} else {
-		//fmt.Println(fmt.Sprintf("Logging in as %s at %s", client.Username, client.Url))
+		//c(fmt.Sprintf("Logging in as %s at %s", client.Username, client.Url))
 		loginRequest := &Request{
 			Method: "POST",
 			Path: "/oauth/token",
@@ -432,13 +432,13 @@ func (client * Client) Login() (* Response, error) {
 				logError(fmt.Sprintf("Error parsing JSON result for type %T [%v]", loginResult, jsonErr))
 			    return resp, jsonErr
 			}
-			// fmt.Println("LOGIN RESPONSE: ", resp, err)
-			// fmt.Println("PARSED LOGIN RESULT: ", loginResult)
+			// log.Printf("LOGIN RESPONSE: ", resp, err)
+			// log.Printf("PARSED LOGIN RESULT: ", loginResult)
 			
 			if (loginResult.AccessToken != "") {
 				client.SetAccessToken(loginResult.AccessToken, loginResult.RefreshToken, loginResult.ExpiresIn, loginResult.Scope)
-				logDebug(fmt.Sprintf("Logged in as %v @ %v", client.Username, client.Url))
-				// fmt.Println("Access Token: " + client.AccessToken)
+				// log.Printf("Logged in as %v @ %v", client.Username, client.Url)
+				// log.Printf("Access Token: ", client.AccessToken)
 			} else {
 				err = errors.New("Login failed, unable to parse access token from login response")
 				logError(err)
@@ -446,10 +446,7 @@ func (client * Client) Login() (* Response, error) {
 			// client.setLastLoginResult(loginResult)
 			return resp, err
 		} else {
-			//fmt.Println("Login Failure:", resp.RestyResponse)
-			//err = errors.New("Login error: %v", resp.RestyResponse)
-			// err = errors.New("Login error: %v", resp.Body)
-			// need to parse with LoginErrorResult which has msg: "blah blah"
+			log.Printf("Login Failure: %v", resp)
 			return resp, err
 		}
 		

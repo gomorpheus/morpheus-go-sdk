@@ -129,11 +129,8 @@ Running `go test` will fail with a panic right away if you have not yet setup yo
 export MORPHEUS_TEST_URL=https://yourmorpheus.com
 export MORPHEUS_TEST_USERNAME=gotest
 export MORPHEUS_TEST_PASSWORD=19830B3f489
-export MORPHEUS_LOG_LEVEL=INFO
 ```
 **Be Careful running this test suite**. It creates and destroys data. Never point at any URL other than a test environment. Although, in reality, tests will not modify or destroy any pre-existing data. It could still orphan some test some data, or cause otherwise undesired effects.
-
-#### Run individual Test
 
 You can run an individual test like this:
 
@@ -141,12 +138,9 @@ You can run an individual test like this:
 go test -run TestGroupsCRUD
 ```
 
-#### Print Verbose Test Output
-
-To print more verbose output during testing, like response payloads, you can set `MORPHEUS_LOG_LEVEL=DEBUG`. The default value is `INFO`.
 
 ```bash
-MORPHEUS_LOG_LEVEL=DEBUG go test
+go test -v
 ```
 
 ## Contribution

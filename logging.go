@@ -1,6 +1,9 @@
-// Provides logging functions for use like logDebug("foobar") and logInfo("baz")
+// Provides logging functions for use like logDebug("I did it!") and logInfo("bye bye")
 // Use `export MORPHEUS_LOG_LEVEL=DEBUG to print more output
 // The default log level is INFO
+//
+// Deprecated: use import "log" like every good package does.
+//
 package morpheus
 
 import (
@@ -55,7 +58,7 @@ func GetLogLevel() string {
 	return logLevel
 }
 
-func log(messages ...interface{}) {
+func logMessage(messages ...interface{}) {
 	for _, msg := range messages {
 		fmt.Println(msg)
 	}
@@ -63,24 +66,24 @@ func log(messages ...interface{}) {
 
 func logDebug(messages ...interface{}) {
 	if logLevelValue <= LogLevels["DEBUG"] {
-		log(messages...)
+		logMessage(messages...)
 	}
 }
 
 func logInfo(messages ...interface{}) {
 	if logLevelValue <= LogLevels["INFO"] {
-		log(messages...)
+		logMessage(messages...)
 	}
 }
 
 func logWarn(messages ...interface{}) {
 	if logLevelValue <= LogLevels["WARN"] {
-		log(messages...)
+		logMessage(messages...)
 	}
 }
 
 func logError(messages ...interface{}) {
 	if logLevelValue <= LogLevels["ERROR"] {
-		log(messages...)
+		logMessage(messages...)
 	}
 }

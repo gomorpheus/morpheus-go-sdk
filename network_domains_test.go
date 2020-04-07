@@ -10,14 +10,14 @@ var (
 )
 
 func TestListNetworkDomains(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	req := &morpheus.Request{}
 	resp, err := client.ListNetworkDomains(req)
 	assertResponse(t, resp, err)
 }
 
 func TestGetNetworkDomain(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	req := &morpheus.Request{}
 	resp, err := client.ListNetworkDomains(req)
 	assertResponse(t, resp, err)
@@ -41,7 +41,7 @@ func TestGetNetworkDomain(t *testing.T) {
 }
 
 func TestNetworkDomainsCRUD(t *testing.T) {
-	client := getTestClient()
+	client := getTestClient(t)
 	//create
 	// this has no uniqueness check on name, it probably should..
 	req := &morpheus.Request{
