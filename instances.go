@@ -22,7 +22,7 @@ type Instance struct {
 	Layout map[string]interface{} `json:"layout"`
 	Group map[string]interface{} `json:"group"`
 	Cloud map[string]interface{} `json:"cloud"`
-	Environment string `json:"environment"`
+	Environment string `json:"instanceContext"`
 	Plan InstancePlan `json:"plan"`
 	Config map[string]interface{} `json:"config"`
 
