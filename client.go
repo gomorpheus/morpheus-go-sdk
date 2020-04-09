@@ -7,7 +7,7 @@ import (
     "errors"
     "time"
 	"encoding/json"
-	"github.com/go-resty/resty"
+	"github.com/go-resty/resty/v2"
 )
 
 type Client struct {
@@ -134,15 +134,11 @@ func (client * Client) ClearAccessToken() (*Client) {
 func (client * Client) Execute(req * Request) (*Response, error) {
 	// first, login if needed
 	if (req.SkipLogin != true) {
-		if (client.IsLoggedIn() != true) {
+		if (client.IsLoggedIn() != true && client.Username != "") {
 			log.Printf("Autologin as %v", client.Username)
-			if client.Username == "" {
-				log.Printf("Skipping login because Username is not set.")
-			} else {
-				loginResp, loginErr := client.Login()
-				if loginErr != nil {
-					return loginResp, loginErr
-				}
+			loginResp, loginErr := client.Login()
+			if loginErr != nil {
+				return loginResp, loginErr
 			}
 		} else {
 			// log.Printf("You are logged in as %v", client.Username)
