@@ -5,8 +5,10 @@ import (
     "fmt"
 	"log"
     "errors"
+    "strings"
     "time"
 	"encoding/json"
+	"crypto/tls"
 	"github.com/go-resty/resty/v2"
 )
 
@@ -167,6 +169,18 @@ func (client * Client) Execute(req * Request) (*Response, error) {
 	//var url string = client.Url + req.Path
 	// construct resty.Client
     restyClient := resty.New()
+    
+    // Enable debug mode
+    // this might be handy
+    // meh, let's use net/http instead
+	// restyClient.SetDebug(true)
+
+    // always ignore ssl cert errors for now...
+    // todo: make this is a config setting
+    if strings.HasPrefix(url, "https") {
+		restyClient.SetTLSClientConfig(&tls.Config{ InsecureSkipVerify: true })
+	}
+
     //set timeout
     if (req.Timeout > 0) {
     	restyClient.SetTimeout(time.Duration(req.Timeout) * time.Second)
