@@ -4,9 +4,9 @@
 - Docs: [Morpheus Documentation](https://docs.morpheusdata.com)
 - Support: [Morpheus Support](https://support.morpheusdata.com)
 
-<img src="https://www.morpheusdata.com/wp-content/uploads/2018/06/cropped-morpheus_highres.png" width="600px">
+<img src="https://morpheusdata.com/wp-content/uploads/2020/04/morpheus-logo-v2.svg" width="600px">
 
-This package provides the official [Go](https://golang.org/) library for the [Morpheus API](https://bertramdev.github.io/morpheus-apidoc/).
+This package provides the official [Go](https://golang.org/) library for the [Morpheus API](https://apidocs.morpheusdata.com/).
 
 This is being developed in conjunction with the [Morpheus Terraform Provider](https://github.com/gomorpheus/morpheus-terraform-provider).
 
@@ -163,7 +163,7 @@ Be sure to add a `_test.go` file with unit tests for each new resource that is i
 
 Link | Description
 --------- | -----------
-[Morpheus API](https://bertramdev.github.io/morpheus-apidoc/) | The Morpheus API documentation.
+[Morpheus API](https://apidocs.morpheusdata.com/) | The Morpheus API documentation.
 
 
 ## Coverage
