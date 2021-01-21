@@ -1,10 +1,10 @@
+<img src="https://morpheusdata.com/wp-content/uploads/2020/04/morpheus-logo-v2.svg" width="200px">
+
 # go-morpheus-sdk
 
 - Website: https://www.morpheusdata.com/
 - Docs: [Morpheus Documentation](https://docs.morpheusdata.com)
 - Support: [Morpheus Support](https://support.morpheusdata.com)
-
-<img src="https://morpheusdata.com/wp-content/uploads/2020/04/morpheus-logo-v2.svg" width="600px">
 
 This package provides the official [Go](https://golang.org/) library for the [Morpheus API](https://apidocs.morpheusdata.com/).
 
