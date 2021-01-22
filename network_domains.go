@@ -68,7 +68,7 @@ type NetworkDomainPayload struct {
 	DcServer string `json:"dcServer"`
 	OuPath string `json:"ouPath"`
 	Account *TenantAbbrev `json:"account"`
-	Owner *TenantAbbrev `json:"account"`
+	Owner *TenantAbbrev `json:"owner"`
 }
 
 type CreateNetworkDomainPayload struct {
