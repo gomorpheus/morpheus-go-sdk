@@ -1,12 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 // Morpheus API types and Client methods for Task Sets
-=======
-// Morpheus API types and Client methods for Option Types
->>>>>>> 2a75585 (Add additional resources)
-=======
-// Morpheus API types and Client methods for Task Sets
->>>>>>> 57ff49e (Update task sets)
+
 package morpheus
 
 import (
@@ -26,11 +19,7 @@ type TaskSet struct {
 	Name        string        `json:"name"`
 	Description string        `json:"description"`
 	Type        string        `json:"type"`
-<<<<<<< HEAD
 	OptionTypes []interface{} `json:"optionTypes"`
-=======
-	OptionTypes []int64       `json:"optionTypes"`
->>>>>>> 2a75585 (Add additional resources)
 	Tasks       []interface{} `json:"types"`
 }
 
@@ -135,11 +124,7 @@ func (client *Client) FindTaskSetByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListTaskSetsResult)
 	taskSetCount := len(*listResult.TaskSets)
 	if taskSetCount != 1 {
-<<<<<<< HEAD
 		return resp, fmt.Errorf("found %d TaskSets for %v", taskSetCount, name)
-=======
-		return resp, fmt.Errorf("Found %d TaskSets for %v", taskSetCount, name)
->>>>>>> 2a75585 (Add additional resources)
 	}
 	firstRecord := (*listResult.TaskSets)[0]
 	taskSetID := firstRecord.ID
