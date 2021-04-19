@@ -1,4 +1,3 @@
-// Client is the driver for interfacing with the Morpheus API
 package morpheus
 
 import (
