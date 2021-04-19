@@ -1,6 +1,7 @@
 <img src="https://morpheusdata.com/wp-content/uploads/2020/04/morpheus-logo-v2.svg" width="200px">
 
 # go-morpheus-sdk
+[![GoDoc](https://godoc.org/github.com/gomorpheus/morpheus-go-sdk?status.svg)](https://godoc.org/github.com/gomorpheus/morpheus-go-sdk)
 
 - Website: https://www.morpheusdata.com/
 - Docs: [Morpheus Documentation](https://docs.morpheusdata.com)
