@@ -109,7 +109,7 @@ func (client *Client) FindTaskByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListTasksResult)
 	tenantsCount := len(*listResult.Tasks)
 	if tenantsCount != 1 {
-		return resp, fmt.Errorf("Found %d Tasks for %v", tenantsCount, name)
+		return resp, fmt.Errorf("found %d Tasks for %v", tenantsCount, name)
 	}
 	firstRecord := (*listResult.Tasks)[0]
 	tenantID := firstRecord.ID

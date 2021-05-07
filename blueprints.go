@@ -110,7 +110,7 @@ func (client *Client) FindBlueprintByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListBlueprintsResult)
 	blueprintsCount := len(*listResult.Blueprints)
 	if blueprintsCount != 1 {
-		return resp, fmt.Errorf("Found %d Blueprints for %v", blueprintsCount, name)
+		return resp, fmt.Errorf("found %d Blueprints for %v", blueprintsCount, name)
 	}
 	firstRecord := (*listResult.Blueprints)[0]
 	blueprintID := firstRecord.ID

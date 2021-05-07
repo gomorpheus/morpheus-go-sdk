@@ -14,15 +14,15 @@ var (
 // CatalogItem structures for use in request and response payloads
 
 type CatalogItem struct {
-	ID          int64   `json:"id"`
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	Type        string  `json:"type"`
-	Featured    bool    `json:"featured"`
-	Enabled     bool    `json:"enabled"`
-	OptionTypes []int64 `json:"optionTypes"`
-	Context     string  `json:"context"`
-	Content     string  `json:"content"`
+	ID          int64         `json:"id"`
+	Name        string        `json:"name"`
+	Description string        `json:"description"`
+	Type        string        `json:"type"`
+	Featured    bool          `json:"featured"`
+	Enabled     bool          `json:"enabled"`
+	OptionTypes []interface{} `json:"optionTypes"`
+	Context     string        `json:"context"`
+	Content     string        `json:"content"`
 }
 
 type ListCatalogItemsResult struct {
@@ -114,7 +114,7 @@ func (client *Client) FindCatalogItemByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListCatalogItemsResult)
 	catalogItemCount := len(*listResult.CatalogItems)
 	if catalogItemCount != 1 {
-		return resp, fmt.Errorf("Found %d CatalogItems for %v", catalogItemCount, name)
+		return resp, fmt.Errorf("found %d CatalogItems for %v", catalogItemCount, name)
 	}
 	firstRecord := (*listResult.CatalogItems)[0]
 	optionTypeID := firstRecord.ID

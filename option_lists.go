@@ -14,22 +14,21 @@ var (
 // OptionLists structures for use in request and response payloads
 
 type OptionList struct {
-	ID                int64                  `json:"id"`
-	Name              string                 `json:"name"`
-	Description       string                 `json:"description"`
-	Type              string                 `json:"type"`
-	SourceURL         string                 `json:"sourceUrl"`
-	Visibility        string                 `json:"visibility"`
-	SourceMethod      string                 `json:"sourceMethod"`
-	APIType           string                 `json:"apiType,omitempty"`
-	IgnoreSSLErrors   bool                   `json:"ignoreSSLErrors"`
-	RealTime          bool                   `json:"realTime"`
-	InitialDataset    string                 `json:"initialDataset"`
-	TranslationScript string                 `json:"translationScript"`
-	Config            map[string]interface{} `json:"config"`
-	//Config            struct {
-	//	SourceHeaders []SourceHeader `json:"sourceHeaders"`
-	//} `json:"config"`
+	ID                int64  `json:"id"`
+	Name              string `json:"name"`
+	Description       string `json:"description"`
+	Type              string `json:"type"`
+	SourceURL         string `json:"sourceUrl"`
+	Visibility        string `json:"visibility"`
+	SourceMethod      string `json:"sourceMethod"`
+	APIType           string `json:"apiType,omitempty"`
+	IgnoreSSLErrors   bool   `json:"ignoreSSLErrors"`
+	RealTime          bool   `json:"realTime"`
+	InitialDataset    string `json:"initialDataset"`
+	TranslationScript string `json:"translationScript"`
+	Config            struct {
+		SourceHeaders []SourceHeader `json:"sourceHeaders"`
+	} `json:"config"`
 }
 
 type SourceHeader struct {
@@ -127,7 +126,7 @@ func (client *Client) FindOptionListByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListOptionListsResult)
 	optionListCount := len(*listResult.OptionLists)
 	if optionListCount != 1 {
-		return resp, fmt.Errorf("Found %d OptionLists for %v", optionListCount, name)
+		return resp, fmt.Errorf("found %d OptionLists for %v", optionListCount, name)
 	}
 	firstRecord := (*listResult.OptionLists)[0]
 	optionListID := firstRecord.ID

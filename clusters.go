@@ -17,8 +17,8 @@ type Cluster struct {
 	ID          int64                  `json:"id"`
 	Name        string                 `json:"name"`
 	Description string                 `json:"description"`
-	Type        string                 `json:"type"`
-	Layout      string                 `json:"layout"`
+	Type        interface{}            `json:"type"`
+	Layout      interface{}            `json:"layout"`
 	Group       map[string]interface{} `json:"group"`
 	Cloud       map[string]interface{} `json:"cloud"`
 	Server      Server                 `json:"server"`
@@ -37,19 +37,19 @@ type Server struct {
 }
 
 type ListClustersResult struct {
-	Clusters *[]Cluster  `json:"clusteres"`
+	Clusters *[]Cluster  `json:"clusters"`
 	Meta     *MetaResult `json:"meta"`
 }
 
 type GetClusterResult struct {
-	Cluster *Cluster `json:"clustere"`
+	Cluster *Cluster `json:"cluster"`
 }
 
 type CreateClusterResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
 	Errors  map[string]string `json:"errors"`
-	Cluster *Cluster          `json:"clustere"`
+	Cluster *Cluster          `json:"cluster"`
 }
 
 type UpdateClusterResult struct {
@@ -125,7 +125,7 @@ func (client *Client) FindClusterByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListClustersResult)
 	clustereCount := len(*listResult.Clusters)
 	if clustereCount != 1 {
-		return resp, fmt.Errorf("Found %d Clusters for %v", clustereCount, name)
+		return resp, fmt.Errorf("found %d Clusters for %v", clustereCount, name)
 	}
 	firstRecord := (*listResult.Clusters)[0]
 	clustereId := firstRecord.ID

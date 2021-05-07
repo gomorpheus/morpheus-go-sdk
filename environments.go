@@ -108,7 +108,7 @@ func (client *Client) FindEnvironmentByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListEnvironmentsResult)
 	environmentsCount := len(*listResult.Environments)
 	if environmentsCount != 1 {
-		return resp, fmt.Errorf("Found %d Environments for %v", environmentsCount, name)
+		return resp, fmt.Errorf("found %d Environments for %v", environmentsCount, name)
 	}
 	firstRecord := (*listResult.Environments)[0]
 	environmentID := firstRecord.ID

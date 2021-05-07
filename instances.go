@@ -141,7 +141,7 @@ func (client *Client) FindInstanceByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListInstancesResult)
 	instanceCount := len(*listResult.Instances)
 	if instanceCount != 1 {
-		return resp, fmt.Errorf("Found %d Instances for %v", instanceCount, name)
+		return resp, fmt.Errorf("found %d Instances for %v", instanceCount, name)
 	}
 	firstRecord := (*listResult.Instances)[0]
 	instanceId := firstRecord.ID
@@ -195,7 +195,7 @@ func (client *Client) FindInstancePlanByName(name string, req *Request) (*Respon
 	}
 	matchingPlanCount := len(matchingPlans)
 	if matchingPlanCount != 1 {
-		return resp, fmt.Errorf("Found %d Plans for '%v'", matchingPlanCount, name)
+		return resp, fmt.Errorf("found %d Plans for '%v'", matchingPlanCount, name)
 	}
 	firstRecord := matchingPlans[0]
 

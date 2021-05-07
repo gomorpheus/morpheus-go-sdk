@@ -129,7 +129,7 @@ func (client *Client) FindGroupByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListGroupsResult)
 	groupsCount := len(*listResult.Groups)
 	if groupsCount != 1 {
-		return resp, fmt.Errorf("Found %d Groups for %v", groupsCount, name)
+		return resp, fmt.Errorf("found %d Groups for %v", groupsCount, name)
 	}
 	firstRecord := (*listResult.Groups)[0]
 	groupId := firstRecord.ID

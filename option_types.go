@@ -14,18 +14,18 @@ var (
 // OptionType structures for use in request and response payloads
 
 type OptionType struct {
-	ID           int64  `json:"id"`
-	Name         string `json:"name"`
-	Description  string `json:"description"`
-	FieldName    string `json:"fieldName"`
-	Type         string `json:"type"`
-	FieldLabel   string `json:"fieldLabel"`
-	PlaceHolder  string `json:"placeHolder"`
-	DefaultValue string `json:"defaultValue"`
-	Required     bool   `json:"required"`
-	ExportMeta   bool   `json:"exportMeta"`
-	OptionListId int64  `json:"optionList,omitEmpty"`
-	HelpBlock    string `json:"helpBlock"`
+	ID           int64       `json:"id"`
+	Name         string      `json:"name"`
+	Description  string      `json:"description"`
+	FieldName    string      `json:"fieldName"`
+	Type         string      `json:"type"`
+	FieldLabel   string      `json:"fieldLabel"`
+	PlaceHolder  string      `json:"placeHolder"`
+	DefaultValue string      `json:"defaultValue"`
+	Required     bool        `json:"required"`
+	ExportMeta   bool        `json:"exportMeta"`
+	OptionListId interface{} `json:"optionList"`
+	HelpBlock    string      `json:"helpBlock"`
 }
 
 type ListOptionTypesResult struct {
@@ -117,7 +117,7 @@ func (client *Client) FindOptionTypeByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListOptionTypesResult)
 	optionTypeCount := len(*listResult.OptionTypes)
 	if optionTypeCount != 1 {
-		return resp, fmt.Errorf("Found %d OptionTypes for %v", optionTypeCount, name)
+		return resp, fmt.Errorf("found %d OptionTypes for %v", optionTypeCount, name)
 	}
 	firstRecord := (*listResult.OptionTypes)[0]
 	optionTypeID := firstRecord.ID

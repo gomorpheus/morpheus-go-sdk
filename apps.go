@@ -110,7 +110,7 @@ func (client *Client) FindAppByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListAppsResult)
 	appsCount := len(*listResult.Apps)
 	if appsCount != 1 {
-		return resp, fmt.Errorf("Found %d Apps for %v", appsCount, name)
+		return resp, fmt.Errorf("found %d Apps for %v", appsCount, name)
 	}
 	firstRecord := (*listResult.Apps)[0]
 	appID := firstRecord.ID

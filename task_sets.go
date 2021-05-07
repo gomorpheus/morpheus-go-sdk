@@ -18,7 +18,7 @@ type TaskSet struct {
 	Name        string        `json:"name"`
 	Description string        `json:"description"`
 	Type        string        `json:"type"`
-	OptionTypes []int64       `json:"optionTypes"`
+	OptionTypes []interface{} `json:"optionTypes"`
 	Tasks       []interface{} `json:"types"`
 }
 
@@ -123,7 +123,7 @@ func (client *Client) FindTaskSetByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListTaskSetsResult)
 	taskSetCount := len(*listResult.TaskSets)
 	if taskSetCount != 1 {
-		return resp, fmt.Errorf("Found %d TaskSets for %v", taskSetCount, name)
+		return resp, fmt.Errorf("found %d TaskSets for %v", taskSetCount, name)
 	}
 	firstRecord := (*listResult.TaskSets)[0]
 	taskSetID := firstRecord.ID

@@ -115,7 +115,7 @@ func (client *Client) FindTenantByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListTenantsResult)
 	tenantsCount := len(*listResult.Accounts)
 	if tenantsCount != 1 {
-		return resp, fmt.Errorf("Found %d Tenants for %v", tenantsCount, name)
+		return resp, fmt.Errorf("found %d Tenants for %v", tenantsCount, name)
 	}
 	firstRecord := (*listResult.Accounts)[0]
 	tenantID := firstRecord.ID
