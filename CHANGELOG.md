@@ -1,5 +1,20 @@
 ## 1.0 (Unreleased)
 
+## 0.2 (May 7, 2021)
+
+FEATURES:
+
+* **Accounts** Client methods for `accounts` (Tenants) API endpoints
+* **Apps** Client methods for `apps` API endpoints
+* **Blueprints** Client methods for `blueprints` API endpoints
+* **Catalog Items** Client methods for `catalog_items` API endpoints
+* **Clusters** Client methods for `clusters` API endpoints
+* **Environments** Client methods for `environments` API endpoints
+* **Option Lists** Client methods for `option_lists` API endpoints
+* **Option Types** Client methods for `option_types` API endpoints
+* **Task Sets** Client methods for `task_sets` API endpoints
+* **Tasks** Client methods for `tasks` API endpoints
+
 ## 0.1 (November 27, 2019)
 
 NOTES:
