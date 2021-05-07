@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 // Morpheus API types and Client methods for Task Sets
 =======
 // Morpheus API types and Client methods for Option Types
 >>>>>>> 2a75585 (Add additional resources)
+=======
+// Morpheus API types and Client methods for Task Sets
+>>>>>>> 57ff49e (Update task sets)
 package morpheus
 
 import (
