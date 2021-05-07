@@ -1,4 +1,4 @@
-// Morpheus API types and Client methods for Option Types
+// Morpheus API types and Client methods for Task Sets
 package morpheus
 
 import (
