@@ -1,30 +1,36 @@
 package morpheus
 
 import (
-    "fmt"
+	"fmt"
+)
+
+// globals
+
+var (
+	KeyPairsPath = "/api/key-pairs"
 )
 
 type KeyPair struct {
-	ID int64 `json:"id"`
-	Name string `json:"name"`
+	ID        int64  `json:"id"`
+	Name      string `json:"name"`
 	PublicKey string `json:"publicKey"`
 	// PrivateKey string `json:"privateKey"`
 }
 
 type ListKeyPairsResult struct {
-    KeyPairs *[]KeyPair `json:"keyPairs"`
-    Meta *MetaResult `json:"meta"`
+	KeyPairs *[]KeyPair  `json:"keyPairs"`
+	Meta     *MetaResult `json:"meta"`
 }
 
 type GetKeyPairResult struct {
-    KeyPair *KeyPair `json:"keyPair"`
+	KeyPair *KeyPair `json:"keyPair"`
 }
 
 type CreateKeyPairResult struct {
-	Success bool `json:"success"`
-	Message string `json:"msg"`
-	Errors map[string]string `json:"errors"`
-	KeyPair *KeyPair `json:"keyPair"`
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	KeyPair *KeyPair          `json:"keyPair"`
 }
 
 type UpdateKeyPairResult struct {
@@ -38,8 +44,8 @@ type DeleteKeyPairResult struct {
 // request types
 
 type KeyPairPayload struct {
-	Name string `json:"name"`
-	PublicKey string `json:"publicKey"`
+	Name       string `json:"name"`
+	PublicKey  string `json:"publicKey"`
 	PrivateKey string `json:"privateKey"`
 }
 
@@ -51,19 +57,18 @@ type UpdateKeyPairBody struct {
 	CreateKeyPairPayload
 }
 
-
-func (client * Client) ListKeyPairs(req *Request) (*Response, error) {
+func (client *Client) ListKeyPairs(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method: "GET",
-		Path: fmt.Sprintf("/api/key-pairs"),
+		Path:   KeyPairsPath,
 		Result: &ListKeyPairsResult{},
 	})
 }
 
-func (client * Client) GetKeyPair(id int64, req *Request) (*Response, error) {
+func (client *Client) GetKeyPair(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method: "GET",
-		Path: fmt.Sprintf("/api/key-pairs/%d", id),
+		Path:   fmt.Sprintf("%s/%d", KeyPairsPath, id),
 		Result: &GetKeyPairResult{},
 	})
 }

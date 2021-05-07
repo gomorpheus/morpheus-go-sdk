@@ -172,26 +172,26 @@ Link | Description
 API | Available?
 --------- | -----------
 account_groups | n/a
-accounts | n/a
+accounts | [Accounts](accounts.go)
 appliance_settings | n/a
-apps | n/a
+apps | [Apps](apps.go)
 archive_buckets | n/a
 archive_files | n/a
 auth | n/a
-blueprints | n/a
+blueprints | [Blueprints](blueprints.go)
 cloud_datastores | n/a
 cloud_folders | n/a
 cloud_policies | n/a
 cloud_resource_pools | n/a
 clouds | [Clouds](clouds.go)
-clusters | n/a
+clusters | [Clusters](clusters.go)
 containers | n/a
 custom_instance_types | n/a
 cypher | n/a
 dashboard | n/a
 deploy | n/a
 deployments | n/a
-environments | n/a
+environments | [Environments](environments.go)
 execute_schedules | n/a
 execution_request | n/a
 file_copy_request | n/a
@@ -200,7 +200,7 @@ groups | [Groups](groups.go)
 image_builder | n/a
 instance_types | n/a
 instances | [Instances](instances.go)
-key_pairs | n/a
+key_pairs | [Key Pairs](key_pairs.go)
 library_compute_type_layouts | n/a
 library_container_scripts | n/a
 library_container_templates | n/a
@@ -231,8 +231,8 @@ network_subnet_types | n/a
 network_subnets | n/a
 network_types | n/a
 networks | [Networks](networks.go)
-option_type_lists | n/a
-option_types | n/a
+option_type_lists | [Option Type Lists](option_type_lists.go)
+option_types | [Option Types](option_types.go)
 policies | n/a
 power_schedules | n/a
 processes | n/a
@@ -248,13 +248,13 @@ service_plans | n/a
 setup | n/a
 storage_providers | n/a
 subnets | n/a
-task_sets | n/a
-tasks | n/a
+task_sets | [Task Sets](task_sets.go)
+tasks | [Tasks](tasks.go)
 user_groups | n/a
 user_settings | n/a
 user_sources | n/a
 users | n/a
 virtual_images | n/a
-whoami | n/a
+whoami | [Whoami](whoami.go)
 whitelabel_settings | n/a
 wiki | n/a
