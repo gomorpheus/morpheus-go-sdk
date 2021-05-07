@@ -232,7 +232,7 @@ network_subnets | n/a
 network_types | n/a
 networks | [Networks](networks.go)
 option_type_lists | n/a
-option_types | n/a
+option_types | [Option Types](option_types.go)
 policies | n/a
 power_schedules | n/a
 processes | n/a
@@ -248,8 +248,8 @@ service_plans | n/a
 setup | n/a
 storage_providers | n/a
 subnets | n/a
-task_sets | n/a
-tasks | n/a
+task_sets | [Task Sets](task_sets.go)
+tasks | [Tasks](tasks.go)
 user_groups | n/a
 user_settings | n/a
 user_sources | n/a

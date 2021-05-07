@@ -25,14 +25,16 @@ type Instance struct {
 	Environment  string                 `json:"instanceContext"`
 	Plan         InstancePlan           `json:"plan"`
 	Config       map[string]interface{} `json:"config"`
+	Labels       []string               `json:"labels"`
+	Status       string                 `json:"status"`
 
 	// might want to define types for these too
-	Volumes             *[]map[string]interface{} `json:"volumes"`
-	Interfaces          *[]map[string]interface{} `json:"interfaces"`
-	Controllers         *[]map[string]interface{} `json:"controllers"`
-	Tags                *[]string                 `json:"tags"`
-	Metadata            *[]map[string]interface{} `json:"metadata"`
-	EnvironmentVaribles *[]map[string]interface{} `json:"evars"`
+	Volumes              *[]map[string]interface{} `json:"volumes"`
+	Interfaces           *[]map[string]interface{} `json:"interfaces"`
+	Controllers          *[]map[string]interface{} `json:"controllers"`
+	Tags                 *[]map[string]interface{} `json:"tags,omitempty"`
+	Metadata             *[]map[string]interface{} `json:"metadata"`
+	EnvironmentVariables *[]map[string]interface{} `json:"evars"`
 }
 
 type InstancePlan struct {

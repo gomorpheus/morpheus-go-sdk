@@ -14,13 +14,16 @@ var (
 // Tenant structures for use in request and response payloads
 
 type Tenant struct {
-	ID             int64  `json:"id"`
-	Name           string `json:"name"`
-	Description    string `json:"description"`
-	Active         bool   `json:"active"`
-	CustomerNumber int64  `json:"customerNumber"`
-	AccountNumber  int64  `json:"accountNumber"`
-	Currency       string `json:"currency"`
+	ID             int64       `json:"id"`
+	Name           string      `json:"name"`
+	Description    string      `json:"description"`
+	Subdomain      string      `json:"subdomain"`
+	Role           interface{} `json:"role"`
+	Active         bool        `json:"active"`
+	CustomerNumber int64       `json:"customerNumber"`
+	AccountNumber  int64       `json:"accountNumber"`
+	Currency       string      `json:"currency"`
+	AccountName    string      `json:"accountName"`
 }
 
 type ListTenantsResult struct {

@@ -2,7 +2,7 @@
 package morpheus
 
 import (
-    "fmt"
+	"fmt"
 )
 
 // globals
@@ -14,27 +14,32 @@ var (
 // types
 
 type Group struct {
-	ID int64 `json:"id"`
-	Name string `json:"name"`
-	Code string `json:"code"`
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
+	Code     string `json:"code"`
 	Location string `json:"location"`
-	// Clouds array `json:"clouds"` //todo
+	Clouds   []Zone `json:"zones"`
+}
+
+type Zone struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
 type ListGroupsResult struct {
-    Groups *[]Group `json:"groups"`
-    Meta *MetaResult `json:"meta"`
+	Groups *[]Group    `json:"groups"`
+	Meta   *MetaResult `json:"meta"`
 }
 
 type GetGroupResult struct {
-    Group *Group `json:"group"`
+	Group *Group `json:"group"`
 }
 
 type CreateGroupResult struct {
-	Success bool `json:"success"`
-	Message string `json:"msg"`
-	Errors map[string]string `json:"errors"`
-	Group *Group `json:"group"`
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Group   *Group            `json:"group"`
 }
 
 type UpdateGroupResult struct {
@@ -47,76 +52,76 @@ type DeleteGroupResult struct {
 
 // API endpoints
 
-func (client * Client) ListGroups(req *Request) (*Response, error) {
+func (client *Client) ListGroups(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "GET",
-		Path: GroupsPath,
+		Method:      "GET",
+		Path:        GroupsPath,
 		QueryParams: req.QueryParams,
-		Result: &ListGroupsResult{},
+		Result:      &ListGroupsResult{},
 	})
 }
 
-func (client * Client) GetGroup(id int64, req *Request) (*Response, error) {
+func (client *Client) GetGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "GET",
-		Path: fmt.Sprintf("%s/%d", GroupsPath, id),
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d", GroupsPath, id),
 		QueryParams: req.QueryParams,
-		Result: &GetGroupResult{},
+		Result:      &GetGroupResult{},
 	})
 }
 
-func (client * Client) CreateGroup(req *Request) (*Response, error) {
+func (client *Client) CreateGroup(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "POST",
-		Path: GroupsPath,
+		Method:      "POST",
+		Path:        GroupsPath,
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &CreateGroupResult{},
+		Body:        req.Body,
+		Result:      &CreateGroupResult{},
 	})
 }
 
-func (client * Client) UpdateGroup(id int64, req *Request) (*Response, error) {
+func (client *Client) UpdateGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "PUT",
-		Path: fmt.Sprintf("%s/%d", GroupsPath, id),
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d", GroupsPath, id),
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &UpdateGroupResult{},
+		Body:        req.Body,
+		Result:      &UpdateGroupResult{},
 	})
 }
 
-func (client * Client) UpdateGroupClouds(id int64, req *Request) (*Response, error) {
+func (client *Client) UpdateGroupClouds(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "PUT",
-		Path: fmt.Sprintf("%s/%d/update-zones", GroupsPath, id),
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-zones", GroupsPath, id),
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &StandardResult{},
+		Body:        req.Body,
+		Result:      &StandardResult{},
 	})
 }
 
-func (client * Client) UpdateGroupZones(id int64, req *Request) (*Response, error) {
+func (client *Client) UpdateGroupZones(id int64, req *Request) (*Response, error) {
 	return client.UpdateGroupClouds(id, req)
 }
 
-func (client * Client) DeleteGroup(id int64, req *Request) (*Response, error) {
+func (client *Client) DeleteGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "DELETE",
-		Path: fmt.Sprintf("%s/%d", GroupsPath, id),
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d", GroupsPath, id),
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &DeleteGroupResult{},
+		Body:        req.Body,
+		Result:      &DeleteGroupResult{},
 	})
 }
 
 // helper functions
 
-func (client * Client) FindGroupByName(name string) (*Response, error) {
+func (client *Client) FindGroupByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListGroups(&Request{
-		QueryParams:map[string]string{
+		QueryParams: map[string]string{
 			"name": name,
-      	},
+		},
 	})
 	if err != nil {
 		return resp, err
