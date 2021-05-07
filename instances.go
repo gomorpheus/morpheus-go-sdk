@@ -32,7 +32,7 @@ type Instance struct {
 	Volumes              *[]map[string]interface{} `json:"volumes"`
 	Interfaces           *[]map[string]interface{} `json:"interfaces"`
 	Controllers          *[]map[string]interface{} `json:"controllers"`
-	Tags                 *[]map[string]interface{} `json:"tags,omitempty"`
+	Tags                 *[]map[string]interface{} `json:"tags"`
 	Metadata             *[]map[string]interface{} `json:"metadata"`
 	EnvironmentVariables *[]map[string]interface{} `json:"evars"`
 }
