@@ -21,19 +21,19 @@ type InstanceLayout struct {
 }
 
 type ListInstanceLayoutsResult struct {
-	InstanceLayouts *[]InstanceLayout `json:"instanceLayouts"`
+	InstanceLayouts *[]InstanceLayout `json:"instanceTypeLayouts"`
 	Meta            *MetaResult       `json:"meta"`
 }
 
 type GetInstanceLayoutResult struct {
-	InstanceLayout *InstanceLayout `json:"instanceLayout"`
+	InstanceLayout *InstanceLayout `json:"instanceTypeLayout"`
 }
 
 type CreateInstanceLayoutResult struct {
 	Success        bool              `json:"success"`
 	Message        string            `json:"msg"`
 	Errors         map[string]string `json:"errors"`
-	InstanceLayout *InstanceLayout   `json:"instanceLayout"`
+	InstanceLayout *InstanceLayout   `json:"instanceTypeLayout"`
 }
 
 type UpdateInstanceLayoutResult struct {
@@ -100,6 +100,7 @@ func (client *Client) FindInstanceLayoutByName(name string) (*Response, error) {
 	resp, err := client.ListInstanceLayouts(&Request{
 		QueryParams: map[string]string{
 			"name": name,
+			"max":  "5000",
 		},
 	})
 	if err != nil {
