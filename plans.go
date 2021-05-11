@@ -21,19 +21,19 @@ type Plan struct {
 }
 
 type ListPlansResult struct {
-	Plans *[]Plan     `json:"environments"`
+	Plans *[]Plan     `json:"servicePlans"`
 	Meta  *MetaResult `json:"meta"`
 }
 
 type GetPlanResult struct {
-	Plan *Plan `json:"environment"`
+	Plan *Plan `json:"servicePlan"`
 }
 
 type CreatePlanResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
 	Errors  map[string]string `json:"errors"`
-	Plan    *Plan             `json:"environment"`
+	Plan    *Plan             `json:"servicePlan"`
 }
 
 type UpdatePlanResult struct {
