@@ -42,6 +42,7 @@ func TestEnvironmentCRUD(t *testing.T) {
 	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"environment": map[string]interface{}{
+				"active":      true,
 				"name":        testEnvironmentName,
 				"code":        testEnvironmentName,
 				"description": "Test Bunker",
@@ -56,6 +57,7 @@ func TestEnvironmentCRUD(t *testing.T) {
 	assertEqual(t, result.Success, true)
 	assertNotNil(t, result.Environment)
 	assertNotEqual(t, result.Environment.ID, 0)
+	assertEqual(t, result.Environment.Active, true)
 	assertEqual(t, result.Environment.Name, testEnvironmentName)
 	assertEqual(t, result.Environment.Code, testEnvironmentName)
 	assertEqual(t, result.Environment.Description, "Test Bunker")
