@@ -26,6 +26,7 @@ type OptionList struct {
 	RealTime          bool   `json:"realTime"`
 	InitialDataset    string `json:"initialDataset"`
 	TranslationScript string `json:"translationScript"`
+	RequestScript     string `json:"requestScript"`
 	Config            struct {
 		SourceHeaders []SourceHeader `json:"sourceHeaders"`
 	} `json:"config"`
