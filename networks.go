@@ -2,7 +2,7 @@
 package morpheus
 
 import (
-    "fmt"
+	"fmt"
 )
 
 var (
@@ -12,33 +12,27 @@ var (
 // Network structures for use in request and response payloads
 
 type Network struct {
-	ID int64 `json:"id"`
-	Name string `json:"name"`
+	ID          int64  `json:"id"`
+	Name        string `json:"name"`
 	Description string `json:"description"`
-	Active bool `json:"active"`
-	Visibility string `json:"visibility"`
-	// what  else?
-	// Account *TenantAbbrev `json:"account"`
-	// Owner *TenantAbbrev `json:"owner"`
-	// RefSource string `json:"refSource"`
-	// RefType string `json:"refType"`
-	// RefId int64 `json:"refId"`
+	Active      bool   `json:"active"`
+	Visibility  string `json:"visibility"`
 }
 
 type ListNetworksResult struct {
-    Networks *[]Network `json:"networks"`
-    Meta *MetaResult `json:"meta"`
+	Networks *[]Network  `json:"networks"`
+	Meta     *MetaResult `json:"meta"`
 }
 
 type GetNetworkResult struct {
-    Network *Network `json:"network"`
+	Network *Network `json:"network"`
 }
 
 type CreateNetworkResult struct {
-	Success bool `json:"success"`
-	Message string `json:"msg"`
-	Errors map[string]string `json:"errors"`
-	Network *Network `json:"network"`
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Network *Network          `json:"network"`
 }
 
 type UpdateNetworkResult struct {
@@ -50,13 +44,10 @@ type DeleteNetworkResult struct {
 }
 
 type NetworkPayload struct {
-	Name string `json:"name"`
+	Name        string `json:"name"`
 	Description string `json:"description"`
-	Active bool `json:"active"`
-	Visibility string `json:"visibility"`
-	// what  else?
-	// Account *TenantAbbrev `json:"account"`
-	// Owner *TenantAbbrev `json:"owner"`
+	Active      bool   `json:"active"`
+	Visibility  string `json:"visibility"`
 }
 
 type CreateNetworkPayload struct {
@@ -67,107 +58,72 @@ type UpdateNetworkPayload struct {
 	CreateNetworkPayload
 }
 
-// Request types
-
-// type ListNetworksRequest struct {
-// 	Request
-// }
-
-// type GetNetworkRequest struct {
-// 	Request
-// 	ID int64
-// }
-
-// type CreateNetworkRequest struct {
-// 	Request
-// 	Payload *CreateNetworkPayload
-// }
-
-// type UpdateNetworkRequest struct {
-// 	Request
-// 	ID int64
-// 	Payload *UpdateNetworkPayload
-// }
-
-// type DeleteNetworkRequest struct {
-// 	Request
-// 	ID int64
-// }
-
-// // Response types
-
-// type ListNetworksResponse struct {
-// 	Response
-// 	Result *ListNetworksResult
-// }
-
-// type GetNetworkResponse struct {
-// 	Response
-// 	Result *GetNetworkResult
-// }
-
-// type CreateNetworkResponse struct {
-// 	Response
-// 	Result *CreateNetworkResult
-// }
-
-// type UpdateNetworkResponse struct {
-// 	Response
-// 	Result *UpdateNetworkResult
-// }
-
-// type DeleteNetworkResponse struct {
-// 	Request
-// 	Result *DeleteNetworkResult
-// }
-
-// Client request methods
-
-func (client * Client) ListNetworks(req *Request) (*Response, error) {
+func (client *Client) ListNetworks(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "GET",
-		Path: NetworksPath,
+		Method:      "GET",
+		Path:        NetworksPath,
 		QueryParams: req.QueryParams,
-		Result: &ListNetworksResult{},
+		Result:      &ListNetworksResult{},
 	})
 }
 
-func (client * Client) GetNetwork(id int64, req *Request) (*Response, error) {
+func (client *Client) GetNetwork(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "GET",
-		Path: fmt.Sprintf("%s/%d", NetworksPath, id),
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d", NetworksPath, id),
 		QueryParams: req.QueryParams,
-		Result: &GetNetworkResult{},
+		Result:      &GetNetworkResult{},
 	})
 }
 
-func (client * Client) CreateNetwork(req *Request) (*Response, error) {
+func (client *Client) CreateNetwork(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "POST",
-		Path: NetworksPath,
+		Method:      "POST",
+		Path:        NetworksPath,
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &CreateNetworkResult{},
+		Body:        req.Body,
+		Result:      &CreateNetworkResult{},
 	})
 }
 
-func (client * Client) UpdateNetwork(id int64, req *Request) (*Response, error) {
+func (client *Client) UpdateNetwork(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "PUT",
-		Path: fmt.Sprintf("%s/%d", NetworksPath, id),
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d", NetworksPath, id),
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &UpdateNetworkResult{},
+		Body:        req.Body,
+		Result:      &UpdateNetworkResult{},
 	})
 }
 
-
-func (client * Client) DeleteNetwork(id int64, req *Request) (*Response, error) {
+func (client *Client) DeleteNetwork(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "DELETE",
-		Path: fmt.Sprintf("%s/%d", NetworksPath, id),
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d", NetworksPath, id),
 		QueryParams: req.QueryParams,
-		Body: req.Body,
-		Result: &DeleteNetworkResult{},
+		Body:        req.Body,
+		Result:      &DeleteNetworkResult{},
 	})
+}
+
+// helper functions
+
+func (client *Client) FindNetworkByName(name string) (*Response, error) {
+	// Find by name, then get by ID
+	resp, err := client.ListNetworks(&Request{
+		QueryParams: map[string]string{
+			"name": name,
+		},
+	})
+	if err != nil {
+		return resp, err
+	}
+	listResult := resp.Result.(*ListNetworksResult)
+	networkCount := len(*listResult.Networks)
+	if networkCount != 1 {
+		return resp, fmt.Errorf("found %d networks for %v", networkCount, name)
+	}
+	firstRecord := (*listResult.Networks)[0]
+	networkID := firstRecord.ID
+	return client.GetNetwork(networkID, &Request{})
 }
