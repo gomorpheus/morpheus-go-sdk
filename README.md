@@ -206,7 +206,7 @@ library_container_scripts | n/a
 library_container_templates | n/a
 library_container_types | n/a
 library_container_upgrades | n/a
-library_instance_types | n/a
+library_instance_types | [Instance Types](instance_types.go)
 library_layouts | n/a
 license | n/a
 load_balancers | n/a
