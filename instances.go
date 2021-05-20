@@ -26,6 +26,7 @@ type Instance struct {
 	Plan         InstancePlan           `json:"plan"`
 	Config       map[string]interface{} `json:"config"`
 	Labels       []string               `json:"labels"`
+	Version      string                 `json:"instanceVersion"`
 	Status       string                 `json:"status"`
 
 	// might want to define types for these too

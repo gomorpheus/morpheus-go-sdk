@@ -19,7 +19,7 @@ type TaskSet struct {
 	Description string        `json:"description"`
 	Type        string        `json:"type"`
 	OptionTypes []interface{} `json:"optionTypes"`
-	Tasks       []interface{} `json:"types"`
+	Tasks       []int64       `json:"tasks"`
 }
 
 type TaskSetPayload struct {
@@ -31,7 +31,7 @@ type TaskSetPayload struct {
 	Platform          string        `json:"platform"`
 	AllowCustomConfig bool          `json:"allowCustomConfig"`
 	OptionTypes       []interface{} `json:"optionTypes"`
-	Tasks             []interface{} `json:"types"`
+	Tasks             []int64       `json:"tasks"`
 }
 
 type ListTaskSetsResult struct {

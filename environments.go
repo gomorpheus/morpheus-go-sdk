@@ -17,6 +17,7 @@ type Environment struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Code        string `json:"code"`
+	Active      bool   `json:"active"`
 	Visibility  string `json:"visibility"`
 }
 

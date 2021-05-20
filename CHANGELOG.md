@@ -1,5 +1,14 @@
 ## 1.0 (Unreleased)
 
+## 0.3 (May 17, 2021)
+
+FEATURES:
+
+* **Instance Layouts** Client methods for `instance_layouts` API endpoints
+* **Instance Types** Client methods for `instance_types` API endpoints
+* **Plans** Client methods for `plans` API endpoints
+* **Resource Pools** Client methods for `resource_pools` API endpoints
+
 ## 0.2 (May 7, 2021)
 
 FEATURES:
