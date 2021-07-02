@@ -208,6 +208,7 @@ library_container_types | n/a
 library_container_upgrades | n/a
 library_instance_types | [Instance Types](instance_types.go)
 library_layouts | n/a
+library_spec_templates | [Spec Templates](spec_templates.go)
 license | n/a
 load_balancers | n/a
 logs | n/a
