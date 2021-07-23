@@ -64,10 +64,10 @@ func (client *Client) GetInstanceLayout(id int64, req *Request) (*Response, erro
 	})
 }
 
-func (client *Client) CreateInstanceLayout(req *Request) (*Response, error) {
+func (client *Client) CreateInstanceLayout(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
-		Path:        InstanceLayoutsPath,
+		Path:        fmt.Sprintf("/api/library/instance-types/%d/layouts", id),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &CreateInstanceLayoutResult{},
