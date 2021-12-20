@@ -2,6 +2,7 @@ package morpheus_test
 
 import (
 	"testing"
+
 	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
@@ -19,15 +20,14 @@ func TestGetInstance(t *testing.T) {
 	listInstancesResult := resp.Result.(*morpheus.ListInstancesResult)
 	instancesCount := listInstancesResult.Meta.Total
 	t.Logf("Found %d Instances.", instancesCount)
-	// if instancesCount != 0 {
-		firstInstance := (*listInstancesResult.Instances)[0]	
+	if instancesCount != 0 {
+		firstInstance := (*listInstancesResult.Instances)[0]
 		// log.Printf(fmt.Sprintf("First Instance: [%d] %v: ", firstInstance.ID, firstInstance.Name))
 		resp, err = client.GetInstance(firstInstance.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
-	// }
-	
-}
+	}
 
+}
 
 // this requires params zoneId&layoutId&siteId, heh
 // func TestListInstancePlans(t *testing.T) {
@@ -35,4 +35,3 @@ func TestGetInstance(t *testing.T) {
 // 	resp, err := client.ListInstancePlans(&morpheus.Request{})
 // 	assertResponse(t, resp, err)
 // }
-

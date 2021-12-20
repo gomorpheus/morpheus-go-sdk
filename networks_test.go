@@ -2,6 +2,7 @@ package morpheus_test
 
 import (
 	"testing"
+
 	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
@@ -26,7 +27,7 @@ func TestGetNetwork(t *testing.T) {
 
 	result := resp.Result.(*morpheus.ListNetworksResult)
 	recordCount := result.Meta.Total
-	t.Logf("Found %d Network Domains.", recordCount)
+	t.Logf("Found %d Networks.", recordCount)
 	if recordCount != 0 {
 		// Get by ID
 		record := (*result.Networks)[0]
@@ -36,7 +37,7 @@ func TestGetNetwork(t *testing.T) {
 		// List by name
 
 	} else {
-		
+
 	}
 }
 
@@ -47,7 +48,7 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"network": map[string]interface{}{
-				"name": testNetworkName,
+				"name":        testNetworkName,
 				"description": "a test network",
 				"zone": map[string]interface{}{
 					"id": 1,
@@ -81,7 +82,7 @@ func _Busted_TestNetworksCRUD(t *testing.T) {
 	assertNotNil(t, updateResult.Network)
 	assertNotEqual(t, updateResult.Network.ID, 0)
 	assertEqual(t, updateResult.Network.Description, "my new description")
-	
+
 	// delete
 	deleteReq := &morpheus.Request{}
 	deleteResp, deleteErr := client.DeleteNetwork(result.Network.ID, deleteReq)

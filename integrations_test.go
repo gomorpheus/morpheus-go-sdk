@@ -6,28 +6,28 @@ import (
 	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
-func TestListSpecTemplates(t *testing.T) {
+func TestIntegrations(t *testing.T) {
 	client := getTestClient(t)
 	req := &morpheus.Request{}
-	resp, err := client.ListSpecTemplates(req)
+	resp, err := client.ListIntegrations(req)
 	assertResponse(t, resp, err)
 }
 
-func TestGetSpecTemplate(t *testing.T) {
+func TestGetIntegration(t *testing.T) {
 	client := getTestClient(t)
 	req := &morpheus.Request{}
-	resp, err := client.ListSpecTemplates(req)
+	resp, err := client.ListIntegrations(req)
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
 
-	result := resp.Result.(*morpheus.ListSpecTemplatesResult)
+	result := resp.Result.(*morpheus.ListIntegrationsResult)
 	recordCount := result.Meta.Total
-	t.Logf("Found %d Spec Templates.", recordCount)
+	t.Logf("Found %d integrations.", recordCount)
 	if recordCount != 0 {
 		// Get by ID
-		record := (*result.SpecTemplates)[0]
-		resp, err = client.GetSpecTemplate(record.ID, &morpheus.Request{})
+		record := (*result.Integrations)[0]
+		resp, err = client.GetIntegration(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
 	}
 }
