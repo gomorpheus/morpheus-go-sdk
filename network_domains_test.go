@@ -2,6 +2,7 @@ package morpheus_test
 
 import (
 	"testing"
+
 	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
@@ -27,16 +28,11 @@ func TestGetNetworkDomain(t *testing.T) {
 	result := resp.Result.(*morpheus.ListNetworkDomainsResult)
 	recordCount := result.Meta.Total
 	t.Logf("Found %d Network Domains.", recordCount)
-	if recordCount != 0 {
+	if recordCount > 1 {
 		// Get by ID
 		record := (*result.NetworkDomains)[0]
 		resp, err = client.GetNetworkDomain(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
-
-		// List by name
-
-	} else {
-		
 	}
 }
 
@@ -47,11 +43,11 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"networkDomain": map[string]interface{}{
-				"name": testNetworkDomainName,
-				"description": "a test domain",
-				"publicZone": false,
+				"name":             testNetworkDomainName,
+				"description":      "a test domain",
+				"publicZone":       false,
 				"domainController": false,
-				"visibility":"private",
+				"visibility":       "private",
 			},
 		},
 	}
@@ -80,7 +76,7 @@ func TestNetworkDomainsCRUD(t *testing.T) {
 	assertNotNil(t, updateResult.NetworkDomain)
 	assertNotEqual(t, updateResult.NetworkDomain.ID, 0)
 	assertEqual(t, updateResult.NetworkDomain.Description, "my new description")
-	
+
 	// delete
 	deleteReq := &morpheus.Request{}
 	deleteResp, deleteErr := client.DeleteNetworkDomain(result.NetworkDomain.ID, deleteReq)
