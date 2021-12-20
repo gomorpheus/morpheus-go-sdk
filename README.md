@@ -17,7 +17,7 @@ Install Go, export environment variables, go get the morpheus package and begin 
 
 ## Requirements
 
-* [Go](https://golang.org/dl/) | 1.13
+* [Go](https://golang.org/dl/) | 1.17
 
 ### Environment Variables
 
@@ -234,7 +234,7 @@ network_types | n/a
 networks | [Networks](networks.go)
 option_type_lists | [Option Type Lists](option_type_lists.go)
 option_types | [Option Types](option_types.go)
-policies | n/a
+policies | [Policies](policies.go)
 power_schedules | n/a
 processes | n/a
 provision_types | n/a

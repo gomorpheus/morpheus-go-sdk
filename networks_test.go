@@ -33,11 +33,6 @@ func TestGetNetwork(t *testing.T) {
 		record := (*result.Networks)[0]
 		resp, err = client.GetNetwork(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
-
-		// List by name
-
-	} else {
-
 	}
 }
 

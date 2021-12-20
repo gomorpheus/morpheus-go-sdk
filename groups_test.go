@@ -2,6 +2,7 @@ package morpheus_test
 
 import (
 	"testing"
+
 	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
@@ -32,11 +33,6 @@ func TestGetGroup(t *testing.T) {
 		record := (*result.Groups)[0]
 		resp, err = client.GetGroup(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
-
-		// List by name
-
-	} else {
-		
 	}
 }
 
@@ -46,8 +42,8 @@ func TestGroupsCRUD(t *testing.T) {
 	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"group": map[string]interface{}{
-				"name": testGroupName,
-				"code": testGroupName,
+				"name":     testGroupName,
+				"code":     testGroupName,
 				"location": "Test Bunker",
 			},
 		},
@@ -79,7 +75,7 @@ func TestGroupsCRUD(t *testing.T) {
 	assertNotNil(t, updateResult.Group)
 	assertNotEqual(t, updateResult.Group.ID, 0)
 	assertEqual(t, updateResult.Group.Location, "Test Lab")
-	
+
 	// delete
 	deleteReq := &morpheus.Request{}
 	deleteResp, deleteErr := client.DeleteGroup(result.Group.ID, deleteReq)
