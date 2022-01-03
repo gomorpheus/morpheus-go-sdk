@@ -204,7 +204,7 @@ key_pairs | [Key Pairs](key_pairs.go)
 library_compute_type_layouts | n/a
 library_container_scripts | n/a
 library_container_templates | n/a
-library_container_types | n/a
+library_container_types |[Node Types](node_types.go)
 library_container_upgrades | n/a
 library_instance_types | [Instance Types](instance_types.go)
 library_layouts | n/a
