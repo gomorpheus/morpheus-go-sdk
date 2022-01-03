@@ -1,5 +1,11 @@
 ## 1.0 (Unreleased)
 
+FEATURES:
+
+* **Policies** Client methods for `policies` API endpoints
+* **Node Types** Client methods for `node_types` API endpoints
+* **Jobs** Client methods for `jobs` API endpoints
+
 ## 0.3 (May 17, 2021)
 
 FEATURES:
