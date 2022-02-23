@@ -240,7 +240,7 @@ processes | n/a
 provision_types | n/a
 refresh_token | n/a
 reports | n/a
-roles | n/a
+roles | [Roles](roles.go)
 security_group_rules | n/a
 security_groups | n/a
 server_types | n/a
