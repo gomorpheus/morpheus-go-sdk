@@ -32,7 +32,7 @@ type CreateNodeTypeResult struct {
 	Success  bool              `json:"success"`
 	Message  string            `json:"msg"`
 	Errors   map[string]string `json:"errors"`
-	NodeType *NodeType         `json:"nodeType"`
+	NodeType *NodeType         `json:"containerType"`
 }
 
 type UpdateNodeTypeResult struct {
