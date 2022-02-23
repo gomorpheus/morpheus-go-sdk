@@ -20,8 +20,8 @@ type Tenant struct {
 	Subdomain      string      `json:"subdomain"`
 	Role           interface{} `json:"role"`
 	Active         bool        `json:"active"`
-	CustomerNumber int64       `json:"customerNumber"`
-	AccountNumber  int64       `json:"accountNumber"`
+	CustomerNumber string      `json:"customerNumber"`
+	AccountNumber  string      `json:"accountNumber"`
 	Currency       string      `json:"currency"`
 	AccountName    string      `json:"accountName"`
 }
