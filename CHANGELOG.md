@@ -2,6 +2,7 @@
 
 FEATURES:
 
+* **Contacts** Client methods for `contacts` API endpoints
 * **Policies** Client methods for `policies` API endpoints
 * **Node Types** Client methods for `node_types` API endpoints
 * **Jobs** Client methods for `jobs` API endpoints
