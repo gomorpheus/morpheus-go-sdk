@@ -219,7 +219,7 @@ monitoring.groups | n/a
 monitoring.apps | n/a
 monitoring.incidents | n/a
 monitoring.alerts | n/a
-monitoring.contacts | n/a
+monitoring.contacts | [Contacts](contacts.go)
 network_domain_records | n/a
 network_domains | [Network Domains](network_domains.go)
 network_groups | n/a
