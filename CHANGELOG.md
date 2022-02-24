@@ -2,10 +2,14 @@
 
 FEATURES:
 
+* **Check Groups** Client methods for `check_groups` API endpoints
+* **Checks** Client methods for `checks` API endpoints
 * **Contacts** Client methods for `contacts` API endpoints
-* **Policies** Client methods for `policies` API endpoints
-* **Node Types** Client methods for `node_types` API endpoints
+* **Incidents** Client methods for `incidents` API endpoints
 * **Jobs** Client methods for `jobs` API endpoints
+* **Monitoring Apps** Client methods for `monitoring_apps` API endpoints
+* **Node Types** Client methods for `node_types` API endpoints
+* **Policies** Client methods for `policies` API endpoints
 * **Roles** Client methods for `roles` API endpoints
 
 ## 0.3 (May 17, 2021)

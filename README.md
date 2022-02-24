@@ -130,6 +130,7 @@ Running `go test` will fail with a panic right away if you have not yet setup yo
 export MORPHEUS_TEST_URL=https://yourmorpheus.com
 export MORPHEUS_TEST_USERNAME=gotest
 export MORPHEUS_TEST_PASSWORD=19830B3f489
+export MORPHEUS_TEST_TOKEN=8c6380df-4cwf-40qd-9fm6-hj16a0357094
 ```
 **Be Careful running this test suite**. It creates and destroys data. Never point at any URL other than a test environment. Although, in reality, tests will not modify or destroy any pre-existing data. It could still orphan some test some data, or cause otherwise undesired effects.
 
@@ -214,10 +215,10 @@ load_balancers | n/a
 logs | n/a
 log_settings | n/a
 monitoring | n/a
-monitoring.checks | n/a
-monitoring.groups | n/a
-monitoring.apps | n/a
-monitoring.incidents | n/a
+monitoring.checks | [Checks](checks.go)
+monitoring.groups | [Check Groups](check_groups.go)
+monitoring.apps | [Monitoring Apps](monitoring_apps.go)
+monitoring.incidents | [Incidents](incidents.go)
 monitoring.alerts | n/a
 monitoring.contacts | [Contacts](contacts.go)
 network_domain_records | n/a
