@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// OptionListsPath is the API endpoint for option lists
 	OptionListsPath = "/api/library/option-type-lists"
 )
 
 // OptionLists structures for use in request and response payloads
-
 type OptionList struct {
 	ID                int64  `json:"id"`
 	Name              string `json:"name"`
@@ -62,8 +59,7 @@ type DeleteOptionListResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListOptionLists lists all option lists
 func (client *Client) ListOptionLists(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -73,6 +69,7 @@ func (client *Client) ListOptionLists(req *Request) (*Response, error) {
 	})
 }
 
+// GetOptionList gets an option list
 func (client *Client) GetOptionList(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -82,6 +79,7 @@ func (client *Client) GetOptionList(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateOptionList creates a new option list
 func (client *Client) CreateOptionList(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -92,6 +90,7 @@ func (client *Client) CreateOptionList(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateOptionList updates an existing option list
 func (client *Client) UpdateOptionList(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -102,6 +101,7 @@ func (client *Client) UpdateOptionList(id int64, req *Request) (*Response, error
 	})
 }
 
+// DeleteOptionList deletes an existing option list
 func (client *Client) DeleteOptionList(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -112,8 +112,7 @@ func (client *Client) DeleteOptionList(id int64, req *Request) (*Response, error
 	})
 }
 
-// helper functions
-
+// FindOptionListByName gets an existing option list by name
 func (client *Client) FindOptionListByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListOptionLists(&Request{

@@ -1,32 +1,32 @@
 package morpheus
 
 import (
-    "fmt"
+	"fmt"
 	// "github.com/go-resty/resty/v2"
 	// "github.com/gormorpheus/morpheusapi/client"
-    // "github.com/gormorpheus/morpheusapi/response"
+	// "github.com/gormorpheus/morpheusapi/response"
 )
 
 type Request struct {
-	Method string
-    Path string
-    QueryParams map[string]string
-    Headers map[string]string
-    Body map[string]interface{}
-    // FormData interface{}
-    // FormData map[string]interface{}
-    FormData map[string]string
-    // Body map[string]interface{}
-    
-    // Client Client
-    SkipLogin bool // used for anonymous api calls, otherwise Login() is always called to get token
-    SkipAuthorization bool // do not automatically add header for Authorization: Bearer AccessToken
-    Timeout int // todo:  dictate request timeout
+	Method      string
+	Path        string
+	QueryParams map[string]string
+	Headers     map[string]string
+	Body        map[string]interface{}
+	// FormData interface{}
+	// FormData map[string]interface{}
+	FormData map[string]string
+	// Body map[string]interface{}
 
-    Result interface{}
+	// Client Client
+	SkipLogin         bool // used for anonymous api calls, otherwise Login() is always called to get token
+	SkipAuthorization bool // do not automatically add header for Authorization: Bearer AccessToken
+	Timeout           int  // todo:  dictate request timeout
 
-    isMultiPart         bool
-	isFormData          bool
+	Result interface{}
+
+	isMultiPart bool
+	isFormData  bool
 	// setContentLength    bool
 	// isSaveResponse      bool
 	// notParseResponse    bool
@@ -44,7 +44,7 @@ type Request struct {
 	// multipartFields     []*MultipartField
 }
 
-func (req * Request) String() string {
-    return fmt.Sprintf("Request Method: %v Path: %v QueryParams: %v Body: %s", 
-        req.Method, req.Path, req.QueryParams, req.Body)
+func (req *Request) String() string {
+	return fmt.Sprintf("Request Method: %v Path: %v QueryParams: %v Body: %s",
+		req.Method, req.Path, req.QueryParams, req.Body)
 }

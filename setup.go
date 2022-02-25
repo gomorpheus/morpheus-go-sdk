@@ -1,7 +1,7 @@
 package morpheus
 
 import (
-    _ "fmt"
+	_ "fmt"
 )
 
 var (
@@ -9,10 +9,10 @@ var (
 )
 
 type SetupCheckResult struct {
-	Success bool `json:"success"`
-	Message string `json:"msg"`
+	Success      bool   `json:"success"`
+	Message      string `json:"msg"`
 	BuildVersion string `json:"buildVersion"`
-	SetupNeeded bool `json:"setupNeeded"`
+	SetupNeeded  bool   `json:"setupNeeded"`
 }
 
 type SetupInitResult struct {
@@ -22,28 +22,27 @@ type SetupInitResult struct {
 type SetupInitPayload struct {
 	// Request
 	AccountName string `json:"accountName"`
-	FirstName string `json:"firstName"`
-	LastName string `json:"lastName"`
-	Username string `json:"username"`
-	Password string `json:"password"`
+	FirstName   string `json:"firstName"`
+	LastName    string `json:"lastName"`
+	Username    string `json:"username"`
+	Password    string `json:"password"`
 }
 
-func (client * Client) SetupCheck(req *Request) (*Response, error) {
+func (client *Client) SetupCheck(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "GET",
-		Path: (SetupPath + "/check"),
+		Method:      "GET",
+		Path:        (SetupPath + "/check"),
 		QueryParams: req.QueryParams,
-		Result: &SetupCheckResult{},
+		Result:      &SetupCheckResult{},
 	})
 }
 
-
-func (client * Client) SetupInit(req *Request) (*Response, error) {
+func (client *Client) SetupInit(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method: "POST",
-		Path: (SetupPath + "/init"),
+		Method:      "POST",
+		Path:        (SetupPath + "/init"),
 		QueryParams: req.QueryParams,
-		Body: req.Body,
+		Body:        req.Body,
 		// Body: payload.(map[string]interface {}),
 		Result: &SetupInitResult{},
 	})

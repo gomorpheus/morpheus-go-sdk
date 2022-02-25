@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// OptionTypesPath is the API endpoint for option types
 	OptionTypesPath = "/api/library/option-types"
 )
 
 // OptionType structures for use in request and response payloads
-
 type OptionType struct {
 	ID                    int64                  `json:"id"`
 	Name                  string                 `json:"name"`
@@ -55,8 +52,7 @@ type DeleteOptionTypeResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListOptionTypes list all option types
 func (client *Client) ListOptionTypes(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -66,6 +62,7 @@ func (client *Client) ListOptionTypes(req *Request) (*Response, error) {
 	})
 }
 
+// GetOptionType gets an option type
 func (client *Client) GetOptionType(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -75,6 +72,7 @@ func (client *Client) GetOptionType(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateOptionType creates a new option type
 func (client *Client) CreateOptionType(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -85,6 +83,7 @@ func (client *Client) CreateOptionType(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateOptionType updates an existing option type
 func (client *Client) UpdateOptionType(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -95,6 +94,7 @@ func (client *Client) UpdateOptionType(id int64, req *Request) (*Response, error
 	})
 }
 
+// DeleteOptionType deletes an existing option type
 func (client *Client) DeleteOptionType(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -105,8 +105,7 @@ func (client *Client) DeleteOptionType(id int64, req *Request) (*Response, error
 	})
 }
 
-// helper functions
-
+// FindOptionTypeByName gets an existing option type by name
 func (client *Client) FindOptionTypeByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListOptionTypes(&Request{

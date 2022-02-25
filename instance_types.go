@@ -1,17 +1,15 @@
-// Morpheus API types and Client methods for Instance Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// InstanceTypesPath is the API endpoint for instance types
 	InstanceTypesPath = "/api/library/instance-types"
 )
 
 // InstanceType structures for use in request and response payloads
-
 type InstanceType struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
@@ -21,6 +19,7 @@ type InstanceType struct {
 	Visibility  string `json:"visibility"`
 }
 
+// ListInstanceTypesResult structure parses the list instance types response payload
 type ListInstanceTypesResult struct {
 	InstanceTypes *[]InstanceType `json:"instanceTypes"`
 	Meta          *MetaResult     `json:"meta"`

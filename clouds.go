@@ -1,19 +1,15 @@
-// Morpheus API types and Client methods for Clouds (Zones)
-// todo: API needs to switch from 'zone' to 'cloud'
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// CloudsPath is the API endpoint for clouds (zones)
 	CloudsPath = "/api/zones"
 )
 
-// types
-
+// Cloud structures for use in request and response payloads
 type Cloud struct {
 	ID        int64     `json:"id"`
 	Name      string    `json:"name"`
@@ -34,6 +30,7 @@ type CloudType struct {
 	Code string `json:"code"`
 }
 
+// ListCloudsResult structure parses the list clouds response payload
 type ListCloudsResult struct {
 	Clouds *[]Cloud    `json:"zones"`
 	Meta   *MetaResult `json:"meta"`
@@ -78,6 +75,7 @@ func (client *Client) GetCloud(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateCloud creates a new cloud
 func (client *Client) CreateCloud(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -88,6 +86,7 @@ func (client *Client) CreateCloud(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateCloud updates an existing cloud
 func (client *Client) UpdateCloud(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -98,6 +97,7 @@ func (client *Client) UpdateCloud(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteCloud deletes an existing cloud
 func (client *Client) DeleteCloud(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -107,8 +107,6 @@ func (client *Client) DeleteCloud(id int64, req *Request) (*Response, error) {
 		Result:      &DeleteCloudResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindCloudByName(name string) (*Response, error) {
 	// Find by name, then get by ID

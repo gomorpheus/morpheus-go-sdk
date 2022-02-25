@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// IncidentsPath is the API endpoint for incidents
 	IncidentsPath = "/api/monitoring/incidents"
 )
 
 // Incident structures for use in request and response payloads
-
 type Incident struct {
 	ID         int64  `json:"id"`
 	Name       string `json:"name"`
@@ -25,6 +22,7 @@ type Incident struct {
 	EndDate    string `json:"endDate"`
 }
 
+// ListIncidentsResult structure parses the list incidents response payload
 type ListIncidentsResult struct {
 	Incidents *[]Incident `json:"incidents"`
 	Meta      *MetaResult `json:"meta"`

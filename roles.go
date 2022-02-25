@@ -1,19 +1,17 @@
-// Morpheus API types and Client methods for Tenants
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
-	RolesPath       = "/api/roles"
+	// RolesPath is the API endpoint for roles
+	RolesPath = "/api/roles"
+	// RolesPath is the API endpoint for tenant roles
 	TenantRolesPath = "/api/accounts/available-roles"
 )
 
 // Role structures for use in request and response payloads
-
 type Role struct {
 	ID          int64       `json:"id"`
 	Name        string      `json:"name"`
@@ -106,8 +104,7 @@ func (client *Client) DeleteRole(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
-
+// FindRoleByName gets an existing role by name
 func (client *Client) FindRoleByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListRoles(&Request{
@@ -128,6 +125,7 @@ func (client *Client) FindRoleByName(name string) (*Response, error) {
 	return client.GetRole(roleID, &Request{})
 }
 
+// FindTenantRoleByName gets an existing tenant role by name
 func (client *Client) FindTenantRoleByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListTenantRoles(&Request{

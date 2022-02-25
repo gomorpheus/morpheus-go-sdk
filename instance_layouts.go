@@ -1,17 +1,15 @@
-// Morpheus API types and Client methods for Instance Layouts
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// InstanceLayoutsPath is the API endpoint for instance layouts
 	InstanceLayoutsPath = "/api/library/layouts"
 )
 
 // InstanceLayout structures for use in request and response payloads
-
 type InstanceLayout struct {
 	ID              int64  `json:"id"`
 	Name            string `json:"name"`
@@ -20,6 +18,7 @@ type InstanceLayout struct {
 	InstanceVersion string `json:"instanceVersion"`
 }
 
+// ListInstanceLayoutsResult structure parses the list instance layouts response payload
 type ListInstanceLayoutsResult struct {
 	InstanceLayouts *[]InstanceLayout `json:"instanceTypeLayouts"`
 	Meta            *MetaResult       `json:"meta"`

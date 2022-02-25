@@ -1,13 +1,11 @@
 package morpheus
 
-// Morpheus API types and Client methods for Node Types
-
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// NodeTypesPath is the API endpoint for node types
 	NodeTypesPath = "/api/library/container-types"
 )
 
@@ -92,8 +90,6 @@ func (client *Client) DeleteNodeType(id int64, req *Request) (*Response, error) 
 		Result:      &DeleteNodeTypeResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindNodeTypeByName(name string) (*Response, error) {
 	// Find by name, then get by ID

@@ -1,13 +1,13 @@
-// Morpheus API types and Client methods for Wikis
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
-	WikisPath          = "/api/wiki/pages"
+	// WikisPath is the API endpoint for wikis
+	WikisPath = "/api/wiki/pages"
+	// WikiCategoriesPath is the API endpoint for wiki categories
 	WikiCategoriesPath = "/api/wiki/categories"
 )
 
@@ -23,12 +23,14 @@ type Wiki struct {
 	Format      string `json:"format"`
 }
 
+// CreateWiki structure defines the create wiki payload
 type CreateWiki struct {
 	Name     string `json:"name"`
 	Category string `json:"category"`
 	Content  string `json:"content"`
 }
 
+// WikiCategory structure defines the wiki category payload
 type WikiCategory struct {
 	Name      string `json:"name"`
 	PageCount int64  `json:"pageCount"`
@@ -65,6 +67,7 @@ type DeleteWikiResult struct {
 
 // Client request methods
 
+// ListWikis lists all the wikis
 // https://apidocs.morpheusdata.com/#get-all-wiki-pages
 func (client *Client) ListWikis(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -75,6 +78,7 @@ func (client *Client) ListWikis(req *Request) (*Response, error) {
 	})
 }
 
+// ListWikiCategories lists all wiki categories
 // https://apidocs.morpheusdata.com/#get-all-wiki-categories
 func (client *Client) ListWikiCategories(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -85,6 +89,7 @@ func (client *Client) ListWikiCategories(req *Request) (*Response, error) {
 	})
 }
 
+// GetAppWiki gets a wiki
 // https://apidocs.morpheusdata.com/#get-a-specific-wiki-page
 func (client *Client) GetWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -95,6 +100,7 @@ func (client *Client) GetWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// GetInstanceWiki gets an instance wiki
 // https://apidocs.morpheusdata.com/#get-a-wiki-page-for-instance
 func (client *Client) GetInstanceWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -105,6 +111,7 @@ func (client *Client) GetInstanceWiki(id int64, req *Request) (*Response, error)
 	})
 }
 
+// GetAppWiki gets an app wiki
 // https://apidocs.morpheusdata.com/#get-a-wiki-page-for-app
 func (client *Client) GetAppWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -115,6 +122,7 @@ func (client *Client) GetAppWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// GetClusterWiki gets a cluster wiki
 // https://apidocs.morpheusdata.com/#get-a-wiki-page-for-cluster
 func (client *Client) GetClusterWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -125,6 +133,7 @@ func (client *Client) GetClusterWiki(id int64, req *Request) (*Response, error) 
 	})
 }
 
+// GetServerWiki gets a server wiki
 // https://apidocs.morpheusdata.com/#get-a-wiki-page-for-server
 func (client *Client) GetServerWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -135,6 +144,7 @@ func (client *Client) GetServerWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// GetCloudWiki gets a cloud wiki
 // https://apidocs.morpheusdata.com/#get-a-wiki-page-for-cloud
 func (client *Client) GetCloudWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -145,6 +155,7 @@ func (client *Client) GetCloudWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// GetGroupWiki gets a wiki
 // https://apidocs.morpheusdata.com/#get-a-wiki-page-for-group
 func (client *Client) GetGroupWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -155,6 +166,7 @@ func (client *Client) GetGroupWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateWiki creates a new wiki
 // https://apidocs.morpheusdata.com/#create-a-wiki-page
 func (client *Client) CreateWiki(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -166,6 +178,7 @@ func (client *Client) CreateWiki(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateWiki updates an existing wiki
 // https://apidocs.morpheusdata.com/#update-a-wiki-page
 func (client *Client) UpdateWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -177,6 +190,7 @@ func (client *Client) UpdateWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// UpdateInstanceWiki updates an existing instance wiki
 // https://apidocs.morpheusdata.com/#update-a-wiki-page-for-instance
 func (client *Client) UpdateInstanceWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -188,6 +202,7 @@ func (client *Client) UpdateInstanceWiki(id int64, req *Request) (*Response, err
 	})
 }
 
+// UpdateAppWiki updates an existing app wiki
 // https://apidocs.morpheusdata.com/#update-a-wiki-page-for-app
 func (client *Client) UpdateAppWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -210,6 +225,7 @@ func (client *Client) UpdateClusterWiki(id int64, req *Request) (*Response, erro
 	})
 }
 
+// UpdateServerWiki updates an existing server wiki
 // https://apidocs.morpheusdata.com/#update-a-wiki-page-for-server
 func (client *Client) UpdateServerWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -221,6 +237,7 @@ func (client *Client) UpdateServerWiki(id int64, req *Request) (*Response, error
 	})
 }
 
+// UpdateCloudWiki updates an existing cloud wiki
 // https://apidocs.morpheusdata.com/#update-a-wiki-page-for-cloud
 func (client *Client) UpdateCloudWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -232,6 +249,7 @@ func (client *Client) UpdateCloudWiki(id int64, req *Request) (*Response, error)
 	})
 }
 
+// UpdateGroupWiki updates an existing group wiki
 // https://apidocs.morpheusdata.com/#update-a-wiki-page-for-group
 func (client *Client) UpdateGroupWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -243,6 +261,7 @@ func (client *Client) UpdateGroupWiki(id int64, req *Request) (*Response, error)
 	})
 }
 
+// DeleteWiki deletes an existing wiki
 // https://apidocs.morpheusdata.com/#delete-a-wiki-page
 func (client *Client) DeleteWiki(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -254,7 +273,7 @@ func (client *Client) DeleteWiki(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
+// FindWikiByName gets an existing wiki by name
 func (client *Client) FindWikiByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListWikis(&Request{

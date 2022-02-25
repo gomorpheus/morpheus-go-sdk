@@ -1,9 +1,9 @@
 package morpheus_test
 
 import (
-	"testing"
 	"github.com/gomorpheus/morpheus-go-sdk"
 	"net/http"
+	"testing"
 )
 
 func TestSetupCheck(t *testing.T) {
@@ -12,7 +12,6 @@ func TestSetupCheck(t *testing.T) {
 	resp, err := client.SetupCheck(req)
 	assertResponse(t, resp, err)
 }
-
 
 // func TestSetupInit(t *testing.T) {
 // 	client := getTestClient(t)
@@ -28,16 +27,15 @@ func TestSetupCheck(t *testing.T) {
 // 	assertResponse(t, resp, err)
 // }
 
-
 // It should expect to be already setup
 func TestSetupInitShouldBeAlreadySetup(t *testing.T) {
 	client := getTestClient(t)
 	req := &morpheus.Request{
 		Body: map[string]interface{}{
 			"accountName": "root",
-			"firstName": "Super",
-			"lastName": "Admin",
-			"password": "ChangeM3!",
+			"firstName":   "Super",
+			"lastName":    "Admin",
+			"password":    "ChangeM3!",
 		},
 	}
 	resp, err := client.SetupInit(req)
@@ -46,4 +44,3 @@ func TestSetupInitShouldBeAlreadySetup(t *testing.T) {
 	//assertBadResponse(t, resp, err)
 	// could assert resp.Msg == "Already setup" or whatever
 }
-

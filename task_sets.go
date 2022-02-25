@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Task Sets
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// TaskSetsPath is the API endpoint for task sets
 	TaskSetsPath = "/api/task-sets"
 )
 
 // TaskSet structures for use in request and response payloads
-
 type TaskSet struct {
 	ID          int64         `json:"id"`
 	Name        string        `json:"name"`
@@ -58,8 +55,7 @@ type DeleteTaskSetResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListTaskSets lists all task sets
 func (client *Client) ListTaskSets(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -69,6 +65,7 @@ func (client *Client) ListTaskSets(req *Request) (*Response, error) {
 	})
 }
 
+// GetTaskSet gets an existing task set
 func (client *Client) GetTaskSet(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -78,6 +75,7 @@ func (client *Client) GetTaskSet(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateTaskSet creates a new task set
 func (client *Client) CreateTaskSet(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -88,6 +86,7 @@ func (client *Client) CreateTaskSet(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateTaskSet updates an existing task set
 func (client *Client) UpdateTaskSet(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -98,6 +97,7 @@ func (client *Client) UpdateTaskSet(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteTaskSet deletes an existing task set
 func (client *Client) DeleteTaskSet(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -108,8 +108,7 @@ func (client *Client) DeleteTaskSet(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
-
+// FindTaskSetByName gets an existing task set by name
 func (client *Client) FindTaskSetByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListTaskSets(&Request{

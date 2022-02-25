@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// MonitoringAppsPath is the API endpoint for monitoring apps
 	MonitoringAppsPath = "/api/monitoring/apps"
 )
 
 // MonitorApp structures for use in request and response payloads
-
 type MonitoringApp struct {
 	ID          int64   `json:"id"`
 	Name        string  `json:"name"`

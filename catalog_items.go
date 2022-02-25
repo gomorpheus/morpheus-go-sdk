@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Catalog Items
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// CatalogItemsPath is the API endpoint for catalog items
 	CatalogItemsPath = "/api/catalog-item-types"
 )
 
 // CatalogItem structures for use in request and response payloads
-
 type CatalogItem struct {
 	ID          int64         `json:"id"`
 	Name        string        `json:"name"`
@@ -25,6 +22,7 @@ type CatalogItem struct {
 	Content     string        `json:"content"`
 }
 
+// ListCatalogItemsResult structure parses the list catalog items response payload
 type ListCatalogItemsResult struct {
 	CatalogItems *[]CatalogItem `json:"catalogItemTypes"`
 	Meta         *MetaResult    `json:"meta"`
@@ -69,6 +67,7 @@ func (client *Client) GetCatalogItem(id int64, req *Request) (*Response, error) 
 	})
 }
 
+// CreateCatalogItem creates a new catalog item
 func (client *Client) CreateCatalogItem(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -79,6 +78,7 @@ func (client *Client) CreateCatalogItem(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateCatalogItem updates an existing catalog item
 func (client *Client) UpdateCatalogItem(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -89,6 +89,7 @@ func (client *Client) UpdateCatalogItem(id int64, req *Request) (*Response, erro
 	})
 }
 
+// DeleteCatalogItem deletes an existing catalog item
 func (client *Client) DeleteCatalogItem(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -98,8 +99,6 @@ func (client *Client) DeleteCatalogItem(id int64, req *Request) (*Response, erro
 		Result:      &DeleteCatalogItemResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindCatalogItemByName(name string) (*Response, error) {
 	// Find by name, then get by ID

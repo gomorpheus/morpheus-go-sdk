@@ -1,17 +1,15 @@
-// Morpheus API types and Client methods for Apps
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// AppsPath is the API endpoint for apps
 	AppsPath = "/api/apps"
 )
 
 // App structures for use in request and response payloads
-
 type App struct {
 	ID          int64                  `json:"id"`
 	Name        string                 `json:"name"`
@@ -21,6 +19,7 @@ type App struct {
 	BlueprintID string                 `json:"blueprintId"`
 }
 
+// ListAppsResult structure parses the list apps response payload
 type ListAppsResult struct {
 	Apps *[]App      `json:"apps"`
 	Meta *MetaResult `json:"meta"`

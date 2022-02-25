@@ -1,43 +1,44 @@
 package morpheus
 
 import (
-    _ "fmt"
-    _ "log"
+	_ "fmt"
+	_ "log"
 )
 
 var (
+	// WhoamiPath is the API endpoint for whoami
 	WhoamiPath = "/api/whoami"
 )
 
 type WhoamiResult struct {
-    User *WhoamiUserResult `json:"user"`
-    IsMasterAccount bool `json:"isMasterAccount"`
-    Permissions *[]WhoamiPermissionObject `json:"permissions"`
-    Appliance WhoamiApplianceResult `json:"appliance"`
+	User            *WhoamiUserResult         `json:"user"`
+	IsMasterAccount bool                      `json:"isMasterAccount"`
+	Permissions     *[]WhoamiPermissionObject `json:"permissions"`
+	Appliance       WhoamiApplianceResult     `json:"appliance"`
 }
 
 type WhoamiPermissionObject struct {
-    Name string `json:"name"`
-    Code string `json:"code"`
-    Access string `json:"access"`
+	Name   string `json:"name"`
+	Code   string `json:"code"`
+	Access string `json:"access"`
 }
 
 type WhoamiUserResult struct {
-	ID int64 `json:"id"`
-	Username string `json:"username"`
+	ID        int64  `json:"id"`
+	Username  string `json:"username"`
 	FirstName string `json:"firstName"`
-	LastName string `json:"lastName"`
+	LastName  string `json:"lastName"`
 }
 type WhoamiApplianceResult struct {
 	BuildVersion string `json:"buildVersion"`
 }
 
-func (client * Client) Whoami() (*Response, error) {
+func (client *Client) Whoami() (*Response, error) {
 	whoamiRequest := &Request{
-		Method: "GET",
-		Path: WhoamiPath,
+		Method:  "GET",
+		Path:    WhoamiPath,
 		Timeout: 10,
-		Result: &WhoamiResult{},
+		Result:  &WhoamiResult{},
 	}
 
 	resp, err := client.Execute(whoamiRequest)
@@ -59,4 +60,3 @@ func (client * Client) Whoami() (*Response, error) {
 	// client.setLastWhoamiResult(whoamiResult)
 	return resp, err
 }
-

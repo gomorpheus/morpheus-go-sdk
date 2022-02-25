@@ -1,8 +1,8 @@
 package morpheus_test
 
 import (
-	"testing"
 	"github.com/gomorpheus/morpheus-go-sdk"
+	"testing"
 )
 
 func TestListClouds(t *testing.T) {
@@ -20,11 +20,11 @@ func TestGetCloud(t *testing.T) {
 	cloudsCount := listCloudsResult.Meta.Total
 	t.Logf("Found %d Clouds.", cloudsCount)
 	if cloudsCount != 0 {
-		firstCloud := (*listCloudsResult.Clouds)[0]	
+		firstCloud := (*listCloudsResult.Clouds)[0]
 		// log.Printf(fmt.Sprintf("First Cloud: [%d] %v: ", firstCloud.ID, firstCloud.Name))
 		// log.Printf("resp.Result: ", resp.Result)
 		resp, err = client.GetCloud(firstCloud.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
 	}
-	
+
 }

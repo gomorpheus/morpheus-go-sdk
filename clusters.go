@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Clusters
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// ClustersPath is the API endpoint for clusters
 	ClustersPath = "/api/clusters"
 )
 
-// types
-
+// Cluster structures for use in request and response payloads
 type Cluster struct {
 	ID          int64                  `json:"id"`
 	Name        string                 `json:"name"`
@@ -36,6 +33,7 @@ type Server struct {
 	NodeCount         int64                     `json:"nodeCount"`
 }
 
+// ListClustersResult structure parses the list clusters response payload
 type ListClustersResult struct {
 	Clusters *[]Cluster  `json:"clusters"`
 	Meta     *MetaResult `json:"meta"`
@@ -80,6 +78,7 @@ func (client *Client) GetCluster(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateCluster creates a new cluster
 func (client *Client) CreateCluster(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -90,6 +89,7 @@ func (client *Client) CreateCluster(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateCluster udpates an existing cluster
 func (client *Client) UpdateCluster(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -100,6 +100,7 @@ func (client *Client) UpdateCluster(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteCluster deletes an existing cluster
 func (client *Client) DeleteCluster(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -109,8 +110,6 @@ func (client *Client) DeleteCluster(id int64, req *Request) (*Response, error) {
 		Result:      &DeleteClusterResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindClusterByName(name string) (*Response, error) {
 	// Find by name, then get by ID

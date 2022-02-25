@@ -1,13 +1,11 @@
 package morpheus
 
-// Morpheus API types and Client methods for Jobs
-
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// JobsPath is the API endpoint for jobs
 	JobsPath = "/api/jobs"
 )
 
@@ -25,6 +23,7 @@ type Job struct {
 	} `json:"workflow"`
 }
 
+// ListJobsResult structure parses the list jobs response payload
 type ListJobsResult struct {
 	Jobs *[]Job      `json:"jobs"`
 	Meta *MetaResult `json:"meta"`

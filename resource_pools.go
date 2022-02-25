@@ -1,4 +1,3 @@
-// Morpheus API types and Client methods for Resource Pools
 package morpheus
 
 import (
@@ -6,7 +5,6 @@ import (
 )
 
 // ResourcePool structures for use in request and response payloads
-
 type ResourcePool struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
@@ -103,8 +101,7 @@ func (client *Client) DeleteResourcePool(cloudId int64, id int64, req *Request) 
 	})
 }
 
-// helper functions
-
+// FindResourcePoolByName gets an existing resource pool by name
 func (client *Client) FindResourcePoolByName(cloudId int64, name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListResourcePools(cloudId, &Request{

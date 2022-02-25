@@ -1,13 +1,11 @@
 package morpheus
 
-// Morpheus API types and Client methods for Policies
-
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// PoliciesPath is the API endpoint for policies
 	PoliciesPath = "/api/policies"
 )
 
@@ -47,8 +45,7 @@ type DeletePolicyResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListPolicies list all policies
 func (client *Client) ListPolicies(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -58,6 +55,7 @@ func (client *Client) ListPolicies(req *Request) (*Response, error) {
 	})
 }
 
+// GetPolicy gets a policy
 func (client *Client) GetPolicy(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -67,6 +65,7 @@ func (client *Client) GetPolicy(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreatePolicy creates a new policy
 func (client *Client) CreatePolicy(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -77,6 +76,7 @@ func (client *Client) CreatePolicy(req *Request) (*Response, error) {
 	})
 }
 
+// UpdatePolicy updates an existing policy
 func (client *Client) UpdatePolicy(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -87,6 +87,7 @@ func (client *Client) UpdatePolicy(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeletePolicy deletes an existing policy
 func (client *Client) DeletePolicy(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -97,8 +98,7 @@ func (client *Client) DeletePolicy(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
-
+// FindPolicyByName gets an existing policy by name
 func (client *Client) FindPolicyByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListPolicies(&Request{
