@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// CheckGroupsPath is the API endpoint for check groups
 	CheckGroupsPath = "/api/monitoring/groups"
 )
 
 // CheckGroup structures for use in request and response payloads
-
 type CheckGroup struct {
 	ID            int64  `json:"id"`
 	Name          string `json:"name"`
@@ -28,6 +25,7 @@ type CheckGroup struct {
 	Config   interface{} `json:"config"`
 }
 
+// ListCheckGroupsResult structure parses the list check groups response payload
 type ListCheckGroupsResult struct {
 	CheckGroups *[]CheckGroup `json:"checkGroups"`
 	Meta        *MetaResult   `json:"meta"`
@@ -72,6 +70,7 @@ func (client *Client) GetCheckGroup(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateCheckGroup creates a new check group
 func (client *Client) CreateCheckGroup(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -82,6 +81,7 @@ func (client *Client) CreateCheckGroup(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateCheckGroup updates an existing check group
 func (client *Client) UpdateCheckGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -92,6 +92,7 @@ func (client *Client) UpdateCheckGroup(id int64, req *Request) (*Response, error
 	})
 }
 
+// DeleteCheckGroup deletes an existing check group
 func (client *Client) DeleteCheckGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -102,7 +103,6 @@ func (client *Client) DeleteCheckGroup(id int64, req *Request) (*Response, error
 	})
 }
 
-// helper functions
 func (client *Client) FindCheckGroupByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListCheckGroups(&Request{

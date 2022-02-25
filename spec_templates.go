@@ -1,13 +1,11 @@
-// Morpheus API types and Client methods for Spec Templates
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// SpecTemplatesPath is the API endpoint for spec templates
 	SpecTemplatesPath = "/api/library/spec-templates"
 )
 
@@ -117,8 +115,7 @@ func (client *Client) DeleteSpecTemplate(id int64, req *Request) (*Response, err
 	})
 }
 
-// helper functions
-
+// FindSpecTemplateByName gets an existing spec template by name
 func (client *Client) FindSpecTemplateByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListSpecTemplates(&Request{

@@ -1,30 +1,28 @@
 package morpheus
 
 import (
-    "fmt"
-    //"errors"
-    "time"
+	"fmt"
+	//"errors"
+	"time"
 	//"encoding/json"
 	"github.com/go-resty/resty/v2"
-
 	// "github.com/gormorpheus/morpheusapi/client"
 )
 
-
 type Response struct {
-    RestyResponse *resty.Response
-    Success bool
-    StatusCode int
-    Status string
-    Body []byte
-    Error error
-    ReceivedAt time.Time
-    Size int64
+	RestyResponse *resty.Response
+	Success       bool
+	StatusCode    int
+	Status        string
+	Body          []byte
+	Error         error
+	ReceivedAt    time.Time
+	Size          int64
 
-    // This holds the parsed JSON for convenience
-    JsonData interface{}
+	// This holds the parsed JSON for convenience
+	JsonData interface{}
 
-    // This holds any error encountering JsonData
+	// This holds any error encountering JsonData
 	JsonParseError error
 
 	Result interface{}
@@ -32,67 +30,64 @@ type Response struct {
 	// the request is stored in here for referencing the http request.
 	request *Request
 
-    // Errors []error
-    // Took int // ms
+	// Errors []error
+	// Took int // ms
 }
 
-func (resp * Response) String() string {
-    return fmt.Sprintf("Response HTTP: %v Success: %v  Size: %dB Body: %s", 
-        resp.Status, resp.Success, resp.Size, resp.Body)
+func (resp *Response) String() string {
+	return fmt.Sprintf("Response HTTP: %v Success: %v  Size: %dB Body: %s",
+		resp.Status, resp.Success, resp.Size, resp.Body)
 }
 
-func (resp * Response) SetRequest(req *Request) (*Response) {
+func (resp *Response) SetRequest(req *Request) *Response {
 	resp.request = req
 	return resp
 }
 
-func (resp * Response) GetRequest() (req *Request) {
+func (resp *Response) GetRequest() (req *Request) {
 	// if resp.request == nil {
 	// 	return nil
 	// }
 	return resp.request
 }
 
-
 // todo: use something like this so we don't have to typecast everywhere.
 // API response interface
 type APIResponse interface {
-    
-    // whether the request was successful (200 OK) or not.
-    Success() bool
 
-    // HTTP status code eg. 200
-    StatusCode() int
+	// whether the request was successful (200 OK) or not.
+	Success() bool
 
-    // HTTP status message .eg "OK"
-    Status() string
+	// HTTP status code eg. 200
+	StatusCode() int
 
-    // response body byte array
-    Body() []byte
+	// HTTP status message .eg "OK"
+	Status() string
 
-    // an error ocured
-    Error() error
+	// response body byte array
+	Body() []byte
 
-    // timestamp of the request
-    ReceivedAt() time.Time
+	// an error ocured
+	Error() error
 
-    // number of bytes in the response
-    Size() int64
+	// timestamp of the request
+	ReceivedAt() time.Time
 
-    // This holds the parsed JSON for convenience
-    JsonData() interface{}
+	// number of bytes in the response
+	Size() int64
 
-    // This holds any error encountering JsonData
-    JsonParseError() error
+	// This holds the parsed JSON for convenience
+	JsonData() interface{}
 
-    // the parsed result, in the specified type.
-    Result() interface{}
+	// This holds any error encountering JsonData
+	JsonParseError() error
 
-    // the request is stored in here for referencing the http request.
-    Request() *Request
+	// the parsed result, in the specified type.
+	Result() interface{}
 
-    // errors that happened during the request
-    Errors() []error
+	// the request is stored in here for referencing the http request.
+	Request() *Request
+
+	// errors that happened during the request
+	Errors() []error
 }
-
-

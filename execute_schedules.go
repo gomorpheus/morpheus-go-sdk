@@ -1,13 +1,11 @@
 package morpheus
 
-// Morpheus API types and Client methods for Execute Schedules
-
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// ExecuteSchedulesPath is the API endpoint for execute schedules
 	ExecuteSchedulesPath = "/api/execute-schedules"
 )
 
@@ -20,6 +18,7 @@ type ExecuteSchedule struct {
 	Desription string `json:"description"`
 }
 
+// ListExecuteSchedulesResult structure parses the list execute schedules response payload
 type ListExecuteSchedulesResult struct {
 	ExecuteSchedules *[]ExecuteSchedule `json:"schedules"`
 	Meta             *MetaResult        `json:"meta"`
@@ -74,6 +73,7 @@ func (client *Client) CreateExecuteSchedule(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateExecuteSchedule updates an existing execution schedule
 func (client *Client) UpdateExecuteSchedule(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -84,6 +84,7 @@ func (client *Client) UpdateExecuteSchedule(id int64, req *Request) (*Response, 
 	})
 }
 
+// DeleteExecuteSchedule deletes an existing execution schedule
 func (client *Client) DeleteExecuteSchedule(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -93,8 +94,6 @@ func (client *Client) DeleteExecuteSchedule(id int64, req *Request) (*Response, 
 		Result:      &DeleteExecuteScheduleResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindExecuteScheduleByName(name string) (*Response, error) {
 	// Find by name, then get by ID

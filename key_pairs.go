@@ -4,12 +4,12 @@ import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// KeyPairsPath is the API endpoint for key pairs
 	KeyPairsPath = "/api/key-pairs"
 )
 
+// KeyPair structures for use in request and response payloads
 type KeyPair struct {
 	ID        int64  `json:"id"`
 	Name      string `json:"name"`
@@ -17,11 +17,13 @@ type KeyPair struct {
 	// PrivateKey string `json:"privateKey"`
 }
 
+// ListKeyPairsResult structure parses the list key pairs response payload
 type ListKeyPairsResult struct {
 	KeyPairs *[]KeyPair  `json:"keyPairs"`
 	Meta     *MetaResult `json:"meta"`
 }
 
+// GetKeyPairResult structure parses the get key pair response payload
 type GetKeyPairResult struct {
 	KeyPair *KeyPair `json:"keyPair"`
 }
@@ -40,8 +42,6 @@ type UpdateKeyPairResult struct {
 type DeleteKeyPairResult struct {
 	DeleteResult
 }
-
-// request types
 
 type KeyPairPayload struct {
 	Name       string `json:"name"`

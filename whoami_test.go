@@ -1,8 +1,8 @@
 package morpheus_test
 
 import (
-	"testing"
 	"github.com/gomorpheus/morpheus-go-sdk"
+	"testing"
 )
 
 func TestWhoami(t *testing.T) {

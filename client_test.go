@@ -2,20 +2,20 @@
 package morpheus_test
 
 import (
-	"testing"
+	_ "encoding/json"
 	"fmt"
+	"github.com/gomorpheus/morpheus-go-sdk"
 	"log"
 	"os"
 	_ "strconv"
-	_ "encoding/json"
-	"github.com/gomorpheus/morpheus-go-sdk"
+	"testing"
 )
 
 var (
 	// DEBUG = (os.Getenv("MORPHEUS_DEBUG") == "true")
-	testUrl = os.Getenv("MORPHEUS_TEST_URL")
-	testUsername = os.Getenv("MORPHEUS_TEST_USERNAME")
-	testPassword = os.Getenv("MORPHEUS_TEST_PASSWORD")
+	testUrl         = os.Getenv("MORPHEUS_TEST_URL")
+	testUsername    = os.Getenv("MORPHEUS_TEST_USERNAME")
+	testPassword    = os.Getenv("MORPHEUS_TEST_PASSWORD")
 	testAccessToken = os.Getenv("MORPHEUS_TEST_TOKEN")
 	// if os.Getenv("MORPHEUS_TEST_ACCESS_TOKEN") != "" {
 	// 	testAccessToken = os.Getenv("MORPHEUS_TEST_ACCESS_TOKEN")
@@ -24,14 +24,13 @@ var (
 	// testUrl                  string
 	// testUsername             string
 	// testPassword             string
-	sharedTestClient         *morpheus.Client
+	sharedTestClient *morpheus.Client
 )
-
 
 // TestMain hooks up setup/teardown methods
 // func TestMain(m *testing.M) {
 //     setup()
-//     code := m.Run() 
+//     code := m.Run()
 //     teardown()
 //     os.Exit(code)
 // }
@@ -49,7 +48,7 @@ var (
 // 	}
 // }
 
-func getNewClient(t *testing.T) (*morpheus.Client) {
+func getNewClient(t *testing.T) *morpheus.Client {
 	if testUrl == "" {
 		t.Errorf("MORPHEUS_TEST_URL must be set to to run tests")
 	}
@@ -64,7 +63,7 @@ func getNewClient(t *testing.T) (*morpheus.Client) {
 // MORPHEUS_TEST_ACCESS_TOKEN - Morpheus API access token
 // MORPHEUS_TEST_USERNAME - Morpheus username
 // MORPHEUS_TEST_PASSWORD - Morpheus password
-func getTestClient(t *testing.T) (*morpheus.Client) {
+func getTestClient(t *testing.T) *morpheus.Client {
 	if sharedTestClient == nil {
 		if testUrl == "" {
 			panic("MORPHEUS_TEST_URL must be set to to run tests.")
@@ -76,7 +75,7 @@ func getTestClient(t *testing.T) (*morpheus.Client) {
 			resp, err := client.Whoami()
 			// assertResponse(t, resp, err)
 			if resp.Success == true {
-				
+
 				whoamiResult := resp.Result.(*morpheus.WhoamiResult)
 				currentUsername := whoamiResult.User.Username
 				// So this just sets the testUsername
@@ -87,7 +86,7 @@ func getTestClient(t *testing.T) (*morpheus.Client) {
 					// t.Fatalf(fmt.Sprintf("MORPHEUS_TEST_USERNAME does not match that of MORPHEUS_TEST_TOKEN. Expected [%v], got [%v]", testUsername, currentUsername))
 				}
 				testUsername = currentUsername
-				
+
 			} else {
 				assertResponse(t, resp, err)
 				// panic("MORPHEUS_TEST_TOKEN could not be validated.")
@@ -98,7 +97,7 @@ func getTestClient(t *testing.T) (*morpheus.Client) {
 				panic("MORPHEUS_TEST_TOKEN or MORPHEUS_TEST_USERNAME and MORPHEUS_TEST_PASSWORD must be set to to run tests.")
 			}
 			log.Printf(fmt.Sprintf("Initializing test client for %v @ %v", testUsername, testUrl))
-			client.SetUsernameAndPassword(testUsername, testPassword)	
+			client.SetUsernameAndPassword(testUsername, testPassword)
 			resp, err := client.Login()
 			assertResponse(t, resp, err)
 		}
@@ -116,11 +115,11 @@ func TestPing(t *testing.T) {
 	client := getNewClient(t)
 	testRequest := &morpheus.Request{
 		Method: "GET",
-		Path: "/api/setup/check",
-		QueryParams:map[string]string{
-	          "foo": "bar",
-	          "gotest": "true",
-	      },
+		Path:   "/api/setup/check",
+		QueryParams: map[string]string{
+			"foo":    "bar",
+			"gotest": "true",
+		},
 	}
 	resp, err := client.Execute(testRequest)
 	assertResponse(t, resp, err)

@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Groups (Sites)
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// GroupsPath is the API endpoint for groups
 	GroupsPath = "/api/groups"
 )
 
-// types
-
+// Group structures for use in request and response payloads
 type Group struct {
 	ID       int64  `json:"id"`
 	Name     string `json:"name"`
@@ -26,6 +23,7 @@ type Zone struct {
 	Name string `json:"name"`
 }
 
+// ListGroupsResult structure parses the list groups response payload
 type ListGroupsResult struct {
 	Groups *[]Group    `json:"groups"`
 	Meta   *MetaResult `json:"meta"`
@@ -104,6 +102,7 @@ func (client *Client) UpdateGroupZones(id int64, req *Request) (*Response, error
 	return client.UpdateGroupClouds(id, req)
 }
 
+// DeleteGroup deletes an existing group
 func (client *Client) DeleteGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -114,8 +113,7 @@ func (client *Client) DeleteGroup(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
-
+// FindGroupByName gets an existing group by name
 func (client *Client) FindGroupByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListGroups(&Request{

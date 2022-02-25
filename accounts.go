@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Tenants
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// TenantsPath is the API endpoint for tenants
 	TenantsPath = "/api/accounts"
 )
 
 // Tenant structures for use in request and response payloads
-
 type Tenant struct {
 	ID             int64       `json:"id"`
 	Name           string      `json:"name"`
@@ -26,15 +23,18 @@ type Tenant struct {
 	AccountName    string      `json:"accountName"`
 }
 
+// ListTenantsResult structure parses the list tenants response payload
 type ListTenantsResult struct {
 	Accounts *[]Tenant   `json:"accounts"`
 	Meta     *MetaResult `json:"meta"`
 }
 
+// GetTenantResult structure parses the get tenant response payload
 type GetTenantResult struct {
 	Tenant *Tenant `json:"account"`
 }
 
+// CreateTenantResult structure parses the create tenant response payload
 type CreateTenantResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
@@ -42,16 +42,19 @@ type CreateTenantResult struct {
 	Tenant  *Tenant           `json:"account"`
 }
 
+// UpdateTenantResult structure parses the update tenant response payload
 type UpdateTenantResult struct {
 	CreateTenantResult
 }
 
+// DeleteTenantResult structure parses the delete tenant response payload
 type DeleteTenantResult struct {
 	DeleteResult
 }
 
 // Client request methods
 
+// ListTenants lists all tenants
 func (client *Client) ListTenants(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -61,6 +64,7 @@ func (client *Client) ListTenants(req *Request) (*Response, error) {
 	})
 }
 
+// GetTenant gets a single tenant by id
 func (client *Client) GetTenant(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -70,6 +74,7 @@ func (client *Client) GetTenant(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateTenant creates a new Morpheus tenant
 func (client *Client) CreateTenant(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -80,6 +85,7 @@ func (client *Client) CreateTenant(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateTenant updates an existing Morpheus tenant
 func (client *Client) UpdateTenant(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -90,6 +96,7 @@ func (client *Client) UpdateTenant(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteTenant deletes an existing Morpheus tenant
 func (client *Client) DeleteTenant(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -100,8 +107,7 @@ func (client *Client) DeleteTenant(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
-
+// FindTenantByName gets an existing tenant by name
 func (client *Client) FindTenantByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListTenants(&Request{

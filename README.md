@@ -1,7 +1,12 @@
 <img src="https://morpheusdata.com/wp-content/uploads/2020/04/morpheus-logo-v2.svg" width="200px">
 
 # go-morpheus-sdk
+[![GoReportCard][report-badge]][report]
+[![GitHub release](https://img.shields.io/github/release/gomorpheus/morpheus-go-sdk.svg)](https://github.com/gomorpheus/morpheus-go-sdk/releases/)
 [![GoDoc](https://pkg.go.dev/badge/badge/github.com/gomorpheus/morpheus-go-sdk?utm_source=godoc)](https://godoc.org/github.com/gomorpheus/morpheus-go-sdk)
+
+[report-badge]: https://goreportcard.com/badge/github.com/gomorpheus/morpheus-go-sdk
+[report]: https://goreportcard.com/report/github.com/gomorpheus/morpheus-go-sdk
 
 - Website: https://www.morpheusdata.com/
 - Docs: [Morpheus Documentation](https://docs.morpheusdata.com)
@@ -236,7 +241,7 @@ networks | [Networks](networks.go)
 option_type_lists | [Option Type Lists](option_type_lists.go)
 option_types | [Option Types](option_types.go)
 policies | [Policies](policies.go)
-power_schedules | n/a
+power_schedules | [Power Schedules](power_schedules.go)
 processes | n/a
 provision_types | n/a
 refresh_token | n/a

@@ -1,4 +1,3 @@
-// Morpheus API types and Client methods for Networks
 package morpheus
 
 import (
@@ -6,11 +5,11 @@ import (
 )
 
 var (
+	// NetworksPath is the API endpoint for networks
 	NetworksPath = "/api/networks"
 )
 
 // Network structures for use in request and response payloads
-
 type Network struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
@@ -105,8 +104,6 @@ func (client *Client) DeleteNetwork(id int64, req *Request) (*Response, error) {
 		Result:      &DeleteNetworkResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindNetworkByName(name string) (*Response, error) {
 	// Find by name, then get by ID

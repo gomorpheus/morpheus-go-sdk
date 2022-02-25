@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// ContactsPath is the API endpoint for check groups
 	ContactsPath = "/api/monitoring/contacts"
 )
 
 // Contact structures for use in request and response payloads
-
 type Contact struct {
 	ID           int64  `json:"id"`
 	Name         string `json:"name"`
@@ -21,6 +18,7 @@ type Contact struct {
 	SlackHook    string `json:"slackHook"`
 }
 
+// ListContactsResult structure parses the list contacts response payload
 type ListContactsResult struct {
 	Contacts *[]Contact  `json:"contacts"`
 	Meta     *MetaResult `json:"meta"`
@@ -56,6 +54,7 @@ func (client *Client) ListContacts(req *Request) (*Response, error) {
 	})
 }
 
+// GetContact gets a contact
 func (client *Client) GetContact(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -65,6 +64,7 @@ func (client *Client) GetContact(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateContact creates a new contact
 func (client *Client) CreateContact(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -75,6 +75,7 @@ func (client *Client) CreateContact(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateContact updates an existing contact
 func (client *Client) UpdateContact(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -85,6 +86,7 @@ func (client *Client) UpdateContact(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteContact deletes an existing contact
 func (client *Client) DeleteContact(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -95,7 +97,7 @@ func (client *Client) DeleteContact(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
+// FindContactByName gets an existing contact by name
 func (client *Client) FindContactByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListContacts(&Request{

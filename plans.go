@@ -1,17 +1,15 @@
-// Morpheus API types and Client methods for Plans
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// PlansPath is the API endpoint for plans
 	PlansPath = "/api/service-plans"
 )
 
 // Plan structures for use in request and response payloads
-
 type Plan struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
@@ -44,8 +42,7 @@ type DeletePlanResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListPlans lists all plans
 func (client *Client) ListPlans(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -55,6 +52,7 @@ func (client *Client) ListPlans(req *Request) (*Response, error) {
 	})
 }
 
+// GetPlan gets a plan
 func (client *Client) GetPlan(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -64,6 +62,7 @@ func (client *Client) GetPlan(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreatePlan creates a new plan
 func (client *Client) CreatePlan(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -74,6 +73,7 @@ func (client *Client) CreatePlan(req *Request) (*Response, error) {
 	})
 }
 
+// UpdatePlan updates an existing plan
 func (client *Client) UpdatePlan(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -84,6 +84,7 @@ func (client *Client) UpdatePlan(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeletePlan deletes an existing plan
 func (client *Client) DeletePlan(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -94,7 +95,7 @@ func (client *Client) DeletePlan(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
+// FindPlanByName gets an existing plan by name
 func (client *Client) FindPlanByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListPlans(&Request{

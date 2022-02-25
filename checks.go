@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Option Types
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// ChecksPath is the API endpoint for check groups
 	ChecksPath = "/api/monitoring/checks"
 )
 
 // Check structures for use in request and response payloads
-
 type Check struct {
 	ID            int64  `json:"id"`
 	Name          string `json:"name"`
@@ -28,6 +25,7 @@ type Check struct {
 	Config   interface{} `json:"config"`
 }
 
+// ListChecksResult structure parses the list check response payload
 type ListChecksResult struct {
 	Checks *[]Check    `json:"checks"`
 	Meta   *MetaResult `json:"meta"`
@@ -72,6 +70,7 @@ func (client *Client) GetCheck(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateCheck creates a new check
 func (client *Client) CreateCheck(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -82,6 +81,7 @@ func (client *Client) CreateCheck(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateCheck updates an existing check
 func (client *Client) UpdateCheck(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -92,6 +92,7 @@ func (client *Client) UpdateCheck(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteCheck deletes an existing check
 func (client *Client) DeleteCheck(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -102,7 +103,6 @@ func (client *Client) DeleteCheck(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
 func (client *Client) FindCheckByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListChecks(&Request{

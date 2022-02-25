@@ -1,17 +1,15 @@
-// Morpheus API types and Client methods for Environments
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// EnvironmentsPath is the API endpoint for environments
 	EnvironmentsPath = "/api/environments"
 )
 
 // Environment structures for use in request and response payloads
-
 type Environment struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
@@ -21,6 +19,7 @@ type Environment struct {
 	Visibility  string `json:"visibility"`
 }
 
+// ListEnvironmentsResult structure parses the list environments response payload
 type ListEnvironmentsResult struct {
 	Environments *[]Environment `json:"environments"`
 	Meta         *MetaResult    `json:"meta"`
@@ -45,8 +44,7 @@ type DeleteEnvironmentResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListEnvironments lists all environments
 func (client *Client) ListEnvironments(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -56,6 +54,7 @@ func (client *Client) ListEnvironments(req *Request) (*Response, error) {
 	})
 }
 
+// GetEnvironment gets an environment
 func (client *Client) GetEnvironment(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -65,6 +64,7 @@ func (client *Client) GetEnvironment(id int64, req *Request) (*Response, error) 
 	})
 }
 
+// CreateEnvironment creates a new environment
 func (client *Client) CreateEnvironment(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -75,6 +75,7 @@ func (client *Client) CreateEnvironment(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateEnvironment updates an existing environment
 func (client *Client) UpdateEnvironment(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -85,6 +86,7 @@ func (client *Client) UpdateEnvironment(id int64, req *Request) (*Response, erro
 	})
 }
 
+// DeleteEnvironment deletes an existing environment
 func (client *Client) DeleteEnvironment(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -95,7 +97,7 @@ func (client *Client) DeleteEnvironment(id int64, req *Request) (*Response, erro
 	})
 }
 
-// helper functions
+// FindEnvironmentByName gets an existing environment by name
 func (client *Client) FindEnvironmentByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListEnvironments(&Request{

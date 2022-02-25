@@ -1,12 +1,11 @@
-// Morpheus API types and Client methods for Integrations
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// IntegrationsPath is the API endpoint for integrations
 	IntegrationsPath = "/api/integrations"
 )
 
@@ -18,6 +17,7 @@ type Integration struct {
 	Type    string `json:"type"`
 }
 
+// ListIntegrationsResult structure parses the list integrations response payload
 type ListIntegrationsResult struct {
 	Integrations *[]Integration `json:"integrations"`
 	Meta         *MetaResult    `json:"meta"`

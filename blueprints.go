@@ -1,17 +1,15 @@
-// Morpheus API types and Client methods for Blueprints
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
 var (
+	// BlueprintsPath is the API endpoint for blueprints
 	BlueprintsPath = "/api/blueprints"
 )
 
 // Blueprint structures for use in request and response payloads
-
 type Blueprint struct {
 	ID          int64                  `json:"id"`
 	Name        string                 `json:"name"`
@@ -21,6 +19,7 @@ type Blueprint struct {
 	Tiers       map[string]interface{} `json:"tiers"`
 }
 
+// ListBlueprintsResult structure parses the list blueprints response payload
 type ListBlueprintsResult struct {
 	Blueprints *[]Blueprint `json:"blueprints"`
 	Meta       *MetaResult  `json:"meta"`
@@ -76,6 +75,7 @@ func (client *Client) CreateBlueprint(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateBlueprint updates an existing blueprint
 func (client *Client) UpdateBlueprint(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -86,6 +86,7 @@ func (client *Client) UpdateBlueprint(id int64, req *Request) (*Response, error)
 	})
 }
 
+// DeleteBlueprint deletes an existing blueprint
 func (client *Client) DeleteBlueprint(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -96,7 +97,6 @@ func (client *Client) DeleteBlueprint(id int64, req *Request) (*Response, error)
 	})
 }
 
-// helper functions
 func (client *Client) FindBlueprintByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListBlueprints(&Request{

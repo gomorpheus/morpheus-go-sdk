@@ -1,4 +1,3 @@
-// Morpheus API types and Client methods for Network Domains
 package morpheus
 
 import (
@@ -6,11 +5,11 @@ import (
 )
 
 var (
+	// NetworkDomainsPath is the API endpoint for network domains
 	NetworkDomainsPath = "/api/networks/domains"
 )
 
 // NetworkDomain structures for use in request and response payloads
-
 type NetworkDomain struct {
 	ID               int64         `json:"id"`
 	Name             string        `json:"name"`
@@ -182,8 +181,6 @@ func (client *Client) DeleteNetworkDomain(id int64, req *Request) (*Response, er
 		Result:      &DeleteNetworkDomainResult{},
 	})
 }
-
-// helper functions
 
 func (client *Client) FindNetworkDomainByName(name string) (*Response, error) {
 	// Find by name, then get by ID

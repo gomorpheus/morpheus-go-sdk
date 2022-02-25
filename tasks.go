@@ -1,18 +1,15 @@
-// Morpheus API types and Client methods for Tasks
 package morpheus
 
 import (
 	"fmt"
 )
 
-// globals
-
 var (
+	// TasksPath is the API endpoint for tasks
 	TasksPath = "/api/tasks"
 )
 
 // Task structures for use in request and response payloads
-
 type Task struct {
 	ID         int64  `json:"id"`
 	Name       string `json:"name"`
@@ -44,8 +41,7 @@ type DeleteTaskResult struct {
 	DeleteResult
 }
 
-// Client request methods
-
+// ListTasks lists all tasks
 func (client *Client) ListTasks(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -55,6 +51,7 @@ func (client *Client) ListTasks(req *Request) (*Response, error) {
 	})
 }
 
+// GetTask gets an existing task
 func (client *Client) GetTask(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -64,6 +61,7 @@ func (client *Client) GetTask(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// CreateTask creates a new task
 func (client *Client) CreateTask(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
@@ -74,6 +72,7 @@ func (client *Client) CreateTask(req *Request) (*Response, error) {
 	})
 }
 
+// UpdateTask updates an existing task
 func (client *Client) UpdateTask(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -84,6 +83,7 @@ func (client *Client) UpdateTask(id int64, req *Request) (*Response, error) {
 	})
 }
 
+// DeleteTask deletes an existing task
 func (client *Client) DeleteTask(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -94,8 +94,7 @@ func (client *Client) DeleteTask(id int64, req *Request) (*Response, error) {
 	})
 }
 
-// helper functions
-
+// FindTaskByName gets an existing task by name
 func (client *Client) FindTaskByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListTasks(&Request{
