@@ -193,7 +193,7 @@ dashboard | n/a
 deploy | n/a
 deployments | n/a
 environments | [Environments](environments.go)
-execute_schedules | n/a
+execute_schedules | [Execute Schedules](execute_schedules.go)
 execution_request | n/a
 file_copy_request | n/a
 group_policies | n/a
@@ -259,4 +259,4 @@ users | n/a
 virtual_images | n/a
 whoami | [Whoami](whoami.go)
 whitelabel_settings | n/a
-wiki | n/a
+wikis | [Wikis](wikis.go)

@@ -11,6 +11,7 @@ FEATURES:
 * **Node Types** Client methods for `node_types` API endpoints
 * **Policies** Client methods for `policies` API endpoints
 * **Roles** Client methods for `roles` API endpoints
+* **Wikis** Client methods for `wikis` API endpoints
 
 ## 0.3 (May 17, 2021)
 
