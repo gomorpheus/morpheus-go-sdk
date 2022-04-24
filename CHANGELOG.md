@@ -10,7 +10,10 @@ FEATURES:
 * **Monitoring Apps** Client methods for `monitoring_apps` API endpoints
 * **Node Types** Client methods for `node_types` API endpoints
 * **Policies** Client methods for `policies` API endpoints
+* **Prices** Client methods for `prices` API endpoints
+* **Price Sets** Client methods for `price_sets` API endpoints
 * **Roles** Client methods for `roles` API endpoints
+* **Service Plans** Client methods for `service_plans` API endpoints
 * **Wikis** Client methods for `wikis` API endpoints
 
 ## 0.3 (May 17, 2021)

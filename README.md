@@ -242,6 +242,8 @@ option_type_lists | [Option Type Lists](option_type_lists.go)
 option_types | [Option Types](option_types.go)
 policies | [Policies](policies.go)
 power_schedules | [Power Schedules](power_schedules.go)
+prices | [Prices](prices.go)
+price_sets | [Price Sets](price_sets.go)
 processes | n/a
 provision_types | n/a
 refresh_token | n/a
@@ -251,7 +253,7 @@ security_group_rules | n/a
 security_groups | n/a
 server_types | n/a
 servers | n/a
-service_plans | n/a
+service_plans | [Service Plans](service_plans.go)
 setup | n/a
 storage_providers | n/a
 subnets | n/a
