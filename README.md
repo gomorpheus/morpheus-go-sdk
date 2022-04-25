@@ -245,7 +245,7 @@ power_schedules | [Power Schedules](power_schedules.go)
 prices | [Prices](prices.go)
 price_sets | [Price Sets](price_sets.go)
 processes | n/a
-provision_types | n/a
+provision_types | [Provision Types](provision_types.go)
 refresh_token | n/a
 reports | n/a
 roles | [Roles](roles.go)
