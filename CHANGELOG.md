@@ -12,6 +12,7 @@ FEATURES:
 * **Policies** Client methods for `policies` API endpoints
 * **Prices** Client methods for `prices` API endpoints
 * **Price Sets** Client methods for `price_sets` API endpoints
+* **Provision Types** Client methods for `provision_types` API endpoints
 * **Roles** Client methods for `roles` API endpoints
 * **Service Plans** Client methods for `service_plans` API endpoints
 * **Wikis** Client methods for `wikis` API endpoints
