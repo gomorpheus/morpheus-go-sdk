@@ -14,7 +14,7 @@
 
 This package provides the official [Go](https://golang.org/) library for the [Morpheus API](https://apidocs.morpheusdata.com/).
 
-This is being developed in conjunction with the [Morpheus Terraform Provider](https://github.com/gomorpheus/morpheus-terraform-provider).
+This is being developed in conjunction with the [Morpheus Terraform Provider](https://github.com/gomorpheus/terraform-provider-morpheus).
 
 ## Setup
 
