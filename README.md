@@ -204,12 +204,12 @@ file_copy_request | n/a
 group_policies | n/a
 groups | [Groups](groups.go)
 image_builder | n/a
-instance_types | n/a
+instance_types | [Instance Types](instance_types.go)
 instances | [Instances](instances.go)
 key_pairs | [Key Pairs](key_pairs.go)
 library_compute_type_layouts | n/a
-library_container_scripts | n/a
-library_container_templates | n/a
+library_container_scripts | [Script Templates](script_templates.go)
+library_container_templates | [File Templates](file_templates.go)
 library_container_types |[Node Types](node_types.go)
 library_container_upgrades | n/a
 library_instance_types | [Instance Types](instance_types.go)
