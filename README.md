@@ -207,6 +207,7 @@ image_builder | n/a
 instance_types | [Instance Types](instance_types.go)
 instances | [Instances](instances.go)
 key_pairs | [Key Pairs](key_pairs.go)
+library_cluster_layouts | [Cluster Layouts](cluster_layouts.go)
 library_compute_type_layouts | n/a
 library_container_scripts | [Script Templates](script_templates.go)
 library_container_templates | [File Templates](file_templates.go)
