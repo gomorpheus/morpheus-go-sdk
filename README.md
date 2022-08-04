@@ -263,7 +263,7 @@ user_groups | n/a
 user_settings | n/a
 user_sources | n/a
 users | n/a
-virtual_images | n/a
+virtual_images | [Virtual Images](virtual_images.go)
 whoami | [Whoami](whoami.go)
 whitelabel_settings | n/a
 wikis | [Wikis](wikis.go)
