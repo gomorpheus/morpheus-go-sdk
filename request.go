@@ -16,7 +16,6 @@ type Request struct {
 	// FormData interface{}
 	// FormData map[string]interface{}
 	FormData map[string]string
-	// Body map[string]interface{}
 
 	// Client Client
 	SkipLogin         bool // used for anonymous api calls, otherwise Login() is always called to get token
@@ -25,7 +24,7 @@ type Request struct {
 
 	Result interface{}
 
-	isMultiPart bool
+	IsMultiPart bool
 	isFormData  bool
 	// setContentLength    bool
 	// isSaveResponse      bool
@@ -40,8 +39,14 @@ type Request struct {
 	// client              *Client
 	// bodyBuf             *bytes.Buffer
 	// clientTrace         *clientTrace
-	// multipartFiles      []*File
+	MultiPartFiles []*FilePayload
 	// multipartFields     []*MultipartField
+}
+
+type FilePayload struct {
+	ParameterName string
+	FileName      string
+	FileContent   []byte
 }
 
 func (req *Request) String() string {

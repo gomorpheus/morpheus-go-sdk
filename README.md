@@ -185,6 +185,7 @@ archive_buckets | n/a
 archive_files | n/a
 auth | n/a
 blueprints | [Blueprints](blueprints.go)
+budgets | [Budgets](budgets.go)
 cloud_datastores | n/a
 cloud_folders | n/a
 cloud_policies | n/a
@@ -197,6 +198,7 @@ cypher | n/a
 dashboard | n/a
 deploy | n/a
 deployments | n/a
+credentials | [Credentials](credentials.go)
 environments | [Environments](environments.go)
 execute_schedules | [Execute Schedules](execute_schedules.go)
 execution_request | n/a
@@ -204,8 +206,8 @@ file_copy_request | n/a
 group_policies | n/a
 groups | [Groups](groups.go)
 image_builder | n/a
-instance_types | [Instance Types](instance_types.go)
 instances | [Instances](instances.go)
+integrations | [Integrations](integrations.go)
 key_pairs | [Key Pairs](key_pairs.go)
 library_cluster_layouts | [Cluster Layouts](cluster_layouts.go)
 library_compute_type_layouts | n/a
@@ -219,7 +221,7 @@ library_spec_templates | [Spec Templates](spec_templates.go)
 license | n/a
 load_balancers | n/a
 logs | n/a
-log_settings | n/a
+log_settings | [Log Settings](log_settings.go)
 monitoring | n/a
 monitoring.checks | [Checks](checks.go)
 monitoring.groups | [Check Groups](check_groups.go)
@@ -250,20 +252,25 @@ provision_types | [Provision Types](provision_types.go)
 refresh_token | n/a
 reports | n/a
 roles | [Roles](roles.go)
+scale_thresholds | [Scale Thresholds](scale_thresholds.go)
 security_group_rules | n/a
 security_groups | n/a
 server_types | n/a
 servers | n/a
 service_plans | [Service Plans](service_plans.go)
-setup | n/a
+setup | [Setup](setup.go)
+software_licenses | [Software Licenses](software_licenses.go)
+storage_buckets | [Storage Buckets](storage_buckets.go)
 storage_providers | n/a
 subnets | n/a
 task_sets | [Task Sets](task_sets.go)
 tasks | [Tasks](tasks.go)
 user_groups | n/a
 user_settings | n/a
-user_sources | n/a
+user_sources | [Identity Sources](identity_sources.go)
 users | n/a
+vdi_gateways | [VDI Gateways](vdi_gateway.go)
+vdi_pools | [VDI Pools](vdi_pools.go)
 virtual_images | [Virtual Images](virtual_images.go)
 whoami | [Whoami](whoami.go)
 whitelabel_settings | n/a

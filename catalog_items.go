@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -11,15 +12,38 @@ var (
 
 // CatalogItem structures for use in request and response payloads
 type CatalogItem struct {
-	ID          int64         `json:"id"`
-	Name        string        `json:"name"`
-	Description string        `json:"description"`
-	Type        string        `json:"type"`
-	Featured    bool          `json:"featured"`
-	Enabled     bool          `json:"enabled"`
+	ID            int64       `json:"id"`
+	Name          string      `json:"name"`
+	Description   string      `json:"description"`
+	Type          string      `json:"type"`
+	RefType       string      `json:"refType"`
+	RefID         interface{} `json:"refId"`
+	Active        bool        `json:"active"`
+	Enabled       bool        `json:"enabled"`
+	Featured      bool        `json:"featured"`
+	IconPath      string      `json:"iconPath"`
+	ImagePath     string      `json:"imagePath"`
+	DarkImagePath string      `json:"darkImagePath"`
+	Context       string      `json:"context"`
+	Content       string      `json:"content"`
+	AppSpec       string      `json:"appSpec"`
+	Blueprint     struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	}
+	Workflow struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"workflow"`
+	Config      interface{}   `json:"config"`
 	OptionTypes []interface{} `json:"optionTypes"`
-	Context     string        `json:"context"`
-	Content     string        `json:"content"`
+	CreatedBy   interface{}   `json:"createdBy"`
+	Owner       struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"owner"`
+	DateCreated time.Time `json:"dateCreated"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }
 
 // ListCatalogItemsResult structure parses the list catalog items response payload
@@ -89,6 +113,19 @@ func (client *Client) UpdateCatalogItem(id int64, req *Request) (*Response, erro
 	})
 }
 
+func (client *Client) UpdateCatalogItemLogo(id int64, filePayload []*FilePayload, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:         "POST",
+		Path:           fmt.Sprintf("/api/catalog-item-types/%d/update-logo", id),
+		IsMultiPart:    true,
+		MultiPartFiles: filePayload,
+		Headers: map[string]string{
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		Result: &UpdateInstanceTypeResult{},
+	})
+}
+
 // DeleteCatalogItem deletes an existing catalog item
 func (client *Client) DeleteCatalogItem(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -113,7 +150,7 @@ func (client *Client) FindCatalogItemByName(name string) (*Response, error) {
 	listResult := resp.Result.(*ListCatalogItemsResult)
 	catalogItemCount := len(*listResult.CatalogItems)
 	if catalogItemCount != 1 {
-		return resp, fmt.Errorf("found %d CatalogItems for %v", catalogItemCount, name)
+		return resp, fmt.Errorf("found %d Catalog Items for %v", catalogItemCount, name)
 	}
 	firstRecord := (*listResult.CatalogItems)[0]
 	optionTypeID := firstRecord.ID

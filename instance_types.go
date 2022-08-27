@@ -94,6 +94,29 @@ func (client *Client) DeleteInstanceType(id int64, req *Request) (*Response, err
 	})
 }
 
+func (client *Client) ToggleFeaturedInstanceType(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/toggle-featured", InstanceTypesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceTypeResult{},
+	})
+}
+
+func (client *Client) UpdateInstanceTypeLogo(id int64, filePayload []*FilePayload, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:         "POST",
+		Path:           fmt.Sprintf("/api/library/instance-types/%d/update-logo", id),
+		IsMultiPart:    true,
+		MultiPartFiles: filePayload,
+		Headers: map[string]string{
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		Result: &UpdateInstanceTypeResult{},
+	})
+}
+
 // helper functions
 func (client *Client) FindInstanceTypeByName(name string) (*Response, error) {
 	// Find by name, then get by ID

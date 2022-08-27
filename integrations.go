@@ -11,10 +11,73 @@ var (
 
 // Integration structures for use in request and response payloads
 type Integration struct {
-	ID      int64  `json:"id"`
-	Name    string `json:"name"`
-	Enabled bool   `json:"enabled"`
-	Type    string `json:"type"`
+	ID              int64  `json:"id"`
+	Name            string `json:"name"`
+	Enabled         bool   `json:"enabled"`
+	Type            string `json:"type"`
+	Username        string `json:"username"`
+	Password        string `json:"password"`
+	Version         string `json:"version"`
+	IntegrationType struct {
+		ID   int64  `json:"id"`
+		Code string `json:"code"`
+		Name string `json:"name"`
+	}
+	URL             string `json:"url"`
+	ServiceUrl      string `json:"serviceUrl"`
+	ServiceUsername string `json:"serviceUsername"`
+	ServicePassword string `json:"servicePassword"`
+	Token           string `json:"token"`
+	TokenHash       string `json:"tokenHash"`
+	Config          struct {
+		DefaultBranch                string                            `json:"defaultBranch"`
+		CacheEnabled                 bool                              `json:"cacheEnabled"`
+		AnsiblePlaybooks             string                            `json:"ansiblePlaybooks"`
+		AnsibleRoles                 string                            `json:"ansibleRoles"`
+		AnsibleGroupVars             string                            `json:"ansibleGroupVars"`
+		AnsibleHostVars              string                            `json:"ansibleHostVars"`
+		AnsibleCommandBus            string                            `json:"ansibleCommandBus"`
+		AnsibleVerbose               bool                              `json:"ansibleVerbose"`
+		AnsibleGalaxyEnabled         string                            `json:"ansibleGalaxyEnabled"`
+		AnsibleDefaultBranch         string                            `json:"ansibleDefaultBranch"`
+		Plugin                       interface{}                       `json:"plugin"`
+		IncidentAccess               bool                              `json:"incidentAccess"`
+		RequestAccess                bool                              `json:"requestAccess"`
+		ServiceNowCMDBBusinessObject string                            `json:"serviceNowCMDBBusinessObject"`
+		ServiceNowCustomCmdbMapping  string                            `json:"serviceNowCustomCmdbMapping"`
+		ServiceNowCmdbClassMapping   []serviceNowCmdbClassMappingEntry `json:"serviceNowCmdbClassMapping"`
+		Databags                     []chefDatabagEntry                `json:"databags"`
+		ApprovalUser                 string                            `json:"approvalUser"`
+		Company                      string                            `json:"company"`
+		AppID                        string                            `json:"appId"`
+		InventoryExisting            string                            `json:"inventoryExisting"`
+		ExtraAttributes              string                            `json:"extraAttributes"`
+		EngineMount                  string                            `json:"engineMount"`
+		SecretPath                   string                            `json:"secretPath"`
+		SecretEngine                 string                            `json:"secretEngine"`
+		SecretPathHash               string                            `json:"secretPathHash"`
+		SecretEngineHash             string                            `json:"secretEngineHash"`
+	}
+	Status     string `json:"status"`
+	StatusDate string `json:"statusDate"`
+	IsPlugin   bool   `json:"isPlugin"`
+	ServiceKey struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	}
+	ServiceMode string `json:"serviceMode"`
+}
+
+type serviceNowCmdbClassMappingEntry struct {
+	ID       string `json:"id"`
+	Name     string `json:"name"`
+	Code     string `json:"code"`
+	NowClass string `json:"nowClass"`
+}
+
+type chefDatabagEntry struct {
+	Path string `json:"path"`
+	Key  string `json:"key"`
 }
 
 // ListIntegrationsResult structure parses the list integrations response payload
