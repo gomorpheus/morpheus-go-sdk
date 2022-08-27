@@ -1,4 +1,17 @@
-## 1.0 (Unreleased)
+## 0.1.5 (August 26, 2022)
+
+FEATURES:
+
+* **Budgets** Client methods for `budgets` API endpoints
+* **Credentials** Client methods for `credentials` API endpoints
+* **Identity Sources** Client methods for `user_sources` API endpoints
+* **Scale Thresholds** Client methods for `scale_thresholds` API endpoints
+* **Software Licenses** Client methods for `software_licenses` API endpoints
+* **Storage Buckets** Client methods for `storage_buckets` API endpoints
+* **VDI Gateways** Client methods for `vdi_gateways` API endpoints
+* **VDI Pools** Client methods for `vdi_pools` API endpoints
+
+## 0.1.4 (August 3, 2022)
 
 FEATURES:
 

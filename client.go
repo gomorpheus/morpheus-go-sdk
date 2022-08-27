@@ -2,6 +2,7 @@
 package morpheus
 
 import (
+	"bytes"
 	"crypto/tls"
 	"encoding/json"
 	"errors"
@@ -86,10 +87,6 @@ func parseJsonToResult(data []byte, output interface{}) error {
 
 func NewClient(url string) (client *Client) {
 	var userAgent = "morpheus-terraform-plugin v0.1"
-	//client := &Client{}
-	// client.Url = url
-	// client.UserAgent = userAgent
-	// return client
 	return &Client{
 		Url:       url,
 		UserAgent: userAgent,
@@ -135,9 +132,8 @@ func (client *Client) ClearAccessToken() *Client {
 
 func (client *Client) Execute(req *Request) (*Response, error) {
 	// first, login if needed
-	if req.SkipLogin != true {
-		if client.IsLoggedIn() != true && client.Username != "" {
-			log.Printf("Autologin as %v", client.Username)
+	if !req.SkipLogin {
+		if !client.IsLoggedIn() && client.Username != "" {
 			loginResp, loginErr := client.Login()
 			if loginErr != nil {
 				return loginResp, loginErr
@@ -202,7 +198,7 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 	}
 
 	// add Authorization Header with our access token
-	if req.SkipAuthorization != true {
+	if !req.SkipAuthorization {
 		if restyReq.Header["Authorization"] == nil {
 			if client.AccessToken != "" {
 				restyReq.SetHeader("Authorization", "Bearer "+client.AccessToken)
@@ -225,6 +221,13 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 				restyReq.SetHeader("Content-Type", "application/x-www-form-urlencoded")
 			}
 		}
+
+		if req.IsMultiPart {
+			for _, v := range req.MultiPartFiles {
+				restyReq.SetFileReader(v.ParameterName, v.FileName, bytes.NewReader(v.FileContent))
+			}
+		}
+
 		if req.Body != nil {
 			//log.Printf("REQUEST BODY: ", req.Body)
 			// Aways json for now...
@@ -233,7 +236,6 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 			if restyReq.Header["Content-Type"] == nil {
 				restyReq.SetHeader("Content-Type", "application/json")
 			}
-
 		}
 
 		// Set default headers: application/json
