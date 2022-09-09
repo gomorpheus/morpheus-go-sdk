@@ -120,7 +120,7 @@ func (client *Client) FindProvisionTypeByName(name string) (*Response, error) {
 	if err != nil {
 		return resp, err
 	}
-	listResult := resp.Result.(*ListProvisionTypeResult)
+	listResult := resp.Result.(*ListProvisionTypesResult)
 	provisionTypeCount := len(*listResult.ProvisionTypes)
 	if provisionTypeCount != 1 {
 		return resp, fmt.Errorf("found %d Provision Types for %v", provisionTypeCount, name)
