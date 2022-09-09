@@ -10,7 +10,7 @@ var (
 
 // Provision Type structures for use in request and response payloads
 type ProvisionType struct {
-	ID                   int         `json:"id"`
+	ID                   int64       `json:"id"`
 	Name                 string      `json:"name"`
 	Description          interface{} `json:"description"`
 	Code                 string      `json:"code"`
@@ -32,7 +32,7 @@ type ProvisionType struct {
 	Rootdiskcustomizable bool        `json:"rootDiskCustomizable"`
 	Lvmsupported         bool        `json:"lvmSupported"`
 	Hostdiskmode         string      `json:"hostDiskMode"`
-	Mindisk              int         `json:"minDisk"`
+	Mindisk              int64       `json:"minDisk"`
 	Maxdisk              interface{} `json:"maxDisk"`
 	Resizecopiesvolumes  bool        `json:"resizeCopiesVolumes"`
 	Optiontypes          []struct {
@@ -50,25 +50,25 @@ type ProvisionType struct {
 		Advanced     bool        `json:"advanced"`
 		Required     bool        `json:"required"`
 		Editable     bool        `json:"editable"`
-		Displayorder int         `json:"displayOrder"`
+		Displayorder int64       `json:"displayOrder"`
 	} `json:"optionTypes"`
 	Customoptiontypes []interface{} `json:"customOptionTypes"`
 	Networktypes      []interface{} `json:"networkTypes"`
 	Storagetypes      []struct {
-		ID                int         `json:"id"`
+		ID                int64       `json:"id"`
 		Code              string      `json:"code"`
 		Name              string      `json:"name"`
-		Displayorder      int         `json:"displayOrder"`
+		Displayorder      int64       `json:"displayOrder"`
 		Defaulttype       bool        `json:"defaultType"`
 		Customlabel       bool        `json:"customLabel"`
 		Customsize        bool        `json:"customSize"`
 		Customsizeoptions interface{} `json:"customSizeOptions"`
 	} `json:"storageTypes"`
 	Rootstoragetypes []struct {
-		ID                int         `json:"id"`
+		ID                int64       `json:"id"`
 		Code              string      `json:"code"`
 		Name              string      `json:"name"`
-		Displayorder      int         `json:"displayOrder"`
+		Displayorder      int64       `json:"displayOrder"`
 		Defaulttype       bool        `json:"defaultType"`
 		Customlabel       bool        `json:"customLabel"`
 		Customsize        bool        `json:"customSize"`
@@ -77,31 +77,29 @@ type ProvisionType struct {
 	Controllertypes []interface{} `json:"controllerTypes"`
 }
 
-// ListPricesResult structure parses the list prices response payload
-type ListProvisionTypeResult struct {
+// ListProvisionTypeResult structure parses the list provision types response payload
+type ListProvisionTypesResult struct {
 	ProvisionTypes *[]ProvisionType `json:"provisionTypes"`
 	Meta           *MetaResult      `json:"meta"`
 }
 
-// GetPriceResult structure parses the get price response payload
+// GetProvisionTypeResult structure parses the get provision type response payload
 type GetProvisionTypeResult struct {
 	ProvisionType *ProvisionType `json:"provisionType"`
 }
 
 // API endpoints
-// ListPrices lists all prices
-// https://apidocs.morpheusdata.com/#get-all-prices
+// ListProvisionTypes lists all provision types
 func (client *Client) ListProvisionTypes(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
 		Path:        ProvisionTypesPath,
 		QueryParams: req.QueryParams,
-		Result:      &ListProvisionTypeResult{},
+		Result:      &ListProvisionTypesResult{},
 	})
 }
 
-// GetPrice gets an existing price
-// https://apidocs.morpheusdata.com/#get-a-specific-price
+// GetProvisionType gets a provision type by ID
 func (client *Client) GetProvisionType(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -109,4 +107,25 @@ func (client *Client) GetProvisionType(id int64, req *Request) (*Response, error
 		QueryParams: req.QueryParams,
 		Result:      &GetProvisionTypeResult{},
 	})
+}
+
+// FindProvisionTypeByName gets an existing provision type by name
+func (client *Client) FindProvisionTypeByName(name string) (*Response, error) {
+	// Find by name, then get by ID
+	resp, err := client.ListProvisionTypes(&Request{
+		QueryParams: map[string]string{
+			"name": name,
+		},
+	})
+	if err != nil {
+		return resp, err
+	}
+	listResult := resp.Result.(*ListProvisionTypeResult)
+	provisionTypeCount := len(*listResult.ProvisionTypes)
+	if provisionTypeCount != 1 {
+		return resp, fmt.Errorf("found %d Provision Types for %v", provisionTypeCount, name)
+	}
+	firstRecord := (*listResult.ProvisionTypes)[0]
+	provisionTypeID := firstRecord.ID
+	return client.GetProvisionType(provisionTypeID, &Request{})
 }

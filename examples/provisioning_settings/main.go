@@ -16,12 +16,12 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List cluster layouts
+	// Get provisioning settings
 	req := &morpheus.Request{}
-	response, err := client.ListClusterLayouts(req)
+	provisioningSettingsResponse, err := client.GetProvisioningSettings(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := response.Result.(*morpheus.ListClusterLayoutsResult)
-	log.Println(result.ClusterLayouts)
+	result := provisioningSettingsResponse.Result.(*morpheus.GetProvisinoingSettingsResult)
+	log.Println(result)
 }

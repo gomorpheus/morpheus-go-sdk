@@ -179,7 +179,7 @@ API | Available?
 --------- | -----------
 account_groups | n/a
 accounts | [Accounts](accounts.go)
-appliance_settings | n/a
+appliance_settings | [Appliance Settings](appliance_settings.go)
 apps | [Apps](apps.go)
 archive_buckets | n/a
 archive_files | n/a
@@ -218,7 +218,7 @@ library_container_upgrades | n/a
 library_instance_types | [Instance Types](instance_types.go)
 library_layouts | n/a
 library_spec_templates | [Spec Templates](spec_templates.go)
-license | n/a
+license | [License](license.go)
 load_balancers | n/a
 logs | n/a
 log_settings | [Log Settings](log_settings.go)
@@ -269,6 +269,8 @@ user_groups | n/a
 user_settings | n/a
 user_sources | [Identity Sources](identity_sources.go)
 users | n/a
+vdi_allocations | [VDI Allocations](vdi_allocations.go)
+vdi_apps | [VDI Apps](vdi_apps.go)
 vdi_gateways | [VDI Gateways](vdi_gateway.go)
 vdi_pools | [VDI Pools](vdi_pools.go)
 virtual_images | [Virtual Images](virtual_images.go)

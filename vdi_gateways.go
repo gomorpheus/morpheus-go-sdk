@@ -22,7 +22,7 @@ type VDIGateway struct {
 }
 
 type ListVDIGatewaysResult struct {
-	VDIGateways *[]VDIGateway `json:"vdiGateway"`
+	VDIGateways *[]VDIGateway `json:"vdiGateways"`
 	Meta        *MetaResult   `json:"meta"`
 }
 

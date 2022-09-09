@@ -16,12 +16,12 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List cluster layouts
+	// List vdi apps
 	req := &morpheus.Request{}
-	response, err := client.ListClusterLayouts(req)
+	vdiAppsResponse, err := client.ListVDIApps(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := response.Result.(*morpheus.ListClusterLayoutsResult)
-	log.Println(result.ClusterLayouts)
+	result := vdiAppsResponse.Result.(*morpheus.ListVDIAppsResult)
+	log.Println(result)
 }
