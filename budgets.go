@@ -76,7 +76,7 @@ type ListBudgetsResult struct {
 }
 
 type GetBudgetResult struct {
-	Budget *Budget `json:"Budget"`
+	Budget *Budget `json:"budget"`
 }
 
 type CreateBudgetResult struct {

@@ -16,7 +16,7 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List policies
+	// List execute schedules
 	req := &morpheus.Request{}
 	scheduleResponse, err := client.ListExecuteSchedules(req)
 	if err != nil {

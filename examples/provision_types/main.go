@@ -16,7 +16,7 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List prices
+	// List provision types
 	req := &morpheus.Request{}
 	provisionTypeResponse, err := client.ListProvisionTypes(req)
 	if err != nil {

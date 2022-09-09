@@ -16,7 +16,7 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List budgets
+	// List identity sources
 	req := &morpheus.Request{}
 	identitySourcesResponse, err := client.ListIdentitySources(req)
 	if err != nil {

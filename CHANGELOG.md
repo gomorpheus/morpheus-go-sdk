@@ -1,3 +1,16 @@
+## 0.1.6 (September 8, 2022)
+
+FEATURES:
+
+* **Appliance Settings** Client methods for `appliance_settings` API endpoints
+* **Backup Settings** Client methods for `backup_settings` API endpoints
+* **Cluster Types** Client methods for `cluster_types` API endpoints
+* **License** Client methods for `license` API endpoints
+* **Provisioning Settings** Client methods for `provisioning_settings` API endpoints
+* **VDI Allocations** Client methods for `vdi_allocations` API endpoints
+* **VDI Apps** Client methods for `vdi_aps` API endpoints
+
+
 ## 0.1.5 (August 26, 2022)
 
 FEATURES:

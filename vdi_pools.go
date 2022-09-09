@@ -179,6 +179,19 @@ func (client *Client) DeleteVDIPool(id int64, req *Request) (*Response, error) {
 	})
 }
 
+func (client *Client) UploadVDIPoolLogo(id int64, filePayload []*FilePayload, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:         "PUT",
+		Path:           fmt.Sprintf("/api/vdi-pools/%d", id),
+		IsMultiPart:    true,
+		MultiPartFiles: filePayload,
+		Headers: map[string]string{
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		Result: &UpdateVDIPoolResult{},
+	})
+}
+
 // FindVDIPoolByName gets an existing vdi pool by name
 func (client *Client) FindVDIPoolByName(name string) (*Response, error) {
 	// Find by name, then get by ID
