@@ -6,5 +6,7 @@ require github.com/go-resty/resty/v2 v2.2.0
 
 require golang.org/x/net v0.0.0-20200222125558-5a598a2470a0 // indirect
 
+retract v0.1.6
+
 // voodoo
 //replace github.com/go-resty/resty => gopkg.in/resty.v1 v1.12.0
