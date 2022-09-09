@@ -1,4 +1,4 @@
-## 0.1.6 (September 8, 2022)
+## 0.1.7 (September 8, 2022)
 
 FEATURES:
 
@@ -10,6 +10,9 @@ FEATURES:
 * **VDI Allocations** Client methods for `vdi_allocations` API endpoints
 * **VDI Apps** Client methods for `vdi_aps` API endpoints
 
+## 0.1.6 (September 8, 2022)
+
+Retracted Release
 
 ## 0.1.5 (August 26, 2022)
 
