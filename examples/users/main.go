@@ -16,12 +16,12 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List provision types
+	// List users
 	req := &morpheus.Request{}
-	provisionTypeResponse, err := client.ListProvisionTypes(req)
+	listUsersResponse, err := client.ListUsers(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := provisionTypeResponse.Result.(*morpheus.ListProvisionTypesResult)
-	log.Println(result.ProvisionTypes)
+	result := listUsersResponse.Result.(*morpheus.ListUsersResult)
+	log.Println(result)
 }

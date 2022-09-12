@@ -16,12 +16,12 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List provision types
+	// Get whitelabel settings
 	req := &morpheus.Request{}
-	provisionTypeResponse, err := client.ListProvisionTypes(req)
+	whitelabelSettingsResponse, err := client.GetWhitelabelSettings(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := provisionTypeResponse.Result.(*morpheus.ListProvisionTypesResult)
-	log.Println(result.ProvisionTypes)
+	result := whitelabelSettingsResponse.Result.(*morpheus.GetWhitelabelSettingsResult)
+	log.Println(result)
 }

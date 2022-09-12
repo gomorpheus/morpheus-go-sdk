@@ -37,7 +37,7 @@ type ProvisioningSettings struct {
 	} `json:"deployStorageProvider"`
 }
 
-type GetProvisinoingSettingsResult struct {
+type GetProvisioningSettingsResult struct {
 	ProvisioningSettings *ProvisioningSettings `json:"provisioningSettings"`
 }
 
@@ -54,7 +54,7 @@ func (client *Client) GetProvisioningSettings(req *Request) (*Response, error) {
 		Method:      "GET",
 		Path:        ProvisioningSettingsPath,
 		QueryParams: req.QueryParams,
-		Result:      &GetProvisinoingSettingsResult{},
+		Result:      &GetProvisioningSettingsResult{},
 	})
 }
 
