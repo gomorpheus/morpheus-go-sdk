@@ -39,9 +39,9 @@ type Integration struct {
 		AnsibleRoles                    string                            `json:"ansibleRoles"`
 		AnsibleGroupVars                string                            `json:"ansibleGroupVars"`
 		AnsibleHostVars                 string                            `json:"ansibleHostVars"`
-		AnsibleCommandBus               string                            `json:"ansibleCommandBus"`
+		AnsibleCommandBus               bool                              `json:"ansibleCommandBus"`
 		AnsibleVerbose                  bool                              `json:"ansibleVerbose"`
-		AnsibleGalaxyEnabled            string                            `json:"ansibleGalaxyEnabled"`
+		AnsibleGalaxyEnabled            bool                              `json:"ansibleGalaxyEnabled"`
 		AnsibleDefaultBranch            string                            `json:"ansibleDefaultBranch"`
 		Plugin                          interface{}                       `json:"plugin"`
 		IncidentAccess                  bool                              `json:"incidentAccess"`
@@ -74,7 +74,7 @@ type Integration struct {
 		OrgKeyHash                      string                            `json:"orgKeyHash"`
 		UserKeyHash                     string                            `json:"userKeyHash"`
 		PuppetMaster                    string                            `json:"puppetMaster"`
-		PuppetFireNowstring             string                            `json:"puppetFireNow"`
+		PuppetFireNow                   string                            `json:"puppetFireNow"`
 		PuppetSshUser                   string                            `json:"puppetSshUser"`
 		PuppetSshPassword               string                            `json:"puppetSshPassword"`
 		PuppetSshPasswordHash           string                            `json:"puppetSshPasswordHash"`
