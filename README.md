@@ -265,15 +265,15 @@ storage_providers | n/a
 subnets | n/a
 task_sets | [Task Sets](task_sets.go)
 tasks | [Tasks](tasks.go)
-user_groups | n/a
+user_groups | [User Groups](user_groups.go)
 user_settings | n/a
 user_sources | [Identity Sources](identity_sources.go)
-users | n/a
+users | [Users](users.go)
 vdi_allocations | [VDI Allocations](vdi_allocations.go)
 vdi_apps | [VDI Apps](vdi_apps.go)
 vdi_gateways | [VDI Gateways](vdi_gateway.go)
 vdi_pools | [VDI Pools](vdi_pools.go)
 virtual_images | [Virtual Images](virtual_images.go)
 whoami | [Whoami](whoami.go)
-whitelabel_settings | n/a
+whitelabel_settings | [Whitelabel Settings](whitelabel_settings.go)
 wikis | [Wikis](wikis.go)

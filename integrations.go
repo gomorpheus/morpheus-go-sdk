@@ -17,6 +17,8 @@ type Integration struct {
 	Type            string `json:"type"`
 	Username        string `json:"username"`
 	Password        string `json:"password"`
+	PasswordHash    string `json:"passwordHash"`
+	Port            string `json:"port"`
 	Version         string `json:"version"`
 	IntegrationType struct {
 		ID   int64  `json:"id"`
@@ -30,33 +32,59 @@ type Integration struct {
 	Token           string `json:"token"`
 	TokenHash       string `json:"tokenHash"`
 	Config          struct {
-		DefaultBranch                string                            `json:"defaultBranch"`
-		CacheEnabled                 bool                              `json:"cacheEnabled"`
-		AnsiblePlaybooks             string                            `json:"ansiblePlaybooks"`
-		AnsibleRoles                 string                            `json:"ansibleRoles"`
-		AnsibleGroupVars             string                            `json:"ansibleGroupVars"`
-		AnsibleHostVars              string                            `json:"ansibleHostVars"`
-		AnsibleCommandBus            string                            `json:"ansibleCommandBus"`
-		AnsibleVerbose               bool                              `json:"ansibleVerbose"`
-		AnsibleGalaxyEnabled         string                            `json:"ansibleGalaxyEnabled"`
-		AnsibleDefaultBranch         string                            `json:"ansibleDefaultBranch"`
-		Plugin                       interface{}                       `json:"plugin"`
-		IncidentAccess               bool                              `json:"incidentAccess"`
-		RequestAccess                bool                              `json:"requestAccess"`
-		ServiceNowCMDBBusinessObject string                            `json:"serviceNowCMDBBusinessObject"`
-		ServiceNowCustomCmdbMapping  string                            `json:"serviceNowCustomCmdbMapping"`
-		ServiceNowCmdbClassMapping   []serviceNowCmdbClassMappingEntry `json:"serviceNowCmdbClassMapping"`
-		Databags                     []chefDatabagEntry                `json:"databags"`
-		ApprovalUser                 string                            `json:"approvalUser"`
-		Company                      string                            `json:"company"`
-		AppID                        string                            `json:"appId"`
-		InventoryExisting            string                            `json:"inventoryExisting"`
-		ExtraAttributes              string                            `json:"extraAttributes"`
-		EngineMount                  string                            `json:"engineMount"`
-		SecretPath                   string                            `json:"secretPath"`
-		SecretEngine                 string                            `json:"secretEngine"`
-		SecretPathHash               string                            `json:"secretPathHash"`
-		SecretEngineHash             string                            `json:"secretEngineHash"`
+		Inventory                       string                            `json:"inventory"`
+		DefaultBranch                   string                            `json:"defaultBranch"`
+		CacheEnabled                    bool                              `json:"cacheEnabled"`
+		AnsiblePlaybooks                string                            `json:"ansiblePlaybooks"`
+		AnsibleRoles                    string                            `json:"ansibleRoles"`
+		AnsibleGroupVars                string                            `json:"ansibleGroupVars"`
+		AnsibleHostVars                 string                            `json:"ansibleHostVars"`
+		AnsibleCommandBus               string                            `json:"ansibleCommandBus"`
+		AnsibleVerbose                  bool                              `json:"ansibleVerbose"`
+		AnsibleGalaxyEnabled            string                            `json:"ansibleGalaxyEnabled"`
+		AnsibleDefaultBranch            string                            `json:"ansibleDefaultBranch"`
+		Plugin                          interface{}                       `json:"plugin"`
+		IncidentAccess                  bool                              `json:"incidentAccess"`
+		RequestAccess                   bool                              `json:"requestAccess"`
+		ServiceNowCMDBBusinessObject    string                            `json:"serviceNowCMDBBusinessObject"`
+		ServiceNowCustomCmdbMapping     string                            `json:"serviceNowCustomCmdbMapping"`
+		ServiceNowCmdbClassMapping      []serviceNowCmdbClassMappingEntry `json:"serviceNowCmdbClassMapping"`
+		ServiceNowCmdbClassMappingInput []string                          `json:"serviceNowCmdbClassMapping.input"`
+		PreparedForSync                 bool                              `json:"preparedForSync"`
+		Databags                        []chefDatabagEntry                `json:"databags"`
+		ApprovalUser                    string                            `json:"approvalUser"`
+		Company                         string                            `json:"company"`
+		AppID                           string                            `json:"appId"`
+		InventoryExisting               string                            `json:"inventoryExisting"`
+		ExtraAttributes                 string                            `json:"extraAttributes"`
+		EngineMount                     string                            `json:"engineMount"`
+		SecretPath                      string                            `json:"secretPath"`
+		SecretEngine                    string                            `json:"secretEngine"`
+		SecretPathHash                  string                            `json:"secretPathHash"`
+		SecretEngineHash                string                            `json:"secretEngineHash"`
+		ChefUser                        string                            `json:"chefUser"`
+		Endpoint                        string                            `json:"endpoint"`
+		Org                             string                            `json:"org"`
+		OrgKey                          string                            `json:"orgKey"`
+		UserKey                         string                            `json:"userKey"`
+		Version                         string                            `json:"version"`
+		ChefUseFQDN                     string                            `json:"chefUseFqdn"`
+		WindowsVersion                  string                            `json:"windowsVersion"`
+		WindowsInstallURL               string                            `json:"windowsInstallUrl"`
+		OrgKeyHash                      string                            `json:"orgKeyHash"`
+		UserKeyHash                     string                            `json:"userKeyHash"`
+		PuppetMaster                    string                            `json:"puppetMaster"`
+		PuppetFireNowstring             string                            `json:"puppetFireNow"`
+		PuppetSshUser                   string                            `json:"puppetSshUser"`
+		PuppetSshPassword               string                            `json:"puppetSshPassword"`
+		PuppetSshPasswordHash           string                            `json:"puppetSshPasswordHash"`
+		CherwellCustomCmdbMapping       string                            `json:"cherwellCustomCmdbMapping"`
+		CherwellClientKey               string                            `json:"cherwellClientKey"`
+		CherwellCreatedBy               string                            `json:"cherwellCreatedBy"`
+		CherwellStartDate               string                            `json:"cherwellStartDate"`
+		CherwellEndDate                 string                            `json:"cherwellEndDate"`
+		CherwellIgnoreSSLErrors         string                            `json:"cherwellIgnoreSSLErrors"`
+		CherwellBusinessObject          string                            `json:"cherwellBusinessObject"`
 	}
 	Status     string `json:"status"`
 	StatusDate string `json:"statusDate"`
@@ -66,6 +94,13 @@ type Integration struct {
 		Name string `json:"name"`
 	}
 	ServiceMode string `json:"serviceMode"`
+	ServiceFlag bool   `json:"serviceFlag"`
+	Credential  struct {
+		ID    int64    `json:"id"`
+		Name  string   `json:"name"`
+		Type  string   `json:"type"`
+		Types []string `json:"types"`
+	}
 }
 
 type serviceNowCmdbClassMappingEntry struct {
@@ -86,6 +121,21 @@ type ListIntegrationsResult struct {
 	Meta         *MetaResult    `json:"meta"`
 }
 
+type ListIntegrationObjectsResult struct {
+	Objects []struct {
+		ID              int64  `json:"id"`
+		Name            string `json:"name"`
+		Type            string `json:"type"`
+		RefType         string `json:"refType"`
+		RefID           int64  `json:"refId"`
+		CatalogItemType struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		}
+	} `json:"objects"`
+	Meta *MetaResult `json:"meta"`
+}
+
 type GetIntegrationResult struct {
 	Integration *Integration `json:"integration"`
 }
@@ -97,6 +147,15 @@ type CreateIntegrationResult struct {
 	Integration *Integration      `json:"integration"`
 }
 
+type CreateIntegrationObjectResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Object  struct {
+		ID int64 `json:"id"`
+	} `json:"object"`
+}
+
 type UpdateIntegrationResult struct {
 	CreateIntegrationResult
 }
@@ -106,11 +165,19 @@ type DeleteIntegrationResult struct {
 }
 
 // Client request methods
-
 func (client *Client) ListIntegrations(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
 		Path:        IntegrationsPath,
+		QueryParams: req.QueryParams,
+		Result:      &ListIntegrationsResult{},
+	})
+}
+
+func (client *Client) ListIntegrationObjects(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/objects", IntegrationsPath, id),
 		QueryParams: req.QueryParams,
 		Result:      &ListIntegrationsResult{},
 	})
@@ -135,6 +202,16 @@ func (client *Client) CreateIntegration(req *Request) (*Response, error) {
 	})
 }
 
+func (client *Client) CreateIntegrationObject(id int64, objectId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/objects/%d", IntegrationsPath, id, objectId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateIntegrationResult{},
+	})
+}
+
 func (client *Client) UpdateIntegration(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
@@ -149,6 +226,16 @@ func (client *Client) DeleteIntegration(id int64, req *Request) (*Response, erro
 	return client.Execute(&Request{
 		Method:      "DELETE",
 		Path:        fmt.Sprintf("%s/%d", IntegrationsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &DeleteIntegrationResult{},
+	})
+}
+
+func (client *Client) DeleteIntegrationObject(id int64, objectId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d/objects/%d", IntegrationsPath, id, objectId),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &DeleteIntegrationResult{},

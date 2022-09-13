@@ -1,3 +1,11 @@
+## 0.1.8 (September 12, 2022)
+
+FEATURES:
+
+* **Users** Client methods for `users` API endpoints
+* **User Groups** Client methods for `user_groups` API endpoints
+* **Whitelabel Settings** Client methods for `whitelabel_settings` API endpoints
+
 ## 0.1.7 (September 8, 2022)
 
 FEATURES:
