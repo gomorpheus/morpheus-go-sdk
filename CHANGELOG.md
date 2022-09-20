@@ -1,3 +1,14 @@
+## 0.1.10 (September 15, 2022)
+
+* **Archives** Client methods for `archive_buckets` API endpoints
+
+## 0.1.9 (September 13, 2022)
+
+FEATURES:
+
+* **Boot Scripts** Client methods for `boot_scripts` API endpoints
+* **Preseed Scripts** Client methods for `preseed_scripts` API endpoints
+
 ## 0.1.8 (September 12, 2022)
 
 FEATURES:

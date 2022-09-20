@@ -22,6 +22,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := provisioningSettingsResponse.Result.(*morpheus.GetProvisinoingSettingsResult)
+	result := provisioningSettingsResponse.Result.(*morpheus.GetProvisioningSettingsResult)
 	log.Println(result)
 }
