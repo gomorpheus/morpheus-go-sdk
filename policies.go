@@ -12,11 +12,12 @@ var (
 
 // Policy structures for use in request and response payloads
 type Policy struct {
-	ID         int64  `json:"id"`
-	Name       string `json:"name"`
-	Enabled    bool   `json:"enabled"`
-	EachUser   bool   `json:"eachUser"`
-	PolicyType struct {
+	ID          int64  `json:"id"`
+	Name        string `json:"name"`
+	Enabled     bool   `json:"enabled"`
+	Description string `json:"description"`
+	EachUser    bool   `json:"eachUser"`
+	PolicyType  struct {
 		ID   int64  `json:"id"`
 		Code string `json:"code"`
 		Name string `json:"name"`

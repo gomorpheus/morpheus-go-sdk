@@ -19,7 +19,7 @@ type ProvisioningSettings struct {
 	CloudInitPassword           string `json:"cloudInitPassword"`
 	CloudInitPasswordHash       string `json:"cloudInitPasswordHash"`
 	Cloudinitkeypair            struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"cloudInitKeyPair"`
 	WindowsPassword     string      `json:"windowsPassword"`
@@ -27,12 +27,12 @@ type ProvisioningSettings struct {
 	PXERootPassword     interface{} `json:"pxeRootPassword"`
 	PXERootPasswordHash interface{} `json:"pxeRootPasswordHash"`
 	DefaultTemplateType struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 		Code string `json:"code"`
 	} `json:"defaultTemplateType"`
 	DeployStorageProvider struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"deployStorageProvider"`
 }

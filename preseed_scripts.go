@@ -37,10 +37,10 @@ type GetPreseedScriptResult struct {
 
 // CreatePreseedScriptResult structure parses the create preseedScript response payload
 type CreatePreseedScriptResult struct {
-	Success bool              `json:"success"`
-	Message string            `json:"msg"`
-	Errors  map[string]string `json:"errors"`
-	ID      int64             `json:"id"`
+	Success       bool              `json:"success"`
+	Message       string            `json:"msg"`
+	Errors        map[string]string `json:"errors"`
+	PreseedScript *PreseedScript    `json:"preseedScript"`
 }
 
 // UpdatePreseedScriptResult structure parses the update preseedScript response payload

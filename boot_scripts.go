@@ -16,9 +16,9 @@ type BootScript struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	FileName    string      `json:"fileName"`
-	Description interface{} `json:"description"`
-	Content     string      `json:"content"`
+	FileName    string `json:"fileName"`
+	Description string `json:"description"`
+	Content     string `json:"content"`
 	CreatedBy   struct {
 		Username string `json:"username"`
 	} `json:"createdBy"`
@@ -38,10 +38,10 @@ type GetBootScriptResult struct {
 
 // CreateBootScriptResult structure parses the create bootScript response payload
 type CreateBootScriptResult struct {
-	Success bool              `json:"success"`
-	Message string            `json:"msg"`
-	Errors  map[string]string `json:"errors"`
-	ID      int64             `json:"id"`
+	Success    bool              `json:"success"`
+	Message    string            `json:"msg"`
+	Errors     map[string]string `json:"errors"`
+	BootScript *BootScript       `json:"bootScript"`
 }
 
 // UpdateBootScriptResult structure parses the update bootScript response payload
@@ -124,6 +124,6 @@ func (client *Client) FindBootScriptByName(name string) (*Response, error) {
 		return resp, fmt.Errorf("found %d Boot Scripts for %v", bootScriptCount, name)
 	}
 	firstRecord := (*listResult.BootScripts)[0]
-	priceSetID := firstRecord.ID
-	return client.GetBootScript(priceSetID, &Request{})
+	bootScriptID := firstRecord.ID
+	return client.GetBootScript(bootScriptID, &Request{})
 }
