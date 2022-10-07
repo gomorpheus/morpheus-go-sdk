@@ -1,3 +1,16 @@
+## 0.2.0 (October 7, 2022)
+
+NOTES:
+
+* Added additional tests and examples for existing resources
+* Updated the response payloads for existing resources
+
+FEATURES:
+
+* **Alerts** Client methods for `alerts` API endpoints
+* **Check Apps** Client methods for `check_apps` API endpoints
+* **Deployments** Client methods for `deployments` API endpoints
+
 ## 0.1.10 (September 15, 2022)
 
 * **Archives** Client methods for `archive_buckets` API endpoints

@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -11,10 +12,59 @@ var (
 
 // Task structures for use in request and response payloads
 type Task struct {
-	ID         int64  `json:"id"`
-	Name       string `json:"name"`
-	Code       string `json:"code"`
-	ResultType string `json:"resultType"`
+	ID        int64  `json:"id"`
+	AccountId int64  `json:"accountId"`
+	Name      string `json:"name"`
+	Code      string `json:"code"`
+	TaskType  struct {
+		ID   int64  `json:"id"`
+		Code string `json:"code"`
+		Name string `json:"name"`
+	} `json:"taskType"`
+	TaskOptions struct {
+		AnsibleOptions            string      `json:"ansibleOptions"`
+		AnsibleTags               string      `json:"ansibleTags"`
+		AnsiblePlaybook           string      `json:"ansiblePlaybook"`
+		AnsibleGitRef             string      `json:"ansibleGitRef"`
+		AnsibleSkipTags           string      `json:"ansibleSkipTags"`
+		AnsibleGitId              string      `json:"ansibleGitId"`
+		JsScript                  string      `json:"jsScript"`
+		WinrmElevated             string      `json:"winrm.elevated"`
+		PythonBinary              string      `json:"pythonBinary"`
+		PythonArgs                string      `json:"pythonArgs"`
+		PythonAdditionalPackages  string      `json:"pythonAdditionalPackages"`
+		PythonScript              interface{} `json:"pythonScript"`
+		ShellSudo                 string      `json:"shell.sudo"`
+		Username                  string      `json:"username"`
+		Host                      string      `json:"host"`
+		LocalScriptGitRef         string      `json:"localScriptGitRef"`
+		Password                  string      `json:"password"`
+		PasswordHash              string      `json:"passwordHash"`
+		WriteAttributesAttributes string      `json:"writeAttributes.attributes"`
+		Port                      string      `json:"port"`
+	} `json:"taskOptions"`
+	File struct {
+		ID          int64  `json:"id"`
+		SourceType  string `json:"sourceType"`
+		ContentRef  string `json:"contentRef"`
+		ContentPath string `json:"contentPath"`
+		Repository  struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"repository"`
+		Content interface{} `json:"content"`
+	} `json:"file"`
+	ResultType        interface{} `json:"resultType"`
+	ExecuteTarget     string      `json:"executeTarget"`
+	Retryable         bool        `json:"retryable"`
+	RetryCount        int64       `json:"retryCount"`
+	RetryDelaySeconds int64       `json:"retryDelaySeconds"`
+	AllowCustomConfig bool        `json:"allowCustomConfig"`
+	Credential        struct {
+		Type string `json:"type"`
+	} `json:"credential"`
+	DateCreated time.Time `json:"dateCreated"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }
 
 type ListTasksResult struct {
@@ -106,11 +156,11 @@ func (client *Client) FindTaskByName(name string) (*Response, error) {
 		return resp, err
 	}
 	listResult := resp.Result.(*ListTasksResult)
-	tenantsCount := len(*listResult.Tasks)
-	if tenantsCount != 1 {
-		return resp, fmt.Errorf("found %d Tasks for %v", tenantsCount, name)
+	tasksCount := len(*listResult.Tasks)
+	if tasksCount != 1 {
+		return resp, fmt.Errorf("found %d Tasks for %v", tasksCount, name)
 	}
 	firstRecord := (*listResult.Tasks)[0]
-	tenantID := firstRecord.ID
-	return client.GetTask(tenantID, &Request{})
+	taskID := firstRecord.ID
+	return client.GetTask(taskID, &Request{})
 }

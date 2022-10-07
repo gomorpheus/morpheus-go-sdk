@@ -11,12 +11,107 @@ var (
 
 // InstanceType structures for use in request and response payloads
 type InstanceType struct {
-	ID          int64  `json:"id"`
-	Name        string `json:"name"`
-	Description string `json:"description"`
-	Code        string `json:"code"`
-	Active      bool   `json:"active"`
-	Visibility  string `json:"visibility"`
+	ID      int64 `json:"id"`
+	Account struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"account"`
+	Name                string      `json:"name"`
+	Code                string      `json:"code"`
+	Description         string      `json:"description"`
+	ProvisionTypeCode   string      `json:"provisionTypeCode"`
+	Category            string      `json:"category"`
+	Active              bool        `json:"active"`
+	HasProvisioningStep bool        `json:"hasProvisioningStep"`
+	HasDeployment       bool        `json:"hasDeployment"`
+	HasConfig           bool        `json:"hasConfig"`
+	HasSettings         bool        `json:"hasSettings"`
+	HasAutoscale        bool        `json:"hasAutoScale"`
+	ProxyType           interface{} `json:"proxyType"`
+	ProxyPort           interface{} `json:"proxyPort"`
+	ProxyProtocol       interface{} `json:"proxyProtocol"`
+	EnvironmentPrefix   string      `json:"environmentPrefix"`
+	BackupType          interface{} `json:"backupType"`
+	Config              struct {
+	} `json:"config"`
+	Visibility          string   `json:"visibility"`
+	Featured            bool     `json:"featured"`
+	Versions            []string `json:"versions"`
+	InstanceTypeLayouts []struct {
+		ID           int64 `json:"id"`
+		InstanceType struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+			Code string `json:"code"`
+		} `json:"instanceType"`
+		Account struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"account"`
+		Code                     string      `json:"code"`
+		Name                     string      `json:"name"`
+		InstanceVersion          string      `json:"instanceVersion"`
+		Description              interface{} `json:"description"`
+		Creatable                bool        `json:"creatable"`
+		MemoryRequirement        interface{} `json:"memoryRequirement"`
+		SortOrder                int64       `json:"sortOrder"`
+		SupportsConvertToManaged bool        `json:"supportsConvertToManaged"`
+	} `json:"instanceTypeLayouts"`
+	OptionTypes []struct {
+		ID                 int64       `json:"id"`
+		Name               string      `json:"name"`
+		Description        interface{} `json:"description"`
+		Code               string      `json:"code"`
+		FieldName          string      `json:"fieldName"`
+		FieldLabel         string      `json:"fieldLabel"`
+		FieldCode          interface{} `json:"fieldCode"`
+		FieldContext       string      `json:"fieldContext"`
+		FieldGroup         interface{} `json:"fieldGroup"`
+		FieldClass         interface{} `json:"fieldClass"`
+		FieldAddon         interface{} `json:"fieldAddOn"`
+		FieldComponent     interface{} `json:"fieldComponent"`
+		FieldInput         interface{} `json:"fieldInput"`
+		Placeholder        interface{} `json:"placeHolder"`
+		VerifyPattern      interface{} `json:"verifyPattern"`
+		HelpBlock          interface{} `json:"helpBlock"`
+		HelpBlockFieldCode interface{} `json:"helpBlockFieldCode"`
+		DefaultValue       interface{} `json:"defaultValue"`
+		OptionSource       string      `json:"optionSource"`
+		OptionSourceType   interface{} `json:"optionSourceType"`
+		OptionList         struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"optionList"`
+		Type       string `json:"type"`
+		Advanced   bool   `json:"advanced"`
+		Required   bool   `json:"required"`
+		ExportMeta bool   `json:"exportMeta"`
+		Editable   bool   `json:"editable"`
+		Creatable  bool   `json:"creatable"`
+		Config     struct {
+		} `json:"config"`
+		DisplayOrder          int64       `json:"displayOrder"`
+		WrapperClass          interface{} `json:"wrapperClass"`
+		Enabled               bool        `json:"enabled"`
+		NoBlank               bool        `json:"noBlank"`
+		DependsOnCode         interface{} `json:"dependsOnCode"`
+		VisibleOnCode         interface{} `json:"visibleOnCode"`
+		RequireOnCode         interface{} `json:"requireOnCode"`
+		ContextualDefault     bool        `json:"contextualDefault"`
+		DisplayValueOnDetails bool        `json:"displayValueOnDetails"`
+		ShowOnCreate          bool        `json:"showOnCreate"`
+		ShowOnEdit            bool        `json:"showOnEdit"`
+		LocalCredential       interface{} `json:"localCredential"`
+	} `json:"optionTypes"`
+	EnvironmentVariables []struct {
+		EvarName         string `json:"evarName"`
+		Name             string `json:"name"`
+		DefaultValue     string `json:"defaultValue"`
+		DefaultValueHash string `json:"defaultValueHash"`
+		ValueType        string `json:"valueType"`
+		Export           bool   `json:"export"`
+		Masked           bool   `json:"masked"`
+	} `json:"environmentVariables"`
 }
 
 // ListInstanceTypesResult structure parses the list instance types response payload

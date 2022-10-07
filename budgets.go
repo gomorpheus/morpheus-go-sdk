@@ -32,7 +32,7 @@ type Budget struct {
 	Active        bool        `json:"active"`
 	Enabled       bool        `json:"enabled"`
 	Rollover      bool        `json:"rollover"`
-	Costs         []int64     `json:"costs"`
+	Costs         []float64   `json:"costs"`
 	AverageCost   float64     `json:"averageCost"`
 	TotalCost     float64     `json:"totalCost"`
 	Currency      string      `json:"currency"`

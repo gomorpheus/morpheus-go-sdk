@@ -6,27 +6,27 @@ import (
 	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
-func TestScriptTemplates(t *testing.T) {
+func TestListBootScripts(t *testing.T) {
 	client := getTestClient(t)
 	req := &morpheus.Request{}
-	resp, err := client.ListScriptTemplates(req)
+	resp, err := client.ListBootScripts(req)
 	assertResponse(t, resp, err)
 }
 
-func TestGetScriptTemplate(t *testing.T) {
+func TestGetBootScript(t *testing.T) {
 	client := getTestClient(t)
 	req := &morpheus.Request{}
-	resp, err := client.ListScriptTemplates(req)
+	resp, err := client.ListBootScripts(req)
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
-	result := resp.Result.(*morpheus.ListScriptTemplatesResult)
+	result := resp.Result.(*morpheus.ListBootScriptsResult)
 	recordCount := result.Meta.Total
-	t.Logf("Found %d Script Templates.", recordCount)
+	t.Logf("Found %d Boot Scripts.", recordCount)
 	if recordCount != 0 {
 		// Get by ID
-		record := (*result.ScriptTemplates)[0]
-		resp, err = client.GetScriptTemplate(record.ID, &morpheus.Request{})
+		record := (*result.BootScripts)[0]
+		resp, err = client.GetBootScript(record.ID, &morpheus.Request{})
 		assertResponse(t, resp, err)
 	}
 }

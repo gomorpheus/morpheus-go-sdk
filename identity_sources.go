@@ -29,6 +29,7 @@ type IdentitySource struct {
 	} `json:"account"`
 	DefaultAccountRole struct {
 		ID        int64  `json:"id"`
+		Name      string `json:"name"`
 		Authority string `json:"authority"`
 	} `json:"defaultAccountRole"`
 	Config struct {
@@ -37,6 +38,7 @@ type IdentitySource struct {
 		UseSSL                         string `json:"useSSL"`
 		BindingUsername                string `json:"bindingUsername"`
 		BindingPassword                string `json:"bindingPassword"`
+		BindingPasswordHash            string `json:"bindingPasswordHash"`
 		RequiredGroup                  string `json:"requiredGroup"`
 		SearchMemberGroups             bool   `json:"searchMemberGroups"`
 		RequiredGroupDN                string `json:"requiredGroupDN"`
@@ -91,6 +93,7 @@ type IdentitySource struct {
 		SourceRoleFqn  string `json:"sourceRoleFqn"`
 		MappedRole     struct {
 			ID        int64  `json:"id"`
+			Name      string `json:"string"`
 			Authority string `json:"authority"`
 		} `json:"mappedRole"`
 	} `json:"roleMappings"`

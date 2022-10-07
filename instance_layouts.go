@@ -11,11 +11,48 @@ var (
 
 // InstanceLayout structures for use in request and response payloads
 type InstanceLayout struct {
-	ID              int64  `json:"id"`
-	Name            string `json:"name"`
-	Description     string `json:"description"`
-	Code            string `json:"code"`
-	InstanceVersion string `json:"instanceVersion"`
+	ID      int64 `json:"id"`
+	Account struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"account"`
+	Name                     string `json:"name"`
+	Description              string `json:"description"`
+	Code                     string `json:"code"`
+	ContainerVersion         string `json:"instanceVersion"`
+	Creatable                bool   `json:"creatable"`
+	MemoryRequirement        int64  `json:"memoryRequirement"`
+	SupportsConvertToManaged bool   `json:"supportsConvertToManaged"`
+	ProvisionType            struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+		Code string `json:"code"`
+	} `json:"provisionType"`
+	TaskSets []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"taskSets"`
+	ContainerTypes []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"containerTypes"`
+	SpecTemplates []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"specTemplates"`
+	OptionTypes []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"optionTypes"`
+	EnvironmentVariables []struct {
+		EvarName         string `json:"evarName"`
+		Name             string `json:"name"`
+		DefaultValue     string `json:"defaultValue"`
+		DefaultValueHash string `json:"defaultValueHash"`
+		ValueType        string `json:"valueType"`
+		Export           bool   `json:"export"`
+		Masked           bool   `json:"masked"`
+	} `json:"environmentVariables"`
 }
 
 // ListInstanceLayoutsResult structure parses the list instance layouts response payload

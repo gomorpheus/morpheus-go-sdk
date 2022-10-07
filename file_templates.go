@@ -15,7 +15,7 @@ type FileTemplate struct {
 	ID      int64  `json:"id"`
 	Code    string `json:"code"`
 	Account struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
 	Name            string      `json:"name"`

@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -11,18 +12,46 @@ var (
 
 // CheckGroup structures for use in request and response payloads
 type CheckGroup struct {
-	ID            int64  `json:"id"`
-	Name          string `json:"name"`
-	Description   string `json:"description"`
-	CheckInterval string `json:"checkInterval"`
-	CheckType     struct {
+	ID      int64 `json:"id"`
+	Account struct {
+		ID int64 `json:"id"`
+	} `json:"account"`
+	Instance struct {
 		ID   int64  `json:"id"`
-		Code string `json:"code"`
+		Name string `json:"name"`
+	} `json:"instance"`
+	Name            string    `json:"name"`
+	Description     string    `json:"description"`
+	InUptime        bool      `json:"inUptime"`
+	LastCheckStatus string    `json:"lastCheckStatus"`
+	LastWarningDate time.Time `json:"lastWarningDate"`
+	LastErrorDate   time.Time `json:"lastErrorDate"`
+	LastSuccessDate time.Time `json:"lastSuccessDate"`
+	LastRunDate     time.Time `json:"lastRunDate"`
+	LastError       string    `json:"lastError"`
+	OutageTime      int64     `json:"outageTime"`
+	LastTimer       int64     `json:"lastTimer"`
+	Health          int64     `json:"health"`
+	History         string    `json:"history"`
+	MinHappy        int64     `json:"minHappy"`
+	LastMetric      string    `json:"lastMetric"`
+	Severity        string    `json:"severity"`
+	CreateIncident  bool      `json:"createIncident"`
+	Muted           bool      `json:"muted"`
+	CreatedBy       struct {
+		ID       int64  `json:"id"`
+		Username string `json:"username"`
+	} `json:"createdBy"`
+	DateCreated  time.Time `json:"dateCreated"`
+	LastUpdated  time.Time `json:"lastUpdated"`
+	Availability float64   `json:"availability"`
+	CheckType    struct {
+		ID         int64  `json:"id"`
+		Code       string `json:"code"`
+		Name       string `json:"name"`
+		MetricName string `json:"metricName"`
 	} `json:"checkType"`
-	InUptime bool        `json:"inUptime"`
-	Active   bool        `json:"active"`
-	Severity string      `json:"severity"`
-	Config   interface{} `json:"config"`
+	Checks []int64 `json:"checks"`
 }
 
 // ListCheckGroupsResult structure parses the list check groups response payload

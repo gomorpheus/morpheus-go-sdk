@@ -11,16 +11,26 @@ var (
 
 // Tenant structures for use in request and response payloads
 type Tenant struct {
-	ID             int64       `json:"id"`
-	Name           string      `json:"name"`
-	Description    string      `json:"description"`
-	Subdomain      string      `json:"subdomain"`
-	Role           interface{} `json:"role"`
-	Active         bool        `json:"active"`
-	CustomerNumber string      `json:"customerNumber"`
-	AccountNumber  string      `json:"accountNumber"`
-	Currency       string      `json:"currency"`
-	AccountName    string      `json:"accountName"`
+	ID          int64  `json:"id"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
+	Subdomain   string `json:"subdomain"`
+	Role        struct {
+		ID          int64  `json:"id"`
+		Authority   string `json:"authority"`
+		Description string `json:"description"`
+	} `json:"role"`
+	Active         bool   `json:"active"`
+	CustomerNumber string `json:"customerNumber"`
+	AccountNumber  string `json:"accountNumber"`
+	Currency       string `json:"currency"`
+	AccountName    string `json:"accountName"`
+	Stats          struct {
+		InstanceCount int64 `json:"instanceCount"`
+		UserCount     int64 `json:"userCount"`
+	} `json:"stats"`
+	DateCreated string `json:"dateCreated"`
+	LastUpdated string `json:"lastUpdated"`
 }
 
 // ListTenantsResult structure parses the list tenants response payload

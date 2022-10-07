@@ -98,7 +98,7 @@ func (client *Client) UpdatePreseedScript(id int64, req *Request) (*Response, er
 // DeletePreseedScript deletes an existing preseedScript
 func (client *Client) DeletePreseedScript(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method:      "PUT",
+		Method:      "DELETE",
 		Path:        fmt.Sprintf("%s/%d", PreseedScriptsPath, id),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,

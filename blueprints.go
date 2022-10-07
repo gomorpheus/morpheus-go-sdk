@@ -11,12 +11,25 @@ var (
 
 // Blueprint structures for use in request and response payloads
 type Blueprint struct {
-	ID          int64                  `json:"id"`
-	Name        string                 `json:"name"`
-	Description string                 `json:"description"`
-	Category    string                 `json:"category"`
-	Type        string                 `json:"type"`
-	Tiers       map[string]interface{} `json:"tiers"`
+	ID                 int64       `json:"id"`
+	Name               string      `json:"name"`
+	Type               string      `json:"type"`
+	Description        string      `json:"description"`
+	Category           string      `json:"category"`
+	Visibility         string      `json:"visibility"`
+	Config             interface{} `json:"config"`
+	ResourcePermission struct {
+		All   bool          `json:"all"`
+		Sites []interface{} `json:"sites"`
+	} `json:"resourcePermission"`
+	Owner struct {
+		ID       int64  `json:"id"`
+		Username string `json:"username"`
+	} `json:"owner"`
+	Tenant struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"tenant"`
 }
 
 // ListBlueprintsResult structure parses the list blueprints response payload
@@ -83,6 +96,20 @@ func (client *Client) UpdateBlueprint(id int64, req *Request) (*Response, error)
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &UpdateBlueprintResult{},
+	})
+}
+
+// UpdateBlueprintLogo updates an existing blueprint logo
+func (client *Client) UpdateBlueprintLogo(id int64, filePayload []*FilePayload, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:         "POST",
+		Path:           fmt.Sprintf("/api/blueprints/%d/image", id),
+		IsMultiPart:    true,
+		MultiPartFiles: filePayload,
+		Headers: map[string]string{
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		Result: &UpdateBlueprintResult{},
 	})
 }
 
