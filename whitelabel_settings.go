@@ -10,7 +10,7 @@ var (
 // WhitelabelSettings structures for use in request and response payloads
 type WhitelabelSettings struct {
 	Account struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
 	Enabled                   bool   `json:"enabled"`

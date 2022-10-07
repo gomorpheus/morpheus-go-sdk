@@ -11,11 +11,38 @@ var (
 
 // Group structures for use in request and response payloads
 type Group struct {
-	ID       int64  `json:"id"`
-	Name     string `json:"name"`
-	Code     string `json:"code"`
-	Location string `json:"location"`
-	Clouds   []Zone `json:"zones"`
+	ID        int64  `json:"id"`
+	UUID      string `json:"uuid"`
+	Name      string `json:"name"`
+	Code      string `json:"code"`
+	Location  string `json:"location"`
+	AccountID int64  `json:"accountId"`
+	Config    struct {
+		DNSIntegrationID    string `json:"dnsIntegrationId"`
+		ConfigCMDBID        string `json:"configCmdbId"`
+		ConfigCMID          string `json:"configCmId"`
+		ServiceRegistryID   string `json:"serviceRegistryId"`
+		ConfigManagementID  string `json:"configManagementId"`
+		ConfigCMDBDiscovery bool   `json:"configCmdbDiscovery"`
+	} `json:"config"`
+	Clouds      []Zone `json:"zones"`
+	DateCreated string `json:"dateCreated"`
+	LastUpdated string `json:"lastUpdated"`
+	Stats       struct {
+		InstanceCounts struct {
+			All int64 `json:"all"`
+		} `json:"instanceCounts"`
+		ServerCounts struct {
+			All           int64 `json:"all"`
+			Host          int64 `json:"host"`
+			Hypervisor    int64 `json:"hypervisor"`
+			ContainerHost int64 `json:"containerHost"`
+			VM            int64 `json:"vm"`
+			Baremetal     int64 `json:"baremetal"`
+			Unmanaged     int64 `json:"unmanaged"`
+		} `json:"serverCounts"`
+	} `json:"stats"`
+	ServerCount int64 `json:"serverCount"`
 }
 
 type Zone struct {

@@ -47,8 +47,8 @@ type VDIPool struct {
 	} `json:"owner"`
 	Config struct {
 		Group struct {
-			ID   int64  `json:"id"`
-			Name string `json:"name"`
+			ID   interface{} `json:"id"`
+			Name string      `json:"name"`
 		} `json:"group"`
 		Cloud struct {
 			ID   int64  `json:"id"`
@@ -107,7 +107,7 @@ type VDIPool struct {
 }
 
 type ListVDIPoolsResult struct {
-	VDIPools *[]VDIPool  `json:"vdiPool"`
+	VDIPools *[]VDIPool  `json:"vdiPools"`
 	Meta     *MetaResult `json:"meta"`
 }
 

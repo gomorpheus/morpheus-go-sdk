@@ -11,17 +11,110 @@ var (
 
 // Cloud structures for use in request and response payloads
 type Cloud struct {
-	ID        int64     `json:"id"`
-	Name      string    `json:"name"`
-	Code      string    `json:"code"`
-	Location  string    `json:"location"`
-	CloudType CloudType `json:"zoneType"`
-	//Active bool `json:"active"`
-	Enabled    bool                   `json:"enabled"`
-	Visibility string                 `json:"visibility"`
-	Config     map[string]interface{} `json:"config"`
-	// Clouds []string `json:"clouds"` //todo
-
+	ID       int64  `json:"id"`
+	UUID     string `json:"uuid"`
+	Name     string `json:"name"`
+	Code     string `json:"code"`
+	Location string `json:"location"`
+	Owner    struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"owner"`
+	AccountID int64 `json:"accountId"`
+	Account   struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"account"`
+	Visibility        string    `json:"visibility"`
+	Enabled           bool      `json:"enabled"`
+	Status            string    `json:"status"`
+	StatusMessage     string    `json:"statusMessage"`
+	StatusDate        string    `json:"statusDate"`
+	CostStatus        string    `json:"costStatus"`
+	CostStatusMessage string    `json:"costStatusMessage"`
+	CostStatusDate    string    `json:"costStatusDate"`
+	CloudType         CloudType `json:"zoneType"`
+	CloudTypeID       int64     `json:"zoneTypeId"`
+	GuidanceMode      string    `json:"guidanceMode"`
+	StorageMode       string    `json:"storageMode"`
+	AgentMode         string    `json:"agentMode"`
+	ServiceVersion    string    `json:"serviceVersion"`
+	Config            struct {
+		APIUrl          string `json:"apiUrl"`
+		APIVersion      string `json:"apiVersion"`
+		Datacenter      string `json:"datacenter"`
+		Cluster         string `json:"cluster"`
+		DiskStorageType string `json:"diskStorageType"`
+		DatacenterID    string `json:"datacenterId"`
+		EnableVNC       string `json:"enableVnc"`
+		AccessKey       string `json:"accessKey"`
+		SecretKey       string `json:"secretKey"`
+		VPC             string `json:"vpc"`
+		DiskEncryption  string `json:"diskEncryption"`
+		ApplianceUrl    string `json:"applianceUrl"`
+		DatacenterName  string `json:"datacenterName"`
+		SecretKeyHash   string `json:"secretKeyHash"`
+		SubscriberID    string `json:"subscriberId"`
+		TenantID        string `json:"tenantId"`
+		ClientID        string `json:"clientId"`
+		ClientSecret    string `json:"clientSecret"`
+		ResourceGroup   string `json:"resourceGroup"`
+		ImportExisting  string `json:"importExisting"`
+		InventoryLevel  string `json:"inventoryLevel"`
+		NetworkServerID string `json:"networkServer.id"`
+		NetworkServer   struct {
+			ID string `json:"id"`
+		} `json:"networkServer"`
+		SecurityMode          string      `json:"securityMode"`
+		CertificateProvider   string      `json:"certificateProvider"`
+		BackupMode            string      `json:"backupMode"`
+		ReplicationMode       string      `json:"replicationMode"`
+		DnsIntegrationID      string      `json:"dnsIntegrationId"`
+		ServiceRegistryID     string      `json:"serviceRegistryId"`
+		ConfigManagementID    string      `json:"configManagementId"`
+		ConfigCmdbID          interface{} `json:"configCmdbId"`
+		SecurityServer        string      `json:"securityServer"`
+		CloudType             string      `json:"cloudType"`
+		AccountType           string      `json:"accountType"`
+		CSPTenantID           string      `json:"cspTenantId"`
+		CSPClientID           string      `json:"cspClientId"`
+		CSPClientSecret       string      `json:"cspClientSecret"`
+		RPCMode               string      `json:"rpcMode"`
+		EncryptionSet         string      `json:"encryptionSet"`
+		ConfigCmID            string      `json:"configCmId"`
+		ClientSecretHash      string      `json:"clientSecretHash"`
+		CSPClientSecretHash   string      `json:"cspClientSecretHash"`
+		ProjectID             string      `json:"projectId"`
+		PrivateKey            string      `json:"privateKey"`
+		ClientEmail           string      `json:"clientEmail"`
+		GoogleRegionID        string      `json:"googleRegionId"`
+		GoogleBucket          string      `json:"googleBucket"`
+		KubeURL               string      `json:"kubeUrl"`
+		CostingProjectID      string      `json:"costingProjectId"`
+		ConfigCMDBDiscovery   bool        `json:"configCmdbDiscovery"`
+		CostingDatasetID      string      `json:"costingDatasetId"`
+		PrivateKeyHash        string      `json:"privateKeyHash"`
+		Provider              string      `json:"provider"`
+		Host                  string      `json:"host"`
+		WorkingPath           string      `json:"workingPath"`
+		VMPath                string      `json:"vmPath"`
+		DiskPath              string      `json:"diskPath"`
+		Username              string      `json:"username"`
+		Password              string      `json:"password"`
+		DistributedWorkerId   string      `json:"distributedWorkerId"`
+		VCDVersion            string      `json:"vcdVersion"`
+		DefaultStorageProfile string      `json:"defaultStorageProfile"`
+		Passwordhash          string      `json:"passwordHash"`
+		OrgID                 string      `json:"orgId"`
+		VDCID                 string      `json:"vdcId"`
+	} `json:"config"`
+	DateCreated string `json:"dateCreated"`
+	LastUpdated string `json:"lastUpdated"`
+	Groups      []struct {
+		ID        int64  `json:"id"`
+		Name      string `json:"name"`
+		AccountID int64  `json:"accountId"`
+	} `json:"groups"`
 }
 
 type CloudType struct {

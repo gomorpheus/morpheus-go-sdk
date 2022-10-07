@@ -99,7 +99,7 @@ func (client *Client) UpdateBootScript(id int64, req *Request) (*Response, error
 // DeleteBootScript deletes an existing bootScript
 func (client *Client) DeleteBootScript(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Method:      "PUT",
+		Method:      "DELETE",
 		Path:        fmt.Sprintf("%s/%d", BootScriptsPath, id),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,

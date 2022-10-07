@@ -20,7 +20,7 @@ type UserGroup struct {
 	SudoUser    bool   `json:"sudoUser"`
 	ServerGroup string `json:"serverGroup"`
 	Users       []struct {
-		ID          int    `json:"id"`
+		ID          int64  `json:"id"`
 		Username    string `json:"username"`
 		DisplayName string `json:"displayName"`
 	} `json:"users"`

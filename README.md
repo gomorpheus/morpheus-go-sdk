@@ -197,7 +197,7 @@ custom_instance_types | n/a
 cypher | n/a
 dashboard | n/a
 deploy | n/a
-deployments | n/a
+deployments | [Deployments](deployments.go)
 credentials | [Credentials](credentials.go)
 environments | [Environments](environments.go)
 execute_schedules | [Execute Schedules](execute_schedules.go)
@@ -227,7 +227,7 @@ monitoring.checks | [Checks](checks.go)
 monitoring.groups | [Check Groups](check_groups.go)
 monitoring.apps | [Monitoring Apps](monitoring_apps.go)
 monitoring.incidents | [Incidents](incidents.go)
-monitoring.alerts | n/a
+monitoring.alerts | [Alerts](alerts.go)
 monitoring.contacts | [Contacts](contacts.go)
 network_domain_records | n/a
 network_domains | [Network Domains](network_domains.go)

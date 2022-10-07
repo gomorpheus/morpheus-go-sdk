@@ -16,7 +16,7 @@ func TestListIdentitySources(t *testing.T) {
 func TestGetIdentitySource(t *testing.T) {
 	client := getTestClient(t)
 	req := &morpheus.Request{}
-	resp, err := client.ListScaleThresholds(req)
+	resp, err := client.ListIdentitySources(req)
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID

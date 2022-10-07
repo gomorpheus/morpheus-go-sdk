@@ -34,14 +34,14 @@ type Integration struct {
 	Config          struct {
 		Inventory                       string                            `json:"inventory"`
 		DefaultBranch                   string                            `json:"defaultBranch"`
-		CacheEnabled                    bool                              `json:"cacheEnabled"`
+		CacheEnabled                    interface{}                       `json:"cacheEnabled"`
 		AnsiblePlaybooks                string                            `json:"ansiblePlaybooks"`
 		AnsibleRoles                    string                            `json:"ansibleRoles"`
 		AnsibleGroupVars                string                            `json:"ansibleGroupVars"`
 		AnsibleHostVars                 string                            `json:"ansibleHostVars"`
-		AnsibleCommandBus               bool                              `json:"ansibleCommandBus"`
-		AnsibleVerbose                  bool                              `json:"ansibleVerbose"`
-		AnsibleGalaxyEnabled            bool                              `json:"ansibleGalaxyEnabled"`
+		AnsibleCommandBus               interface{}                       `json:"ansibleCommandBus"`
+		AnsibleVerbose                  interface{}                       `json:"ansibleVerbose"`
+		AnsibleGalaxyEnabled            interface{}                       `json:"ansibleGalaxyEnabled"`
 		AnsibleDefaultBranch            string                            `json:"ansibleDefaultBranch"`
 		Plugin                          interface{}                       `json:"plugin"`
 		IncidentAccess                  bool                              `json:"incidentAccess"`
@@ -68,7 +68,7 @@ type Integration struct {
 		OrgKey                          string                            `json:"orgKey"`
 		UserKey                         string                            `json:"userKey"`
 		Version                         string                            `json:"version"`
-		ChefUseFQDN                     string                            `json:"chefUseFqdn"`
+		ChefUseFQDN                     bool                              `json:"chefUseFqdn"`
 		WindowsVersion                  string                            `json:"windowsVersion"`
 		WindowsInstallURL               string                            `json:"windowsInstallUrl"`
 		OrgKeyHash                      string                            `json:"orgKeyHash"`

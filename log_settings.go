@@ -11,7 +11,7 @@ var (
 // LogSettings structures for use in request and response payloads
 type LogSettings struct {
 	Enabled       bool          `json:"enabled"`
-	Retentiondays int           `json:"retentionDays"`
+	Retentiondays string        `json:"retentionDays"`
 	SyslogRules   []SyslogRule  `json:"syslogRules"`
 	Integrations  []interface{} `json:"integrations"`
 }

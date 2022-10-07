@@ -22,10 +22,10 @@ type ProvisioningSettings struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"cloudInitKeyPair"`
-	WindowsPassword     string      `json:"windowsPassword"`
-	WindowsPasswordHash string      `json:"windowsPasswordHash"`
-	PXERootPassword     interface{} `json:"pxeRootPassword"`
-	PXERootPasswordHash interface{} `json:"pxeRootPasswordHash"`
+	WindowsPassword     string `json:"windowsPassword"`
+	WindowsPasswordHash string `json:"windowsPasswordHash"`
+	PXERootPassword     string `json:"pxeRootPassword"`
+	PXERootPasswordHash string `json:"pxeRootPasswordHash"`
 	DefaultTemplateType struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`

@@ -7,7 +7,7 @@ import (
 
 var (
 	// ArchivesPath is the API endpoint for archives
-	ArchivesPath = "/api/archives"
+	ArchivesPath = "/api/archives/buckets"
 )
 
 // Archive structures for use in request and response payloads

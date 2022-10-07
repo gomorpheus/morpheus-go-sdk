@@ -15,9 +15,9 @@ type VirtualImage struct {
 	ID          int64       `json:"id"`
 	Name        string      `json:"name"`
 	Description interface{} `json:"description"`
-	OwnerID     int         `json:"ownerId"`
+	OwnerID     int64       `json:"ownerId"`
 	Tenant      struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"tenant"`
 	ImageType       string      `json:"imageType"`
@@ -30,7 +30,7 @@ type VirtualImage struct {
 	SshPasswordHash interface{} `json:"sshPasswordHash"`
 	SshKey          interface{} `json:"sshKey"`
 	OsType          struct {
-		ID          int         `json:"id"`
+		ID          int64       `json:"id"`
 		Code        string      `json:"code"`
 		Name        string      `json:"name"`
 		Description interface{} `json:"description"`
@@ -38,7 +38,7 @@ type VirtualImage struct {
 		Category    string      `json:"category"`
 		OsFamily    string      `json:"osFamily"`
 		OsVersion   string      `json:"osVersion"`
-		BitCount    int         `json:"bitCount"`
+		BitCount    int64       `json:"bitCount"`
 		Platform    string      `json:"platform"`
 	} `json:"osType"`
 	MinRam               int64       `json:"minRam"`
@@ -62,7 +62,7 @@ type VirtualImage struct {
 	ExternalID           string      `json:"externalId"`
 	Visibility           string      `json:"visibility"`
 	Accounts             []struct {
-		ID   int    `json:"id"`
+		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"accounts"`
 	Config struct {
@@ -71,26 +71,26 @@ type VirtualImage struct {
 		Name       string `json:"name"`
 		MaxStorage int64  `json:"maxStorage"`
 		RawSize    int64  `json:"rawSize"`
-		Size       int    `json:"size"`
+		Size       int64  `json:"size"`
 		RootVolume bool   `json:"rootVolume"`
 		Resizeable bool   `json:"resizeable"`
 	} `json:"volumes"`
 	StorageControllers []struct {
 		Name string `json:"name"`
 		Type struct {
-			ID   int    `json:"id"`
+			ID   int64  `json:"id"`
 			Code string `json:"code"`
 			Name string `json:"name"`
 		} `json:"type"`
-		MaxDevices         int `json:"maxDevices"`
-		ReservedUnitNumber int `json:"reservedUnitNumber"`
+		MaxDevices         int64 `json:"maxDevices"`
+		ReservedUnitNumber int64 `json:"reservedUnitNumber"`
 	} `json:"storageControllers"`
 	NetworkInterfaces []interface{} `json:"networkInterfaces"`
 	Tags              []interface{} `json:"tags"`
 	Locations         []struct {
-		ID    int `json:"id"`
+		ID    int64 `json:"id"`
 		Cloud struct {
-			ID   int    `json:"id"`
+			ID   int64  `json:"id"`
 			Code string `json:"code"`
 			Name string `json:"name"`
 		} `json:"cloud"`
@@ -104,14 +104,14 @@ type VirtualImage struct {
 		ImageRegion    string      `json:"imageRegion"`
 		ImageFolder    interface{} `json:"imageFolder"`
 		RefType        string      `json:"refType"`
-		RefID          int         `json:"refId"`
+		RefID          int64       `json:"refId"`
 		NodeRefType    interface{} `json:"nodeRefType"`
 		NodeRefID      interface{} `json:"nodeRefId"`
 		SubRefType     interface{} `json:"subRefType"`
 		SubRefID       interface{} `json:"subRefId"`
 		IsPublic       bool        `json:"isPublic"`
 		SystemImage    bool        `json:"systemImage"`
-		DiskIndex      int         `json:"diskIndex"`
+		DiskIndex      int64       `json:"diskIndex"`
 	} `json:"locations"`
 	DateCreated time.Time `json:"dateCreated"`
 	LastUpdated time.Time `json:"lastUpdated"`

@@ -11,10 +11,14 @@ var (
 
 // ServicePlans structures for use in request and response payloads
 type ServicePlan struct {
-	ID     int64  `json:"id"`
-	Name   string `json:"name"`
-	Code   string `json:"code"`
-	Active bool   `json:"active"`
+	ID             int64  `json:"id"`
+	Name           string `json:"name"`
+	Code           string `json:"code"`
+	Active         bool   `json:"active"`
+	SortOrder      int64  `json:"sortOrder"`
+	Description    string `json:"description"`
+	MaxCores       int64  `json:"maxCores"`
+	CoresPerSocket int64  `json:"coresPerSocket"`
 }
 
 // ListServicePlansResult structure parses the list servicePlans response payload

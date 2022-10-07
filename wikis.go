@@ -13,14 +13,24 @@ var (
 
 // Wiki structures for use in request and response payloads
 type Wiki struct {
-	ID          int64  `json:"id"`
-	Name        string `json:"name"`
-	UrlName     string `json:"urlName"`
-	Category    string `json:"category"`
-	Content     string `json:"content"`
+	ID        int64  `json:"id"`
+	Name      string `json:"name"`
+	UrlName   string `json:"urlName"`
+	Category  string `json:"category"`
+	RefID     int64  `json:"refId"`
+	RefType   string `json:"refType"`
+	Format    string `json:"format"`
+	Content   string `json:"content"`
+	CreatedBy struct {
+		ID       int64  `json:"id"`
+		Username string `json:"username"`
+	}
+	UpdatedBy struct {
+		ID       int64  `json:"id"`
+		Username string `json:"username"`
+	}
 	DateCreated string `json:"dateCreated"`
 	LastUpdated string `json:"lastUpdated"`
-	Format      string `json:"format"`
 }
 
 // CreateWiki structure defines the create wiki payload

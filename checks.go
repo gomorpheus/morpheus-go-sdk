@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -11,18 +12,54 @@ var (
 
 // Check structures for use in request and response payloads
 type Check struct {
-	ID            int64  `json:"id"`
-	Name          string `json:"name"`
-	Description   string `json:"description"`
-	CheckInterval int64  `json:"checkInterval"`
+	ID      int64 `json:"id"`
+	Account struct {
+		ID int64 `json:"id"`
+	} `json:"account"`
+	Active        bool    `json:"active"`
+	APIKey        string  `json:"apiKey"`
+	Availability  float64 `json:"availability"`
+	CheckAgent    string  `json:"checkAgent"`
+	CheckInterval int64   `json:"checkInterval"`
+	CheckSpec     string  `json:"checkSpec"`
 	CheckType     struct {
-		ID   int64  `json:"id"`
-		Code string `json:"code"`
+		ID         int64  `json:"id"`
+		Code       string `json:"code"`
+		Name       string `json:"name"`
+		MetricName string `json:"metricName"`
 	} `json:"checkType"`
-	InUptime bool        `json:"inUptime"`
-	Active   bool        `json:"active"`
-	Severity string      `json:"severity"`
-	Config   interface{} `json:"config"`
+	Container struct {
+		ID int64 `json:"id"`
+	} `json:"container"`
+	Config         interface{} `json:"config"`
+	CreateIncident bool        `json:"createIncident"`
+	Muted          bool        `json:"muted"`
+	CreatedBy      struct {
+		ID       int64  `json:"id"`
+		Username string `json:"username"`
+	} `json:"createdBy"`
+	DateCreated     time.Time `json:"dateCreated"`
+	Description     string    `json:"description"`
+	EndDate         time.Time `json:"endDate"`
+	Health          int64     `json:"health"`
+	InUptime        bool      `json:"inUptime"`
+	LastBoxStats    string    `json:"lastBoxStats"`
+	LastCheckStatus string    `json:"lastCheckStatus"`
+	LastError       string    `json:"lastError"`
+	LastErrorDate   time.Time `json:"lastErrorDate"`
+	LastMessage     string    `json:"lastMessage"`
+	LastMetric      string    `json:"lastMetric"`
+	LastRunDate     time.Time `json:"lastRunDate"`
+	LastStats       string    `json:"lastStats"`
+	LastSuccessDate time.Time `json:"lastSuccessDate"`
+	LastTimer       int64     `json:"lastTimer"`
+	LastUpdated     time.Time `json:"lastUpdated"`
+	LastWarningDate time.Time `json:"lastWarningDate"`
+	Name            string    `json:"name"`
+	NextRunDate     time.Time `json:"nextRunDate"`
+	OutageTime      int64     `json:"outageTime"`
+	Severity        string    `json:"severity"`
+	StartDate       time.Time `json:"startDate"`
 }
 
 // ListChecksResult structure parses the list check response payload
