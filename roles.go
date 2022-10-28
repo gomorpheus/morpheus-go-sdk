@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -12,13 +13,81 @@ var (
 )
 
 // Role structures for use in request and response payloads
+type GetRoleResult struct {
+	Role               Role `json:"role"`
+	FeaturePermissions []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"featurePermissions"`
+	GlobalSiteAccess string `json:"globalSiteAccess"`
+	Sites            []struct {
+		ID     int64  `json:"id"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"sites"`
+	GlobalZoneAccess         string        `json:"globalZoneAccess"`
+	Zones                    []interface{} `json:"zones"`
+	GlobalInstanceTypeAccess string        `json:"globalInstanceTypeAccess"`
+	InstanceTypePermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"instanceTypePermissions"`
+	GlobalAppTemplateAccess string `json:"globalAppTemplateAccess"`
+	AppTemplatePermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"appTemplatePermissions"`
+	GlobalCatalogItemTypeAccess string `json:"globalCatalogItemTypeAccess"`
+	CatalogItemTypePermissions  []struct {
+		ID     int64  `json:"id"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"catalogItemTypePermissions"`
+	PersonaPermissions []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"personaPermissions"`
+	GlobalVDIPoolAccess    string        `json:"globalVdiPoolAccess"`
+	VDIPoolPermissions     []interface{} `json:"vdiPoolPermissions"`
+	GlobalReportTypeAccess string        `json:"globalReportTypeAccess"`
+	ReportTypePermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"reportTypePermissions"`
+}
+
 type Role struct {
-	ID          int64       `json:"id"`
-	Name        string      `json:"name"`
-	Description string      `json:"description"`
-	Authority   string      `json:"authority"`
-	RoleType    string      `json:"roleType"`
-	Owner       interface{} `json:"owner"`
+	ID                int64  `json:"id"`
+	Name              string `json:"name"`
+	Description       string `json:"description"`
+	Scope             string `json:"scope"`
+	RoleType          string `json:"roleType"`
+	MultiTenant       bool   `json:"multitenant"`
+	MultiTenantLocked bool   `json:"multitenantLocked"`
+	Diverged          bool   `json:"diverged"`
+	OwnerId           int64  `json:"ownerId"`
+	Authority         string `json:"authority"`
+	Owner             struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"owner"`
+	DefaultPersona struct {
+		ID   int    `json:"id"`
+		Code string `json:"code"`
+		Name string `json:"name"`
+	} `json:"defaultPersona"`
+	DateCreated time.Time `json:"dateCreated"`
+	LastUpdated time.Time `json:"lastUpdated"`
 }
 
 type ListRolesResult struct {
@@ -26,19 +95,22 @@ type ListRolesResult struct {
 	Meta  *MetaResult `json:"meta"`
 }
 
-type GetRoleResult struct {
-	Role *Role `json:"role"`
-}
-
 type CreateRoleResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
 	Errors  map[string]string `json:"errors"`
-	Role    *Role             `json:"role"`
+	Role    *GetRoleResult    `json:"role"`
 }
 
 type UpdateRoleResult struct {
 	CreateRoleResult
+}
+
+type UpdateRolePermissionResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Access  string            `json:"access"`
 }
 
 type DeleteRoleResult struct {
@@ -46,7 +118,6 @@ type DeleteRoleResult struct {
 }
 
 // Client request methods
-
 func (client *Client) ListRoles(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -94,6 +165,96 @@ func (client *Client) UpdateRole(id int64, req *Request) (*Response, error) {
 	})
 }
 
+func (client *Client) UpdateRoleBlueprintAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-blueprint", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleCatalogItemTypeAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-catalog-item-type", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleCloudAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-cloud", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleGroupAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-group", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleInstanceTypeAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-instance-type", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleFeaturePermission(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-permission", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRolePersonaAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-persona", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleReportTypeAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-report-type", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleVDIPoolAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-vdi-pool", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
 func (client *Client) DeleteRole(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -109,7 +270,7 @@ func (client *Client) FindRoleByName(name string) (*Response, error) {
 	// Find by name, then get by ID
 	resp, err := client.ListRoles(&Request{
 		QueryParams: map[string]string{
-			"name": name,
+			"authority": name,
 		},
 	})
 	if err != nil {
