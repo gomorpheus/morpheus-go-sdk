@@ -37,7 +37,7 @@ type Policy struct {
 		PowerSchedule                    string      `json:"powerSchedule"`
 		PowerScheduleType                string      `json:"powerScheduleType"`
 		AccountIntegrationId             string      `json:"accountIntegrationId"`
-		WorkflowID                       string      `json:"workflowId"`
+		WorkflowID                       int64       `json:"workflowId"`
 		CreateUser                       string      `json:"createUser"`
 		CreateUserType                   string      `json:"createUserType"`
 		MaxRouters                       string      `json:"maxRouters"`
@@ -59,7 +59,7 @@ type Policy struct {
 		MaxPrice                         string      `json:"maxPrice"`
 		MaxPriceCurrency                 string      `json:"maxPriceCurrency"`
 		MaxPriceUnit                     string      `json:"maxPriceUnit"`
-		RemovalAge                       string      `json:"removalAge"`
+		RemovalAge                       int64       `json:"removalAge"`
 		MotdTitle                        string      `json:"motd.title"`
 		MotdMessage                      string      `json:"motd.message"`
 		MotdType                         string      `json:"motd.type"`
@@ -81,6 +81,7 @@ type Policy struct {
 		ServerNamingType                  string `json:"serverNamingType"`
 		ServerNamingPattern               string `json:"serverNamingPattern"`
 		ServerNamingConflict              string `json:"serverNamingConflict"`
+		CreateBackup                      string `json:"createBackup"`
 		CreateBackupType                  string `json:"createBackupType"`
 		LifecycleType                     string `json:"lifecycleType"`
 		LifecycleAge                      string `json:"lifecycleAge"`

@@ -20,7 +20,6 @@ func TestGetRole(t *testing.T) {
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
-
 	result := resp.Result.(*morpheus.ListRolesResult)
 	recordCount := result.Meta.Total
 	t.Logf("Found %d Roles.", recordCount)
