@@ -1,3 +1,10 @@
+## 0.2.1 (October 27, 2022)
+
+NOTES:
+
+* Update policies code
+* Update data structs
+
 ## 0.2.0 (October 7, 2022)
 
 NOTES:
