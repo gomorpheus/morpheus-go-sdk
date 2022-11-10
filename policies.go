@@ -59,7 +59,7 @@ type Policy struct {
 		MaxPrice                         string      `json:"maxPrice"`
 		MaxPriceCurrency                 string      `json:"maxPriceCurrency"`
 		MaxPriceUnit                     string      `json:"maxPriceUnit"`
-		RemovalAge                       int64       `json:"removalAge"`
+		RemovalAge                       string      `json:"removalAge"`
 		MotdTitle                        string      `json:"motd.title"`
 		MotdMessage                      string      `json:"motd.message"`
 		MotdType                         string      `json:"motd.type"`
