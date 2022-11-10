@@ -1,3 +1,10 @@
+## 0.2.2 (November 10, 2022)
+
+NOTES:
+
+* Fix user role creation response payload struct
+* Fix delayed delete policy response payload struct
+
 ## 0.2.1 (October 27, 2022)
 
 NOTES:

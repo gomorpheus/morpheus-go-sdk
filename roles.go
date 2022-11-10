@@ -99,7 +99,7 @@ type CreateRoleResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
 	Errors  map[string]string `json:"errors"`
-	Role    *GetRoleResult    `json:"role"`
+	Role    *Role             `json:"role"`
 }
 
 type UpdateRoleResult struct {
