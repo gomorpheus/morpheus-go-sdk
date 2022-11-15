@@ -71,26 +71,26 @@ type Policy struct {
 			Type     string `json:"type"`
 			FullPage string `json:"fullPage"`
 		} `json:"motd"`
-		KeyPattern                        string `json:"keyPattern"`
-		Read                              string `json:"read"`
-		Write                             string `json:"write"`
-		Update                            string `json:"update"`
-		Delete                            string `json:"delete"`
-		List                              string `json:"list"`
-		UserGroup                         string `json:"userGroup"`
-		ServerNamingType                  string `json:"serverNamingType"`
-		ServerNamingPattern               string `json:"serverNamingPattern"`
-		ServerNamingConflict              string `json:"serverNamingConflict"`
-		CreateBackup                      string `json:"createBackup"`
-		CreateBackupType                  string `json:"createBackupType"`
-		LifecycleType                     string `json:"lifecycleType"`
-		LifecycleAge                      string `json:"lifecycleAge"`
-		LifecycleRenewal                  string `json:"lifecycleRenewal"`
-		LifecycleNotify                   string `json:"lifecycleNotify"`
-		LifecycleMessage                  string `json:"lifecycleMessage"`
-		LifecycleExtensionsBeforeApproval string `json:"lifecycleExtensionsBeforeApproval"`
-		LifecycleAutoRenew                string `json:"lifecycleAutoRenew"`
-		LifecycleHideFixed                bool   `json:"lifecycleHideFixed"`
+		KeyPattern                        string      `json:"keyPattern"`
+		Read                              string      `json:"read"`
+		Write                             string      `json:"write"`
+		Update                            string      `json:"update"`
+		Delete                            string      `json:"delete"`
+		List                              string      `json:"list"`
+		UserGroup                         string      `json:"userGroup"`
+		ServerNamingType                  string      `json:"serverNamingType"`
+		ServerNamingPattern               string      `json:"serverNamingPattern"`
+		ServerNamingConflict              interface{} `json:"serverNamingConflict"`
+		CreateBackup                      string      `json:"createBackup"`
+		CreateBackupType                  string      `json:"createBackupType"`
+		LifecycleType                     string      `json:"lifecycleType"`
+		LifecycleAge                      string      `json:"lifecycleAge"`
+		LifecycleRenewal                  string      `json:"lifecycleRenewal"`
+		LifecycleNotify                   string      `json:"lifecycleNotify"`
+		LifecycleMessage                  string      `json:"lifecycleMessage"`
+		LifecycleExtensionsBeforeApproval string      `json:"lifecycleExtensionsBeforeApproval"`
+		LifecycleAutoRenew                string      `json:"lifecycleAutoRenew"`
+		LifecycleHideFixed                bool        `json:"lifecycleHideFixed"`
 	} `json:"config"`
 	Owner struct {
 		ID   int64  `json:"id"`
