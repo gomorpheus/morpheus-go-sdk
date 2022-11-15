@@ -1,3 +1,9 @@
+## 0.2.3 (November 14, 2022)
+
+NOTES:
+
+* Update cluster resource naming policy data type for auto resolve naming conflict setting.
+
 ## 0.2.2 (November 10, 2022)
 
 NOTES:
