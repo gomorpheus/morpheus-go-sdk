@@ -11,7 +11,11 @@ var (
 
 // SpecTemplate structures for use in request and response payloads
 type SpecTemplate struct {
-	ID     int64  `json:"id"`
+	ID      int64 `json:"id"`
+	Account struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"account"`
 	Name   string `json:"name"`
 	Type   Type   `json:"type"`
 	Config Config `json:"config"`

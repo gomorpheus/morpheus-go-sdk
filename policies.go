@@ -20,7 +20,7 @@ type Policy struct {
 		ID   int64  `json:"id"`
 		Code string `json:"code"`
 		Name string `json:"name"`
-	} `json:"type"`
+	} `json:"policyType"`
 	Config struct {
 		ShutdownType                     string      `json:"shutdownType"`
 		ShutdownAge                      string      `json:"shutdownAge"`
@@ -37,7 +37,7 @@ type Policy struct {
 		PowerSchedule                    string      `json:"powerSchedule"`
 		PowerScheduleType                string      `json:"powerScheduleType"`
 		AccountIntegrationId             string      `json:"accountIntegrationId"`
-		WorkflowID                       int64       `json:"workflowId"`
+		WorkflowID                       interface{} `json:"workflowId"`
 		CreateUser                       string      `json:"createUser"`
 		CreateUserType                   string      `json:"createUserType"`
 		MaxRouters                       string      `json:"maxRouters"`
@@ -89,7 +89,7 @@ type Policy struct {
 		LifecycleNotify                   string      `json:"lifecycleNotify"`
 		LifecycleMessage                  string      `json:"lifecycleMessage"`
 		LifecycleExtensionsBeforeApproval string      `json:"lifecycleExtensionsBeforeApproval"`
-		LifecycleAutoRenew                string      `json:"lifecycleAutoRenew"`
+		LifecycleAutoRenew                interface{} `json:"lifecycleAutoRenew"`
 		LifecycleHideFixed                bool        `json:"lifecycleHideFixed"`
 	} `json:"config"`
 	Owner struct {
