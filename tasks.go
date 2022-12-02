@@ -22,26 +22,25 @@ type Task struct {
 		Name string `json:"name"`
 	} `json:"taskType"`
 	TaskOptions struct {
-		AnsibleOptions            string      `json:"ansibleOptions"`
-		AnsibleTags               string      `json:"ansibleTags"`
-		AnsiblePlaybook           string      `json:"ansiblePlaybook"`
-		AnsibleGitRef             string      `json:"ansibleGitRef"`
-		AnsibleSkipTags           string      `json:"ansibleSkipTags"`
-		AnsibleGitId              string      `json:"ansibleGitId"`
-		JsScript                  string      `json:"jsScript"`
-		WinrmElevated             string      `json:"winrm.elevated"`
-		PythonBinary              string      `json:"pythonBinary"`
-		PythonArgs                string      `json:"pythonArgs"`
-		PythonAdditionalPackages  string      `json:"pythonAdditionalPackages"`
-		PythonScript              interface{} `json:"pythonScript"`
-		ShellSudo                 string      `json:"shell.sudo"`
-		Username                  string      `json:"username"`
-		Host                      string      `json:"host"`
-		LocalScriptGitRef         string      `json:"localScriptGitRef"`
-		Password                  string      `json:"password"`
-		PasswordHash              string      `json:"passwordHash"`
-		WriteAttributesAttributes string      `json:"writeAttributes.attributes"`
-		Port                      string      `json:"port"`
+		AnsibleOptions            string `json:"ansibleOptions"`
+		AnsibleTags               string `json:"ansibleTags"`
+		AnsiblePlaybook           string `json:"ansiblePlaybook"`
+		AnsibleGitRef             string `json:"ansibleGitRef"`
+		AnsibleSkipTags           string `json:"ansibleSkipTags"`
+		AnsibleGitId              string `json:"ansibleGitId"`
+		JsScript                  string `json:"jsScript"`
+		WinrmElevated             string `json:"winrm.elevated"`
+		PythonBinary              string `json:"pythonBinary"`
+		PythonArgs                string `json:"pythonArgs"`
+		PythonAdditionalPackages  string `json:"pythonAdditionalPackages"`
+		ShellSudo                 string `json:"shell.sudo"`
+		Username                  string `json:"username"`
+		Host                      string `json:"host"`
+		LocalScriptGitRef         string `json:"localScriptGitRef"`
+		Password                  string `json:"password"`
+		PasswordHash              string `json:"passwordHash"`
+		WriteAttributesAttributes string `json:"writeAttributes.attributes"`
+		Port                      string `json:"port"`
 	} `json:"taskOptions"`
 	File struct {
 		ID          int64  `json:"id"`
@@ -52,14 +51,14 @@ type Task struct {
 			ID   int64  `json:"id"`
 			Name string `json:"name"`
 		} `json:"repository"`
-		Content interface{} `json:"content"`
+		Content string `json:"content"`
 	} `json:"file"`
-	ResultType        interface{} `json:"resultType"`
-	ExecuteTarget     string      `json:"executeTarget"`
-	Retryable         bool        `json:"retryable"`
-	RetryCount        int64       `json:"retryCount"`
-	RetryDelaySeconds int64       `json:"retryDelaySeconds"`
-	AllowCustomConfig bool        `json:"allowCustomConfig"`
+	ResultType        string `json:"resultType"`
+	ExecuteTarget     string `json:"executeTarget"`
+	Retryable         bool   `json:"retryable"`
+	RetryCount        int64  `json:"retryCount"`
+	RetryDelaySeconds int64  `json:"retryDelaySeconds"`
+	AllowCustomConfig bool   `json:"allowCustomConfig"`
 	Credential        struct {
 		Type string `json:"type"`
 	} `json:"credential"`
