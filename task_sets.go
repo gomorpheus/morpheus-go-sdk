@@ -11,12 +11,13 @@ var (
 
 // TaskSet structures for use in request and response payloads
 type TaskSet struct {
-	ID          int64         `json:"id"`
-	Name        string        `json:"name"`
-	Description string        `json:"description"`
-	Type        string        `json:"type"`
-	OptionTypes []interface{} `json:"optionTypes"`
-	Tasks       []int64       `json:"tasks"`
+	ID           int64         `json:"id"`
+	Name         string        `json:"name"`
+	Description  string        `json:"description"`
+	Type         string        `json:"type"`
+	OptionTypes  []interface{} `json:"optionTypes"`
+	Tasks        []int64       `json:"tasks"`
+	TaskSetTasks []TaskSetTask `json:"taskSetTasks"`
 }
 
 type TaskSetPayload struct {
@@ -24,11 +25,20 @@ type TaskSetPayload struct {
 	Name              string        `json:"name"`
 	Description       string        `json:"description"`
 	Type              string        `json:"type"`
+	AccountID         int64         `json:"accountId"`
 	Visibility        string        `json:"visibility"`
 	Platform          string        `json:"platform"`
 	AllowCustomConfig bool          `json:"allowCustomConfig"`
 	OptionTypes       []interface{} `json:"optionTypes"`
 	Tasks             []int64       `json:"tasks"`
+	TaskSetTasks      []TaskSetTask `json:"taskSetTasks"`
+}
+
+type TaskSetTask struct {
+	ID        int64  `json:"id"`
+	TaskPhase string `json:"taskPhase"`
+	TaskOrder int64  `json:"taskOrder"`
+	Task      Task   `json:"task"`
 }
 
 type ListTaskSetsResult struct {

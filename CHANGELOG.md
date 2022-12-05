@@ -1,3 +1,9 @@
+## 0.2.5 (December 5, 2022)
+
+NOTES:
+
+* Update workflow payloads to return the task sets data.
+
 ## 0.2.3 (November 14, 2022)
 
 NOTES:
