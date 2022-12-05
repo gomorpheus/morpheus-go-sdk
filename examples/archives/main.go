@@ -16,12 +16,12 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List preseed scripts
+	// Get archives
 	req := &morpheus.Request{}
-	preseedScriptsResponse, err := client.ListPreseedScripts(req)
+	archivesResponse, err := client.ListArchives(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := preseedScriptsResponse.Result.(*morpheus.ListPreseedScriptsResult)
+	result := archivesResponse.Result.(*morpheus.ListArchivesResult)
 	log.Println(result)
 }

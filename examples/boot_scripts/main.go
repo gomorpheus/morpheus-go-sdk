@@ -22,6 +22,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := bootScriptsResponse.Result.(*morpheus.GetBootScriptResult)
+	result := bootScriptsResponse.Result.(*morpheus.ListBootScriptsResult)
 	log.Println(result)
 }
