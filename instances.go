@@ -165,7 +165,7 @@ func (client *Client) ListInstancePlans(req *Request) (*Response, error) {
 	})
 }
 
-// todo: need this api endpoint still, and consolidate to /api/plans perhaps
+//todo: need this api endpoint still, and consolidate to /api/plans perhaps
 func (client *Client) GetInstancePlan(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
