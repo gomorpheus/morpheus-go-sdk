@@ -141,3 +141,26 @@ func (client *Client) FindUserByName(name string) (*Response, error) {
 	userID := firstRecord.ID
 	return client.GetUser(userID, &Request{})
 }
+
+func (client *Client) FindUserByExactName(name string) (*Response, error) {
+	// Find by name, then get by ID
+
+	resp, err := client.ListUsers(&Request{
+		QueryParams: map[string]string{
+			"name": name,
+			"max":  "1000", //this is needed for tenants with a lot of users that could be returned
+		},
+	})
+	if err != nil {
+		return resp, err
+	}
+
+	listResult := resp.Result.(*ListUsersResult)
+	var userID int64 = 0
+	for _, user := range *listResult.Users {
+		if user.Username == name {
+			userID = user.ID
+		}
+	}
+	return client.GetUser(userID, &Request{})
+}
