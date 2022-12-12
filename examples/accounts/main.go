@@ -22,6 +22,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := tenantsResponse.Result.(*morpheus.GetTenantResult)
+	result := tenantsResponse.Result.(*morpheus.ListTenantsResult)
 	log.Println(result)
 }

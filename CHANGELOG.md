@@ -1,3 +1,17 @@
+## 0.2.5 (December 12, 2022)
+
+NOTES:
+
+* Update workflow payloads to return the task sets data.
+
+## 0.2.4 (December 2, 2022)
+
+NOTES:
+
+* Update execute schedule data payload.
+* Fix invalid policy data payload.
+* Update task data payload.
+
 ## 0.2.3 (November 14, 2022)
 
 NOTES:

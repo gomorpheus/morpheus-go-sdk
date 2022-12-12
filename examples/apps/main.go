@@ -22,6 +22,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := appsResponse.Result.(*morpheus.GetAppResult)
+	result := appsResponse.Result.(*morpheus.ListAppsResult)
 	log.Println(result)
 }
