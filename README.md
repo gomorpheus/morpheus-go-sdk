@@ -179,6 +179,7 @@ API | Available?
 --------- | -----------
 account_groups | n/a
 accounts | [Accounts](accounts.go)
+activity | [Activity](activity.go)
 appliance_settings | [Appliance Settings](appliance_settings.go)
 apps | [Apps](apps.go)
 archive_buckets | n/a
@@ -243,6 +244,8 @@ network_types | n/a
 networks | [Networks](networks.go)
 option_type_lists | [Option Type Lists](option_type_lists.go)
 option_types | [Option Types](option_types.go)
+plans | [Plans](plans.go)
+plugins | [Plugins](plugins.go)
 policies | [Policies](policies.go)
 power_schedules | [Power Schedules](power_schedules.go)
 prices | [Prices](prices.go)
