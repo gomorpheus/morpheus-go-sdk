@@ -1,3 +1,11 @@
+## Unreleased
+
+NOTES:
+
+* Add support for plugins API endpoint.
+* Add support for activity API endpoint.
+* Updated the return payload for clouds.
+
 ## 0.2.5 (December 12, 2022)
 
 NOTES:
