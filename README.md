@@ -181,6 +181,7 @@ account_groups | n/a
 accounts | [Accounts](accounts.go)
 activity | [Activity](activity.go)
 appliance_settings | [Appliance Settings](appliance_settings.go)
+approvals | [Approvals](approvals.go)
 apps | [Apps](apps.go)
 archive_buckets | n/a
 archive_files | n/a

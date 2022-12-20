@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -21,6 +22,35 @@ type Job struct {
 	Workflow struct {
 		ID int64 `json:"id"`
 	} `json:"workflow"`
+	Category  interface{} `json:"category"`
+	CreatedBy struct {
+		DisplayName string `json:"displayName"`
+		ID          int64  `json:"id"`
+		Username    string `json:"username"`
+	} `json:"createdBy"`
+	CustomConfig  string      `json:"customConfig"`
+	CustomOptions interface{} `json:"customOptions"`
+	DateCreated   time.Time   `json:"dateCreated"`
+	DateTime      interface{} `json:"dateTime"`
+	Description   interface{} `json:"description"`
+	JobSummary    string      `json:"jobSummary"`
+	LastResult    string      `json:"lastResult"`
+	LastRun       time.Time   `json:"lastRun"`
+	LastUpdated   time.Time   `json:"lastUpdated"`
+	Namespace     interface{} `json:"namespace"`
+	ScheduleMode  string      `json:"scheduleMode"`
+	Status        interface{} `json:"status"`
+	Targets       []struct {
+		ID         int64  `json:"id"`
+		Name       string `json:"name"`
+		RefId      int64  `json:"refId"`
+		TargetType string `json:"targetType"`
+	} `json:"targets"`
+	Type struct {
+		Code string `json:"code"`
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"type"`
 }
 
 // ListJobsResult structure parses the list jobs response payload
