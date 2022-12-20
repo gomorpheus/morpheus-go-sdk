@@ -14,8 +14,10 @@ type OptionType struct {
 	ID                    int64                  `json:"id"`
 	Name                  string                 `json:"name"`
 	Description           string                 `json:"description"`
-	FieldName             string                 `json:"fieldName"`
+	Labels                []string               `json:"labels"`
+	Code                  string                 `json:"code"`
 	Type                  string                 `json:"type"`
+	FieldName             string                 `json:"fieldName"`
 	FieldLabel            string                 `json:"fieldLabel"`
 	PlaceHolder           string                 `json:"placeHolder"`
 	DefaultValue          string                 `json:"defaultValue"`
@@ -25,7 +27,11 @@ type OptionType struct {
 	HelpBlock             string                 `json:"helpBlock"`
 	DependsOnCode         string                 `json:"dependsOnCode"`
 	DisplayValueOnDetails bool                   `json:"displayValueOnDetails"`
+	VerifyPattern         string                 `json:"verifyPattern"`
 	VisibleOnCode         string                 `json:"visibleOnCode"`
+	RequireOnCode         string                 `json:"requireOnCode"`
+	ShowOnCreate          bool                   `json:"showOnCreate"`
+	ShowOnEdit            bool                   `json:"showOnEdit"`
 }
 
 type ListOptionTypesResult struct {
