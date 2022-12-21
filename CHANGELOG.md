@@ -14,6 +14,7 @@ FEATURES:
 * **Load Balancers** Client methods for `load_balancers` API endpoints
 * **Network Proxies** Client methods for `network_proxies` API endpoints* 
 * **Plugins** Client methods for `plugins` API endpoints
+* **Security Packages** Client methods for `security_packages` API endpoints
 
 ## 0.2.5 (December 12, 2022)
 
