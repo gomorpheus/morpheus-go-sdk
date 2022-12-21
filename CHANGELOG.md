@@ -2,9 +2,12 @@
 
 NOTES:
 
-* Add support for plugins API endpoint.
-* Add support for activity API endpoint.
 * Updated the return payload for clouds.
+
+FEATURES:
+
+* **Activity** Client methods for `activity` API endpoints
+* **Network Proxies** Client methods for `network_proxies` API endpoints* **Plugins** Client methods for `plugins` API endpoints
 
 ## 0.2.5 (December 12, 2022)
 
