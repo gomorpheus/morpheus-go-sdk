@@ -7,7 +7,13 @@ NOTES:
 FEATURES:
 
 * **Activity** Client methods for `activity` API endpoints
-* **Network Proxies** Client methods for `network_proxies` API endpoints* **Plugins** Client methods for `plugins` API endpoints
+* **Load Balancer Monitors** Client methods for `load_balancer_monitors` API endpoints
+* **Load Balancer Pools** Client methods for `load_balancer_pools` API endpoints
+* **Load Balancer Types** Client methods for `load_balancer_types` API endpoints
+* **Load Balancer Virtual Servers** Client methods for `load_balancer_virtual_servers` API endpoints
+* **Load Balancers** Client methods for `load_balancers` API endpoints
+* **Network Proxies** Client methods for `network_proxies` API endpoints* 
+* **Plugins** Client methods for `plugins` API endpoints
 
 ## 0.2.5 (December 12, 2022)
 
