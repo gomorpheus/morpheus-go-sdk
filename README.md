@@ -221,7 +221,12 @@ library_instance_types | [Instance Types](instance_types.go)
 library_layouts | n/a
 library_spec_templates | [Spec Templates](spec_templates.go)
 license | [License](license.go)
-load_balancers | n/a
+load_balancer_monitors | [Load Balancer Monitors](load_balancer_monitors.go)
+load_balancer_pools | [Load Balancer Pools](load_balancer_pools.go)
+load_balancer_monitors | [Load Balancer Profiles](load_balancer_profiles.go)
+load_balancer_types | [Load Balancer Types](load_balancer_monitors.go)
+load_balancer_virtual_servers | [Load Balancer Virtual Servers](load_balancer_virtual_servers.go)
+load_balancers | [Load Balancers](load_balancers.go)
 logs | n/a
 log_settings | [Log Settings](log_settings.go)
 monitoring | n/a
