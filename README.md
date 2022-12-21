@@ -237,7 +237,7 @@ network_groups | n/a
 network_pool_ips | n/a
 network_pool_servers | n/a
 network_pools | n/a
-network_proxies | n/a
+network_proxies | [Network Proxies](network_proxies.go)
 network_services | n/a
 network_subnet_types | n/a
 network_subnets | n/a
