@@ -44,6 +44,8 @@ type Cloud struct {
 	GuidanceMode         string    `json:"guidanceMode"`
 	StorageMode          string    `json:"storageMode"`
 	AgentMode            string    `json:"agentMode"`
+	ConsoleKeymap        string    `json:"consoleKeymap"`
+	ContainerMode        string    `json:"containerMode"`
 	CostingMode          string    `json:"costingMode"`
 	ServiceVersion       string    `json:"serviceVersion"`
 	SecurityMode         string    `json:"securityMode"`
@@ -72,14 +74,20 @@ type Cloud struct {
 		VPC                  string `json:"vpc"`
 
 		// vSphere
-		APIUrl          string `json:"apiUrl"`
-		APIVersion      string `json:"apiVersion"`
-		Datacenter      string `json:"datacenter"`
-		Cluster         string `json:"cluster"`
-		DiskStorageType string `json:"diskStorageType"`
-		DatacenterID    string `json:"datacenterId"`
-		EnableVNC       string `json:"enableVnc"`
-		DiskEncryption  string `json:"diskEncryption"`
+		APIUrl                     string `json:"apiUrl"`
+		APIVersion                 string `json:"apiVersion"`
+		Datacenter                 string `json:"datacenter"`
+		Cluster                    string `json:"cluster"`
+		DiskStorageType            string `json:"diskStorageType"`
+		DatacenterID               string `json:"datacenterId"`
+		EnableVNC                  string `json:"enableVnc"`
+		DiskEncryption             string `json:"diskEncryption"`
+		EnableDiskTypeSelection    string `json:"enableDiskTypeSelection"`
+		EnableStorageTypeSelection string `json:"enableStorageTypeSelection"`
+		EnableNetworkTypeSelection string `json:"enableNetworkTypeSelection"`
+		ResourcePool               string `json:"resourcePool"`
+		ResourcePoolId             string `json:"resourcePoolId"`
+		HideHostSelection          string `json:"hideHostSelection"`
 
 		// Azure
 		AzureCostingMode    string `json:"azureCostingMode"`
@@ -101,6 +109,13 @@ type Cloud struct {
 		PrivateKey     string `json:"privateKey"`
 		PrivateKeyHash string `json:"privateKeyHash"`
 		ClientEmail    string `json:"clientEmail"`
+
+		// Hyperv
+		Provider    string `json:"provider"`
+		Host        string `json:"host"`
+		WorkingPath string `json:"workingPath"`
+		VMPath      string `json:"vmPath"`
+		DiskPath    string `json:"diskPath"`
 
 		// OpenStack
 		IdentityApi                  string `json:"identityApi"`
@@ -140,7 +155,15 @@ type Cloud struct {
 		SharedFileSystemVersion      string `json:"sharedFileSystemVersion"`
 		SharedFileSystemMicroVersion string `json:"sharedFileSystemMicroVersion"`
 
+		// VCD
+		OrgID                 string `json:"orgId"`
+		VDCID                 string `json:"vdcId"`
+		VCDVersion            string `json:"vcdVersion"`
+		DefaultStorageProfile string `json:"defaultStorageProfile"`
+		Catalog               string `json:"catalog"`
+
 		// General
+		ClusterRef      string `json:"clusterRef"`
 		ProjectID       string `json:"projectId"`
 		ApplianceUrl    string `json:"applianceUrl"`
 		DatacenterName  string `json:"datacenterName"`
@@ -150,40 +173,33 @@ type Cloud struct {
 		NetworkServer   struct {
 			ID string `json:"id"`
 		} `json:"networkServer"`
-		SecurityMode          string      `json:"securityMode"`
-		CertificateProvider   string      `json:"certificateProvider"`
-		BackupMode            string      `json:"backupMode"`
-		ReplicationMode       string      `json:"replicationMode"`
-		DnsIntegrationID      string      `json:"dnsIntegrationId"`
-		ServiceRegistryID     string      `json:"serviceRegistryId"`
-		ConfigManagementID    string      `json:"configManagementId"`
-		ConfigCmdbID          interface{} `json:"configCmdbId"`
-		SecurityServer        string      `json:"securityServer"`
-		CloudType             string      `json:"cloudType"`
-		AccountType           string      `json:"accountType"`
-		RPCMode               string      `json:"rpcMode"`
-		EncryptionSet         string      `json:"encryptionSet"`
-		ConfigCmID            string      `json:"configCmId"`
-		KubeURL               string      `json:"kubeUrl"`
-		CostingProjectID      string      `json:"costingProjectId"`
-		ConfigCMDBDiscovery   bool        `json:"configCmdbDiscovery"`
-		CostingDatasetID      string      `json:"costingDatasetId"`
-		Provider              string      `json:"provider"`
-		Host                  string      `json:"host"`
-		WorkingPath           string      `json:"workingPath"`
-		VMPath                string      `json:"vmPath"`
-		DiskPath              string      `json:"diskPath"`
-		Username              string      `json:"username"`
-		Password              string      `json:"password"`
-		DistributedWorkerId   string      `json:"distributedWorkerId"`
-		VCDVersion            string      `json:"vcdVersion"`
-		DefaultStorageProfile string      `json:"defaultStorageProfile"`
-		Passwordhash          string      `json:"passwordHash"`
-		OrgID                 string      `json:"orgId"`
-		VDCID                 string      `json:"vdcId"`
+		SecurityMode        string      `json:"securityMode"`
+		CertificateProvider string      `json:"certificateProvider"`
+		BackupMode          string      `json:"backupMode"`
+		ReplicationMode     string      `json:"replicationMode"`
+		DnsIntegrationID    string      `json:"dnsIntegrationId"`
+		ServiceRegistryID   string      `json:"serviceRegistryId"`
+		ConfigManagementID  string      `json:"configManagementId"`
+		ConfigCmdbID        interface{} `json:"configCmdbId"`
+		SecurityServer      string      `json:"securityServer"`
+		CloudType           string      `json:"cloudType"`
+		AccountType         string      `json:"accountType"`
+		RPCMode             string      `json:"rpcMode"`
+		EncryptionSet       string      `json:"encryptionSet"`
+		ConfigCmID          string      `json:"configCmId"`
+		KubeURL             string      `json:"kubeUrl"`
+		CostingProjectID    string      `json:"costingProjectId"`
+		ConfigCMDBDiscovery bool        `json:"configCmdbDiscovery"`
+		CostingDatasetID    string      `json:"costingDatasetId"`
+		Username            string      `json:"username"`
+		Password            string      `json:"password"`
+		DistributedWorkerId string      `json:"distributedWorkerId"`
+		PasswordHash        string      `json:"passwordHash"`
 	} `json:"config"`
 	Credential struct {
 		Type string `json:"type"`
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
 	} `json:"credential"`
 	DateCreated string `json:"dateCreated"`
 	LastUpdated string `json:"lastUpdated"`

@@ -6,6 +6,15 @@ NOTES:
 
 FEATURES:
 
+
+## 0.2.6 (December 22, 2022)
+
+NOTES:
+
+* Updated the return payload for clouds.
+
+FEATURES:
+
 * **Activity** Client methods for `activity` API endpoints
 * **Load Balancer Monitors** Client methods for `load_balancer_monitors` API endpoints
 * **Load Balancer Pools** Client methods for `load_balancer_pools` API endpoints
