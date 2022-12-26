@@ -8,6 +8,10 @@ NOTES:
 FEATURES:
 
 * **Network Pools** Client methods for `network_pools` API endpoints
+* **Network Pool Servers** Client methods for `network_pool_servers` API endpoints
+* **Network Routes** Client methods for `network_routes` API endpoints
+* **Network Static Routes** Client methods for `network_static_routes` API endpoints
+* **Network Subnets** Client methods for `network_subnets` API endpoints
 
 ## 0.2.6 (December 22, 2022)
 
