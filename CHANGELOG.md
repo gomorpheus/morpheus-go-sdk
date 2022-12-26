@@ -3,9 +3,11 @@
 NOTES:
 
 * Updated the return payload for clouds.
+* Updated the return payload for networks.
 
 FEATURES:
 
+* **Network Pools** Client methods for `network_pools` API endpoints
 
 ## 0.2.6 (December 22, 2022)
 
