@@ -131,7 +131,7 @@ func (client *Client) TestLicense(req *Request) (*Response, error) {
 func (client *Client) UninstallLicense(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
-		Path:        fmt.Sprintf("%s", LicensePath),
+		Path:        LicensePath,
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &UninstallLicenseResult{},

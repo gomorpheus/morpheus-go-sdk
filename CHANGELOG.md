@@ -12,6 +12,7 @@ FEATURES:
 * **Network Routes** Client methods for `network_routes` API endpoints
 * **Network Static Routes** Client methods for `network_static_routes` API endpoints
 * **Network Subnets** Client methods for `network_subnets` API endpoints
+* **Storage Servers** Client methods for `storage_servers` API endpoints
 
 ## 0.2.6 (December 22, 2022)
 
