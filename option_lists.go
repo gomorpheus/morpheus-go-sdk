@@ -11,22 +11,32 @@ var (
 
 // OptionLists structures for use in request and response payloads
 type OptionList struct {
-	ID                int64  `json:"id"`
-	Name              string `json:"name"`
-	Description       string `json:"description"`
-	Type              string `json:"type"`
-	SourceURL         string `json:"sourceUrl"`
-	Visibility        string `json:"visibility"`
-	SourceMethod      string `json:"sourceMethod"`
-	APIType           string `json:"apiType,omitempty"`
-	IgnoreSSLErrors   bool   `json:"ignoreSSLErrors"`
-	RealTime          bool   `json:"realTime"`
-	InitialDataset    string `json:"initialDataset"`
-	TranslationScript string `json:"translationScript"`
-	RequestScript     string `json:"requestScript"`
-	Config            struct {
+	ID                  int64  `json:"id"`
+	Name                string `json:"name"`
+	Description         string `json:"description"`
+	Type                string `json:"type"`
+	SourceURL           string `json:"sourceUrl"`
+	Visibility          string `json:"visibility"`
+	SourceMethod        string `json:"sourceMethod"`
+	APIType             string `json:"apiType,omitempty"`
+	IgnoreSSLErrors     bool   `json:"ignoreSSLErrors"`
+	RealTime            bool   `json:"realTime"`
+	InitialDataset      string `json:"initialDataset"`
+	TranslationScript   string `json:"translationScript"`
+	RequestScript       string `json:"requestScript"`
+	ServiceUsername     string `json:"serviceUsername"`
+	ServicePassword     string `json:"servicePassword"`
+	ServicePasswordHash string `json:"servicePasswordHash"`
+	Config              struct {
 		SourceHeaders []SourceHeader `json:"sourceHeaders"`
 	} `json:"config"`
+	Credential struct {
+		Type string `json:"type"`
+	} `json:"credential"`
+	Account struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"account"`
 }
 
 type SourceHeader struct {
@@ -38,6 +48,13 @@ type SourceHeader struct {
 type ListOptionListsResult struct {
 	OptionLists *[]OptionList `json:"optionTypeLists"`
 	Meta        *MetaResult   `json:"meta"`
+}
+
+type ListOptionListItemsResult struct {
+	OptionListItems *[]struct {
+		Name  string `json:"name"`
+		Value string `json:"value"`
+	} `json:"listItems"`
 }
 
 type GetOptionListResult struct {
@@ -57,6 +74,16 @@ type UpdateOptionListResult struct {
 
 type DeleteOptionListResult struct {
 	DeleteResult
+}
+
+// ListOptionListItems lists all option list items
+func (client *Client) ListOptionListItems(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/items", OptionListsPath, id),
+		QueryParams: req.QueryParams,
+		Result:      &ListOptionListsResult{},
+	})
 }
 
 // ListOptionLists lists all option lists
