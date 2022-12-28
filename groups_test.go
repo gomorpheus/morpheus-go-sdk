@@ -36,7 +36,6 @@ func TestGetGroup(t *testing.T) {
 	}
 }
 
-/*
 func TestGroupsCRUD(t *testing.T) {
 	client := getTestClient(t)
 	//create
@@ -86,4 +85,3 @@ func TestGroupsCRUD(t *testing.T) {
 	assertEqual(t, deleteResult.Success, true)
 
 }
-*/

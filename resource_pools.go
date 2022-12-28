@@ -9,9 +9,34 @@ type ResourcePool struct {
 	ID          int64  `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
-	Active      bool   `json:"active"`
-	Type        string `json:"type"`
-	Visibility  string `json:"visibility"`
+	Zone        struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"zone"`
+	Active      bool        `json:"active"`
+	Type        string      `json:"type"`
+	ExternalId  string      `json:"externalId"`
+	ReadOnly    bool        `json:"readOnly"`
+	DefaultPool bool        `json:"defaultPool"`
+	RegionCode  interface{} `json:"regionCode"`
+	IacId       interface{} `json:"iacId"`
+	Status      string      `json:"status"`
+	Inventory   bool        `json:"inventory"`
+	Visibility  string      `json:"visibility"`
+	Config      struct {
+		CidrBlock string `json:"cidrBlock"`
+		Tenancy   string `json:"tenancy"`
+	} `json:"config"`
+	Tenants []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"tenants"`
+	ResourcePermission struct {
+		All      string        `json:"all"`
+		Sites    []interface{} `json:"sites"`
+		Plans    []interface{} `json:"plans"`
+		AllPlans string        `json:"allPlans"`
+	} `json:"resourcePermission"`
 }
 
 type ListResourcePoolsResult struct {

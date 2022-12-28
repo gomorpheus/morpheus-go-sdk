@@ -272,6 +272,7 @@ setup | [Setup](setup.go)
 software_licenses | [Software Licenses](software_licenses.go)
 storage_buckets | [Storage Buckets](storage_buckets.go)
 storage_providers | n/a
+storage_servers | [Storage Servers](storage_servers.go)
 subnets | n/a
 task_sets | [Task Sets](task_sets.go)
 tasks | [Tasks](tasks.go)

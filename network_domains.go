@@ -78,60 +78,6 @@ type UpdateNetworkDomainPayload struct {
 	CreateNetworkDomainPayload
 }
 
-// Request types
-
-// type ListNetworkDomainsRequest struct {
-// 	Request
-// }
-
-// type GetNetworkDomainRequest struct {
-// 	Request
-// 	ID int64
-// }
-
-// type CreateNetworkDomainRequest struct {
-// 	Request
-// 	Payload *CreateNetworkDomainPayload
-// }
-
-// type UpdateNetworkDomainRequest struct {
-// 	Request
-// 	ID int64
-// 	Payload *UpdateNetworkDomainPayload
-// }
-
-// type DeleteNetworkDomainRequest struct {
-// 	Request
-// 	ID int64
-// }
-
-// // Response types
-
-// type ListNetworkDomainsResponse struct {
-// 	Response
-// 	Result *ListNetworkDomainsResult
-// }
-
-// type GetNetworkDomainResponse struct {
-// 	Response
-// 	Result *GetNetworkDomainResult
-// }
-
-// type CreateNetworkDomainResponse struct {
-// 	Response
-// 	Result *CreateNetworkDomainResult
-// }
-
-// type UpdateNetworkDomainResponse struct {
-// 	Response
-// 	Result *UpdateNetworkDomainResult
-// }
-
-// type DeleteNetworkDomainResponse struct {
-// 	Request
-// 	Result *DeleteNetworkDomainResult
-// }
-
 // Client request methods
 
 func (client *Client) ListNetworkDomains(req *Request) (*Response, error) {

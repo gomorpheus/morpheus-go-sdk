@@ -13,13 +13,27 @@ var (
 type StorageBucket struct {
 	ID           int64  `json:"id"`
 	Name         string `json:"name"`
+	Active       bool   `json:"active"`
 	AccountID    int64  `json:"accountId"`
 	ProviderType string `json:"providerType"`
 	Config       struct {
-		AccessKey string `json:"accessKey"`
-		SecretKey string `json:"secretKey"`
-		Endpoint  string `json:"endpoint"`
-		BasePath  string `json:"basePath"`
+		LocationType       string      `json:"locationType"`
+		Location           string      `json:"location"`
+		StorageClass       string      `json:"storageClass"`
+		ClientEmail        string      `json:"clientEmail"`
+		PrivateKey         string      `json:"privateKey"`
+		ProjectId          string      `json:"projectId"`
+		AccessKey          string      `json:"accessKey"`
+		SecretKey          string      `json:"secretKey"`
+		SecretKeyHash      string      `json:"secretKeyHash"`
+		Endpoint           string      `json:"endpoint"`
+		BasePath           string      `json:"basePath"`
+		Host               string      `json:"host"`
+		StsAssumeRole      string      `json:"stsAssumeRole"`
+		UseHostCredentials interface{} `json:"useHostCredentials"`
+		ExportFolder       string      `json:"exportFolder"`
+		Permissions        []string    `json:"permissions"`
+		AdminPermissions   []string    `json:"adminPermissions"`
 	} `json:"config"`
 	BucketName                string      `json:"bucketName"`
 	ReadOnly                  bool        `json:"readOnly"`
