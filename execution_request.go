@@ -10,13 +10,8 @@ var (
 	ExecutionRequestPath = "/api/execution-request"
 )
 
-// Execution Request strcutures for use in request and response payloads
-type ExecutionRequest struct {
-	Script string `json:"script"`
-}
-
 // ExeuctionRequestResult structure parses the response from the server when running or retrieving an exeuction request
-type ExecutionRequestResult struct {
+type ExecutionRequest struct {
 	ID            int64    `json:"id"`
 	UniqueID      string   `json:"uniqueId"`
 	ContainerID   int64    `json:"containerId"`
@@ -36,6 +31,10 @@ type ExecutionRequestResult struct {
 	RawData       string   `json:"rawData"`
 }
 
+type ExecutionRequestResult struct {
+	ExecutionRequest ExecutionRequest `json:"executionRequest"`
+}
+
 // Execution Request Methods
 
 func (client *Client) GetExecutionRequest(uniqueID string, req *Request) (*Response, error) {
@@ -50,7 +49,7 @@ func (client *Client) GetExecutionRequest(uniqueID string, req *Request) (*Respo
 func (client *Client) CreateExecutionRequest(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "POST",
-		Path:        fmt.Sprintf("%s", ExecutionRequestPath),
+		Path:        fmt.Sprintf("%s/%s", ExecutionRequestPath, "execute"),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &ExecutionRequestResult{},
@@ -59,7 +58,7 @@ func (client *Client) CreateExecutionRequest(req *Request) (*Response, error) {
 
 // helper functions
 
-func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) (*Response, error) {
+func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) (string, error) {
 
 	resp, err := client.CreateExecutionRequest(&Request{
 		QueryParams: map[string]string{
@@ -74,5 +73,7 @@ func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) 
 		fmt.Println("unable to run script on instance ", instance.ID, " due to ", err)
 	}
 
-	return resp, err
+	scriptResult := resp.Result.(ExecutionRequestResult).ExecutionRequest.StdOut
+
+	return scriptResult, err
 }
