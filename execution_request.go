@@ -73,7 +73,7 @@ func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) 
 		fmt.Println("unable to run script on instance ", instance.ID, " due to ", err)
 	}
 
-	scriptResult := resp.Result.(ExecutionRequestResult).ExecutionRequest.StdOut
+	scriptResult := resp.Result.(*ExecutionRequestResult).ExecutionRequest.StdOut
 
 	return scriptResult, err
 }
