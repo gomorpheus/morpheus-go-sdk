@@ -58,7 +58,7 @@ func (client *Client) CreateExecutionRequest(req *Request) (*Response, error) {
 
 // helper functions
 
-func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) (string, error) {
+func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) (stdOut string, stdErr string, err error) {
 
 	resp, err := client.CreateExecutionRequest(&Request{
 		QueryParams: map[string]string{
@@ -73,7 +73,8 @@ func (client *Client) ExecuteScriptOnInstance(instance Instance, script string) 
 		fmt.Println("unable to run script on instance ", instance.ID, " due to ", err)
 	}
 
-	scriptResult := resp.Result.(*ExecutionRequestResult).ExecutionRequest.StdOut
+	stdOut = resp.Result.(*ExecutionRequestResult).ExecutionRequest.StdOut
+	stdErr = resp.Result.(*ExecutionRequestResult).ExecutionRequest.StdErr
 
-	return scriptResult, err
+	return
 }
