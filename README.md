@@ -179,7 +179,9 @@ API | Available?
 --------- | -----------
 account_groups | n/a
 accounts | [Accounts](accounts.go)
+activity | [Activity](activity.go)
 appliance_settings | [Appliance Settings](appliance_settings.go)
+approvals | [Approvals](approvals.go)
 apps | [Apps](apps.go)
 archive_buckets | n/a
 archive_files | n/a
@@ -219,7 +221,12 @@ library_instance_types | [Instance Types](instance_types.go)
 library_layouts | n/a
 library_spec_templates | [Spec Templates](spec_templates.go)
 license | [License](license.go)
-load_balancers | n/a
+load_balancer_monitors | [Load Balancer Monitors](load_balancer_monitors.go)
+load_balancer_pools | [Load Balancer Pools](load_balancer_pools.go)
+load_balancer_monitors | [Load Balancer Profiles](load_balancer_profiles.go)
+load_balancer_types | [Load Balancer Types](load_balancer_monitors.go)
+load_balancer_virtual_servers | [Load Balancer Virtual Servers](load_balancer_virtual_servers.go)
+load_balancers | [Load Balancers](load_balancers.go)
 logs | n/a
 log_settings | [Log Settings](log_settings.go)
 monitoring | n/a
@@ -235,7 +242,7 @@ network_groups | n/a
 network_pool_ips | n/a
 network_pool_servers | n/a
 network_pools | n/a
-network_proxies | n/a
+network_proxies | [Network Proxies](network_proxies.go)
 network_services | n/a
 network_subnet_types | n/a
 network_subnets | n/a
@@ -243,6 +250,8 @@ network_types | n/a
 networks | [Networks](networks.go)
 option_type_lists | [Option Type Lists](option_type_lists.go)
 option_types | [Option Types](option_types.go)
+plans | [Plans](plans.go)
+plugins | [Plugins](plugins.go)
 policies | [Policies](policies.go)
 power_schedules | [Power Schedules](power_schedules.go)
 prices | [Prices](prices.go)
@@ -255,6 +264,7 @@ roles | [Roles](roles.go)
 scale_thresholds | [Scale Thresholds](scale_thresholds.go)
 security_group_rules | n/a
 security_groups | n/a
+security_packages | [Security Packages](security_packages.go)
 server_types | n/a
 servers | n/a
 service_plans | [Service Plans](service_plans.go)
@@ -262,6 +272,7 @@ setup | [Setup](setup.go)
 software_licenses | [Software Licenses](software_licenses.go)
 storage_buckets | [Storage Buckets](storage_buckets.go)
 storage_providers | n/a
+storage_servers | [Storage Servers](storage_servers.go)
 subnets | n/a
 task_sets | [Task Sets](task_sets.go)
 tasks | [Tasks](tasks.go)

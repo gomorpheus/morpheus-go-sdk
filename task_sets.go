@@ -11,24 +11,24 @@ var (
 
 // TaskSet structures for use in request and response payloads
 type TaskSet struct {
-	ID          int64         `json:"id"`
-	Name        string        `json:"name"`
-	Description string        `json:"description"`
-	Type        string        `json:"type"`
-	OptionTypes []interface{} `json:"optionTypes"`
-	Tasks       []int64       `json:"tasks"`
-}
-
-type TaskSetPayload struct {
 	ID                int64         `json:"id"`
 	Name              string        `json:"name"`
 	Description       string        `json:"description"`
 	Type              string        `json:"type"`
+	AccountID         int64         `json:"accountId"`
 	Visibility        string        `json:"visibility"`
 	Platform          string        `json:"platform"`
 	AllowCustomConfig bool          `json:"allowCustomConfig"`
 	OptionTypes       []interface{} `json:"optionTypes"`
 	Tasks             []int64       `json:"tasks"`
+	TaskSetTasks      []TaskSetTask `json:"taskSetTasks"`
+}
+
+type TaskSetTask struct {
+	ID        int64  `json:"id"`
+	TaskPhase string `json:"taskPhase"`
+	TaskOrder int64  `json:"taskOrder"`
+	Task      Task   `json:"task"`
 }
 
 type ListTaskSetsResult struct {
@@ -37,14 +37,14 @@ type ListTaskSetsResult struct {
 }
 
 type GetTaskSetResult struct {
-	TaskSet *TaskSetPayload `json:"taskSet"`
+	TaskSet *TaskSet `json:"taskSet"`
 }
 
 type CreateTaskSetResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
 	Errors  map[string]string `json:"errors"`
-	TaskSet *TaskSetPayload   `json:"taskSet"`
+	TaskSet *TaskSet          `json:"taskSet"`
 }
 
 type UpdateTaskSetResult struct {

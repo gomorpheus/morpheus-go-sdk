@@ -11,21 +11,37 @@ var (
 
 // OptionType structures for use in request and response payloads
 type OptionType struct {
-	ID                    int64                  `json:"id"`
-	Name                  string                 `json:"name"`
-	Description           string                 `json:"description"`
-	FieldName             string                 `json:"fieldName"`
-	Type                  string                 `json:"type"`
-	FieldLabel            string                 `json:"fieldLabel"`
-	PlaceHolder           string                 `json:"placeHolder"`
-	DefaultValue          string                 `json:"defaultValue"`
-	Required              bool                   `json:"required"`
-	ExportMeta            bool                   `json:"exportMeta"`
-	OptionListId          map[string]interface{} `json:"optionList"`
-	HelpBlock             string                 `json:"helpBlock"`
-	DependsOnCode         string                 `json:"dependsOnCode"`
-	DisplayValueOnDetails bool                   `json:"displayValueOnDetails"`
-	VisibleOnCode         string                 `json:"visibleOnCode"`
+	ID           int64    `json:"id"`
+	Name         string   `json:"name"`
+	Description  string   `json:"description"`
+	Labels       []string `json:"labels"`
+	Code         string   `json:"code"`
+	Type         string   `json:"type"`
+	FieldName    string   `json:"fieldName"`
+	FieldLabel   string   `json:"fieldLabel"`
+	PlaceHolder  string   `json:"placeHolder"`
+	DefaultValue string   `json:"defaultValue"`
+	Required     bool     `json:"required"`
+	ExportMeta   bool     `json:"exportMeta"`
+	OptionSource string   `json:"optionSource"`
+	OptionList   struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"optionList"`
+	HelpBlock             string `json:"helpBlock"`
+	Editable              bool   `json:"editable"`
+	Creatable             bool   `json:"creatable"`
+	DependsOnCode         string `json:"dependsOnCode"`
+	VerifyPattern         string `json:"verifyPattern"`
+	VisibleOnCode         string `json:"visibleOnCode"`
+	RequireOnCode         string `json:"requireOnCode"`
+	ContextualDefault     bool   `json:"contextualDefault"`
+	DisplayValueOnDetails bool   `json:"displayValueOnDetails"`
+	ShowOnCreate          bool   `json:"showOnCreate"`
+	ShowOnEdit            bool   `json:"showOnEdit"`
+	Config                struct {
+		Rows string `json:"rows"`
+	} `json:"config"`
 }
 
 type ListOptionTypesResult struct {

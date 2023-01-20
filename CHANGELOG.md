@@ -1,3 +1,51 @@
+## Unreleased
+
+NOTES:
+
+* Updated the return payload for clouds.
+* Updated the return payload for networks.
+
+FEATURES:
+
+* **Network Pools** Client methods for `network_pools` API endpoints
+* **Network Pool Servers** Client methods for `network_pool_servers` API endpoints
+* **Network Routes** Client methods for `network_routes` API endpoints
+* **Network Static Routes** Client methods for `network_static_routes` API endpoints
+* **Network Subnets** Client methods for `network_subnets` API endpoints
+* **Storage Servers** Client methods for `storage_servers` API endpoints
+
+## 0.2.6 (December 22, 2022)
+
+NOTES:
+
+* Updated the return payload for clouds.
+
+FEATURES:
+
+* **Activity** Client methods for `activity` API endpoints
+* **Load Balancer Monitors** Client methods for `load_balancer_monitors` API endpoints
+* **Load Balancer Pools** Client methods for `load_balancer_pools` API endpoints
+* **Load Balancer Types** Client methods for `load_balancer_types` API endpoints
+* **Load Balancer Virtual Servers** Client methods for `load_balancer_virtual_servers` API endpoints
+* **Load Balancers** Client methods for `load_balancers` API endpoints
+* **Network Proxies** Client methods for `network_proxies` API endpoints* 
+* **Plugins** Client methods for `plugins` API endpoints
+* **Security Packages** Client methods for `security_packages` API endpoints
+
+## 0.2.5 (December 12, 2022)
+
+NOTES:
+
+* Update workflow payloads to return the task sets data.
+
+## 0.2.4 (December 2, 2022)
+
+NOTES:
+
+* Update execute schedule data payload.
+* Fix invalid policy data payload.
+* Update task data payload.
+
 ## 0.2.3 (November 14, 2022)
 
 NOTES:

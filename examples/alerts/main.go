@@ -22,6 +22,6 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := alertsResponse.Result.(*morpheus.GetAlertResult)
+	result := alertsResponse.Result.(*morpheus.ListAlertsResult)
 	log.Println(result)
 }

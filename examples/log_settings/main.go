@@ -16,7 +16,7 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// List log settings
+	// Get log settings
 	req := &morpheus.Request{}
 	logSettingsResponse, err := client.GetLogSettings(req)
 	if err != nil {
