@@ -1,6 +1,7 @@
 package morpheus_test
 
 import (
+	"strconv"
 	"testing"
 
 	"github.com/gomorpheus/morpheus-go-sdk"
@@ -11,7 +12,7 @@ import (
 
 // }
 
-func TestExecuteScriptOnInstance(t *testing.T) {
+func TestCreateExecutionRequest(t *testing.T) {
 	client := getTestClient(t)
 	resp, err := client.ListInstances(&morpheus.Request{})
 	assertResponse(t, resp, err)
@@ -23,7 +24,14 @@ func TestExecuteScriptOnInstance(t *testing.T) {
 
 	if instancesCount != 0 {
 		firstInstance := (*listInstancesResult.Instances)[0]
-		resp, err = client.ExecuteScriptOnInstance(firstInstance, "pwd")
+		resp, err := client.CreateExecutionRequest(&morpheus.Request{
+			QueryParams: map[string]string{
+				"instanceId": strconv.Itoa(int(firstInstance.ID)),
+			},
+			Body: map[string]interface{}{
+				"script": "pwd",
+			},
+		})
 		assertResponse(t, resp, err)
 	}
 }
