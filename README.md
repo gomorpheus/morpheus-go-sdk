@@ -238,10 +238,10 @@ monitoring.alerts | [Alerts](alerts.go)
 monitoring.contacts | [Contacts](contacts.go)
 network_domain_records | n/a
 network_domains | [Network Domains](network_domains.go)
-network_groups | n/a
+network_groups | [Network Groups](network_groups.go)
 network_pool_ips | n/a
-network_pool_servers | n/a
-network_pools | n/a
+network_pool_servers | [Network Pool Servers](network_pool_servers.go)
+network_pools | [Network Pools](network_pools.go)
 network_proxies | [Network Proxies](network_proxies.go)
 network_services | n/a
 network_subnet_types | n/a

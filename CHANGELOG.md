@@ -7,6 +7,7 @@ NOTES:
 
 FEATURES:
 
+* **Network Groups** Client methods for `network_groups` API endpoints
 * **Network Pools** Client methods for `network_pools` API endpoints
 * **Network Pool Servers** Client methods for `network_pool_servers` API endpoints
 * **Network Routes** Client methods for `network_routes` API endpoints
