@@ -16,13 +16,14 @@ type InstanceLayout struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	Name                     string `json:"name"`
-	Description              string `json:"description"`
-	Code                     string `json:"code"`
-	ContainerVersion         string `json:"instanceVersion"`
-	Creatable                bool   `json:"creatable"`
-	MemoryRequirement        int64  `json:"memoryRequirement"`
-	SupportsConvertToManaged bool   `json:"supportsConvertToManaged"`
+	Name                     string   `json:"name"`
+	Labels                   []string `json:"labels"`
+	Description              string   `json:"description"`
+	Code                     string   `json:"code"`
+	ContainerVersion         string   `json:"instanceVersion"`
+	Creatable                bool     `json:"creatable"`
+	MemoryRequirement        int64    `json:"memoryRequirement"`
+	SupportsConvertToManaged bool     `json:"supportsConvertToManaged"`
 	ProvisionType            struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`

@@ -16,13 +16,16 @@ type SpecTemplate struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	Name   string `json:"name"`
-	Type   Type   `json:"type"`
-	Config Config `json:"config"`
-	File   File   `json:"file"`
+	Name   string   `json:"name"`
+	Labels []string `json:"labels"`
+	Type   Type     `json:"type"`
+	Config Config   `json:"config"`
+	File   File     `json:"file"`
 }
 
 type Type struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
 	Code string `json:"code"`
 }
 type Cloudformation struct {
@@ -32,7 +35,11 @@ type Cloudformation struct {
 }
 type Config struct {
 	Cloudformation Cloudformation `json:"cloudformation"`
+	Terraform      struct {
+		TfVersion string `json:"tfVersion"`
+	} `json:"terraform"`
 }
+
 type File struct {
 	Sourcetype  string     `json:"sourceType"`
 	Content     string     `json:"content"`

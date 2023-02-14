@@ -19,6 +19,7 @@ type FileTemplate struct {
 		Name string `json:"name"`
 	} `json:"account"`
 	Name            string      `json:"name"`
+	Labels          []string    `json:"labels"`
 	FileName        string      `json:"fileName"`
 	FilePath        string      `json:"filePath"`
 	TemplateType    interface{} `json:"templateType"`

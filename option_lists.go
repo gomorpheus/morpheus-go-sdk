@@ -11,22 +11,23 @@ var (
 
 // OptionLists structures for use in request and response payloads
 type OptionList struct {
-	ID                  int64  `json:"id"`
-	Name                string `json:"name"`
-	Description         string `json:"description"`
-	Type                string `json:"type"`
-	SourceURL           string `json:"sourceUrl"`
-	Visibility          string `json:"visibility"`
-	SourceMethod        string `json:"sourceMethod"`
-	APIType             string `json:"apiType,omitempty"`
-	IgnoreSSLErrors     bool   `json:"ignoreSSLErrors"`
-	RealTime            bool   `json:"realTime"`
-	InitialDataset      string `json:"initialDataset"`
-	TranslationScript   string `json:"translationScript"`
-	RequestScript       string `json:"requestScript"`
-	ServiceUsername     string `json:"serviceUsername"`
-	ServicePassword     string `json:"servicePassword"`
-	ServicePasswordHash string `json:"servicePasswordHash"`
+	ID                  int64    `json:"id"`
+	Name                string   `json:"name"`
+	Labels              []string `json:"labels"`
+	Description         string   `json:"description"`
+	Type                string   `json:"type"`
+	SourceURL           string   `json:"sourceUrl"`
+	Visibility          string   `json:"visibility"`
+	SourceMethod        string   `json:"sourceMethod"`
+	APIType             string   `json:"apiType,omitempty"`
+	IgnoreSSLErrors     bool     `json:"ignoreSSLErrors"`
+	RealTime            bool     `json:"realTime"`
+	InitialDataset      string   `json:"initialDataset"`
+	TranslationScript   string   `json:"translationScript"`
+	RequestScript       string   `json:"requestScript"`
+	ServiceUsername     string   `json:"serviceUsername"`
+	ServicePassword     string   `json:"servicePassword"`
+	ServicePasswordHash string   `json:"servicePasswordHash"`
 	Config              struct {
 		SourceHeaders []SourceHeader `json:"sourceHeaders"`
 	} `json:"config"`

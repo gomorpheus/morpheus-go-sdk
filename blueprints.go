@@ -15,6 +15,7 @@ type Blueprint struct {
 	Name               string      `json:"name"`
 	Type               string      `json:"type"`
 	Description        string      `json:"description"`
+	Labels             []string    `json:"labels"`
 	Category           string      `json:"category"`
 	Visibility         string      `json:"visibility"`
 	Config             interface{} `json:"config"`
