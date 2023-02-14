@@ -12,10 +12,11 @@ var (
 
 // Task structures for use in request and response payloads
 type Task struct {
-	ID        int64  `json:"id"`
-	AccountId int64  `json:"accountId"`
-	Name      string `json:"name"`
-	Code      string `json:"code"`
+	ID        int64    `json:"id"`
+	AccountId int64    `json:"accountId"`
+	Name      string   `json:"name"`
+	Labels    []string `json:"labels"`
+	Code      string   `json:"code"`
 	TaskType  struct {
 		ID   int64  `json:"id"`
 		Code string `json:"code"`

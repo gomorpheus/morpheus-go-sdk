@@ -34,8 +34,9 @@ type ClusterLayout struct {
 		Code string `json:"code"`
 		Name string `json:"name"`
 	} `json:"groupType"`
-	Name string `json:"name"`
-	Type struct {
+	Name   string   `json:"name"`
+	Labels []string `json:"labels"`
+	Type   struct {
 		ID   int    `json:"id"`
 		Code string `json:"code"`
 		Name string `json:"name"`

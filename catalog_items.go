@@ -14,6 +14,7 @@ var (
 type CatalogItem struct {
 	ID            int64       `json:"id"`
 	Name          string      `json:"name"`
+	Labels        []string    `json:"labels"`
 	Description   string      `json:"description"`
 	Type          string      `json:"type"`
 	RefType       string      `json:"refType"`

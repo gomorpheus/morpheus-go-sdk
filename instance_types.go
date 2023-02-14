@@ -17,6 +17,7 @@ type InstanceType struct {
 		Name string `json:"name"`
 	} `json:"account"`
 	Name                string      `json:"name"`
+	Labels              []string    `json:"labels"`
 	Code                string      `json:"code"`
 	Description         string      `json:"description"`
 	ProvisionTypeCode   string      `json:"provisionTypeCode"`

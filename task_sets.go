@@ -13,6 +13,7 @@ var (
 type TaskSet struct {
 	ID                int64         `json:"id"`
 	Name              string        `json:"name"`
+	Labels            []string      `json:"labels"`
 	Description       string        `json:"description"`
 	Type              string        `json:"type"`
 	AccountID         int64         `json:"accountId"`

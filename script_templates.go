@@ -12,8 +12,9 @@ var (
 
 // ScriptTemplate structures for use in request and response payloads
 type ScriptTemplate struct {
-	ID      int64  `json:"id"`
-	Name    string `json:"name"`
+	ID      int64    `json:"id"`
+	Name    string   `json:"name"`
+	Labels  []string `json:"labels"`
 	Account struct {
 		ID   int    `json:"id"`
 		Name string `json:"name"`

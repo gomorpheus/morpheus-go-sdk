@@ -12,10 +12,11 @@ var (
 
 // Job structures for use in request and response payloads
 type Job struct {
-	ID         int64  `json:"id"`
-	Name       string `json:"name"`
-	Enabled    bool   `json:"enabled"`
-	TargetType string `json:"targetType"`
+	ID         int64    `json:"id"`
+	Name       string   `json:"name"`
+	Labels     []string `json:"labels"`
+	Enabled    bool     `json:"enabled"`
+	TargetType string   `json:"targetType"`
 	Task       struct {
 		ID int64 `json:"id"`
 	} `json:"task"`

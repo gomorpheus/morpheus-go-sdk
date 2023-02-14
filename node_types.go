@@ -16,10 +16,11 @@ type NodeType struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	Name             string `json:"name"`
-	ShortName        string `json:"shortName"`
-	Code             string `json:"code"`
-	ContainerVersion string `json:"containerVersion"`
+	Name             string   `json:"name"`
+	Labels           []string `json:"labels"`
+	ShortName        string   `json:"shortName"`
+	Code             string   `json:"code"`
+	ContainerVersion string   `json:"containerVersion"`
 	ProvisionType    struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
