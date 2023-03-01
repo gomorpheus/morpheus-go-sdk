@@ -16,10 +16,11 @@ var (
 type GetRoleResult struct {
 	Role               Role `json:"role"`
 	FeaturePermissions []struct {
-		ID     int64  `json:"id"`
-		Code   string `json:"code"`
-		Name   string `json:"name"`
-		Access string `json:"access"`
+		ID          int64  `json:"id"`
+		Code        string `json:"code"`
+		Name        string `json:"name"`
+		Access      string `json:"access"`
+		SubCategory string `json:"subCategory"`
 	} `json:"featurePermissions"`
 	GlobalSiteAccess string `json:"globalSiteAccess"`
 	Sites            []struct {
@@ -27,9 +28,14 @@ type GetRoleResult struct {
 		Name   string `json:"name"`
 		Access string `json:"access"`
 	} `json:"sites"`
-	GlobalZoneAccess         string        `json:"globalZoneAccess"`
-	Zones                    []interface{} `json:"zones"`
-	GlobalInstanceTypeAccess string        `json:"globalInstanceTypeAccess"`
+	GlobalZoneAccess string `json:"globalZoneAccess"`
+	Zones            []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"zones"`
+	GlobalInstanceTypeAccess string `json:"globalInstanceTypeAccess"`
 	InstanceTypePermissions  []struct {
 		ID     int64  `json:"id"`
 		Code   string `json:"code"`
@@ -55,15 +61,34 @@ type GetRoleResult struct {
 		Name   string `json:"name"`
 		Access string `json:"access"`
 	} `json:"personaPermissions"`
-	GlobalVDIPoolAccess    string        `json:"globalVdiPoolAccess"`
-	VDIPoolPermissions     []interface{} `json:"vdiPoolPermissions"`
-	GlobalReportTypeAccess string        `json:"globalReportTypeAccess"`
+	GlobalVDIPoolAccess string `json:"globalVdiPoolAccess"`
+	VDIPoolPermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"vdiPoolPermissions"`
+	GlobalReportTypeAccess string `json:"globalReportTypeAccess"`
 	ReportTypePermissions  []struct {
 		ID     int64  `json:"id"`
 		Code   string `json:"code"`
 		Name   string `json:"name"`
 		Access string `json:"access"`
 	} `json:"reportTypePermissions"`
+	GlobalTaskAccess string `json:"globalTaskAccess"`
+	TaskPermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"taskPermissions"`
+	GlobalTaskSetAccess string `json:"globalTaskSetAccess"`
+	TaskSetPermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"taskSetPermissions"`
 }
 
 type Role struct {
@@ -239,6 +264,26 @@ func (client *Client) UpdateRoleReportTypeAccess(id int64, req *Request) (*Respo
 	return client.Execute(&Request{
 		Method:      "PUT",
 		Path:        fmt.Sprintf("%s/%d/update-report-type", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleTaskAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-task", RolesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateRolePermissionResult{},
+	})
+}
+
+func (client *Client) UpdateRoleWorkflowAccess(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/update-task-set", RolesPath, id),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &UpdateRolePermissionResult{},
