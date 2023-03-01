@@ -2,19 +2,53 @@
 
 NOTES:
 
+* Update resty library from 2.2.0 to 2.7.0.
+* Update option type response payload.
+
+FEATURES:
+
+
+## 0.2.9 (February  14, 2023)
+
+
+NOTES:
+
+* Add label support for additional objects.
+* Updated the return payload for networks.
+
+FEATURES:
+
+* **Execution Request** Client methods for `execution_request` API endpoints
+* **Network Groups** Client methods for `network_groups` API endpoints
+* **Oauth Clients** Client methods for `oauth_clients` API endpoints
+
+
+## 0.2.8 (December 27, 2022)
+
+
+NOTES:
+
 * Updated the return payload for clouds.
 * Updated the return payload for networks.
 
 FEATURES:
 
-* **Network Groups** Client methods for `network_groups` API endpoints
+* **Storage Servers** Client methods for `storage_servers` API endpoints
+
+## 0.2.7 (December 26, 2022)
+
+NOTES:
+
+* Updated the return payload for clouds.
+* Updated the return payload for networks.
+
+FEATURES:
+
 * **Network Pools** Client methods for `network_pools` API endpoints
 * **Network Pool Servers** Client methods for `network_pool_servers` API endpoints
 * **Network Routes** Client methods for `network_routes` API endpoints
 * **Network Static Routes** Client methods for `network_static_routes` API endpoints
 * **Network Subnets** Client methods for `network_subnets` API endpoints
-* **Oauth Clients** Client methods for `oauth_clients` API endpoints
-* **Storage Servers** Client methods for `storage_servers` API endpoints
 
 ## 0.2.6 (December 22, 2022)
 
