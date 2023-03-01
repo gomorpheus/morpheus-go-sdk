@@ -1,12 +1,13 @@
 ## Unreleased
 
+
+## 0.2.10 (March 1, 2023)
+
 NOTES:
 
 * Update resty library from 2.2.0 to 2.7.0.
 * Update option type response payload.
-
-FEATURES:
-
+* Update roles response payload.
 
 ## 0.2.9 (February  14, 2023)
 
