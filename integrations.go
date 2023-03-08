@@ -31,6 +31,7 @@ type Integration struct {
 	ServicePassword string `json:"servicePassword"`
 	Token           string `json:"token"`
 	TokenHash       string `json:"tokenHash"`
+	AuthType        string `json:"authType"`
 	Config          struct {
 		Inventory                       string                            `json:"inventory"`
 		DefaultBranch                   string                            `json:"defaultBranch"`
