@@ -234,6 +234,7 @@ monitoring | n/a
 monitoring.checks | [Checks](checks.go)
 monitoring.groups | [Check Groups](check_groups.go)
 monitoring.apps | [Monitoring Apps](monitoring_apps.go)
+monitoring_settings | [Monitoring Settings](monitoring_settings.go)
 monitoring.incidents | [Incidents](incidents.go)
 monitoring.alerts | [Alerts](alerts.go)
 monitoring.contacts | [Contacts](contacts.go)

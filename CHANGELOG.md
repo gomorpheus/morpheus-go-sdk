@@ -6,7 +6,8 @@ NOTES:
 
 FEATURES:
 
-* **Execution Request** Client methods for `guidance_settings` API endpoints
+* **Guidance Settings** Client methods for `guidance_settings` API endpoints
+* **Monitoring Settings** Client methods for `monitoring_settings` API endpoints
 
 ## 0.2.10 (March 1, 2023)
 
