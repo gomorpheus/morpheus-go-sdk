@@ -207,6 +207,7 @@ execution_request | n/a
 file_copy_request | n/a
 group_policies | n/a
 groups | [Groups](groups.go)
+guidance_settings | [Guidance Settings](guidance_settings.go)
 image_builder | n/a
 instances | [Instances](instances.go)
 integrations | [Integrations](integrations.go)
