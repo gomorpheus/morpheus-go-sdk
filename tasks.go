@@ -23,6 +23,12 @@ type Task struct {
 		Name string `json:"name"`
 	} `json:"taskType"`
 	TaskOptions struct {
+		AnsibleTowerGitRef        string `json:"ansibleTowerGitRef"`
+		AnsibleTowerInventoryId   string `json:"ansibleTowerInventoryId"`
+		AnsibleTowerIntegrationId string `json:"ansibleTowerIntegrationId"`
+		AnsibleTowerJobTemplateId string `json:"ansibleTowerJobTemplateId"`
+		AnsibleTowerExecuteMode   string `json:"ansibleTowerExecuteMode"`
+		AnsibleGroup              string `json:"ansibleGroup"`
 		AnsibleOptions            string `json:"ansibleOptions"`
 		AnsibleTags               string `json:"ansibleTags"`
 		AnsiblePlaybook           string `json:"ansiblePlaybook"`
@@ -42,6 +48,33 @@ type Task struct {
 		PasswordHash              string `json:"passwordHash"`
 		WriteAttributesAttributes string `json:"writeAttributes.attributes"`
 		Port                      string `json:"port"`
+		OperationalWorkflowId     string `json:"operationalWorkflowId"`
+		OperationalWorkflowName   string `json:"operationalWorkflowName"`
+		WebBody                   string `json:"webBody"`
+		WebUrl                    string `json:"webUrl"`
+		WebUser                   string `json:"webUser"`
+		IgnoreSSL                 string `json:"ignoreSSL"`
+		WebPassword               string `json:"webPassword"`
+		WebPasswordHash           string `json:"webPasswordHash"`
+		WebMethod                 string `json:"webMethod"`
+		WebHeaders                string `json:"webHeaders"`
+		ContainerScript           string `json:"containerScript"`
+		ContainerScriptId         string `json:"containerScriptId"`
+		ContainerTemplate         string `json:"containerTemplate"`
+		ContainerTemplateId       string `json:"containerTemplateId"`
+		ChefDataKey               string `json:"chefDataKey"`
+		ChefDataKeyHash           string `json:"chefDataKeyHash"`
+		ChefRunList               string `json:"chefRunList"`
+		ChefDataKeyPath           string `json:"chefDataKeyPath"`
+		ChefEnv                   string `json:"chefEnv"`
+		ChefNodeName              string `json:"chefNodeName"`
+		ChefAttributes            string `json:"chefAttributes"`
+		PuppetEnvironment         string `json:"puppetEnvironment"`
+		PuppetNodeName            string `json:"puppetNodeName"`
+		SshKey                    string `json:"sshKey"`
+		VroIntegrationId          string `json:"vroIntegrationId"`
+		VroWorkflow               string `json:"vroWorkflow"`
+		VroBody                   string `json:"vroBody"`
 	} `json:"taskOptions"`
 	File struct {
 		ID          int64  `json:"id"`
@@ -61,10 +94,13 @@ type Task struct {
 	RetryDelaySeconds int64  `json:"retryDelaySeconds"`
 	AllowCustomConfig bool   `json:"allowCustomConfig"`
 	Credential        struct {
+		ID   int64  `json:"id"`
 		Type string `json:"type"`
+		Name string `json:"name"`
 	} `json:"credential"`
 	DateCreated time.Time `json:"dateCreated"`
 	LastUpdated time.Time `json:"lastUpdated"`
+	Visibility  string    `json:"visibility"`
 }
 
 type ListTasksResult struct {

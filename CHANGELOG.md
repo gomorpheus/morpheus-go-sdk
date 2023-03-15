@@ -2,6 +2,14 @@
 
 NOTES:
 
+* Update automation tasks payload.
+
+FEATURES:
+
+## 0.3.0 (March 14, 2023)
+
+NOTES:
+
 * Update vRO payload.
 
 FEATURES:
