@@ -267,6 +267,7 @@ scale_thresholds | [Scale Thresholds](scale_thresholds.go)
 security_group_rules | n/a
 security_groups | n/a
 security_packages | [Security Packages](security_packages.go)
+security_scans | [Security Scans](security_scans.go)
 server_types | n/a
 servers | n/a
 service_plans | [Service Plans](service_plans.go)
