@@ -8,6 +8,7 @@ FEATURES:
 
 * **Guidance Settings** Client methods for `guidance_settings` API endpoints
 * **Monitoring Settings** Client methods for `monitoring_settings` API endpoints
+* **Security Scans** Client methods for `security_scans` API endpoints
 
 ## 0.2.10 (March 1, 2023)
 
