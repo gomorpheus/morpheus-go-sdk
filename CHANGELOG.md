@@ -1,5 +1,7 @@
 ## Unreleased
 
+## 0.3.1 (March 15, 2023)
+
 NOTES:
 
 * Update automation tasks payload.

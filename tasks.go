@@ -69,8 +69,10 @@ type Task struct {
 		ChefEnv                   string `json:"chefEnv"`
 		ChefNodeName              string `json:"chefNodeName"`
 		ChefAttributes            string `json:"chefAttributes"`
+		ChefServerId              string `json:"chefServerId"`
 		PuppetEnvironment         string `json:"puppetEnvironment"`
 		PuppetNodeName            string `json:"puppetNodeName"`
+		PuppetMasterId            string `json:"puppetMasterId"`
 		SshKey                    string `json:"sshKey"`
 		VroIntegrationId          string `json:"vroIntegrationId"`
 		VroWorkflow               string `json:"vroWorkflow"`
