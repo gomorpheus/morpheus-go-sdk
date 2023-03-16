@@ -262,6 +262,7 @@ processes | n/a
 provision_types | [Provision Types](provision_types.go)
 refresh_token | n/a
 reports | n/a
+resource_pool_groups | [Resource Pool Groups](resource_pool_groups.go)
 roles | [Roles](roles.go)
 scale_thresholds | [Scale Thresholds](scale_thresholds.go)
 security_group_rules | n/a

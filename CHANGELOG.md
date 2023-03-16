@@ -6,6 +6,8 @@ NOTES:
 
 FEATURES:
 
+* **Resource Pool Groups** Client methods for `resource_pool_groups` API endpoints
+
 ## 0.3.0 (March 14, 2023)
 
 NOTES:
