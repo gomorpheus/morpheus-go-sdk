@@ -1,5 +1,15 @@
 ## Unreleased
 
+NOTES:
+
+FEATURES:
+
+## 0.3.2 (April 18, 2023)
+
+NOTES:
+
+* Additional response payload updates.
+
 ## 0.3.1 (March 15, 2023)
 
 NOTES:

@@ -11,17 +11,18 @@ var (
 
 // PriceSets structures for use in request and response payloads
 type PriceSet struct {
-	ID           int64                  `json:"id"`
-	Name         string                 `json:"name"`
-	Code         string                 `json:"code"`
-	Active       bool                   `json:"active"`
-	PriceUnit    string                 `json:"priceUnit"`
-	Type         string                 `json:"type"`
-	RegionCode   string                 `json:"regionCode"`
-	Zone         map[string]interface{} `json:"zone"`
-	ZonePool     map[string]interface{} `json:"zonePool"`
-	Prices       []Price                `json:"prices"`
-	RestartUsage bool                   `json:"restartUsage"`
+	ID            int64                  `json:"id"`
+	Name          string                 `json:"name"`
+	Code          string                 `json:"code"`
+	Active        bool                   `json:"active"`
+	PriceUnit     string                 `json:"priceUnit"`
+	Type          string                 `json:"type"`
+	RegionCode    string                 `json:"regionCode"`
+	SystemCreated bool                   `json:"systemCreated"`
+	Zone          map[string]interface{} `json:"zone"`
+	ZonePool      map[string]interface{} `json:"zonePool"`
+	Prices        []Price                `json:"prices"`
+	RestartUsage  bool                   `json:"restartUsage"`
 }
 
 // ListPriceSetsResult structure parses the list priceSets response payload

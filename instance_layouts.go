@@ -11,7 +11,12 @@ var (
 
 // InstanceLayout structures for use in request and response payloads
 type InstanceLayout struct {
-	ID      int64 `json:"id"`
+	ID           int64 `json:"id"`
+	InstanceType struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+		Code string `json:"code"`
+	} `json:"instanceType"`
 	Account struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
@@ -24,6 +29,7 @@ type InstanceLayout struct {
 	Creatable                bool     `json:"creatable"`
 	MemoryRequirement        int64    `json:"memoryRequirement"`
 	SupportsConvertToManaged bool     `json:"supportsConvertToManaged"`
+	SortOrder                int64    `json:"sortOrder"`
 	ProvisionType            struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
@@ -37,6 +43,35 @@ type InstanceLayout struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"containerTypes"`
+	ContainerScripts []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"containerScripts"`
+	Mounts []struct {
+		ID         int64  `json:"id"`
+		Name       string `json:"name"`
+		Code       string `json:"code"`
+		ShortName  string `json:"shortName"`
+		MountType  string `json:"mountType"`
+		SortOrder  int64  `json:"sortOrder"`
+		Required   bool   `json:"required"`
+		Visible    bool   `json:"visible"`
+		Deployable bool   `json:"deployable"`
+		CanPersist bool   `json:"canPersist"`
+	} `json:"mounts"`
+	Ports []struct {
+		ID                  int64  `json:"id"`
+		Name                string `json:"name"`
+		Code                string `json:"code"`
+		ShortName           string `json:"shortName"`
+		InternalPort        int64  `json:"internalPort"`
+		ExternalPort        int64  `json:"externalPort"`
+		LoadBalancePort     int64  `json:"loadBalancePort"`
+		SortOrder           int64  `json:"sortOrder"`
+		LoadBalanceProtocol string `json:"loadBalanceProtocol"`
+		LoadBalance         bool   `json:"loadBalance"`
+		Visible             bool   `json:"visible"`
+	} `json:"ports"`
 	SpecTemplates []struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
@@ -54,6 +89,19 @@ type InstanceLayout struct {
 		Export           bool   `json:"export"`
 		Masked           bool   `json:"masked"`
 	} `json:"environmentVariables"`
+	TfVarSecret string `json:"tfvarSecret"`
+	Permissions struct {
+		ResourcePermissions struct {
+			DefaultStore  bool `json:"defaultStore"`
+			AllPlans      bool `json:"allPlans"`
+			DefaultTarget bool `json:"defaultTarget"`
+			CanManage     bool `json:"canManage"`
+			All           bool `json:"all"`
+			Account       struct {
+				ID int64 `json:"id"`
+			} `json:"account"`
+		} `json:"resourcePermissions"`
+	} `json:"permissions"`
 }
 
 // ListInstanceLayoutsResult structure parses the list instance layouts response payload

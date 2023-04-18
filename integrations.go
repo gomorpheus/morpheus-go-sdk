@@ -32,6 +32,7 @@ type Integration struct {
 	Token           string `json:"token"`
 	TokenHash       string `json:"tokenHash"`
 	AuthType        string `json:"authType"`
+	AuthId          string `json:"authId"`
 	Config          struct {
 		Inventory                       string                            `json:"inventory"`
 		DefaultBranch                   string                            `json:"defaultBranch"`
@@ -200,6 +201,16 @@ func (client *Client) CreateIntegration(req *Request) (*Response, error) {
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &CreateIntegrationResult{},
+	})
+}
+
+func (client *Client) RefreshIntegration(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/refresh", IntegrationsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateIntegrationResult{},
 	})
 }
 

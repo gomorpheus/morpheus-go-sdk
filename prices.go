@@ -11,19 +11,41 @@ var (
 
 // Prices structures for use in request and response payloads
 type Price struct {
-	ID            int64   `json:"id"`
-	Name          string  `json:"name"`
-	Code          string  `json:"code"`
-	Cost          float64 `json:"cost"`
-	Currency      string  `json:"currency"`
-	CustomPrice   float64 `json:"customPrice"`
-	IncurCharges  string  `json:"incurCharges"`
-	Markup        float64 `json:"markup"`
-	MarkupType    string  `json:"markupType"`
-	MarkupPercent float64 `json:"markupPercent"`
-	Price         float64 `json:"price"`
-	PriceType     string  `json:"priceType"`
-	PriceUnit     string  `json:"priceUnit"`
+	ID                  int64   `json:"id"`
+	Name                string  `json:"name"`
+	Code                string  `json:"code"`
+	Active              bool    `json:"active"`
+	PriceType           string  `json:"priceType"`
+	PriceUnit           string  `json:"priceUnit"`
+	AdditionalPriceUnit string  `json:"additionalPriceUnit"`
+	Price               float64 `json:"price"`
+	CustomPrice         float64 `json:"customPrice"`
+	MarkupType          string  `json:"markupType"`
+	Markup              float64 `json:"markup"`
+	MarkupPercent       float64 `json:"markupPercent"`
+	Cost                float64 `json:"cost"`
+	Currency            string  `json:"currency"`
+	IncurCharges        string  `json:"incurCharges"`
+	Platform            string  `json:"platform"`
+	Software            string  `json:"software"`
+	RestartUsage        bool    `json:"restartUsage"`
+	Volumetype          struct {
+		ID   int64  `json:"id"`
+		Code string `json:"code"`
+		Name string `json:"name"`
+	} `json:"volumeType"`
+	Datastore struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"datastore"`
+	CrossCloudApply bool `json:"crossCloudApply"`
+	Zone            struct {
+		ID int64 `json:"id"`
+	} `json:"zone"`
+	Zonepool struct {
+		ID int64 `json:"id"`
+	} `json:"zonePool"`
+	Account interface{} `json:"account"`
 }
 
 // ListPricesResult structure parses the list prices response payload

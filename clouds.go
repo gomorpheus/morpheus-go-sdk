@@ -72,6 +72,13 @@ type Cloud struct {
 		AccessKey            string `json:"accessKey"`
 		SecretKey            string `json:"secretKey"`
 		VPC                  string `json:"vpc"`
+		StsAssumeRole        string `json:"stsAssumeRole"`
+		UseHostCredentials   string `json:"useHostCredentials"`
+		CostingAccessKey     string `json:"costingAccessKey"`
+		CostingBucketName    string `json:"costingBucketName"`
+		CostingFolder        string `json:"costingFolder"`
+		CostingReportName    string `json:"costingReportName"`
+		CostingSecretKey     string `json:"costingSecretKey"`
 
 		// vSphere
 		APIUrl                     string `json:"apiUrl"`
@@ -242,7 +249,6 @@ type DeleteCloudResult struct {
 }
 
 // API endpoints
-
 func (client *Client) ListClouds(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",

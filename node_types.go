@@ -44,10 +44,10 @@ type NodeType struct {
 		Name string `json:"name"`
 	} `json:"containerTemplates"`
 	EnvironmentVariables []struct {
-		Evarname     string `json:"evarName"`
+		EvarName     string `json:"evarName"`
 		Name         string `json:"name"`
-		Defaultvalue string `json:"defaultValue"`
-		Valuetype    string `json:"valueType"`
+		DefaultValue string `json:"defaultValue"`
+		ValueType    string `json:"valueType"`
 		Export       bool   `json:"export"`
 		Masked       bool   `json:"masked"`
 	} `json:"environmentVariables"`
@@ -57,8 +57,8 @@ type ContainerPort struct {
 	ID                  int64  `json:"id"`
 	Name                string `json:"name"`
 	Port                int64  `json:"port"`
-	Loadbalanceprotocol string `json:"loadBalanceProtocol"`
-	Exportname          string `json:"exportName"`
+	LoadBalanceProtocol string `json:"loadBalanceProtocol"`
+	ExportName          string `json:"exportName"`
 }
 
 type ListNodeTypesResult struct {

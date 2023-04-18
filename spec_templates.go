@@ -16,11 +16,17 @@ type SpecTemplate struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	Name   string   `json:"name"`
-	Labels []string `json:"labels"`
-	Type   Type     `json:"type"`
-	Config Config   `json:"config"`
-	File   File     `json:"file"`
+	Name         string      `json:"name"`
+	Labels       []string    `json:"labels"`
+	Externalid   interface{} `json:"externalId"`
+	Externaltype interface{} `json:"externalType"`
+	Deploymentid interface{} `json:"deploymentId"`
+	Status       interface{} `json:"status"`
+	Type         Type        `json:"type"`
+	Config       Config      `json:"config"`
+	File         File        `json:"file"`
+	Createdby    string      `json:"createdBy"`
+	Updatedby    string      `json:"updatedBy"`
 }
 
 type Type struct {
@@ -41,6 +47,7 @@ type Config struct {
 }
 
 type File struct {
+	ID          int64      `json:"id"`
 	Sourcetype  string     `json:"sourceType"`
 	Content     string     `json:"content"`
 	ContentPath string     `json:"contentPath"`
@@ -49,7 +56,8 @@ type File struct {
 }
 
 type Repository struct {
-	ID int64 `json:"id"`
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
 }
 
 type ListSpecTemplatesResult struct {
