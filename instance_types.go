@@ -113,6 +113,9 @@ type InstanceType struct {
 		Export           bool   `json:"export"`
 		Masked           bool   `json:"masked"`
 	} `json:"environmentVariables"`
+	ImagePath     string        `json:"imagePath"`
+	DarkImagePath string        `json:"darkImagePath"`
+	PriceSets     []interface{} `json:"priceSets"`
 }
 
 // ListInstanceTypesResult structure parses the list instance types response payload

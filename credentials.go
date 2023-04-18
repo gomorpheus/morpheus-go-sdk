@@ -52,6 +52,15 @@ type Credential struct {
 	} `json:"user"`
 	DateCreated time.Time `json:"dateCreated"`
 	LastUpdated time.Time `json:"lastUpdated"`
+	Config      struct {
+		GrantType        string `json:"grantType"`
+		AccessTokenUrl   string `json:"accessTokenUrl"`
+		ClientAuth       string `json:"clientAuth"`
+		ClientSecret     string `json:"clientSecret"`
+		Scope            string `json:"scope"`
+		ClientId         string `json:"clientId"`
+		ClientSecretHash string `json:"clientSecretHash"`
+	} `json:"config"`
 }
 
 type ListCredentialsResult struct {

@@ -11,17 +11,93 @@ var (
 
 // Blueprint structures for use in request and response payloads
 type Blueprint struct {
-	ID                 int64       `json:"id"`
-	Name               string      `json:"name"`
-	Type               string      `json:"type"`
-	Description        string      `json:"description"`
-	Labels             []string    `json:"labels"`
-	Category           string      `json:"category"`
-	Visibility         string      `json:"visibility"`
-	Config             interface{} `json:"config"`
+	ID          int64    `json:"id"`
+	Name        string   `json:"name"`
+	Type        string   `json:"type"`
+	Description string   `json:"description"`
+	Labels      []string `json:"labels"`
+	Category    string   `json:"category"`
+	Visibility  string   `json:"visibility"`
+	Config      struct {
+		Name        string `json:"name"`
+		Description string `json:"description"`
+		Arm         struct {
+			ConfigType       string `json:"configType"`
+			OsType           string `json:"osType"`
+			CloudInitEnabled bool   `json:"cloudInitEnabled"`
+			InstallAgent     bool   `json:"installAgent"`
+			JSON             string `json:"json"`
+			Git              struct {
+				Path          string `json:"path"`
+				RepoId        int64  `json:"repoId"`
+				IntegrationId int64  `json:"integrationId"`
+				Branch        string `json:"branch"`
+			} `json:"git"`
+		} `json:"arm"`
+		CloudFormation struct {
+			ConfigType       string `json:"configType"`
+			CloudInitEnabled bool   `json:"cloudInitEnabled"`
+			InstallAgent     bool   `json:"installAgent"`
+			JSON             string `json:"json"`
+			YAML             string `json:"yaml"`
+			IAM              bool   `json:"IAM"`
+			IAMNamed         bool   `json:"CAPABILITY_NAMED_IAM"`
+			AutoExpand       bool   `json:"CAPABILITY_AUTO_EXPAND"`
+			Git              struct {
+				Path          string `json:"path"`
+				RepoId        int64  `json:"repoId"`
+				IntegrationId int64  `json:"integrationId"`
+				Branch        string `json:"branch"`
+			} `json:"git"`
+		} `json:"cloudformation"`
+		Helm struct {
+			ConfigType string `json:"configType"`
+			Git        struct {
+				Path          string `json:"path"`
+				RepoId        int    `json:"repoId"`
+				IntegrationId int    `json:"integrationId"`
+				Branch        string `json:"branch"`
+			} `json:"git"`
+		} `json:"helm"`
+		Kubernetes struct {
+			ConfigType string `json:"configType"`
+			Git        struct {
+				Path          string `json:"path"`
+				RepoId        int    `json:"repoId"`
+				IntegrationId int    `json:"integrationId"`
+				Branch        string `json:"branch"`
+			} `json:"git"`
+		} `json:"kubernetes"`
+		Terraform struct {
+			TfVersion      string `json:"tfVersion"`
+			Tf             string `json:"tf"`
+			TfVarSecret    string `json:"tfvarSecret"`
+			CommandOptions string `json:"commandOptions"`
+			ConfigType     string `json:"configType"`
+			JSON           string `json:"json"`
+			Git            struct {
+				Path          string `json:"path"`
+				RepoId        int64  `json:"repoId"`
+				IntegrationId int64  `json:"integrationId"`
+				Branch        string `json:"branch"`
+			} `json:"git"`
+		} `json:"terraform"`
+		Config struct {
+			Specs []struct {
+				ID    int64  `json:"id"`
+				Value string `json:"value"`
+				Name  string `json:"name"`
+			} `json:"specs"`
+		} `json:"config"`
+		Type     string `json:"type"`
+		Category string `json:"category"`
+		Image    string `json:"image"`
+	} `json:"config"`
 	ResourcePermission struct {
-		All   bool          `json:"all"`
-		Sites []interface{} `json:"sites"`
+		All      bool          `json:"all"`
+		Sites    []interface{} `json:"sites"`
+		AllPlans bool          `json:"allPlans"`
+		Plans    []interface{} `json:"plans"`
 	} `json:"resourcePermission"`
 	Owner struct {
 		ID       int64  `json:"id"`

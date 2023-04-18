@@ -11,15 +11,15 @@ var (
 
 // ExecuteSchedule structures for use in request and response payloads
 type ExecuteSchedule struct {
-	ID           int64  `json:"id"`
-	Name         string `json:"name"`
-	Desription   string `json:"description"`
-	ScheduleType string `json:"scheduleType"`
-	TimeZone     string `json:"scheduleTimezone"`
-	Cron         string `json:"cron"`
-	Enabled      bool   `json:"enabled"`
-	DateCreated  string `json:"dateCreated"`
-	LastUpdated  string `json:"lastUpdated"`
+	ID               int64  `json:"id"`
+	Name             string `json:"name"`
+	Enabled          bool   `json:"enabled"`
+	ScheduleType     string `json:"scheduleType"`
+	ScheduleTimeZone string `json:"scheduleTimezone"`
+	Desription       string `json:"description"`
+	Cron             string `json:"cron"`
+	DateCreated      string `json:"dateCreated"`
+	LastUpdated      string `json:"lastUpdated"`
 }
 
 // ListExecuteSchedulesResult structure parses the list execute schedules response payload

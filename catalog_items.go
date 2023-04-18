@@ -12,16 +12,21 @@ var (
 
 // CatalogItem structures for use in request and response payloads
 type CatalogItem struct {
-	ID            int64       `json:"id"`
-	Name          string      `json:"name"`
-	Labels        []string    `json:"labels"`
-	Description   string      `json:"description"`
-	Type          string      `json:"type"`
+	ID          int64    `json:"id"`
+	Name        string   `json:"name"`
+	Code        string   `json:"code"`
+	Description string   `json:"description"`
+	Category    string   `json:"category"`
+	Labels      []string `json:"labels"`
+	Type        string   `json:"type"`
+	Visibility  string   `json:"visibility"`
+
 	RefType       string      `json:"refType"`
 	RefID         interface{} `json:"refId"`
 	Active        bool        `json:"active"`
 	Enabled       bool        `json:"enabled"`
 	Featured      bool        `json:"featured"`
+	AllowQuantity bool        `json:"allowQuantity"`
 	IconPath      string      `json:"iconPath"`
 	ImagePath     string      `json:"imagePath"`
 	DarkImagePath string      `json:"darkImagePath"`

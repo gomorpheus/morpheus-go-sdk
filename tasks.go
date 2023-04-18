@@ -77,6 +77,9 @@ type Task struct {
 		VroIntegrationId          string `json:"vroIntegrationId"`
 		VroWorkflow               string `json:"vroWorkflow"`
 		VroBody                   string `json:"vroBody"`
+		EmailAddress              string `json:"emailAddress"`
+		EmailSubject              string `json:"emailSubject"`
+		EmailSkipTemplate         string `json:"emailSkipTemplate"`
 	} `json:"taskOptions"`
 	File struct {
 		ID          int64  `json:"id"`

@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -11,14 +12,80 @@ var (
 
 // ServicePlans structures for use in request and response payloads
 type ServicePlan struct {
-	ID             int64  `json:"id"`
-	Name           string `json:"name"`
-	Code           string `json:"code"`
-	Active         bool   `json:"active"`
-	SortOrder      int64  `json:"sortOrder"`
-	Description    string `json:"description"`
-	MaxCores       int64  `json:"maxCores"`
-	CoresPerSocket int64  `json:"coresPerSocket"`
+	ID                   int64       `json:"id"`
+	Name                 string      `json:"name"`
+	Code                 string      `json:"code"`
+	Active               bool        `json:"active"`
+	SortOrder            int64       `json:"sortOrder"`
+	Description          string      `json:"description"`
+	CoresPerSocket       int64       `json:"coresPerSocket"`
+	MaxStorage           int64       `json:"maxStorage"`
+	MaxMemory            int64       `json:"maxMemory"`
+	MaxCpu               int64       `json:"maxCpu"`
+	MaxCores             int64       `json:"maxCores"`
+	MaxDisks             int64       `json:"maxDisks"`
+	CustomCpu            bool        `json:"customCpu"`
+	CustomCores          bool        `json:"customCores"`
+	CustomMaxStorage     bool        `json:"customMaxStorage"`
+	CustomMaxDataStorage bool        `json:"customMaxDataStorage"`
+	CustomMaxMemory      bool        `json:"customMaxMemory"`
+	AddVolumes           bool        `json:"addVolumes"`
+	MemoryOptionSource   interface{} `json:"memoryOptionSource"`
+	CpuOptionSource      interface{} `json:"cpuOptionSource"`
+	DateCreated          time.Time   `json:"dateCreated"`
+	LastUpdated          time.Time   `json:"lastUpdated"`
+	RegionCode           string      `json:"regionCode"`
+	Visibility           string      `json:"visibility"`
+	Editable             bool        `json:"editable"`
+	Provisiontype        struct {
+		ID                        int64  `json:"id"`
+		Name                      string `json:"name"`
+		Code                      string `json:"code"`
+		RootDiskCustomizable      bool   `json:"rootDiskCustomizable"`
+		AddVolumes                bool   `json:"addVolumes"`
+		CustomizeVolume           bool   `json:"customizeVolume"`
+		HasConfigurableCpuSockets bool   `json:"hasConfigurableCpuSockets"`
+	} `json:"provisionType"`
+	Tenants   string     `json:"tenants"`
+	PriceSets []PriceSet `json:"priceSets"`
+	Config    struct {
+		StorageSizeType string `json:"storageSizeType"`
+		MemorySizeType  string `json:"memorySizeType"`
+		Ranges          struct {
+			MinStorage string `json:"minStorage"`
+			MaxStorage string `json:"maxStorage"`
+			MinMemory  int64  `json:"minMemory"`
+			MaxMemory  int64  `json:"maxMemory"`
+			MinCores   string `json:"minCores"`
+			MaxCores   string `json:"maxCores"`
+		} `json:"ranges"`
+	} `json:"config"`
+	Zones []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+		Code string `json:"code"`
+	} `json:"zones"`
+	Permissions struct {
+		ResourcePermissions struct {
+			DefaultStore  bool `json:"defaultStore"`
+			AllPlans      bool `json:"allPlans"`
+			DefaultTarget bool `json:"defaultTarget"`
+			CanManage     bool `json:"canManage"`
+			All           bool `json:"all"`
+			Account       struct {
+				ID int64 `json:"id"`
+			} `json:"account"`
+			Sites []struct {
+				ID      int64  `json:"id"`
+				Name    string `json:"name"`
+				Default bool   `json:"default"`
+			} `json:"sites"`
+			Plans []interface{} `json:"plans"`
+		} `json:"resourcePermissions"`
+	} `json:"permissions"`
+	TenantPermission struct {
+		Accounts []int64 `json:"accounts"`
+	} `json:"tenantPermissions"`
 }
 
 // ListServicePlansResult structure parses the list servicePlans response payload

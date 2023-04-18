@@ -52,6 +52,8 @@ type Job struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"type"`
+	SecurityProfile string `json:"securityProfile"`
+	ScanPath        string `json:"scanPath"`
 }
 
 // ListJobsResult structure parses the list jobs response payload
