@@ -216,3 +216,25 @@ func (client *Client) FindVirtualImageByName(name string) (*Response, error) {
 	virtualImageID := firstRecord.ID
 	return client.GetVirtualImage(virtualImageID, &Request{})
 }
+func (client *Client) FindVirtualImageByNameAndType(name string, imagetype string) (*Response, error) {
+        // Find by name, then get by ID
+        resp, err := client.ListVirtualImages(&Request{
+                QueryParams: map[string]string{
+                        "name":       name,
+                        "filterType": "All",
+                        "imageType": imagetype,
+                },
+        })
+        if err != nil {
+                return resp, err
+        }
+        listResult := resp.Result.(*ListVirtualImagesResult)
+        virtualImagesCount := len(*listResult.VirtualImages)
+        if virtualImagesCount != 1 {
+                return resp, fmt.Errorf("found %d Virtual Images for %v", virtualImagesCount, name)
+        }
+        firstRecord := (*listResult.VirtualImages)[0]
+        virtualImageID := firstRecord.ID
+        return client.GetVirtualImage(virtualImageID, &Request{})
+}
+
