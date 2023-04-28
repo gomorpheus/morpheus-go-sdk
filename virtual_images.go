@@ -222,7 +222,7 @@ func (client *Client) FindVirtualImageByNameAndType(name string, imagetype strin
                 QueryParams: map[string]string{
                         "name":       name,
                         "filterType": "All",
-                        "imageType": "vmware",
+                        "imageType": imagetype,
                 },
         })
         if err != nil {
