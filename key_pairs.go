@@ -78,10 +78,11 @@ func (client *Client) CreateKeyPair(name string, publicKey string) (*Response, e
 		Path:   "/api/key-pairs",
 		Body: map[string]interface{}{
 			"keyPair": map[string]string{
-				"name":      "test123",
-				"publicKey": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDJzKbAk5Yu1YDNTcr4IxKOcvO3nZtCbRECons3Hl7SWCgX1+aj1BANJY0DTmpjbQ+rv+TkbWrQePwRy+HR4s6So4GJImlyOLmFMH5qJOJRMCoi3vUgyFa0cluT4G9MBK66ym1kYB3ZXh3RAMwmOY3jKmjRAA5282K3F+UT+bedihQZuuW0IIOrnLD1kFg39xB8XJsu0ysym1L1tEfh19i15bciQdESsRf0ClAn8ELgn6LZ/VYS5cOr03wa0VZojwF+GrxHEvYNP0KKvUb9Sgt7grlfieWf0f8LHdS6vbNNhumvzGJWHU9Ak6jNkvXO3aHaGhOUtoZYtXhYS96C8FlatZGHKnhMfkkRWcujW7lB4xujPs7R0yzOCwHZ65BRCWk1qn2yZti8OYhl4uZ4arUOMhXvOndLKOGBf1tShLrNxATs4Fe5L0G0B6iL0xJ8Xc4m1ppfot91hRwyFzn4QuVDnlr4zKyQI7JhOhwprwJDPreKi+iUPtRVxweXg98hOK0= stefan@console",
+				"name":      name,
+				"publicKey": publicKey,
 			},
 		},
+		Result: &CreateKeyPairResult{},
 	}
 	return client.Execute(req)
 }
@@ -90,5 +91,17 @@ func (client *Client) DeleteKeyPair(id int64) (*Response, error) {
 		Path:   fmt.Sprintf("%s/%d", KeyPairsPath, id),
 		Method: "DELETE",
 		Result: &DeleteKeyPairResult{},
+	})
+}
+func (client *Client) GetKeyPairByName(name string) (*Response, error) {
+	//	req :=
+	fmt.Printf("%s?name=\"%s\"", KeyPairsPath, name)
+	return client.Execute(&Request{
+		Method: "GET",
+		QueryParams: map[string]string{
+			"name": name,
+		},
+		Path:   KeyPairsPath,
+		Result: &ListKeyPairsResult{},
 	})
 }
