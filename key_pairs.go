@@ -57,7 +57,7 @@ type UpdateKeyPairBody struct {
 	CreateKeyPairPayload
 }
 
-func (client *Client) ListKeyPairs(req *Request) (*Response, error) {
+func (client *Client) ListKeyPairs() (*Response, error) {
 	return client.Execute(&Request{
 		Method: "GET",
 		Path:   KeyPairsPath,
@@ -65,10 +65,43 @@ func (client *Client) ListKeyPairs(req *Request) (*Response, error) {
 	})
 }
 
-func (client *Client) GetKeyPair(id int64, req *Request) (*Response, error) {
+func (client *Client) GetKeyPair(id int64) (*Response, error) {
 	return client.Execute(&Request{
 		Method: "GET",
 		Path:   fmt.Sprintf("%s/%d", KeyPairsPath, id),
 		Result: &GetKeyPairResult{},
+	})
+}
+func (client *Client) CreateKeyPair(name string, publicKey string) (*Response, error) {
+	req := &Request{
+		Method: "POST",
+		Path:   "/api/key-pairs",
+		Body: map[string]interface{}{
+			"keyPair": map[string]string{
+				"name":      name,
+				"publicKey": publicKey,
+			},
+		},
+		Result: &CreateKeyPairResult{},
+	}
+	return client.Execute(req)
+}
+func (client *Client) DeleteKeyPair(id int64) (*Response, error) {
+	return client.Execute(&Request{
+		Path:   fmt.Sprintf("%s/%d", KeyPairsPath, id),
+		Method: "DELETE",
+		Result: &DeleteKeyPairResult{},
+	})
+}
+func (client *Client) GetKeyPairByName(name string) (*Response, error) {
+	//	req :=
+	fmt.Printf("%s?name=\"%s\"", KeyPairsPath, name)
+	return client.Execute(&Request{
+		Method: "GET",
+		QueryParams: map[string]string{
+			"name": name,
+		},
+		Path:   KeyPairsPath,
+		Result: &ListKeyPairsResult{},
 	})
 }
