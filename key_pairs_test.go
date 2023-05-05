@@ -8,15 +8,13 @@ import (
 
 func TestListKeyPairs(t *testing.T) {
 	client := getTestClient(t)
-	req := &morpheus.Request{}
-	resp, err := client.ListKeyPairs(req)
+	resp, err := client.ListKeyPairs()
 	assertResponse(t, resp, err)
 }
 
 func TestGetKeyPair(t *testing.T) {
 	client := getTestClient(t)
-	req := &morpheus.Request{}
-	resp, err := client.ListKeyPairs(req)
+	resp, err := client.ListKeyPairs()
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
@@ -27,7 +25,7 @@ func TestGetKeyPair(t *testing.T) {
 	if recordCount != 0 {
 		// Get by ID
 		record := (*result.KeyPairs)[0]
-		resp, err = client.GetKeyPair(record.ID, &morpheus.Request{})
+		resp, err = client.GetKeyPair(record.ID)
 		assertResponse(t, resp, err)
 	}
 }

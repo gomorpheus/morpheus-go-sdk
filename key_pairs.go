@@ -11,10 +11,16 @@ var (
 
 // KeyPair structures for use in request and response payloads
 type KeyPair struct {
-	ID        int64  `json:"id"`
-	Name      string `json:"name"`
-	PublicKey string `json:"publicKey"`
-	// PrivateKey string `json:"privateKey"`
+	ID             int64  `json:"id"`
+	Name           string `json:"name"`
+	AccountId      int64  `json:"accountId"`
+	PublicKey      string `json:"publicKey"`
+	HasPrivateKey  bool   `json:"hasPrivateKey"`
+	PrivateKeyHash string `json:"privateKeyHash"`
+	Fingerprint    string `json:"fingerprint"`
+	PrivateKey     string `json:"privateKey"`
+	DateCreated    string `json:"dateCreated"`
+	LastUpdated    string `json:"lastUpdated"`
 }
 
 // ListKeyPairsResult structure parses the list key pairs response payload
@@ -43,20 +49,6 @@ type DeleteKeyPairResult struct {
 	DeleteResult
 }
 
-type KeyPairPayload struct {
-	Name       string `json:"name"`
-	PublicKey  string `json:"publicKey"`
-	PrivateKey string `json:"privateKey"`
-}
-
-type CreateKeyPairPayload struct {
-	KeyPair *KeyPairPayload `json:"keyPair"`
-}
-
-type UpdateKeyPairBody struct {
-	CreateKeyPairPayload
-}
-
 func (client *Client) ListKeyPairs() (*Response, error) {
 	return client.Execute(&Request{
 		Method: "GET",
@@ -72,30 +64,25 @@ func (client *Client) GetKeyPair(id int64) (*Response, error) {
 		Result: &GetKeyPairResult{},
 	})
 }
-func (client *Client) CreateKeyPair(name string, publicKey string) (*Response, error) {
-	req := &Request{
-		Method: "POST",
-		Path:   "/api/key-pairs",
-		Body: map[string]interface{}{
-			"keyPair": map[string]string{
-				"name":      name,
-				"publicKey": publicKey,
-			},
-		},
-		Result: &CreateKeyPairResult{},
-	}
-	return client.Execute(req)
-}
-func (client *Client) DeleteKeyPair(id int64) (*Response, error) {
+func (client *Client) CreateKeyPair(req *Request) (*Response, error) {
 	return client.Execute(&Request{
-		Path:   fmt.Sprintf("%s/%d", KeyPairsPath, id),
-		Method: "DELETE",
-		Result: &DeleteKeyPairResult{},
+		Method:      "POST",
+		Path:        KeyPairsPath,
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateKeyPairResult{},
+	})
+}
+func (client *Client) DeleteKeyPair(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d", KeyPairsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &DeleteKeyPairResult{},
 	})
 }
 func (client *Client) GetKeyPairByName(name string) (*Response, error) {
-	//	req :=
-	fmt.Printf("%s?name=\"%s\"", KeyPairsPath, name)
 	return client.Execute(&Request{
 		Method: "GET",
 		QueryParams: map[string]string{

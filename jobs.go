@@ -23,7 +23,7 @@ type Job struct {
 	Workflow struct {
 		ID int64 `json:"id"`
 	} `json:"workflow"`
-	Category  interface{} `json:"category"`
+	Category  string `json:"category"`
 	CreatedBy struct {
 		DisplayName string `json:"displayName"`
 		ID          int64  `json:"id"`
@@ -33,14 +33,14 @@ type Job struct {
 	CustomOptions interface{} `json:"customOptions"`
 	DateCreated   time.Time   `json:"dateCreated"`
 	DateTime      interface{} `json:"dateTime"`
-	Description   interface{} `json:"description"`
+	Description   string      `json:"description"`
 	JobSummary    string      `json:"jobSummary"`
 	LastResult    string      `json:"lastResult"`
 	LastRun       time.Time   `json:"lastRun"`
 	LastUpdated   time.Time   `json:"lastUpdated"`
 	Namespace     interface{} `json:"namespace"`
 	ScheduleMode  string      `json:"scheduleMode"`
-	Status        interface{} `json:"status"`
+	Status        string      `json:"status"`
 	Targets       []struct {
 		ID         int64  `json:"id"`
 		Name       string `json:"name"`

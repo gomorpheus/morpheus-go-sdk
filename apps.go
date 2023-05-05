@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -11,12 +12,65 @@ var (
 
 // App structures for use in request and response payloads
 type App struct {
-	ID          int64                  `json:"id"`
-	Name        string                 `json:"name"`
-	Description string                 `json:"description"`
-	Group       map[string]interface{} `json:"group"`
-	Environment string                 `json:"environment"`
-	BlueprintID string                 `json:"blueprintId"`
+	ID          int64    `json:"id"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Labels      []string `json:"labels"`
+	Environment string   `json:"environment"`
+	AccountId   int64    `json:"accountId"`
+	Account     struct {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"account"`
+	Owner struct {
+		Id       int64  `json:"id"`
+		Username string `json:"username"`
+	} `json:"owner"`
+	SiteId int64 `json:"siteId"`
+	Group  struct {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"group"`
+	Blueprint struct {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+		Type string `json:"type"`
+	} `json:"blueprint"`
+	Type           string    `json:"type"`
+	DateCreated    time.Time `json:"dateCreated"`
+	LastUpdated    time.Time `json:"lastUpdated"`
+	AppContext     string    `json:"appContext"`
+	Status         string    `json:"status"`
+	AppStatus      string    `json:"appStatus"`
+	InstanceCount  int64     `json:"instanceCount"`
+	ContainerCount int64     `json:"containerCount"`
+	AppTiers       []struct {
+		Tier struct {
+			Id   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"tier"`
+		AppInstances []struct {
+			Config   interface{} `json:"config"`
+			Instance Instance    `json:"instance"`
+		} `json:"appInstances"`
+		BootSequence int64 `json:"bootSequence"`
+	} `json:"appTiers"`
+	Instances []struct {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"instances"`
+	Stats struct {
+		UsedMemory            int64   `json:"usedMemory"`
+		MaxMemory             int64   `json:"maxMemory"`
+		UsedStorage           int64   `json:"usedStorage"`
+		MaxStorage            int64   `json:"maxStorage"`
+		Running               int64   `json:"running"`
+		Total                 int64   `json:"total"`
+		CpuUsage              float64 `json:"cpuUsage"`
+		InstanceCount         int64   `json:"instanceCount"`
+		InstanceDayCount      []int64 `json:"instanceDayCount"`
+		InstanceDayCountTotal int64   `json:"instanceDayCountTotal"`
+	} `json:"stats"`
 }
 
 // ListAppsResult structure parses the list apps response payload
