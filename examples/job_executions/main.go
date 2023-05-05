@@ -16,12 +16,12 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// Get apps
+	// List job executions
 	req := &morpheus.Request{}
-	appsResponse, err := client.ListApps(req)
+	jobExecutionsResponse, err := client.ListJobExecutions(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := appsResponse.Result.(*morpheus.ListAppsResult)
-	log.Println(result.Apps)
+	result := jobExecutionsResponse.Result.(*morpheus.ListJobExecutionsResult)
+	log.Println(result.JobExecutions)
 }

@@ -15,6 +15,7 @@ type Tenant struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Subdomain   string `json:"subdomain"`
+	Master      bool   `json:"master"`
 	Role        struct {
 		ID          int64  `json:"id"`
 		Authority   string `json:"authority"`

@@ -2,7 +2,11 @@
 
 NOTES:
 
+* Update instance and app response payloads.
+
 FEATURES:
+
+* **Job Executions** Client methods for `job_executions` API endpoints
 
 ## 0.3.2 (April 18, 2023)
 
