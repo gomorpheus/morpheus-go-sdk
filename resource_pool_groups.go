@@ -83,7 +83,7 @@ func (client *Client) CreateResourcePoolGroup(req *Request) (*Response, error) {
 	})
 }
 
-func (client *Client) UpdateResourcePoolGroup(cloudId int64, id int64, req *Request) (*Response, error) {
+func (client *Client) UpdateResourcePoolGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "PUT",
 		Path:        fmt.Sprintf("%s/%d", ResourcePoolGroupsPath, id),
@@ -93,7 +93,7 @@ func (client *Client) UpdateResourcePoolGroup(cloudId int64, id int64, req *Requ
 	})
 }
 
-func (client *Client) DeleteResourcePoolGroup(cloudId int64, id int64, req *Request) (*Response, error) {
+func (client *Client) DeleteResourcePoolGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
 		Path:        fmt.Sprintf("%s/%d", ResourcePoolGroupsPath, id),

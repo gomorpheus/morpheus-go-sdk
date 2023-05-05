@@ -3,6 +3,7 @@
 NOTES:
 
 * Update instance and app response payloads.
+* Fix an issue with the update and delete methods for resource pool management in which a cloud id was erroneously required.
 
 FEATURES:
 
