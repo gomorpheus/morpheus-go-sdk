@@ -1,9 +1,13 @@
 ## Unreleased
 
+
+## 0.3.3 (May 11, 2023)
+
 NOTES:
 
 * Update instance and app response payloads.
 * Fix an issue with the update and delete methods for resource pool management in which a cloud id was erroneously required.
+* Add additional methods for managing key pairs
 
 FEATURES:
 
