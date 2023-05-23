@@ -44,6 +44,7 @@ type Task struct {
 		Username                  string `json:"username"`
 		Host                      string `json:"host"`
 		LocalScriptGitRef         string `json:"localScriptGitRef"`
+		LocalScriptGitId          string `json:"localScriptGitId"`
 		Password                  string `json:"password"`
 		PasswordHash              string `json:"passwordHash"`
 		WriteAttributesAttributes string `json:"writeAttributes.attributes"`
