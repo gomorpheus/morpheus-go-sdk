@@ -1,5 +1,14 @@
 ## Unreleased
 
+## 0.3.4 (June 4, 2023)
+
+NOTES:
+
+* Update task response payload.
+
+FEATURES:
+
+* **Service Catalog** Client methods for `service_catalog` API endpoints
 
 ## 0.3.3 (May 11, 2023)
 
