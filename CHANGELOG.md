@@ -1,5 +1,10 @@
 ## Unreleased
 
+NOTES:
+
+* Update clouds response payload along with adding support for cloud datastores and cloud resource pools.
+* Update instances response payload to add support for network domains and stats.
+
 ## 0.3.4 (June 4, 2023)
 
 NOTES:

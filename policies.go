@@ -36,10 +36,12 @@ type Policy struct {
 		Value                            string      `json:"value"`
 		PowerSchedule                    string      `json:"powerSchedule"`
 		PowerScheduleType                string      `json:"powerScheduleType"`
-		AccountIntegrationId             string      `json:"accountIntegrationId"`
-		WorkflowID                       interface{} `json:"workflowId"`
+		AccountIntegrationId             int64       `json:"accountIntegrationId"`
+		WorkflowID                       int64       `json:"workflowId"`
 		CreateUser                       string      `json:"createUser"`
 		CreateUserType                   string      `json:"createUserType"`
+		MaxSnapshots                     string      `json:"maxSnapshots"`
+		ExcludeContainers                string      `json:"excludeContainers"`
 		MaxRouters                       string      `json:"maxRouters"`
 		MaxNetworks                      string      `json:"maxNetworks"`
 		MaxVms                           string      `json:"maxVms"`

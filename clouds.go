@@ -33,11 +33,11 @@ type Cloud struct {
 	StatusDate           string    `json:"statusDate"`
 	LastSync             string    `json:"lastSync"`
 	NextRunDate          string    `json:"nextRunDate"`
-	LastSyncDuration     string    `json:"lastSyncDuration"`
+	LastSyncDuration     int64     `json:"lastSyncDuration"`
 	CostStatus           string    `json:"costStatus"`
 	CostStatusMessage    string    `json:"costStatusMessage"`
 	CostStatusDate       string    `json:"costStatusDate"`
-	CostLastSyncDuration string    `json:"costLastSyncDuration"`
+	CostLastSyncDuration int64     `json:"costLastSyncDuration"`
 	CostLastSync         string    `json:"costLastSync"`
 	CloudType            CloudType `json:"zoneType"`
 	CloudTypeID          int64     `json:"zoneTypeId"`
@@ -248,6 +248,102 @@ type DeleteCloudResult struct {
 	DeleteResult
 }
 
+// Datastores
+type Datastore struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Zone struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"zone"`
+	Type       string `json:"type"`
+	FreeSpace  int64  `json:"freeSpace"`
+	Online     bool   `json:"online"`
+	Active     bool   `json:"active"`
+	Visibility string `json:"visibility"`
+	Tenants    []struct {
+		ID            int    `json:"id"`
+		Name          string `json:"name"`
+		DefaultStore  bool   `json:"defaultStore"`
+		DefaultTarget bool   `json:"defaultTarget"`
+	} `json:"tenants"`
+	ResourcePermission struct {
+		All   bool `json:"all"`
+		Sites []struct {
+			ID      int    `json:"id"`
+			Name    string `json:"name"`
+			Default bool   `json:"default"`
+		} `json:"sites"`
+		AllPlans bool          `json:"allPlans"`
+		Plans    []interface{} `json:"plans"`
+	} `json:"resourcePermission"`
+}
+
+type ListCloudDatastoresResult struct {
+	Datastores *[]Datastore `json:"datastores"`
+	Meta       *MetaResult  `json:"meta"`
+}
+
+type GetCloudDatastoreResult struct {
+	Datastore *Datastore `json:"datastore"`
+}
+
+type UpdateCloudDatastoreResult struct {
+	Success   bool              `json:"success"`
+	Message   string            `json:"msg"`
+	Errors    map[string]string `json:"errors"`
+	Datastore *Datastore        `json:"datastore"`
+}
+
+// Resource Folder
+type Folder struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Zone struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"zone"`
+	Parent struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"parent"`
+	Type          string `json:"type"`
+	ExternalId    string `json:"externalId"`
+	Visibility    string `json:"visibility"`
+	ReadOnly      bool   `json:"readOnly"`
+	DefaultFolder bool   `json:"defaultFolder"`
+	DefaultStore  bool   `json:"defaultStore"`
+	Active        bool   `json:"active"`
+	Tenants       []struct {
+		ID            int64  `json:"id"`
+		Name          string `json:"name"`
+		DefaultStore  bool   `json:"defaultStore"`
+		DefaultTarget bool   `json:"defaultTarget"`
+	} `json:"tenants"`
+	ResourcePermission struct {
+		All      bool          `json:"all"`
+		Sites    []interface{} `json:"sites"`
+		AllPlans bool          `json:"allPlans"`
+		Plans    []interface{} `json:"plans"`
+	} `json:"resourcePermission"`
+}
+
+type ListCloudResourceFoldersResult struct {
+	Folders *[]Folder   `json:"folders"`
+	Meta    *MetaResult `json:"meta"`
+}
+
+type GetCloudResourceFolderResult struct {
+	Folder *Folder `json:"folder"`
+}
+
+type UpdateCloudResourceFolderResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Folder  *Folder           `json:"folder"`
+}
+
 // API endpoints
 func (client *Client) ListClouds(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -318,4 +414,58 @@ func (client *Client) FindCloudByName(name string) (*Response, error) {
 	firstRecord := (*listResult.Clouds)[0]
 	cloudId := firstRecord.ID
 	return client.GetCloud(cloudId, &Request{})
+}
+
+func (client *Client) ListCloudDatastores(zoneId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/data-stores", CloudsPath, zoneId),
+		QueryParams: req.QueryParams,
+		Result:      &ListCloudDatastoresResult{},
+	})
+}
+
+func (client *Client) GetCloudDatastore(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/data-stores/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Result:      &GetCloudDatastoreResult{},
+	})
+}
+
+func (client *Client) UpdateCloudDatastore(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/data-stores/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Result:      &UpdateCloudDatastoreResult{},
+	})
+}
+
+func (client *Client) ListCloudResourceFolders(zoneId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/folders", CloudsPath, zoneId),
+		QueryParams: req.QueryParams,
+		Result:      &ListCloudResourceFoldersResult{},
+	})
+}
+
+func (client *Client) GetCloudResourceFolder(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/folders/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Result:      &GetCloudResourceFolderResult{},
+	})
+}
+
+func (client *Client) UpdateCloudResourceFolder(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/folders/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Result:      &UpdateCloudResourceFolderResult{},
+	})
 }
