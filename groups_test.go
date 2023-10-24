@@ -83,5 +83,4 @@ func TestGroupsCRUD(t *testing.T) {
 	assertResponse(t, deleteResp, deleteErr)
 	assertNotNil(t, deleteResult)
 	assertEqual(t, deleteResult.Success, true)
-
 }
