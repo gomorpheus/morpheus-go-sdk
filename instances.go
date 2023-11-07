@@ -21,6 +21,7 @@ type Instance struct {
 	} `json:"tenant"`
 	Name         string `json:"name"`
 	Description  string `json:"description"`
+	DisplayName  string `json:"displayName"`
 	InstanceType struct {
 		ID       int64  `json:"id"`
 		Name     string `json:"name"`
@@ -41,6 +42,7 @@ type Instance struct {
 	Cloud struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
+		Type string `json:"type"`
 	} `json:"cloud"`
 	Containers []int64 `json:"containers"`
 	Servers    []int64 `json:"servers"`
@@ -109,10 +111,13 @@ type Instance struct {
 		Currency string  `json:"currency"`
 		Unit     string  `json:"unit"`
 	} `json:"instancePrice"`
-	DateCreated       string `json:"dateCreated"`
-	LastUpdated       string `json:"lastUpdated"`
-	HostName          string `json:"hostName"`
-	DomainName        string `json:"domainName"`
+	DateCreated   string `json:"dateCreated"`
+	LastUpdated   string `json:"lastUpdated"`
+	HostName      string `json:"hostName"`
+	DomainName    string `json:"domainName"`
+	NetworkDomain struct {
+		Id int64 `json:"id"`
+	} `json:"networkDomain"`
 	EnvironmentPrefix string `json:"environmentPrefix"`
 	FirewallEnabled   bool   `json:"firewallEnabled"`
 	NetworkLevel      string `json:"networkLevel"`
@@ -124,6 +129,16 @@ type Instance struct {
 		Id       int64  `json:"id"`
 		Username string `json:"username"`
 	} `json:"createdBy"`
+	Stats struct {
+		UsedStorage  int64   `json:"usedStorage"`
+		MaxStorage   int64   `json:"maxStorage"`
+		UsedMemory   int64   `json:"usedMemory"`
+		MaxMemory    int64   `json:"maxMemory"`
+		UsedCpu      float64 `json:"usedCpu"`
+		CpuUsage     float64 `json:"cpuUsage"`
+		CpuUsagePeak float64 `json:"cpuUsagePeak"`
+		CpuUsageAvg  float64 `json:"cpuUsageAvg"`
+	} `json:"stats"`
 }
 
 type InstancePlan struct {
