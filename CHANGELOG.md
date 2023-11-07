@@ -14,6 +14,7 @@ NOTES:
 FEATURES:
 
 * **Service Catalog** Client methods for `service_catalog` API endpoints
+* **Cypher** Client methods for `cypher` API endpoints
 
 ## 0.3.3 (May 11, 2023)
 
