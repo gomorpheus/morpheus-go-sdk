@@ -1,9 +1,15 @@
 ## Unreleased
 
+## 0.3.5 (November 7, 2023)
+
 NOTES:
 
 * Update clouds response payload along with adding support for cloud datastores and cloud resource pools.
 * Update instances response payload to add support for network domains and stats.
+
+FEATURES:
+
+* **Cypher** Client methods for `cypher` API endpoints
 
 ## 0.3.4 (June 4, 2023)
 
@@ -14,7 +20,6 @@ NOTES:
 FEATURES:
 
 * **Service Catalog** Client methods for `service_catalog` API endpoints
-* **Cypher** Client methods for `cypher` API endpoints
 
 ## 0.3.3 (May 11, 2023)
 
