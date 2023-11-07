@@ -196,7 +196,7 @@ clouds | [Clouds](clouds.go)
 clusters | [Clusters](clusters.go)
 containers | n/a
 custom_instance_types | n/a
-cypher | n/a
+cypher | [Cypher](cypher.go)
 dashboard | n/a
 deploy | n/a
 deployments | [Deployments](deployments.go)
