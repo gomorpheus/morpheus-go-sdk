@@ -1,5 +1,11 @@
 ## Unreleased
 
+## 0.3.6 (November 13, 2023)
+
+NOTES:
+
+* Update cloud, cypher, and tenant response payloads.
+
 ## 0.3.5 (November 7, 2023)
 
 NOTES:
