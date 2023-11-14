@@ -95,6 +95,7 @@ type Role struct {
 	ID                int64  `json:"id"`
 	Name              string `json:"name"`
 	Description       string `json:"description"`
+	LandingUrl        string `json:"landingUrl"`
 	Scope             string `json:"scope"`
 	RoleType          string `json:"roleType"`
 	MultiTenant       bool   `json:"multitenant"`

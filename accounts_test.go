@@ -20,7 +20,6 @@ func TestGetTenant(t *testing.T) {
 	assertResponse(t, resp, err)
 
 	// parse JSON and fetch the first one by ID
-
 	result := resp.Result.(*morpheus.ListTenantsResult)
 	recordCount := result.Meta.Total
 	t.Logf("Found %d Tenants.", recordCount)

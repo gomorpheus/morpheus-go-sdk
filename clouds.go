@@ -244,6 +244,14 @@ type UpdateCloudResult struct {
 	CreateCloudResult
 }
 
+type UpdateCloudLogoResult struct {
+	StandardResult
+}
+
+type RefreshCloudResult struct {
+	StandardResult
+}
+
 type DeleteCloudResult struct {
 	DeleteResult
 }
@@ -344,6 +352,76 @@ type UpdateCloudResourceFolderResult struct {
 	Folder  *Folder           `json:"folder"`
 }
 
+// Resource Pool
+type Pool struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Zone struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"zone"`
+	Parent struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"parent"`
+	Type        string      `json:"type"`
+	ExternalId  string      `json:"externalId"`
+	RegionCode  string      `json:"regionCode"`
+	Visibility  string      `json:"visibility"`
+	ReadOnly    bool        `json:"readOnly"`
+	DefaultPool bool        `json:"defaultPool"`
+	Active      bool        `json:"active"`
+	Status      string      `json:"status"`
+	Inventory   bool        `json:"inventory"`
+	Config      interface{} `json:"config"`
+	Tenants     []struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"tenants"`
+	ResourcePermission struct {
+		All   bool `json:"all"`
+		Sites []struct {
+			ID      int64  `json:"id"`
+			Name    string `json:"name"`
+			Default bool   `json:"default"`
+		} `json:"sites"`
+		AllPlans bool `json:"allPlans"`
+		Plans    []struct {
+			ID      int64  `json:"id"`
+			Name    string `json:"name"`
+			Default bool   `json:"default"`
+		} `json:"plans"`
+	} `json:"resourcePermission"`
+	Depth int64 `json:"depth"`
+}
+
+type ListCloudResourcePoolsResult struct {
+	Pools *[]Pool     `json:"resourcePools"`
+	Meta  *MetaResult `json:"meta"`
+}
+
+type GetCloudResourcePoolResult struct {
+	Pool *Pool `json:"resourcePool"`
+}
+
+type CreateCloudResourcePoolResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Cloud   *Cloud            `json:"zone"`
+}
+
+type UpdateCloudResourcePoolResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Pool    *Pool             `json:"resourcePool"`
+}
+
+type DeleteCloudResourcePoolResult struct {
+	DeleteResult
+}
+
 // API endpoints
 func (client *Client) ListClouds(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -385,10 +463,34 @@ func (client *Client) UpdateCloud(id int64, req *Request) (*Response, error) {
 	})
 }
 
+func (client *Client) UpdateCloudLogo(id int64, filePayload []*FilePayload, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:         "POST",
+		Path:           fmt.Sprintf("%s/%d/update-logo", CloudsPath, id),
+		IsMultiPart:    true,
+		MultiPartFiles: filePayload,
+		Headers: map[string]string{
+			"Content-Type": "application/x-www-form-urlencoded",
+		},
+		Result: &UpdateCloudLogoResult{},
+	})
+}
+
 // DeleteCloud deletes an existing cloud
 func (client *Client) DeleteCloud(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d", CloudsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &DeleteCloudResult{},
+	})
+}
+
+// RefreshCloud refreshes an existing cloud
+func (client *Client) RefreshCloud(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
 		Path:        fmt.Sprintf("%s/%d", CloudsPath, id),
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
@@ -467,5 +569,57 @@ func (client *Client) UpdateCloudResourceFolder(zoneId int64, id int64, req *Req
 		Path:        fmt.Sprintf("%s/%d/folders/%d", CloudsPath, zoneId, id),
 		QueryParams: req.QueryParams,
 		Result:      &UpdateCloudResourceFolderResult{},
+	})
+}
+
+// ListCloudResourcePools fetches all existing cloud resource pools
+func (client *Client) ListCloudResourcePools(zoneId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/resource-pools", CloudsPath, zoneId),
+		QueryParams: req.QueryParams,
+		Result:      &ListCloudResourcePoolsResult{},
+	})
+}
+
+// GetCloudResourcePool fetches an existing cloud resource pool
+func (client *Client) GetCloudResourcePool(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/resource-pools/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Result:      &GetCloudResourcePoolResult{},
+	})
+}
+
+// CreateCloudResourcePool creates a new cloud resource pool
+func (client *Client) CreateCloudResourcePool(zoneId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/resource-pools", CloudsPath, zoneId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateCloudResourcePoolResult{},
+	})
+}
+
+// UpdateCloudResourcePool updates an existing cloud resource pool
+func (client *Client) UpdateCloudResourcePool(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/resource-pools/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Result:      &UpdateCloudResourcePoolResult{},
+	})
+}
+
+// DeleteCloudResourcePool deletes an existing cloud resource pool
+func (client *Client) DeleteCloudResourcePool(zoneId int64, id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d/resource-pools/%d", CloudsPath, zoneId, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &DeleteCloudResourcePoolResult{},
 	})
 }

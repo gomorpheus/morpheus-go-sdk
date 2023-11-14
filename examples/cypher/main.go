@@ -18,8 +18,11 @@ func main() {
 
 	createReq := &morpheus.Request{
 		Body: map[string]interface{}{
-			"ttl":   "15m",
 			"value": "test secret",
+		},
+		QueryParams: map[string]string{
+			"ttl":  "15m",
+			"type": "string",
 		},
 	}
 	createResp, err := client.CreateCypher("secret/gotest", createReq)
@@ -37,6 +40,15 @@ func main() {
 	}
 	listResult := cyphersResponse.Result.(*morpheus.ListCypherResult)
 	log.Println(listResult.Cyphers)
+
+	// Get cypher
+	getReq := &morpheus.Request{}
+	getResp, deleteErr := client.GetCypher("secret/gotest", getReq)
+	if deleteErr != nil {
+		fmt.Println(deleteErr)
+	}
+	getResult := getResp.Result.(*morpheus.GetCypherResult)
+	fmt.Println(getResult)
 
 	// Delete cypher
 	deleteReq := &morpheus.Request{}

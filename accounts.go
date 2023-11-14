@@ -40,6 +40,49 @@ type ListTenantsResult struct {
 	Meta     *MetaResult `json:"meta"`
 }
 
+// ListAvailableTenantRolesResult structure parses the list availabe tenant roles response payload
+type ListAvailableTenantRolesResult struct {
+	Roles []struct {
+		ID          int64  `json:"id"`
+		Authority   string `json:"authority"`
+		Description string `json:"description"`
+		RoleType    string `json:"roleType"`
+		Owner       struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"owner"`
+	} `json:"roles"`
+	Meta *MetaResult `json:"meta"`
+}
+
+type ListSubtenantGroupsResult struct {
+	Groups []Group     `json:"groups"`
+	Meta   *MetaResult `json:"meta"`
+}
+
+type CreateSubtenantGroupResult struct {
+	Group Group `json:"group"`
+	StandardResult
+}
+
+type CreateSubtenantUserResult struct {
+	User User `json:"user"`
+	StandardResult
+}
+
+type GetSubtenantGroupsResult struct {
+	Group Group `json:"group"`
+	StandardResult
+}
+
+type DeleteSubtenantGroupResult struct {
+	StandardResult
+}
+
+type UpdateSubtenantGroupZonesResult struct {
+	StandardResult
+}
+
 // GetTenantResult structure parses the get tenant response payload
 type GetTenantResult struct {
 	Tenant *Tenant `json:"account"`
@@ -115,6 +158,91 @@ func (client *Client) DeleteTenant(id int64, req *Request) (*Response, error) {
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &DeleteTenantResult{},
+	})
+}
+
+// ListAvailableTenantRoles lists all roles available for tenants
+func (client *Client) ListAvailableTenantRoles(req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/available-roles", TenantsPath),
+		QueryParams: req.QueryParams,
+		Result:      &ListAvailableTenantRolesResult{},
+	})
+}
+
+// ListSubtenantGroups lists all roles available for tenants
+func (client *Client) ListSubtenantGroups(tenantId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/groups", TenantsPath, tenantId),
+		QueryParams: req.QueryParams,
+		Result:      &ListSubtenantGroupsResult{},
+	})
+}
+
+// CreateSubtenantGroup creates a new Morpheus group in a subtenant
+func (client *Client) CreateSubtenantGroup(tenantId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/groups", TenantsPath, tenantId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateSubtenantGroupResult{},
+	})
+}
+
+// GetSubtenantGroup gets a group in a subtenant
+func (client *Client) GetSubtenantGroup(tenantId int64, groupId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/groups/%d", TenantsPath, tenantId, groupId),
+		QueryParams: req.QueryParams,
+		Result:      &GetSubtenantGroupsResult{},
+	})
+}
+
+// UpdateSubtenantGroup updates an existing Morpheus group in a subtenant
+func (client *Client) UpdateSubtenantGroup(tenantId int64, groupId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/groups/%d", TenantsPath, tenantId, groupId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateSubtenantGroupResult{},
+	})
+}
+
+// DeleteSubtenantGroup deletes an existing Morpheus group in a subtenant
+func (client *Client) DeleteSubtenantGroup(tenantId int64, groupId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d/groups/%d", TenantsPath, tenantId, groupId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &DeleteSubtenantGroupResult{},
+	})
+}
+
+// UpdateSubtenantGroup updates an existing Morpheus group in a subtenant
+func (client *Client) UpdateSubtenantGroupZones(tenantId int64, groupId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/groups/%d/update-zones", TenantsPath, tenantId, groupId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateSubtenantGroupZonesResult{},
+	})
+}
+
+// CreateSubtenantUser creates a new Morpheus user in a subtenant
+func (client *Client) CreateSubtenantUser(tenantId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/users", TenantsPath, tenantId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateSubtenantUserResult{},
 	})
 }
 

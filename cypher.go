@@ -34,15 +34,21 @@ type ListCypherResult struct {
 }
 
 type GetCypherResult struct {
-	Cypher *Cypher `json:"cypher"`
+	Success       bool    `json:"success"`
+	Data          string  `json:"data"`
+	Type          string  `json:"type"`
+	LeaseDuration int64   `json:"lease_duration"`
+	Cypher        *Cypher `json:"cypher"`
 }
 
 type CreateCypherResult struct {
-	Success bool              `json:"success"`
-	Data    CypherData        `json:"data"`
-	Message string            `json:"msg"`
-	Errors  map[string]string `json:"errors"`
-	Cypher  *Cypher           `json:"cypher"`
+	Success       bool              `json:"success"`
+	Data          string            `json:"data"`
+	Type          string            `json:"type"`
+	LeaseDuration int64             `json:"lease_duration"`
+	Message       string            `json:"msg"`
+	Errors        map[string]string `json:"errors"`
+	Cypher        *Cypher           `json:"cypher"`
 }
 
 type DeleteCypherResult struct {
@@ -59,10 +65,10 @@ func (client *Client) ListCyphers(req *Request) (*Response, error) {
 	})
 }
 
-func (client *Client) GetCypher(id int64, req *Request) (*Response, error) {
+func (client *Client) GetCypher(path string, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
-		Path:        fmt.Sprintf("%s/%d", CypherPath, id),
+		Path:        fmt.Sprintf("%s/%s", CypherPath, path),
 		QueryParams: req.QueryParams,
 		Result:      &GetCypherResult{},
 	})
@@ -86,25 +92,4 @@ func (client *Client) DeleteCypher(path string, req *Request) (*Response, error)
 		Body:        req.Body,
 		Result:      &DeleteCypherResult{},
 	})
-}
-
-// FindCredentialByName gets an existing credential by name
-func (client *Client) FindCypherByName(name string) (*Response, error) {
-	// Find by name, then get by ID
-	resp, err := client.ListCyphers(&Request{
-		QueryParams: map[string]string{
-			"name": name,
-		},
-	})
-	if err != nil {
-		return resp, err
-	}
-	listResult := resp.Result.(*ListCypherResult)
-	cypherCount := len(*listResult.Cyphers)
-	if cypherCount != 1 {
-		return resp, fmt.Errorf("found %d cyphers for %v", cypherCount, name)
-	}
-	firstRecord := (*listResult.Cyphers)[0]
-	cypherID := firstRecord.ID
-	return client.GetCypher(cypherID, &Request{})
 }
