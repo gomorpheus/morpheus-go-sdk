@@ -208,9 +208,11 @@ type Cloud struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"credential"`
-	DateCreated string `json:"dateCreated"`
-	LastUpdated string `json:"lastUpdated"`
-	Groups      []struct {
+	ImagePath     string `json:"imagePath"`
+	DarkImagePath string `json:"darkImagePath"`
+	DateCreated   string `json:"dateCreated"`
+	LastUpdated   string `json:"lastUpdated"`
+	Groups        []struct {
 		ID        int64  `json:"id"`
 		Name      string `json:"name"`
 		AccountID int64  `json:"accountId"`
@@ -541,6 +543,7 @@ func (client *Client) UpdateCloudDatastore(zoneId int64, id int64, req *Request)
 		Method:      "PUT",
 		Path:        fmt.Sprintf("%s/%d/data-stores/%d", CloudsPath, zoneId, id),
 		QueryParams: req.QueryParams,
+		Body:        req.Body,
 		Result:      &UpdateCloudDatastoreResult{},
 	})
 }

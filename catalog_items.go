@@ -12,28 +12,30 @@ var (
 
 // CatalogItem structures for use in request and response payloads
 type CatalogItem struct {
-	ID          int64    `json:"id"`
-	Name        string   `json:"name"`
-	Code        string   `json:"code"`
-	Description string   `json:"description"`
-	Category    string   `json:"category"`
-	Labels      []string `json:"labels"`
-	Type        string   `json:"type"`
-	Visibility  string   `json:"visibility"`
-
-	RefType       string      `json:"refType"`
-	RefID         interface{} `json:"refId"`
-	Active        bool        `json:"active"`
-	Enabled       bool        `json:"enabled"`
-	Featured      bool        `json:"featured"`
-	AllowQuantity bool        `json:"allowQuantity"`
-	IconPath      string      `json:"iconPath"`
-	ImagePath     string      `json:"imagePath"`
-	DarkImagePath string      `json:"darkImagePath"`
-	Context       string      `json:"context"`
-	Content       string      `json:"content"`
-	AppSpec       string      `json:"appSpec"`
-	Blueprint     struct {
+	ID             int64       `json:"id"`
+	Name           string      `json:"name"`
+	Code           string      `json:"code"`
+	Description    string      `json:"description"`
+	Category       string      `json:"category"`
+	Labels         []string    `json:"labels"`
+	Type           string      `json:"type"`
+	Visibility     string      `json:"visibility"`
+	LayoutCode     interface{} `json:"layoutCode"`
+	FormType       string      `json:"formType"`
+	RefType        string      `json:"refType"`
+	RefID          interface{} `json:"refId"`
+	Active         bool        `json:"active"`
+	Enabled        bool        `json:"enabled"`
+	Featured       bool        `json:"featured"`
+	AllowQuantity  bool        `json:"allowQuantity"`
+	IconPath       string      `json:"iconPath"`
+	ImagePath      string      `json:"imagePath"`
+	DarkImagePath  string      `json:"darkImagePath"`
+	Context        string      `json:"context"`
+	WorkflowConfig interface{} `json:"workflowConfig"`
+	Content        string      `json:"content"`
+	AppSpec        string      `json:"appSpec"`
+	Blueprint      struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	}
@@ -42,6 +44,8 @@ type CatalogItem struct {
 		Name string `json:"name"`
 	} `json:"workflow"`
 	Config      interface{}   `json:"config"`
+	FormConfig  interface{}   `json:"formConfig"`
+	Form        Form          `json:"form"`
 	OptionTypes []interface{} `json:"optionTypes"`
 	CreatedBy   interface{}   `json:"createdBy"`
 	Owner       struct {
