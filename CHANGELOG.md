@@ -1,5 +1,9 @@
 ## Unreleased
 
+FEATURES:
+
+* **Forms** Client methods for `forms` API endpoints
+
 ## 0.3.6 (November 13, 2023)
 
 NOTES:
