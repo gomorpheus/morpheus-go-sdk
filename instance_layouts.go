@@ -72,6 +72,12 @@ type InstanceLayout struct {
 		LoadBalance         bool   `json:"loadBalance"`
 		Visible             bool   `json:"visible"`
 	} `json:"ports"`
+	PriceSets []struct {
+		ID        int64  `json:"id"`
+		Name      string `json:"name"`
+		Code      string `json:"code"`
+		PriceUnit string `json:"priceUnit"`
+	} `json:"priceSets"`
 	SpecTemplates []struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`

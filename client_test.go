@@ -4,11 +4,12 @@ package morpheus_test
 import (
 	_ "encoding/json"
 	"fmt"
-	"github.com/gomorpheus/morpheus-go-sdk"
 	"log"
 	"os"
 	_ "strconv"
 	"testing"
+
+	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
 var (
@@ -96,7 +97,7 @@ func getTestClient(t *testing.T) *morpheus.Client {
 			if testUsername == "" || testPassword == "" {
 				panic("MORPHEUS_TEST_TOKEN or MORPHEUS_TEST_USERNAME and MORPHEUS_TEST_PASSWORD must be set to to run tests.")
 			}
-			log.Printf(fmt.Sprintf("Initializing test client for %v @ %v", testUsername, testUrl))
+			log.Printf("Initializing test client for %v @ %v", testUsername, testUrl)
 			client.SetUsernameAndPassword(testUsername, testPassword)
 			resp, err := client.Login()
 			assertResponse(t, resp, err)
@@ -145,7 +146,7 @@ func TestLogout(t *testing.T) {
 	resp, err := client.Login()
 	assertResponse(t, resp, err)
 	if err == nil {
-		resp, err = client.Logout()
+		_, err = client.Logout()
 		assertError(t, err)
 		// assertResponse(t, resp, err)
 	}
@@ -157,10 +158,10 @@ func TestLoginRepeated(t *testing.T) {
 	resp, err := client.Login()
 	assertResponse(t, resp, err)
 	if err == nil {
-		resp, err = client.Login()
-		resp, err = client.Login()
-		resp, err = client.Login()
-		resp, err = client.Login()
+		_, _ = client.Login()
+		_, _ = client.Login()
+		_, _ = client.Login()
+		_, _ = client.Login()
 		// assertResponse(t, resp, err)
 		assertError(t, err)
 	}

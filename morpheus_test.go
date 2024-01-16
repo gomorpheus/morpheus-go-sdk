@@ -5,11 +5,12 @@ package morpheus_test
 
 import (
 	_ "fmt"
-	"github.com/gomorpheus/morpheus-go-sdk"
 	_ "io"
 	_ "os"
 	"reflect"
 	"testing"
+
+	"github.com/gomorpheus/morpheus-go-sdk"
 )
 
 //‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾
@@ -90,9 +91,6 @@ func assertResponse(t *testing.T, resp *morpheus.Response, err error) {
 		if resp.Success != true {
 			t.Errorf("API Response Error [%v]", err)
 			logFailure(t, resp, err)
-		} else {
-			// success
-			// logResponse(t, resp)
 		}
 	}
 
@@ -106,9 +104,6 @@ func assertBadResponse(t *testing.T, resp *morpheus.Response, err error) {
 		if resp.Success != false {
 			logResponse(t, resp)
 			t.Errorf("API Request should have failed and did not [%v]", err)
-		} else {
-			// failure
-			// logResponse(t, resp)
 		}
 	}
 }
