@@ -48,6 +48,8 @@ type Integration struct {
 		Plugin                          interface{}                       `json:"plugin"`
 		IncidentAccess                  bool                              `json:"incidentAccess"`
 		RequestAccess                   bool                              `json:"requestAccess"`
+		ServiceNowCMDBMode              string                            `json:"cmdbMode"`
+		ServiceNowIgnoreCertErrors      bool                              `json:"ignoreCertErrors"`
 		ServiceNowCMDBBusinessObject    string                            `json:"serviceNowCMDBBusinessObject"`
 		ServiceNowCustomCmdbMapping     string                            `json:"serviceNowCustomCmdbMapping"`
 		ServiceNowCmdbClassMapping      []serviceNowCmdbClassMappingEntry `json:"serviceNowCmdbClassMapping"`

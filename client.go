@@ -138,8 +138,6 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 			if loginErr != nil {
 				return loginResp, loginErr
 			}
-		} else {
-			// log.Printf("You are logged in as %v", client.Username)
 		}
 	}
 
@@ -156,7 +154,7 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 	var httpMethod = req.Method
 	if httpMethod == "" {
 		// httpMethod = "GET"
-		return nil, errors.New("Invalid Request: Method is required eg. GET,POST,PUT,DELETE")
+		return nil, errors.New("invalid Request: Method is required eg. GET,POST,PUT,DELETE")
 	}
 
 	var url string = client.Url + req.Path
@@ -179,8 +177,6 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 	//set timeout
 	if req.Timeout > 0 {
 		restyClient.SetTimeout(time.Duration(req.Timeout) * time.Second)
-	} else {
-		// restyClient.SetTimeout(time.Duration(30) * time.Second)
 	}
 	// construct resty.Request
 	restyReq := restyClient.R()
@@ -271,7 +267,7 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 		// } else if httpMethod == "LIST" {
 		// restyResponse, err = restyReq.List(url)
 	} else {
-		return nil, errors.New(fmt.Sprintf("Invalid Request.  Unknown HTTP Method: %v", httpMethod))
+		return nil, fmt.Errorf("invalid request. unknown HTTP method: %v", httpMethod)
 	}
 
 	// convert a resty response into our Response object
@@ -289,8 +285,8 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 	}
 
 	// determine success and set err accordingly
-	if resp.Success != true {
-		err = errors.New(fmt.Sprintf("API returned HTTP %d", resp.StatusCode))
+	if !resp.Success {
+		err = fmt.Errorf("API returned HTTP %d", resp.StatusCode)
 		// try to parse the result as a standard result to get success info
 		var standardResult StandardResult
 		standardResultParseErr := json.Unmarshal(resp.Body, &standardResult)
@@ -300,10 +296,6 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 		} else {
 			if standardResult.Message != "" {
 				err = errors.New(standardResult.Message)
-			}
-			if len(standardResult.Errors) != 0 {
-				// err = errors.New(standardResult.Errors[0])
-				// resp.Errors = standardResult.Errors
 			}
 		}
 	}
@@ -331,8 +323,6 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 			//log.Errorf("Parse Error: %v", jsonParseResultError)
 			// err = jsonParseResultError
 			// resp.Success = false
-		} else {
-			// log.Printf("Parsed JSON result for type %T", resp.Result)
 		}
 	}
 

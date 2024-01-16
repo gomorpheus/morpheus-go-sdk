@@ -1,5 +1,12 @@
 ## Unreleased
 
+NOTES:
+
+* Update resty library from 2.10.0 to 2.11.0.
+* Update `instance_type` and `instance_layout` resources to add support for price sets.
+
+## 0.3.7 (November 20, 2023)
+
 FEATURES:
 
 * **Cluster Packages** Client methods for `cluster_packages` API endpoints
