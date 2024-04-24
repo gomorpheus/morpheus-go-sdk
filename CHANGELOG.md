@@ -1,8 +1,11 @@
 ## Unreleased
 
+## 0.3.8 (April 24, 2024)
+
 NOTES:
 
-* Update resty library from 2.10.0 to 2.11.0.
+* Fix issues with the `user_group` delete function and added support for newer API attributes.
+* Update resty library from 2.10.0 to 2.12.0.
 * Update `instance_type` and `instance_layout` resources to add support for price sets.
 
 ## 0.3.7 (November 20, 2023)

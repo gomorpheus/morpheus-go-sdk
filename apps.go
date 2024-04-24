@@ -83,6 +83,59 @@ type GetAppResult struct {
 	App *App `json:"app"`
 }
 
+type GetAppStateResult struct {
+	Success   bool       `json:"success"`
+	Workloads []Workload `json:"workloads"`
+	IacDrift  bool       `json:"iacDrift"`
+	Specs     []Spec     `json:"specs"`
+	PlanData  string     `json:"planData"`
+	Input     struct {
+		Variables []struct {
+			Name      string      `json:"name"`
+			Sensitive bool        `json:"sensitive"`
+			Value     interface{} `json:"value"`
+			Type      interface{} `json:"type"`
+		} `json:"variables"`
+		Providers []struct {
+			Name string `json:"name"`
+		} `json:"providers"`
+	} `json:"input"`
+	Output struct {
+		Outputs []struct {
+			Name  string `json:"name"`
+			Value struct {
+				Sensitive bool        `json:"sensitive"`
+				Value     interface{} `json:"value"`
+				Type      interface{} `json:"type"`
+			} `json:"value"`
+		} `json:"outputs"`
+	} `json:"output"`
+	// StateData `json:"stateData"`
+}
+
+type Output struct {
+}
+
+type Workload struct {
+	RefType    string `json:"refType"`
+	RefId      int64  `json:"refId"`
+	RefName    string `json:"refName"`
+	SubRefName string `json:"subRefName"`
+	StateDate  string `json:"stateDate"`
+	Status     string `json:"status"`
+	IacDrift   bool   `json:"iacDrift"`
+}
+
+type Spec struct {
+	ID       int64  `json:"id"`
+	Name     string `json:"name"`
+	Template struct {
+		Name string `json:"name"`
+		Type string `json:"type"`
+	} `json:"template"`
+	Isolated bool `json:"isolated"`
+}
+
 type CreateAppResult struct {
 	Success bool              `json:"success"`
 	Message string            `json:"msg"`
@@ -115,6 +168,15 @@ func (client *Client) GetApp(id int64, req *Request) (*Response, error) {
 		Path:        fmt.Sprintf("%s/%d", AppsPath, id),
 		QueryParams: req.QueryParams,
 		Result:      &GetAppResult{},
+	})
+}
+
+func (client *Client) GetAppState(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/state", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Result:      &GetAppStateResult{},
 	})
 }
 

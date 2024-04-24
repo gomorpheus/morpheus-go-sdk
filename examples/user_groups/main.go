@@ -23,5 +23,5 @@ func main() {
 		log.Fatal(err)
 	}
 	result := listUserGroupsResponse.Result.(*morpheus.ListUserGroupsResult)
-	log.Println(result)
+	log.Println(result.UserGroups)
 }

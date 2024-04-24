@@ -95,7 +95,7 @@ func (client *Client) UpdateUserGroup(id int64, req *Request) (*Response, error)
 	})
 }
 
-func (client *Client) DeleteUserGroupResult(id int64, req *Request) (*Response, error) {
+func (client *Client) DeleteUserGroup(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
 		Path:        fmt.Sprintf("%s/%d", UserGroupsPath, id),

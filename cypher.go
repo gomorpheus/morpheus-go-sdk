@@ -34,11 +34,13 @@ type ListCypherResult struct {
 }
 
 type GetCypherResult struct {
-	Success       bool    `json:"success"`
-	Data          string  `json:"data"`
-	Type          string  `json:"type"`
-	LeaseDuration int64   `json:"lease_duration"`
-	Cypher        *Cypher `json:"cypher"`
+	Success       bool              `json:"success"`
+	Data          interface{}       `json:"data"`
+	Type          string            `json:"type"`
+	LeaseDuration int64             `json:"lease_duration"`
+	Cypher        *Cypher           `json:"cypher"`
+	Message       string            `json:"msg"`
+	Errors        map[string]string `json:"errors"`
 }
 
 type CreateCypherResult struct {

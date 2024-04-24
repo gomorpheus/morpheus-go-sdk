@@ -11,12 +11,13 @@ var (
 
 // Group structures for use in request and response payloads
 type Group struct {
-	ID        int64  `json:"id"`
-	UUID      string `json:"uuid"`
-	Name      string `json:"name"`
-	Code      string `json:"code"`
-	Location  string `json:"location"`
-	AccountID int64  `json:"accountId"`
+	ID        int64    `json:"id"`
+	UUID      string   `json:"uuid"`
+	Name      string   `json:"name"`
+	Code      string   `json:"code"`
+	Labels    []string `json:"labels"`
+	Location  string   `json:"location"`
+	AccountID int64    `json:"accountId"`
 	Config    struct {
 		DNSIntegrationID    string `json:"dnsIntegrationId"`
 		ConfigCMDBID        string `json:"configCmdbId"`
