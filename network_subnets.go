@@ -73,19 +73,25 @@ type NetworkSubnet struct {
 
 // ListNetowrkSubnetsResult structure parses the list network subnets response payload
 type ListNetworkSubnetsResult struct {
-	NetworkSubnets *[]NetworkSubnet `json:"networkSubnets"`
+	NetworkSubnets *[]NetworkSubnet `json:"subnets"`
+	Meta           *MetaResult      `json:"meta"`
+}
+
+// ListNetowrkSubnetsResult structure parses the list network subnets response payload
+type ListNetworkSubnetsByNetworkResult struct {
+	NetworkSubnets *[]NetworkSubnet `json:"subnets"`
 	Meta           *MetaResult      `json:"meta"`
 }
 
 type GetNetworkSubnetResult struct {
-	NetworkSubnet *NetworkSubnet `json:"networkSubnet"`
+	NetworkSubnet *NetworkSubnet `json:"subnet"`
 }
 
 type CreateNetworkSubnetResult struct {
 	Success       bool              `json:"success"`
 	Message       string            `json:"msg"`
 	Errors        map[string]string `json:"errors"`
-	NetworkSubnet *NetworkSubnet    `json:"networkSubnet"`
+	NetworkSubnet *NetworkSubnet    `json:"subnet"`
 }
 
 type UpdateNetworkSubnetResult struct {
@@ -103,6 +109,16 @@ func (client *Client) ListNetworkSubnets(req *Request) (*Response, error) {
 		Path:        NetworkSubnetsPath,
 		QueryParams: req.QueryParams,
 		Result:      &ListNetworkSubnetsResult{},
+	})
+}
+
+// ListNetworkSubnetsByNetwork lists all network subnets for a given network
+func (client *Client) ListNetworkSubnetsByNetwork(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("/api/networks/%d/subnets", id),
+		QueryParams: req.QueryParams,
+		Result:      &ListNetworkSubnetsByNetworkResult{},
 	})
 }
 
