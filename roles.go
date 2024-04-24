@@ -89,6 +89,13 @@ type GetRoleResult struct {
 		Name   string `json:"name"`
 		Access string `json:"access"`
 	} `json:"taskSetPermissions"`
+	GlobalClusterTypeAccess string `json:"globalClusterTypeAccess"`
+	ClusterTypePermissions  []struct {
+		ID     int64  `json:"id"`
+		Code   string `json:"code"`
+		Name   string `json:"name"`
+		Access string `json:"access"`
+	} `json:"clusterTypePermissions"`
 }
 
 type Role struct {

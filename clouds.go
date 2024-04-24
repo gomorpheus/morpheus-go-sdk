@@ -11,12 +11,13 @@ var (
 
 // Cloud structures for use in request and response payloads
 type Cloud struct {
-	ID         int64  `json:"id"`
-	UUID       string `json:"uuid"`
-	ExternalID string `json:"externalId"`
-	Name       string `json:"name"`
-	Code       string `json:"code"`
-	Location   string `json:"location"`
+	ID         int64    `json:"id"`
+	UUID       string   `json:"uuid"`
+	ExternalID string   `json:"externalId"`
+	Name       string   `json:"name"`
+	Code       string   `json:"code"`
+	Labels     []string `json:"labels"`
+	Location   string   `json:"location"`
 	Owner      struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
