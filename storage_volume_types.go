@@ -11,23 +11,28 @@ var (
 
 // StorageVolumeType structures for use in request and response payloads
 type StorageVolumeType struct {
-	ID      int64 `json:"id"`
+	ID      int64  `json:"id"`
+	Code    string `json:"code"`
 	Account struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	Name              string        `json:"name"`
-	Description       string        `json:"description"`
-	DisplayOrder      int64         `json:"displayOrder"`
-	DefaultType       bool          `json:"defaultType"`
-	CustomLabel       bool          `json:"customLabel"`
-	CustomSize        bool          `json:"customSize"`
-	CustomSizeOptions []interface{} `json:"customSizeOptions"`
-	ConfigurableIOPS  bool          `json:"configurableIOPS"`
-	HasDatastore      bool          `json:"hasDatastore"`
-	Category          string        `json:"Category"`
-	Enabled           bool          `json:"enabled"`
-	OptionTypes       []interface{} `json:"optionTypes"`
+	Name              string `json:"name"`
+	Description       string `json:"description"`
+	DisplayOrder      int64  `json:"displayOrder"`
+	DefaultType       bool   `json:"defaultType"`
+	CustomLabel       bool   `json:"customLabel"`
+	CustomSize        bool   `json:"customSize"`
+	CustomSizeOptions []struct {
+		Key   string `json:"key"`
+		Value string `json:"value"`
+		Size  string `json:"size"`
+	} `json:"customSizeOptions"`
+	ConfigurableIOPS bool         `json:"configurableIOPS"`
+	HasDatastore     bool         `json:"hasDatastore"`
+	Category         string       `json:"category"`
+	Enabled          bool         `json:"enabled"`
+	OptionTypes      []OptionType `json:"optionTypes"`
 }
 
 type ListStorageVolumeTypesResult struct {

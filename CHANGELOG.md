@@ -1,5 +1,11 @@
 ## Unreleased
 
+FEATURES:
+
+* **Storage Volumes** Client methods for `storage_volumes` API endpoints
+* **Storage Volume Types** Client methods for `storage_volume_types` API endpoints
+* **Task Types** Client methods for `task_types` API endpoints
+
 ## 0.3.8 (April 24, 2024)
 
 NOTES:
