@@ -6,7 +6,8 @@ import (
 
 var (
 	// CloudsPath is the API endpoint for clouds (zones)
-	CloudsPath = "/api/zones"
+	CloudsPath     = "/api/zones"
+	CloudTypesPath = "/api/zone-types"
 )
 
 // Cloud structures for use in request and response payloads
@@ -220,12 +221,6 @@ type Cloud struct {
 	} `json:"groups"`
 }
 
-type CloudType struct {
-	ID   int64  `json:"id"`
-	Name string `json:"name"`
-	Code string `json:"code"`
-}
-
 // ListCloudsResult structure parses the list clouds response payload
 type ListCloudsResult struct {
 	Clouds *[]Cloud    `json:"zones"`
@@ -423,6 +418,77 @@ type UpdateCloudResourcePoolResult struct {
 
 type DeleteCloudResourcePoolResult struct {
 	DeleteResult
+}
+
+// Cloud Types
+type CloudType struct {
+	ID                            int64        `json:"id"`
+	Name                          string       `json:"name"`
+	Code                          string       `json:"code"`
+	Enabled                       bool         `json:"enabled"`
+	Provision                     bool         `json:"provision"`
+	AutoCapacity                  bool         `json:"autoCapacity"`
+	MigrationTarget               bool         `json:"migrationTarget"`
+	HasDatastores                 bool         `json:"hasDatastores"`
+	HasNetworks                   bool         `json:"hasNetworks"`
+	HasResourcePools              bool         `json:"hasResourcePools"`
+	HasSecurityGroups             bool         `json:"hasSecurityGroups"`
+	HasContainers                 bool         `json:"hasContainers"`
+	HasBareMetal                  bool         `json:"hasBareMetal"`
+	HasServices                   bool         `json:"hasServices"`
+	HasFunctions                  bool         `json:"hasFunctions"`
+	HasJobs                       bool         `json:"hasJobs"`
+	HasDiscovery                  bool         `json:"hasDiscovery"`
+	HasCloudInit                  bool         `json:"hasCloudInit"`
+	HasFolders                    bool         `json:"hasFolders"`
+	HasFloatingIps                bool         `json:"hasFloatingIps"`
+	HasMarketplace                bool         `json:"hasMarketplace"`
+	CanCreateResourcePools        bool         `json:"canCreateResourcePools"`
+	CanDeleteResourcePools        bool         `json:"canDeleteResourcePools"`
+	CanCreateDatastores           bool         `json:"canCreateDatastores"`
+	CanCreateNetworks             bool         `json:"canCreateNetworks"`
+	CanChooseContainerMode        bool         `json:"canChooseContainerMode"`
+	ProvisionRequiresResourcePool bool         `json:"provisionRequiresResourcePool"`
+	SupportsDistributedWorker     bool         `json:"supportsDistributedWorker"`
+	Cloud                         string       `json:"cloud"`
+	ProvisionTypes                []int64      `json:"provisionTypes"`
+	ZoneInstanceTypeLayoutId      int64        `json:"zoneInstanceTypeLayoutId"`
+	ServerTypes                   []ServerType `json:"serverTypes"`
+	OptionTypes                   []OptionType `json:"optionTypes"`
+}
+
+type ServerType struct {
+	ID                  int           `json:"id"`
+	Code                string        `json:"code"`
+	Name                string        `json:"name"`
+	Description         string        `json:"description"`
+	NodeType            string        `json:"nodeType"`
+	Platform            string        `json:"platform"`
+	Enabled             bool          `json:"enabled"`
+	Selectable          bool          `json:"selectable"`
+	ExternalDelete      bool          `json:"externalDelete"`
+	Managed             bool          `json:"managed"`
+	ControlPower        bool          `json:"controlPower"`
+	ControlSuspend      bool          `json:"controlSuspend"`
+	Creatable           bool          `json:"creatable"`
+	HasAgent            bool          `json:"hasAgent"`
+	VmHypervisor        bool          `json:"vmHypervisor"`
+	ContainerHypervisor bool          `json:"containerHypervisor"`
+	BareMetalHost       bool          `json:"bareMetalHost"`
+	GuestVm             bool          `json:"guestVm"`
+	HasAutomation       bool          `json:"hasAutomation"`
+	ProvisionType       ProvisionType `json:"provisionType"`
+	OptionTypes         []OptionType  `json:"optionTypes"`
+	DisplayOrder        int64         `json:"displayOrder"`
+}
+
+type ListCloudTypesResult struct {
+	CloudTypes *[]CloudType `json:"zoneTypes"`
+	Meta       *MetaResult  `json:"meta"`
+}
+
+type GetCloudTypeResult struct {
+	CloudType *CloudType `json:"zoneType"`
 }
 
 // API endpoints
@@ -626,4 +692,48 @@ func (client *Client) DeleteCloudResourcePool(zoneId int64, id int64, req *Reque
 		Body:        req.Body,
 		Result:      &DeleteCloudResourcePoolResult{},
 	})
+}
+
+// Cloud Types
+
+// ListCloudTypes fetches existing cloud types
+func (client *Client) ListCloudTypes(req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        CloudTypesPath,
+		QueryParams: req.QueryParams,
+		Result:      &ListCloudTypesResult{},
+	})
+}
+
+// GetCloudResourcePool fetches an existing cloud type
+func (client *Client) GetCloudType(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d", CloudTypesPath, id),
+		QueryParams: req.QueryParams,
+		Result:      &GetCloudTypeResult{},
+	})
+}
+
+func (client *Client) FindCloudTypeByName(name string) (*Response, error) {
+	// Find by name, then get by ID
+	resp, err := client.ListCloudTypes(&Request{
+		QueryParams: map[string]string{
+			"name": name,
+		},
+	})
+	if err != nil {
+		return resp, err
+	}
+	listResult := resp.Result.(*ListCloudTypesResult)
+	cloudTypesCount := len(*listResult.CloudTypes)
+	fmt.Println(cloudTypesCount)
+	if cloudTypesCount != 1 {
+		return resp, fmt.Errorf("found %d Clouds Types for %v", cloudTypesCount, name)
+	}
+	firstRecord := (*listResult.CloudTypes)[0]
+	cloudTypeId := firstRecord.ID
+	fmt.Println(cloudTypeId)
+	return client.GetCloudType(cloudTypeId, &Request{})
 }

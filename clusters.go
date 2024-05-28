@@ -138,17 +138,42 @@ type GetClusterApiConfigResult struct {
 }
 
 type ListClusterNamespacesResults struct {
-	Namespaces []struct {
-		Id          int64  `json:"id"`
-		Name        string `json:"name"`
-		Description string `json:"description"`
-		RegionCode  string `json:"regionCode"`
-		ExternalId  string `json:"externalId"`
-		Status      string `json:"status"`
-		Visibility  string `json:"visibility"`
-		Active      bool   `json:"active"`
-	} `json:"namespaces"`
-	Meta *MetaResult `json:"meta"`
+	Namespaces []Namespaces `json:"namespaces"`
+	Meta       *MetaResult  `json:"meta"`
+}
+
+type Namespaces struct {
+	Id                 int64  `json:"id"`
+	Name               string `json:"name"`
+	Description        string `json:"description"`
+	RegionCode         string `json:"regionCode"`
+	ExternalId         string `json:"externalId"`
+	Status             string `json:"status"`
+	Visibility         string `json:"visibility"`
+	Active             bool   `json:"active"`
+	ResourcePermission struct {
+		AllGroups            bool   `json:"allGroups"`
+		DefaultStore         bool   `json:"defaultStore"`
+		AllPlans             bool   `json:"allPlans"`
+		DefaultTarget        bool   `json:"defaultTarget"`
+		MorpheusResourceType string `json:"morpheusResourceType"`
+		MorpheusResourceId   int64  `json:"morpheusResourceId"`
+		CanManage            bool   `json:"canManage"`
+		All                  bool   `json:"all"`
+		Account              struct {
+			ID int64 `json:"id"`
+		} `json:"account"`
+		Sites []struct {
+			ID      int64  `json:"id"`
+			Name    string `json:"name"`
+			Default bool   `json:"default"`
+		} `json:"sites"`
+		Plans []struct {
+			ID      int64  `json:"id"`
+			Name    string `json:"name"`
+			Default bool   `json:"default"`
+		} `json:"plans"`
+	} `json:"resourcePermission"`
 }
 
 type CreateClusterResult struct {

@@ -23,5 +23,5 @@ func main() {
 		log.Fatal(err)
 	}
 	result := applianceSettingsResponse.Result.(*morpheus.GetApplianceSettingsResult)
-	log.Println(result)
+	log.Println(result.ApplianceSettings)
 }
