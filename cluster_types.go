@@ -6,26 +6,26 @@ var (
 
 // ClusterType structures for use in request and response payloads
 type ClusterType struct {
-	ID                   int64         `json:"id"`
-	DeployTargetService  string        `json:"deployTargetService"`
-	ShortName            string        `json:"shortName"`
-	ProviderType         string        `json:"providerType"`
-	Code                 string        `json:"code"`
-	HostService          string        `json:"hostService"`
-	Managed              bool          `json:"managed"`
-	HasMasters           bool          `json:"hasMasters"`
-	HasWorkers           bool          `json:"hasWorkers"`
-	ViewSet              string        `json:"viewSet"`
-	ImageCode            string        `json:"imageCode"`
-	KubeCtlLocal         bool          `json:"kubeCtlLocal"`
-	HasDatastore         bool          `json:"hasDatastore"`
-	SupportsCloudScaling bool          `json:"supportsCloudScaling"`
-	Name                 string        `json:"name"`
-	HasDefaultDataDisk   bool          `json:"hasDefaultDataDisk"`
-	CanManage            bool          `json:"canManage"`
-	HasCluster           bool          `json:"hasCluster"`
-	Description          string        `json:"description"`
-	OptionTypes          []interface{} `json:"optionTypes"`
+	ID                   int64        `json:"id"`
+	DeployTargetService  string       `json:"deployTargetService"`
+	ShortName            string       `json:"shortName"`
+	ProviderType         string       `json:"providerType"`
+	Code                 string       `json:"code"`
+	HostService          string       `json:"hostService"`
+	Managed              bool         `json:"managed"`
+	HasMasters           bool         `json:"hasMasters"`
+	HasWorkers           bool         `json:"hasWorkers"`
+	ViewSet              string       `json:"viewSet"`
+	ImageCode            string       `json:"imageCode"`
+	KubeCtlLocal         bool         `json:"kubeCtlLocal"`
+	HasDatastore         bool         `json:"hasDatastore"`
+	SupportsCloudScaling bool         `json:"supportsCloudScaling"`
+	Name                 string       `json:"name"`
+	HasDefaultDataDisk   bool         `json:"hasDefaultDataDisk"`
+	CanManage            bool         `json:"canManage"`
+	HasCluster           bool         `json:"hasCluster"`
+	Description          string       `json:"description"`
+	OptionTypes          []OptionType `json:"optionTypes"`
 	ControllerTypes      []struct {
 		ID          int64  `json:"id"`
 		Name        string `json:"name"`

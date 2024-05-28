@@ -48,7 +48,7 @@ type ApplianceSettings struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"enabledZoneTypes"`
-	StatsRetainmentPeriod int64 `json:"statsRetainmentPeriod"`
+	StatsRetainmentPeriod string `json:"statsRetainmentPeriod"`
 }
 
 type GetApplianceSettingsResult struct {

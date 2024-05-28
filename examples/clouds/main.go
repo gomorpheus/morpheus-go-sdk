@@ -42,4 +42,25 @@ func main() {
 	}
 	folder := cloudResourceFoldersResp.Result.(*morpheus.ListCloudResourceFoldersResult)
 	log.Println(folder.Folders)
+
+	// List cloud types
+	req = &morpheus.Request{}
+	cloudTypesResp, err := client.ListCloudTypes(req)
+	if err != nil {
+		log.Fatal(err)
+	}
+	cloudType := cloudTypesResp.Result.(*morpheus.ListCloudTypesResult)
+	//log.Println(cloudType.CloudTypes)
+	for _, ct := range *cloudType.CloudTypes {
+		log.Println(ct.Name)
+	}
+
+	// Find cloud type
+	req = &morpheus.Request{}
+	cloudTypeResp, err := client.FindCloudTypeByName("UpCloud")
+	if err != nil {
+		log.Fatal(err)
+	}
+	cloudTypeRecord := cloudTypeResp.Result.(*morpheus.GetCloudTypeResult)
+	log.Println(cloudTypeRecord.CloudType)
 }
