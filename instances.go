@@ -232,6 +232,20 @@ type GetInstancePlanResult struct {
 	Plan *InstancePlan `json:"plan"`
 }
 
+type GetInstanceSecurityGroupsResult struct {
+	SecurityGroups *[]SecurityGroup  `json:"securityGroups"`
+	Success        bool              `json:"success"`
+	Message        string            `json:"msg"`
+	Errors         map[string]string `json:"errors"`
+}
+
+type UpdateInstanceSecurityGroupsResult struct {
+	SecurityGroups *[]SecurityGroup  `json:"securityGroups"`
+	Success        bool              `json:"success"`
+	Message        string            `json:"msg"`
+	Errors         map[string]string `json:"errors"`
+}
+
 // API endpoints
 
 func (client *Client) ListInstances(req *Request) (*Response, error) {
@@ -279,6 +293,56 @@ func (client *Client) DeleteInstance(id int64, req *Request) (*Response, error) 
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &DeleteInstanceResult{},
+	})
+}
+
+func (client *Client) ResizeInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/resize", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceResult{},
+	})
+}
+
+func (client *Client) LockInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/lock", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceResult{},
+	})
+}
+
+func (client *Client) UnlockInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/unlock", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceResult{},
+	})
+}
+
+func (client *Client) GetInstanceSecurityGroups(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/security-groups", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &GetInstanceSecurityGroupsResult{},
+	})
+}
+
+func (client *Client) UpdateInstanceSecurityGroups(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/security-groups", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceSecurityGroupsResult{},
 	})
 }
 

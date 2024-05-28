@@ -1,7 +1,16 @@
 ## Unreleased
 
+## 0.3.9 (May 27, 2024)
+
+NOTES:
+
+* Updates to instances to support add support for resize, lock, and unlock.
+* Add additional payload attributes to virtual images.
+
 FEATURES:
 
+* **Security Groups** Client methods for `security_groups` API endpoints
+* **Email Templates** Client methods for `email_templates` API endpoints
 * **Storage Volumes** Client methods for `storage_volumes` API endpoints
 * **Storage Volume Types** Client methods for `storage_volume_types` API endpoints
 * **Task Types** Client methods for `task_types` API endpoints
