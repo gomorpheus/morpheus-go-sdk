@@ -16,12 +16,14 @@ func main() {
 	}
 	fmt.Println("LOGIN RESPONSE:", resp)
 
-	// Get whitelabel settings
+	// List email templates
 	req := &morpheus.Request{}
-	whitelabelSettingsResponse, err := client.GetWhitelabelSettings(req)
+	emailTemplatesResponse, err := client.ListEmailTemplates(req)
 	if err != nil {
 		log.Fatal(err)
 	}
-	result := whitelabelSettingsResponse.Result.(*morpheus.GetWhitelabelSettingsResult)
-	log.Println(result.WhitelabelSettings)
+	result := emailTemplatesResponse.Result.(*morpheus.ListEmailTemplatesResult)
+	for _, emailTemplate := range *result.EmailTemplates {
+		fmt.Println(emailTemplate)
+	}
 }

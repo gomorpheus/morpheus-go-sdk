@@ -54,6 +54,12 @@ type UpdateWhitelabelSettingsResult struct {
 	WhitelabelSettings *WhitelabelSettings `json:"whitelabelSettings"`
 }
 
+type UpdateWhiteLabelImageResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+}
+
 // Client request methods
 func (client *Client) GetWhitelabelSettings(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -83,6 +89,15 @@ func (client *Client) UpdateWhitelabelImages(id int64, filePayload []*FilePayloa
 		Headers: map[string]string{
 			"Content-Type": "application/x-www-form-urlencoded",
 		},
-		Result: &UpdateInstanceTypeResult{},
+		Result: &UpdateWhiteLabelImageResult{},
+	})
+}
+
+func (client *Client) ResetWhitelabelImage(req *Request, imageType string) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/images/%s", WhitelabelSettingsPath, imageType),
+		QueryParams: req.QueryParams,
+		Result:      &UpdateWhiteLabelImageResult{},
 	})
 }

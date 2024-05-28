@@ -224,6 +224,10 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 			}
 		}
 
+		if req.IsStream {
+			restyReq.SetBody(req.StreamBody)
+		}
+
 		if req.Body != nil {
 			//log.Printf("REQUEST BODY: ", req.Body)
 			// Aways json for now...

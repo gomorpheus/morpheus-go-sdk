@@ -26,6 +26,8 @@ type Request struct {
 
 	IsMultiPart bool
 	isFormData  bool
+	IsStream    bool
+	StreamBody  string
 	// setContentLength    bool
 	// isSaveResponse      bool
 	// notParseResponse    bool
