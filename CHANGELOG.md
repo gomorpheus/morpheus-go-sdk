@@ -1,5 +1,9 @@
 ## Unreleased
 
+FEATURES:
+
+* **Hosts** Client methods for `hosts` API endpoints
+
 ## 0.3.9 (May 27, 2024)
 
 NOTES:
