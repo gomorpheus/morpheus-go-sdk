@@ -50,7 +50,6 @@ func main() {
 		log.Fatal(err)
 	}
 	cloudType := cloudTypesResp.Result.(*morpheus.ListCloudTypesResult)
-	//log.Println(cloudType.CloudTypes)
 	for _, ct := range *cloudType.CloudTypes {
 		log.Println(ct.Name)
 	}

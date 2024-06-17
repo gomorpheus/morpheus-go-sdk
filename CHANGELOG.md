@@ -3,6 +3,7 @@
 FEATURES:
 
 * **Hosts** Client methods for `hosts` API endpoints
+* **Network Routers** Client methods for `network_routers` API endpoints
 
 ## 0.3.9 (May 27, 2024)
 
