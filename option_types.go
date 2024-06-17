@@ -40,8 +40,10 @@ type OptionType struct {
 	ShowOnCreate          bool   `json:"showOnCreate"`
 	ShowOnEdit            bool   `json:"showOnEdit"`
 	Config                struct {
-		Rows        string      `json:"rows"`
-		MultiSelect interface{} `json:"multiSelect"`
+		Rows                     string      `json:"rows"`
+		BrowseEnabled            bool        `json:"browseEnabled"`
+		ClearPlaceholderOnSelect bool        `json:"clearPlaceholderOnSelect"`
+		MultiSelect              interface{} `json:"multiSelect"`
 	} `json:"config"`
 }
 
