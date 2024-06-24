@@ -7,7 +7,7 @@ FEATURES:
 * **Hosts** Client methods for `hosts` API endpoints
 * **Network Routers** Client methods for `network_routers` API endpoints
 
-## 0.3.9 (May 27, 2024)
+## 0.4.0 (May 27, 2024)
 
 NOTES:
 
@@ -22,13 +22,19 @@ FEATURES:
 * **Storage Volume Types** Client methods for `storage_volume_types` API endpoints
 * **Task Types** Client methods for `task_types` API endpoints
 
-## 0.3.8 (April 24, 2024)
+## 0.3.9 (April 24, 2024)
 
 NOTES:
 
 * Fix issues with the `user_group` delete function and added support for newer API attributes.
 * Update resty library from 2.10.0 to 2.12.0.
 * Update `instance_type` and `instance_layout` resources to add support for price sets.
+
+## 0.3.8 (January 15, 2024)
+
+NOTES:
+
+* Fix issues with the `user_group` delete function and added support for newer API attributes.
 
 ## 0.3.7 (November 20, 2023)
 
