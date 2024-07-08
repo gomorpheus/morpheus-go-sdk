@@ -44,6 +44,15 @@ type Instance struct {
 		Name string `json:"name"`
 		Type string `json:"type"`
 	} `json:"cloud"`
+	Cluster struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+		Type struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+			Code string `json:"code"`
+		} `json:"type"`
+	} `json:"cluster"`
 	Containers []int64 `json:"containers"`
 	Servers    []int64 `json:"servers"`
 	Resources  []struct {
@@ -74,37 +83,50 @@ type Instance struct {
 	ConnectionInfo []struct {
 		Ip   string `json:"ip"`
 		Port int64  `json:"port"`
+		Name string `json:"name"`
 	} `json:"connectionInfo"`
-	Environment string                   `json:"environment"`
-	Plan        InstancePlan             `json:"plan"`
-	Config      map[string]interface{}   `json:"config"`
-	Labels      []string                 `json:"labels"`
-	Version     string                   `json:"instanceVersion"`
-	Status      string                   `json:"status"`
-	Owner       Owner                    `json:"owner"`
-	Volumes     []map[string]interface{} `json:"volumes"`
-	Interfaces  []map[string]interface{} `json:"interfaces"`
-	Controllers []map[string]interface{} `json:"controllers"`
+	Environment string                 `json:"environment"`
+	Plan        InstancePlan           `json:"plan"`
+	Config      map[string]interface{} `json:"config"`
+	Labels      []string               `json:"labels"`
+	Version     string                 `json:"instanceVersion"`
+	Status      string                 `json:"status"`
+	Owner       Owner                  `json:"owner"`
+	Volumes     []StorageVolume        `json:"volumes"`
+	Interfaces  []NetworkInterface     `json:"interfaces"`
+	Controllers []StorageControler     `json:"controllers"`
 	Tags        []struct {
-		Id    int64  `json:"id"`
-		Name  string `json:"name"`
-		Value string `json:"value"`
+		Id    int64       `json:"id"`
+		Name  string      `json:"name"`
+		Value interface{} `json:"value"`
 	} `json:"tags"`
 	Metadata             []map[string]interface{} `json:"metadata"`
 	EnvironmentVariables []struct {
-		Name   string `json:"name"`
-		Value  string `json:"value"`
-		Export bool   `json:"export"`
-		Masked bool   `json:"masked"`
+		Name   string      `json:"name"`
+		Value  interface{} `json:"value"`
+		Export bool        `json:"export"`
+		Masked bool        `json:"masked"`
 	} `json:"evars"`
-	CustomOptions  map[string]interface{} `json:"customOptions"`
-	MaxMemory      int64                  `json:"maxMemory"`
-	MaxStorage     int64                  `json:"maxStorage"`
-	MaxCores       int64                  `json:"maxCores"`
-	CoresPerSocket int64                  `json:"coresPerSocket"`
-	MaxCpu         int64                  `json:"maxCpu"`
-	HourlyCost     float64                `json:"hourlyCost"`
-	HourlyPrice    float64                `json:"hourlyPrice"`
+	CustomOptions   map[string]interface{} `json:"customOptions"`
+	PendingRequests []struct {
+		Id           int64  `json:"id"`
+		Type         string `json:"type"`
+		Status       string `json:"status"`
+		Name         string `json:"name"`
+		ExternalName string `json:"externalName"`
+		DateCreated  string `json:"dateCreated"`
+		DateApproved string `json:"dateApproved"`
+		DateDenied   string `json:"dateDenied"`
+		ApprovedBy   string `json:"approvedBy"`
+		DeniedBy     string `json:"deniedBy"`
+	} `json:"pendingRequests"`
+	MaxMemory      int64   `json:"maxMemory"`
+	MaxStorage     int64   `json:"maxStorage"`
+	MaxCores       int64   `json:"maxCores"`
+	CoresPerSocket int64   `json:"coresPerSocket"`
+	MaxCpu         int64   `json:"maxCpu"`
+	HourlyCost     float64 `json:"hourlyCost"`
+	HourlyPrice    float64 `json:"hourlyPrice"`
 	InstancePrice  struct {
 		Price    float64 `json:"price"`
 		Cost     float64 `json:"cost"`
@@ -118,17 +140,28 @@ type Instance struct {
 	NetworkDomain struct {
 		Id int64 `json:"id"`
 	} `json:"networkDomain"`
-	EnvironmentPrefix string `json:"environmentPrefix"`
-	FirewallEnabled   bool   `json:"firewallEnabled"`
-	NetworkLevel      string `json:"networkLevel"`
-	AutoScale         bool   `json:"autoScale"`
-	InstanceContext   string `json:"instanceContext"`
-	Locked            bool   `json:"locked"`
-	IsScalable        bool   `json:"isScalable"`
-	CreatedBy         struct {
+	EnvironmentPrefix   string `json:"environmentPrefix"`
+	FirewallEnabled     bool   `json:"firewallEnabled"`
+	NetworkLevel        string `json:"networkLevel"`
+	AutoScale           bool   `json:"autoScale"`
+	InstanceContext     string `json:"instanceContext"`
+	Locked              bool   `json:"locked"`
+	IsScalable          bool   `json:"isScalable"`
+	ExpireCount         int64  `json:"expireCount"`
+	ExpireDate          string `json:"expireDate"`
+	ExpireWarningDate   string `json:"expireWarningDate"`
+	ExpireWarningSent   bool   `json:"expireWarningSent"`
+	ShutdownDays        int64  `json:"shutdownDays"`
+	ShutdownRenewDays   int64  `json:"shutdownRenewDays"`
+	ShutdownCount       int64  `json:"shutdownCount"`
+	ShutdownDate        string `json:"shutdownDate"`
+	ShutdownWarningDate string `json:"shutdownWarningDate"`
+	ShutdownWarningSent bool   `json:"shutdownWarningSent"`
+	CreatedBy           struct {
 		Id       int64  `json:"id"`
 		Username string `json:"username"`
 	} `json:"createdBy"`
+	Notes string `json:"notes"`
 	Stats struct {
 		UsedStorage  int64   `json:"usedStorage"`
 		MaxStorage   int64   `json:"maxStorage"`
@@ -139,6 +172,102 @@ type Instance struct {
 		CpuUsagePeak float64 `json:"cpuUsagePeak"`
 		CpuUsageAvg  float64 `json:"cpuUsageAvg"`
 	} `json:"stats"`
+	IsBusy bool `json:"isBusy"`
+	Apps   []struct {
+		Id   int64  `json:"id"`
+		Name string `json:"name"`
+		Tier string `json:"tier"`
+	} `json:"apps"`
+}
+
+// Only used as an optional struct until all possible options are validated
+type InstanceConfig struct {
+	CreateUser       bool     `json:"createUser"`
+	IsEC2            bool     `json:"isEC2"`
+	AllowExisting    bool     `json:"allowExisting"`
+	IsVpcSelectable  bool     `json:"isVpcSelectable"`
+	Username         string   `json:"username"`
+	Host             string   `json:"host"`
+	Port             int64    `json:"port"`
+	Password         string   `json:"password"`
+	PasswordHash     string   `json:"passwordHash"`
+	NoAgent          bool     `json:"noAgent"`
+	RootPassword     string   `json:"rootPassword"`
+	RootPasswordHash string   `json:"rootPasswordHash"`
+	ServicePassword  string   `json:"servicePassword"`
+	ServiceUsername  string   `json:"serviceUsername"`
+	SmbiosAssetTag   string   `json:"smbiosAssetTag"`
+	Cloud            string   `json:"cloud"`
+	LoadBalancerId   int64    `json:"loadBalancerId"`
+	Expose           []string `json:"expose"`
+	RemovalOptions   struct {
+		Force           bool  `json:"force"`
+		KeepBackups     bool  `json:"keepBackups"`
+		ReleaseEIPs     bool  `json:"releaseEIPs"`
+		RemoveVolumes   bool  `json:"removeVolumes"`
+		RemoveResources bool  `json:"removeResources"`
+		UserId          int64 `json:"userId"`
+	} `json:"removalOptions"`
+	Attributes     map[string]interface{} `json:"attributes"`
+	VmwareFolderId string                 `json:"vmwareFolderId"`
+	SecurityId     string                 `json:"securityId"`
+	KmsKeyId       string                 `json:"kmsKeyId"`
+	ResourcePoolId string                 `json:"resourcePoolId"`
+	PublicIpType   string                 `json:"publicIpType"`
+	CatalogItem    int64                  `json:"catalogItem"`
+	CreateBackup   bool                   `json:"createBackup"`
+	MemoryDisplay  string                 `json:"memoryDisplay"`
+	SecurityGroups []struct {
+		ID string `json:"id"`
+	}
+	Backup struct {
+		CreateBackup               bool   `json:"createBackup"`
+		BackupRepository           int64  `json:"backupRepository"`
+		JobAction                  string `json:"jobAction"`
+		JobRetentionCount          string `json:"jobRetentionCount"`
+		ProviderBackupType         int64  `json:"providerBackupType"`
+		Enabled                    bool   `json:"enabled"`
+		ShowScheduledBackupWarning bool   `json:"showScheduledBackupWarning"`
+	} `json:"backup"`
+	ReplicationGroup struct {
+		ProviderMethod string `json:"providerMethod"`
+	} `json:"replicationGroup"`
+	ShutdownDays        string `json:"shutdownDays"`
+	ExpireDays          string `json:"expireDays"`
+	LayoutSize          int64  `json:"layoutSize"`
+	ServicePasswordHash string `json:"servicePasswordHash"`
+}
+
+type StorageControler struct {
+	ID   int64  `json:"id"`
+	Name string `json:"name"`
+	Type struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+		Code string `json:"code"`
+	}
+	MaxDevices         int64 `json:"maxDevices"`
+	ReservedUnitNumber int64 `json:"reservedUnitNumber"`
+}
+
+type NetworkInterface struct {
+	ID      string `json:"id"`
+	Row     int64  `json:"row"`
+	Network struct {
+		ID         int64  `json:"id"`
+		Subnet     int64  `json:"subnet"`
+		Group      int64  `json:"group"`
+		Name       string `json:"name"`
+		DhcpServer bool   `json:"dhcpServer"`
+		Pool       struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"pool"`
+	} `json:"network"`
+	IpAddress              string      `json:"ipAddress"`
+	IpMode                 string      `json:"ipMode"`
+	NetworkInterfaceTypeId interface{} `json:"networkInterfaceTypeId"`
+	IsPrimary              bool        `json:"isPrimary"`
 }
 
 type InstancePlan struct {
@@ -198,6 +327,39 @@ type ContainerDetails struct {
 	} `json:"server"`
 }
 
+type Snapshot struct {
+	ID              int64  `json:"id"`
+	Name            string `json:"name"`
+	Description     string `json:"description"`
+	ExternalId      string `json:"externalId"`
+	Status          string `json:"status"`
+	State           string `json:"state"`
+	SnapshotType    string `json:"snapshotType"`
+	SnapshotCreated string `json:"snapshotCreated"`
+	Zone            struct {
+		ID   int64  `json:"id"`
+		Name string `json:"name"`
+	} `json:"zone"`
+	Datastore       string `json:"datastore"`
+	ParentSnapshot  string `json:"parentSnapshot"`
+	CurrentlyActive bool   `json:"currentlyActive"`
+	DateCreated     string `json:"dateCreated"`
+}
+
+type InstanceSchedule struct {
+	ID             int64          `json:"id"`
+	ScheduleType   string         `json:"scheduleType"`
+	StartDayOfWeek int64          `json:"startDayOfWeek"`
+	StartTime      string         `json:"startTime"`
+	EndDayOfWeek   int64          `json:"endDayOfWeek"`
+	EndTime        string         `json:"endTime"`
+	StartDisplay   string         `json:"startDisplay"`
+	EndDisplay     string         `json:"endDisplay"`
+	Threshold      ScaleThreshold `json:"threshold"`
+	DateCreated    string         `json:"dateCreated"`
+	LastUpdated    string         `json:"lastUpdated"`
+}
+
 // ListInstancesResult structure parses the list instances response payload
 type ListInstancesResult struct {
 	Instances *[]Instance `json:"instances"`
@@ -205,7 +367,10 @@ type ListInstancesResult struct {
 }
 
 type GetInstanceResult struct {
-	Instance *Instance `json:"instance"`
+	Instance *Instance         `json:"instance"`
+	Success  bool              `json:"success"`
+	Message  string            `json:"msg"`
+	Errors   map[string]string `json:"errors"`
 }
 
 type CreateInstanceResult struct {
@@ -246,8 +411,56 @@ type UpdateInstanceSecurityGroupsResult struct {
 	Errors         map[string]string `json:"errors"`
 }
 
-// API endpoints
+type GetInstanceSnapshotResult struct {
+	Snapshot *Snapshot         `json:"snapshot"`
+	Success  bool              `json:"success"`
+	Message  string            `json:"msg"`
+	Errors   map[string]string `json:"errors"`
+}
 
+type RunWorkflowOnInstanceResult struct {
+	ProcessId int64             `json:"processId"`
+	Success   bool              `json:"success"`
+	Message   string            `json:"msg"`
+	Errors    map[string]string `json:"errors"`
+}
+
+type ApplyStateResult struct {
+	ExecutionId string            `json:"executionId"`
+	Success     bool              `json:"success"`
+	Message     string            `json:"msg"`
+	Errors      map[string]string `json:"errors"`
+}
+
+type ValidateInstanceStateApplyResult struct {
+	ExecutionId string            `json:"executionId"`
+	Success     bool              `json:"success"`
+	Message     string            `json:"msg"`
+	Errors      map[string]string `json:"errors"`
+}
+
+type UpdateInstanceScheduleResult struct {
+	InstanceSchedule InstanceSchedule  `json:"instanceSchedule"`
+	Success          bool              `json:"success"`
+	Message          string            `json:"msg"`
+	Errors           map[string]string `json:"errors"`
+}
+
+type GetInstanceScheduleResult struct {
+	InstanceSchedule InstanceSchedule  `json:"instanceSchedule"`
+	Success          bool              `json:"success"`
+	Message          string            `json:"msg"`
+	Errors           map[string]string `json:"errors"`
+}
+
+type ListInstanceScheduleResult struct {
+	InstanceSchedules []InstanceSchedule `json:"instanceSchedules"`
+	Success           bool               `json:"success"`
+	Message           string             `json:"msg"`
+	Errors            map[string]string  `json:"errors"`
+}
+
+// API endpoints
 func (client *Client) ListInstances(req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "GET",
@@ -293,6 +506,186 @@ func (client *Client) DeleteInstance(id int64, req *Request) (*Response, error) 
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &DeleteInstanceResult{},
+	})
+}
+
+func (client *Client) StartInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/start", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceResult{},
+	})
+}
+
+func (client *Client) StopInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/stop", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) RestartInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/restart", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) SuspendInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/suspend", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) SnapshotInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/snapshot", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) BackupInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/backup", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) CancelInstanceExpiration(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/cancel-expiration", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) CancelInstanceRemoval(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/cancel-removal", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) CancelInstanceShutdown(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/cancel-shutdown", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) EjectInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/eject", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) CloneInstanceToImage(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/clone-image", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) CloneInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/clone", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) ImportInstanceSnapshot(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/import-snapshot", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) CreateLinkedClone(id int64, snapshotId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/linked-clone/%d", InstancesPath, id, snapshotId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) ApplyInstanceState(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/apply", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &ApplyStateResult{},
+	})
+}
+
+func (client *Client) RefreshInstanceState(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/refresh", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) RevertInstanceToSnapshot(id int64, snapshotId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/revert-snapshot/%d", InstancesPath, id, snapshotId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+func (client *Client) DeleteInstanceSnapshot(snapshotId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("api/snapshots/%d", snapshotId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
 	})
 }
 
@@ -443,4 +836,103 @@ func (client *Client) FindInstancePlanByName(name string, req *Request) (*Respon
 // it also requires zoneId AND layoutId??
 func (client *Client) FindInstancePlanByCode(code string, req *Request) (*Response, error) {
 	return client.FindInstancePlanByName(code, req)
+}
+
+// ListInstanceSchedules fetches existing instance scaling schedules
+func (client *Client) ListInstanceSchedules(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/schedules", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &ListInstanceScheduleResult{},
+	})
+}
+
+// CreateInstanceSchedule creates a new instance scaling schedule
+func (client *Client) CreateInstanceSchedule(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/schedules", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceScheduleResult{},
+	})
+}
+
+// GetInstanceSchedule fetches an existing instance scaling schedule
+func (client *Client) GetInstanceSchedule(id int64, scheduleId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/schedules/%d", InstancesPath, id, scheduleId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &GetInstanceScheduleResult{},
+	})
+}
+
+// UpdateInstanceSchedule updates an existing instance scaling schedule
+func (client *Client) UpdateInstanceSchedule(id int64, scheduleId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/schedules/%d", InstancesPath, id, scheduleId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateInstanceScheduleResult{},
+	})
+}
+
+// DeleteInstanceSchedule deletes a specified instance scaling schedule
+func (client *Client) DeleteInstanceSchedule(id int64, scheduleId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d/schedules/%d", InstancesPath, id, scheduleId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+// ValidateInstanceStateApply validates instance configuration and templateParameter variables before executing the apply
+func (client *Client) ValidateInstanceStateApply(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/validate-apply", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &ValidateInstanceStateApplyResult{},
+	})
+}
+
+// RunWorkflowOnInstance executes a workflow on an existing instance
+func (client *Client) RunWorkflowOnInstance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/workflow", InstancesPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &RunWorkflowOnInstanceResult{},
+	})
+}
+
+// RemoveInstanceFromControl removes an instance from Morpheus control
+func (client *Client) RemoveInstanceFromControl(req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/remove-from-control", InstancesPath),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
+// GetInstanceSnapshot fetches an existing instance snapshot
+func (client *Client) GetInstanceSnapshot(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("api/snapshots/%d", id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
 }

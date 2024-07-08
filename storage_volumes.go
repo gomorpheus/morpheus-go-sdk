@@ -11,16 +11,20 @@ var (
 
 // StorageVolume structures for use in request and response payloads
 type StorageVolume struct {
-	ID                   int64  `json:"id"`
-	Name                 string `json:"name"`
-	Description          string `json:"description"`
-	ControllerId         int64  `json:"controllerId"`
-	ControllerMountPoint string `json:"controllerMountPoint"`
-	Resizeable           bool   `json:"resizeable"`
-	RootVolume           bool   `json:"rootVolume"`
-	UnitNumber           string `json:"unitNumber"`
-	DeviceName           string `json:"deviceName"`
-	DeviceDisplayName    string `json:"deviceDisplayName"`
+	ID                   interface{} `json:"id"`
+	Name                 string      `json:"name"`
+	ShortName            string      `json:"shortName"`
+	Description          string      `json:"description"`
+	ControllerId         int64       `json:"controllerId"`
+	ControllerMountPoint string      `json:"controllerMountPoint"`
+	Resizeable           interface{} `json:"resizeable"`
+	PlanResizable        interface{} `json:"planResizable"`
+	Size                 interface{} `json:"size"`
+	StorageType          interface{} `json:"storageType"`
+	RootVolume           interface{} `json:"rootVolume"`
+	UnitNumber           string      `json:"unitNumber"`
+	DeviceName           string      `json:"deviceName"`
+	DeviceDisplayName    string      `json:"deviceDisplayName"`
 	Type                 struct {
 		ID   int64  `json:"id"`
 		Code string `json:"code"`
@@ -45,7 +49,7 @@ type StorageVolume struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"datastore"`
-	DatastoreId   int64  `json:"datastoreId"`
+	DatastoreId   string `json:"datastoreId"`
 	StorageGroup  string `json:"storageGroup"`
 	Namespace     string `json:"namespace"`
 	StorageServer string `json:"storageServer"`
@@ -146,5 +150,5 @@ func (client *Client) FindStorageVolumeByName(name string) (*Response, error) {
 	}
 	firstRecord := (*listResult.StorageVolumes)[0]
 	StorageVolumeID := firstRecord.ID
-	return client.GetStorageVolume(StorageVolumeID, &Request{})
+	return client.GetStorageVolume(StorageVolumeID.(int64), &Request{})
 }

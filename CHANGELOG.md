@@ -1,5 +1,9 @@
 ## Unreleased
 
+NOTES:
+
+* Updates to instances to support additional actions (i.e. - snapshots, resize, clone, etc.).
+
 ## 0.4.1 (June 24, 2024)
 
 FEATURES:
