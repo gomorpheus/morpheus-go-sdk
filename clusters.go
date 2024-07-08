@@ -87,14 +87,15 @@ type Cluster struct {
 		CpuUsagePeak float64 `json:"cpuUsagePeak"`
 		CpuUsageAvg  float64 `json:"cpuUsageAvg"`
 	}
-	ContainersCount  int64 `json:"containersCount"`
-	DeploymentsCount int64 `json:"deploymentsCount"`
-	PodsCount        int64 `json:"podsCount"`
-	JobsCount        int64 `json:"jobsCount"`
-	VolumesCount     int64 `json:"volumesCount"`
-	NamespacesCount  int64 `json:"namespacesCount"`
-	WorkersCount     int64 `json:"workersCount"`
-	ServicesCount    int64 `json:"servicesCount"`
+	ContainersCount  int64                  `json:"containersCount"`
+	DeploymentsCount int64                  `json:"deploymentsCount"`
+	PodsCount        int64                  `json:"podsCount"`
+	JobsCount        int64                  `json:"jobsCount"`
+	VolumesCount     int64                  `json:"volumesCount"`
+	NamespacesCount  int64                  `json:"namespacesCount"`
+	WorkersCount     int64                  `json:"workersCount"`
+	ServicesCount    int64                  `json:"servicesCount"`
+	Config           map[string]interface{} `json:"config"`
 }
 
 type Server struct {

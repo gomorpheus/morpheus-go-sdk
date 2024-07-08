@@ -26,7 +26,7 @@ func TestGetStorageVolume(t *testing.T) {
 	if recordCount != 0 {
 		// Get by ID
 		record := (*result.StorageVolumes)[0]
-		resp, err = client.GetStorageVolume(record.ID, &morpheus.Request{})
+		resp, err = client.GetStorageVolume(record.ID.(int64), &morpheus.Request{})
 		assertResponse(t, resp, err)
 	}
 }
