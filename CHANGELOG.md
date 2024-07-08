@@ -2,6 +2,7 @@
 
 NOTES:
 
+* Updates to apps payload to add more details and support new actions
 * Updates to instances to support additional actions (i.e. - snapshots, resize, clone, etc.).
 
 ## 0.4.1 (June 24, 2024)

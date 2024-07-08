@@ -110,7 +110,7 @@ type GetAppStateResult struct {
 			} `json:"value"`
 		} `json:"outputs"`
 	} `json:"output"`
-	// StateData `json:"stateData"`
+	StateData string `json:"stateData"`
 }
 
 type Output struct {
@@ -149,6 +149,49 @@ type UpdateAppResult struct {
 
 type DeleteAppResult struct {
 	DeleteResult
+}
+
+type ApplyStateForAppResult struct {
+	Success     bool              `json:"success"`
+	Message     string            `json:"msg"`
+	Errors      map[string]string `json:"errors"`
+	ExecutionId string            `json:"executionId"`
+}
+
+type ValidateApplyStateForAppResult struct {
+	Success     bool              `json:"success"`
+	Message     string            `json:"msg"`
+	Errors      map[string]string `json:"errors"`
+	ExecutionId string            `json:"executionId"`
+}
+
+type PrepareToApplyAppResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+	Data    struct {
+		Image        string `json:"image"`
+		Name         string `json:"name"`
+		AutoValidate bool   `json:"autoValidate"`
+		Terraform    struct {
+			RefreshMode string `json:"refreshMode"`
+			BackendType string `json:"backendType"`
+			TimeoutMode string `json:"timeoutMode"`
+			ConfigType  string `json:"configType"`
+		} `json:"terraform"`
+		Type   string `json:"type"`
+		Config struct {
+			Specs []Spec `json:"specs"`
+		} `json:"config"`
+		BlueprintName string `json:"blueprintName"`
+		Description   string `json:"description"`
+		TemplateId    int64  `json:"templateId"`
+		BlueprintId   int64  `json:"blueprintId"`
+		Group         struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"group"`
+	} `json:"data"`
 }
 
 // Client request methods
@@ -201,6 +244,66 @@ func (client *Client) UpdateApp(id int64, req *Request) (*Response, error) {
 	})
 }
 
+func (client *Client) AddInstanceToApp(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/add-instance", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateAppResult{},
+	})
+}
+
+func (client *Client) RemoveInstanceFromApp(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/remove-instance", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &UpdateAppResult{},
+	})
+}
+
+func (client *Client) PrepareToApplyAppState(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/prepare-apply", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &PrepareToApplyAppResult{},
+	})
+}
+
+func (client *Client) ApplyAppState(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/add-instance", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &ApplyStateForAppResult{},
+	})
+}
+
+func (client *Client) UndoAppDelete(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/cancel-removal", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateAppResult{},
+	})
+}
+
+func (client *Client) RefreshAppState(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/refresh", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardResult{},
+	})
+}
+
 func (client *Client) DeleteApp(id int64, req *Request) (*Response, error) {
 	return client.Execute(&Request{
 		Method:      "DELETE",
@@ -208,6 +311,16 @@ func (client *Client) DeleteApp(id int64, req *Request) (*Response, error) {
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &DeleteAppResult{},
+	})
+}
+
+func (client *Client) ValidateApplyStateForApp(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/validate-apply", AppsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &ValidateApplyStateForAppResult{},
 	})
 }
 
