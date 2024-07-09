@@ -1,7 +1,10 @@
 ## Unreleased
 
+## 0.4.2 (July 9, 2024)
+
 NOTES:
 
+* Updates to the clusters payload
 * Updates to apps payload to add more details and support new actions
 * Updates to instances to support additional actions (i.e. - snapshots, resize, clone, etc.).
 
