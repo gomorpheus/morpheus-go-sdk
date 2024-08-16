@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 0.4.3 (August 16, 2024)
+
+NOTES:
+
+* Add network pool ip address management support
+* Update instance datstoreid to an interface to handle edge cases in which the value is a null value, string or integer.
+
 ## 0.4.2 (July 9, 2024)
 
 NOTES:

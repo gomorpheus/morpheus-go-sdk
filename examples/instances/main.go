@@ -23,5 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 	result := instancesResponse.Result.(*morpheus.ListInstancesResult)
-	log.Println(result.Instances)
+	for _, instance := range *result.Instances {
+		fmt.Println(instance)
+	}
 }

@@ -23,6 +23,13 @@ func main() {
 		log.Fatal(err)
 	}
 	result := networkPoolResponse.Result.(*morpheus.ListNetworkPoolsResult)
-	pools := result.NetworkPools
-	log.Println(pools)
+	pools := *result.NetworkPools
+	for _, pool := range pools {
+		networkPoolIpResponse, err := client.ListNetworkPoolIPAddresses(pool.ID, req)
+		if err != nil {
+			log.Fatal(err)
+		}
+		networkPoolIpResult := networkPoolIpResponse.Result.(*morpheus.ListNetworkPoolIPAddressesResult)
+		fmt.Println(networkPoolIpResult.NetworkPoolIps)
+	}
 }
