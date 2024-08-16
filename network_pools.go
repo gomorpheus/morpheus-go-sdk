@@ -2,6 +2,7 @@ package morpheus
 
 import (
 	"fmt"
+	"time"
 )
 
 var (
@@ -21,7 +22,7 @@ type NetworkPool struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	} `json:"account"`
-	Category      interface{} `json:"category"`
+	Category      string      `json:"category"`
 	Code          string      `json:"code"`
 	Name          string      `json:"name"`
 	DisplayName   string      `json:"displayName"`
@@ -42,7 +43,7 @@ type NetworkPool struct {
 	FreeCount     int64       `json:"freeCount"`
 	PoolEnabled   bool        `json:"poolEnabled"`
 	TftpServer    interface{} `json:"tftpServer"`
-	BootFile      interface{} `json:"bootFile"`
+	BootFile      string      `json:"bootFile"`
 	RefType       string      `json:"refType"`
 	RefId         string      `json:"refId"`
 	ParentType    string      `json:"parentType"`
@@ -54,7 +55,7 @@ type NetworkPool struct {
 		EndAddress   string      `json:"endAddress"`
 		InternalId   interface{} `json:"internalId"`
 		ExternalId   interface{} `json:"externalId"`
-		Description  interface{} `json:"description"`
+		Description  string      `json:"description"`
 		AddressCount int64       `json:"addressCount"`
 		Active       bool        `json:"active"`
 		DateCreated  string      `json:"dateCreated"`
@@ -63,16 +64,50 @@ type NetworkPool struct {
 	} `json:"ipRanges"`
 }
 
+type NetworkPoolIP struct {
+	ID             int64     `json:"id"`
+	NetworkPoolId  int64     `json:"networkPoolId"`
+	IpType         string    `json:"ipType"`
+	IpAddress      string    `json:"ipAddress"`
+	GatewayAddress string    `json:"gatewayAddress"`
+	SubnetMask     string    `json:"subnetMask"`
+	DnsServer      string    `json:"dnsServer"`
+	InterfaceName  string    `json:"interfaceName"`
+	Description    string    `json:"description"`
+	Active         bool      `json:"active"`
+	StaticIp       bool      `json:"staticIp"`
+	Fqdn           string    `json:"fqdn"`
+	DomainName     string    `json:"domainName"`
+	Hostname       string    `json:"hostname"`
+	InternalId     int64     `json:"internalId"`
+	ExternalId     int64     `json:"externalId"`
+	PtrId          int64     `json:"ptrId"`
+	DateCreated    time.Time `json:"dateCreated"`
+	LastUpdated    time.Time `json:"lastUpdated"`
+	StartDate      time.Time `json:"startDate"`
+	EndDate        time.Time `json:"endDate"`
+	RefType        string    `json:"refType"`
+	RefId          int64     `json:"refId"`
+	SubRefId       int64     `json:"subRefId"`
+	NetworkDomain  string    `json:"networkDomain"`
+	CreatedBy      struct {
+		ID       int    `json:"id"`
+		Username string `json:"username"`
+	} `json:"createdBy"`
+}
+
 // ListNetworkPoolsResult structure parses the list network pools response payload
 type ListNetworkPoolsResult struct {
 	NetworkPools *[]NetworkPool `json:"networkPools"`
 	Meta         *MetaResult    `json:"meta"`
 }
 
+// GetNetworkPoolResult structure parses the get network pools response payload
 type GetNetworkPoolResult struct {
 	NetworkPool *NetworkPool `json:"networkPool"`
 }
 
+// CreateNetworkPoolResult structure parses the create network pool response payload
 type CreateNetworkPoolResult struct {
 	Success     bool              `json:"success"`
 	Message     string            `json:"msg"`
@@ -80,11 +115,36 @@ type CreateNetworkPoolResult struct {
 	NetworkPool *NetworkPool      `json:"networkPool"`
 }
 
+// UpdateNetworkPoolResult structure parses the update network pool response payload
 type UpdateNetworkPoolResult struct {
 	CreateNetworkPoolResult
 }
 
+// DeleteNetworkPoolResult structure parses the delete network pool response payload
 type DeleteNetworkPoolResult struct {
+	DeleteResult
+}
+
+type ListNetworkPoolIPAddressesResult struct {
+	NetworkPoolIps *[]NetworkPoolIP `json:"networkPoolIps"`
+	Meta           *MetaResult      `json:"meta"`
+}
+
+// GetNetworkPoolIPAddressResult structure parses the get network pool ip address response payload
+type GetNetworkPoolIPAddressResult struct {
+	NetworkPoolIP *NetworkPoolIP `json:"networkPoolIp"`
+}
+
+// CreateNetworkPoolIPAddressResult structure parses the create network pool ip response payload
+type CreateNetworkPoolIPAddressResult struct {
+	Success       bool              `json:"success"`
+	Message       string            `json:"msg"`
+	Errors        map[string]string `json:"errors"`
+	NetworkPoolIP *NetworkPoolIP    `json:"networkPoolIp"`
+}
+
+// DeleteNetworkPoolIPAddressResult structure parses the delete network pool ip response payload
+type DeleteNetworkPoolIPAddressResult struct {
 	DeleteResult
 }
 
@@ -160,4 +220,46 @@ func (client *Client) FindNetworkPoolByName(name string) (*Response, error) {
 	firstRecord := (*listResult.NetworkPools)[0]
 	networkPoolID := firstRecord.ID
 	return client.GetNetworkPool(networkPoolID, &Request{})
+}
+
+// ListNetworkPoolIPAddresses lists all network pools ip addresses
+func (client *Client) ListNetworkPoolIPAddresses(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/ips", NetworkPoolsPath, id),
+		QueryParams: req.QueryParams,
+		Result:      &ListNetworkPoolIPAddressesResult{},
+	})
+}
+
+// GetNetworkPoolIPAddress gets an existing network pool ip address
+func (client *Client) GetNetworkPoolIPAddress(networkPoolId int64, networkPoolIpId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "GET",
+		Path:        fmt.Sprintf("%s/%d/%d", NetworkPoolsPath, networkPoolId, networkPoolIpId),
+		QueryParams: req.QueryParams,
+		Result:      &GetNetworkPoolIPAddressResult{},
+	})
+}
+
+// CreateNetworkPoolIPAddress creates a new network pool IP address
+func (client *Client) CreateNetworkPoolIPAddress(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "POST",
+		Path:        fmt.Sprintf("%s/%d/ips", NetworkPoolsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &CreateNetworkPoolIPAddressResult{},
+	})
+}
+
+// DeleteNetworkPoolIPAddress deletes an existing network pool ip address
+func (client *Client) DeleteNetworkPoolIPAddress(networkPoolId int64, networkPoolIpId int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "DELETE",
+		Path:        fmt.Sprintf("%s/%d/ips/%d", NetworkPoolsPath, networkPoolId, networkPoolIpId),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &DeleteNetworkPoolIPAddressResult{},
+	})
 }

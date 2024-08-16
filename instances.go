@@ -92,9 +92,57 @@ type Instance struct {
 	Version     string                 `json:"instanceVersion"`
 	Status      string                 `json:"status"`
 	Owner       Owner                  `json:"owner"`
-	Volumes     []StorageVolume        `json:"volumes"`
-	Interfaces  []NetworkInterface     `json:"interfaces"`
-	Controllers []StorageControler     `json:"controllers"`
+	Volumes     []struct {
+		ID                   interface{} `json:"id"`
+		Name                 string      `json:"name"`
+		ShortName            string      `json:"shortName"`
+		Description          string      `json:"description"`
+		ControllerId         int64       `json:"controllerId"`
+		ControllerMountPoint string      `json:"controllerMountPoint"`
+		Resizeable           interface{} `json:"resizeable"`
+		PlanResizable        interface{} `json:"planResizable"`
+		Size                 interface{} `json:"size"`
+		StorageType          interface{} `json:"storageType"`
+		RootVolume           interface{} `json:"rootVolume"`
+		UnitNumber           string      `json:"unitNumber"`
+		DeviceName           string      `json:"deviceName"`
+		DeviceDisplayName    string      `json:"deviceDisplayName"`
+		Type                 struct {
+			ID   int64  `json:"id"`
+			Code string `json:"code"`
+			Name string `json:"name"`
+		} `json:"type"`
+		TypeId           int64  `json:"typeId"`
+		Category         string `json:"category"`
+		Status           string `json:"status"`
+		StatusMessage    string `json:"statusMessage"`
+		ConfigurableIOPS bool   `json:"configurableIOPS"`
+		MaxStorage       int64  `json:"maxStorage"`
+		DisplayOrder     int64  `json:"displayOrder"`
+		MaxIOPS          string `json:"maxIOPS"`
+		Uuid             string `json:"uuid"`
+		Active           bool   `json:"active"`
+		Zone             struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"zone"`
+		ZoneId    int64 `json:"zoneId"`
+		Datastore struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"datastore"`
+		DatastoreId   interface{} `json:"datastoreId"`
+		StorageGroup  string      `json:"storageGroup"`
+		Namespace     string      `json:"namespace"`
+		StorageServer string      `json:"storageServer"`
+		Source        string      `json:"source"`
+		Owner         struct {
+			ID   int64  `json:"id"`
+			Name string `json:"name"`
+		} `json:"owner"`
+	} `json:"volumes"`
+	Interfaces  []NetworkInterface `json:"interfaces"`
+	Controllers []StorageControler `json:"controllers"`
 	Tags        []struct {
 		Id    int64       `json:"id"`
 		Name  string      `json:"name"`
@@ -251,9 +299,13 @@ type StorageControler struct {
 }
 
 type NetworkInterface struct {
-	ID      string `json:"id"`
-	Row     int64  `json:"row"`
-	Network struct {
+	ID              string `json:"id"`
+	Row             int64  `json:"row"`
+	InternalId      string `json:"internalId"`
+	ExternalId      string `json:"externalId"`
+	UniqueId        string `json:"uniqueId"`
+	PublicIpAddress string `json:"publicIpAddress"`
+	Network         struct {
 		ID         int64  `json:"id"`
 		Subnet     int64  `json:"subnet"`
 		Group      int64  `json:"group"`
@@ -265,9 +317,20 @@ type NetworkInterface struct {
 		} `json:"pool"`
 	} `json:"network"`
 	IpAddress              string      `json:"ipAddress"`
+	Ipv6Address            string      `json:"ipv6Address"`
+	Description            string      `json:"description"`
 	IpMode                 string      `json:"ipMode"`
 	NetworkInterfaceTypeId interface{} `json:"networkInterfaceTypeId"`
 	IsPrimary              bool        `json:"isPrimary"`
+	Type                   struct {
+		ID   int64  `json:"id"`
+		Code string `json:"code"`
+		Name string `json:"name"`
+	} `json:"type"`
+	PoolAssigned bool   `json:"poolAssigned"`
+	MacAddress   string `json:"macAddress"`
+	Active       bool   `json:"active"`
+	DHCP         bool   `json:"dhcp"`
 }
 
 type InstancePlan struct {
@@ -303,22 +366,23 @@ type ContainerDetails struct {
 		Category string `json:"category"`
 	} `json:"containerType"`
 	Server struct {
-		ID               int64  `json:"id"`
-		UUID             string `json:"uuid"`
-		ExternalId       string `json:"externalId"`
-		InternalId       string `json:"internalId"`
-		ExternalUniqueId string `json:"externalUniqueId"`
-		Name             string `json:"name"`
-		ExternalName     string `json:"externalName"`
-		Hostname         string `json:"hostname"`
-		AccountId        int64  `json:"accountId"`
-		SshHost          string `json:"sshHost"`
-		ExternalIp       string `json:"externalIp"`
-		InternalIp       string `json:"internalIp"`
-		Platform         string `json:"platform"`
-		PlatformVersion  string `json:"platformVersion"`
-		AgentInstalled   bool   `json:"agentInstalled"`
-		AgentVersion     string `json:"agentVersion"`
+		ID               int64              `json:"id"`
+		UUID             string             `json:"uuid"`
+		ExternalId       string             `json:"externalId"`
+		InternalId       string             `json:"internalId"`
+		ExternalUniqueId string             `json:"externalUniqueId"`
+		Name             string             `json:"name"`
+		ExternalName     string             `json:"externalName"`
+		Hostname         string             `json:"hostname"`
+		AccountId        int64              `json:"accountId"`
+		SshHost          string             `json:"sshHost"`
+		ExternalIp       string             `json:"externalIp"`
+		InternalIp       string             `json:"internalIp"`
+		Platform         string             `json:"platform"`
+		PlatformVersion  string             `json:"platformVersion"`
+		AgentInstalled   bool               `json:"agentInstalled"`
+		AgentVersion     string             `json:"agentVersion"`
+		Interfaces       []NetworkInterface `json:"interfaces"`
 		SourceImage      struct {
 			ID   int64  `json:"id"`
 			Name string `json:"name"`
