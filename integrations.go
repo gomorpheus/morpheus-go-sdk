@@ -26,6 +26,9 @@ type Integration struct {
 		Name string `json:"name"`
 	}
 	URL             string `json:"url"`
+	WindowsVersion  string `json:"windowsVersion"`
+	RefType         string `json:"refType"`
+	RefId           string `json:"refId"`
 	ServiceUrl      string `json:"serviceUrl"`
 	ServiceUsername string `json:"serviceUsername"`
 	ServicePassword string `json:"servicePassword"`
@@ -34,9 +37,11 @@ type Integration struct {
 	AuthType        string `json:"authType"`
 	AuthId          string `json:"authId"`
 	Config          struct {
-		Inventory                       string                            `json:"inventory"`
-		DefaultBranch                   string                            `json:"defaultBranch"`
-		CacheEnabled                    interface{}                       `json:"cacheEnabled"`
+		Inventory string `json:"inventory"`
+		// Git Integration
+		DefaultBranch string      `json:"defaultBranch"`
+		CacheEnabled  interface{} `json:"cacheEnabled"`
+		// Ansible Integration
 		AnsiblePlaybooks                string                            `json:"ansiblePlaybooks"`
 		AnsibleRoles                    string                            `json:"ansibleRoles"`
 		AnsibleGroupVars                string                            `json:"ansibleGroupVars"`
@@ -55,7 +60,12 @@ type Integration struct {
 		ServiceNowCmdbClassMapping      []serviceNowCmdbClassMappingEntry `json:"serviceNowCmdbClassMapping"`
 		ServiceNowCmdbClassMappingInput []string                          `json:"serviceNowCmdbClassMapping.input"`
 		PreparedForSync                 bool                              `json:"preparedForSync"`
-		Databags                        []chefDatabagEntry                `json:"databags"`
+		PreparedForSyncv2               bool                              `json:"preparedForSync-v2"`
+		PreparedForSyncv3               bool                              `json:"preparedForSync-v3"`
+		PreparedForSyncv4               bool                              `json:"preparedForSync-v4"`
+		WebServiceImportUrl             string                            `json:"webServiceImportUrl"`
+		WebServiceImportSysId           string                            `json:"webServiceImportSysId"`
+		WebServiceOperationUrl          string                            `json:"webServiceOperationUrl"`
 		ApprovalUser                    string                            `json:"approvalUser"`
 		Company                         string                            `json:"company"`
 		AppID                           string                            `json:"appId"`
@@ -66,34 +76,41 @@ type Integration struct {
 		SecretEngine                    string                            `json:"secretEngine"`
 		SecretPathHash                  string                            `json:"secretPathHash"`
 		SecretEngineHash                string                            `json:"secretEngineHash"`
-		ChefUser                        string                            `json:"chefUser"`
-		Endpoint                        string                            `json:"endpoint"`
-		Org                             string                            `json:"org"`
-		OrgKey                          string                            `json:"orgKey"`
-		UserKey                         string                            `json:"userKey"`
-		Version                         string                            `json:"version"`
-		ChefUseFQDN                     bool                              `json:"chefUseFqdn"`
-		WindowsVersion                  string                            `json:"windowsVersion"`
-		WindowsInstallURL               string                            `json:"windowsInstallUrl"`
-		OrgKeyHash                      string                            `json:"orgKeyHash"`
-		UserKeyHash                     string                            `json:"userKeyHash"`
-		PuppetMaster                    string                            `json:"puppetMaster"`
-		PuppetFireNow                   string                            `json:"puppetFireNow"`
-		PuppetSshUser                   string                            `json:"puppetSshUser"`
-		PuppetSshPassword               string                            `json:"puppetSshPassword"`
-		PuppetSshPasswordHash           string                            `json:"puppetSshPasswordHash"`
-		CherwellCustomCmdbMapping       string                            `json:"cherwellCustomCmdbMapping"`
-		CherwellClientKey               string                            `json:"cherwellClientKey"`
-		CherwellCreatedBy               string                            `json:"cherwellCreatedBy"`
-		CherwellStartDate               string                            `json:"cherwellStartDate"`
-		CherwellEndDate                 string                            `json:"cherwellEndDate"`
-		CherwellIgnoreSSLErrors         string                            `json:"cherwellIgnoreSSLErrors"`
-		CherwellBusinessObject          string                            `json:"cherwellBusinessObject"`
+		// Chef Integration
+		Databags              []chefDatabagEntry `json:"databag"`
+		Endpoint              string             `json:"endpoint"`
+		Org                   string             `json:"org"`
+		ChefUser              string             `json:"chefUser"`
+		ChefUseFQDN           bool               `json:"chefUseFqdn"`
+		UserKey               string             `json:"userKey"`
+		OrgKey                string             `json:"orgKey"`
+		Version               string             `json:"version"`
+		WindowsVersion        string             `json:"windowsVersion"`
+		WindowsInstallURL     string             `json:"windowsInstallUrl"`
+		UserKeyHash           string             `json:"userKeyHash"`
+		OrgKeyHash            string             `json:"orgKeyHash"`
+		PuppetMaster          string             `json:"puppetMaster"`
+		PuppetFireNow         string             `json:"puppetFireNow"`
+		PuppetSshUser         string             `json:"puppetSshUser"`
+		PuppetSshPassword     string             `json:"puppetSshPassword"`
+		PuppetSshPasswordHash string             `json:"puppetSshPasswordHash"`
+		// Cherwell integration
+		CherwellCustomCmdbMapping string `json:"cherwellCustomCmdbMapping"`
+		CherwellClientKey         string `json:"cherwellClientKey"`
+		CherwellCreatedBy         string `json:"cherwellCreatedBy"`
+		CherwellStartDate         string `json:"cherwellStartDate"`
+		CherwellEndDate           string `json:"cherwellEndDate"`
+		CherwellIgnoreSSLErrors   string `json:"cherwellIgnoreSSLErrors"`
+		CherwellBusinessObject    string `json:"cherwellBusinessObject"`
+		ZoneFilter                string `json:"zoneFilter"`
 	}
-	Status     string `json:"status"`
-	StatusDate string `json:"statusDate"`
-	IsPlugin   bool   `json:"isPlugin"`
-	ServiceKey struct {
+	Status           string `json:"status"`
+	StatusDate       string `json:"statusDate"`
+	StatusMessage    string `json:"statusMessage"`
+	LastSync         string `json:"lastSync"`
+	LastSyncDuration string `json:"lastSyncDuration"`
+	IsPlugin         bool   `json:"isPlugin"`
+	ServiceKey       struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
 	}
