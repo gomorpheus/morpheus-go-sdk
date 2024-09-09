@@ -5,6 +5,11 @@ NOTES:
 * Update network pool server response payload
 * Update integration response payload
 
+FEATURES:
+
+* **Backups** Client methods for `backups` API endpoints
+* **Backup Jobs** Client methods for `backup_jobs` API endpoints
+
 ## 0.4.3 (August 16, 2024)
 
 NOTES:
