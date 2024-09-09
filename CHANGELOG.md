@@ -2,6 +2,7 @@
 
 NOTES:
 
+* Update cloud response payload
 * Update network pool server response payload
 * Update integration response payload
 
