@@ -25,6 +25,7 @@ type NetworkPoolServer struct {
 	ServiceMode         string `json:"serviceMode"`
 	ServiceUsername     string `json:"serviceUsername"`
 	ServicePassword     string `json:"servicePassword"`
+	ServicePasswordHash string `json:"servicePasswordHash"`
 	Status              string `json:"status"`
 	StatusMessage       string `json:"statusMessage"`
 	StatusDate          string `json:"statusDate"`
