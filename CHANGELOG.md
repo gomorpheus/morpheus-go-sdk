@@ -1,7 +1,10 @@
 ## Unreleased
 
+## 0.5.0 (September 9, 2024)
+
 NOTES:
 
+* Update resty library from 2.12.0 to 2.14.0.
 * Update cloud response payload
 * Update network pool server response payload
 * Update integration response payload
