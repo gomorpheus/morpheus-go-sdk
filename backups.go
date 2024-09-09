@@ -43,7 +43,7 @@ type Backup struct {
 	StorageProvider struct {
 		ID   int64  `json:"id"`
 		Name string `json:"name"`
-	} `json:"jstorageProviderob"`
+	} `json:"StorageProvider"`
 	BackupRepository string `json:"backupRepository"`
 	CronExpression   string `json:"cronExpression"`
 	NextFire         string `json:"nextFire"`

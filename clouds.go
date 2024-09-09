@@ -169,7 +169,13 @@ type Cloud struct {
 		Region                       string `json:"region"`
 		KubeUrl                      string `json:"kubeUrl"`
 
+		// MaaS
+		ReleasePoolName string `json:"releasePoolName"`
+		ReleaseMode     string `json:"releaseMode"`
+		AvailableFilter string `json:"availableFilter"`
+
 		// VCD
+		ServiceToken          string `json:"serviceToken"`
 		OrgID                 string `json:"orgId"`
 		VDCID                 string `json:"vdcId"`
 		VCDVersion            string `json:"vcdVersion"`
@@ -178,12 +184,12 @@ type Cloud struct {
 
 		// General
 		ClusterRef      string `json:"clusterRef"`
-		ProjectID       string `json:"projectId"`
 		ApplianceUrl    string `json:"applianceUrl"`
 		DatacenterName  string `json:"datacenterName"`
 		ImportExisting  string `json:"importExisting"`
 		InventoryLevel  string `json:"inventoryLevel"`
 		NetworkServerID string `json:"networkServer.id"`
+		KubernetesToken string `json:"kubernetes-token"`
 		NetworkServer   struct {
 			ID   string `json:"id"`
 			Name string `json:"name"`
@@ -203,12 +209,12 @@ type Cloud struct {
 		RPCMode             string `json:"rpcMode"`
 		EncryptionSet       string `json:"encryptionSet"`
 		ConfigCmID          string `json:"configCmId"`
-		KubeURL             string `json:"kubeUrl"`
 		CostingProjectID    string `json:"costingProjectId"`
 		ConfigCMDBDiscovery bool   `json:"configCmdbDiscovery"`
 		CostingDatasetID    string `json:"costingDatasetId"`
 		Username            string `json:"username"`
 		Password            string `json:"password"`
+		MasterAddress       string `json:"masterAddress"`
 		DistributedWorkerId string `json:"distributedWorkerId"`
 		PasswordHash        string `json:"passwordHash"`
 	} `json:"config"`
