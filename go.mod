@@ -2,9 +2,9 @@ module github.com/gomorpheus/morpheus-go-sdk
 
 go 1.17
 
-require github.com/go-resty/resty/v2 v2.12.0
+require github.com/go-resty/resty/v2 v2.14.0
 
-require golang.org/x/net v0.22.0 // indirect
+require golang.org/x/net v0.27.0 // indirect
 
 retract v0.1.6
 
