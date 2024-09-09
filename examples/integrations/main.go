@@ -17,11 +17,17 @@ func main() {
 	fmt.Println("LOGIN RESPONSE:", resp)
 
 	// List integrations
-	req := &morpheus.Request{}
+	req := &morpheus.Request{
+		QueryParams: map[string]string{
+			"max": "50",
+		},
+	}
 	integrationsResponse, err := client.ListIntegrations(req)
 	if err != nil {
 		log.Fatal(err)
 	}
 	result := integrationsResponse.Result.(*morpheus.ListIntegrationsResult)
-	log.Println(result.Integrations)
+	for _, integration := range *result.Integrations {
+		log.Println(integration)
+	}
 }

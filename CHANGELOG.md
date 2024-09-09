@@ -3,6 +3,7 @@
 NOTES:
 
 * Update network pool server response payload
+* Update integration response payload
 
 ## 0.4.3 (August 16, 2024)
 
