@@ -34,8 +34,9 @@ type Policy struct {
 		Key                              string      `json:"key"`
 		ValueListId                      string      `json:"valueListId"`
 		Value                            string      `json:"value"`
-		PowerSchedule                    string      `json:"powerSchedule"`
+		PowerSchedule                    int64       `json:"powerSchedule"`
 		PowerScheduleType                string      `json:"powerScheduleType"`
+		PowerScheduleHideFixed           interface{} `json:"powerScheduleHideFixed"`
 		AccountIntegrationId             int64       `json:"accountIntegrationId"`
 		WorkflowID                       int64       `json:"workflowId"`
 		CreateUser                       string      `json:"createUser"`

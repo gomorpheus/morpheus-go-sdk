@@ -23,5 +23,7 @@ func main() {
 		log.Fatal(err)
 	}
 	result := policyResponse.Result.(*morpheus.ListPoliciesResult)
-	log.Println(result)
+	for _, policy := range *result.Policies {
+		fmt.Println(policy)
+	}
 }
