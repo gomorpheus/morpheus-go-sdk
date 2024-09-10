@@ -81,6 +81,7 @@ type Integration struct {
 		Endpoint              string             `json:"endpoint"`
 		Org                   string             `json:"org"`
 		ChefUser              string             `json:"chefUser"`
+		UseFqdn               bool               `json:"useFqdn"`
 		ChefUseFQDN           bool               `json:"chefUseFqdn"`
 		UserKey               string             `json:"userKey"`
 		OrgKey                string             `json:"orgKey"`

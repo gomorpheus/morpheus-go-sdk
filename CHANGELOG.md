@@ -1,5 +1,12 @@
 ## Unreleased
 
+## 0.5.1 (September 10, 2024)
+
+NOTES:
+
+* Update the policy response payload to handle power schedule policies
+* Update the integrations response payload to handle chef integrations
+
 ## 0.5.0 (September 9, 2024)
 
 NOTES:
