@@ -55,6 +55,7 @@ type GetRoleResult struct {
 		Name   string `json:"name"`
 		Access string `json:"access"`
 	} `json:"catalogItemTypePermissions"`
+	GlobalPersonaAccess string `json:"globalPersonaAccess"`
 	PersonaPermissions []struct {
 		ID     int64  `json:"id"`
 		Code   string `json:"code"`
