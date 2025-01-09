@@ -306,6 +306,12 @@ type DeleteHostResult struct {
 	DeleteResult
 }
 
+type StandardHostResult struct {
+	Success bool              `json:"success"`
+	Message string            `json:"msg"`
+	Errors  map[string]string `json:"errors"`
+}
+
 // Client request methods
 func (client *Client) ListHosts(req *Request) (*Response, error) {
 	return client.Execute(&Request{
@@ -450,6 +456,36 @@ func (client *Client) InstallHostAgent(id int64, req *Request) (*Response, error
 		QueryParams: req.QueryParams,
 		Body:        req.Body,
 		Result:      &ConvertToManagedResult{},
+	})
+}
+
+func (client *Client) EnableHostMaintenance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/maintenance", HostsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardHostResult{},
+	})
+}
+
+func (client *Client) LeaveHostMaintenance(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/leave-maintenance", HostsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardHostResult{},
+	})
+}
+
+func (client *Client) ManageHostPlacement(id int64, req *Request) (*Response, error) {
+	return client.Execute(&Request{
+		Method:      "PUT",
+		Path:        fmt.Sprintf("%s/%d/placement", HostsPath, id),
+		QueryParams: req.QueryParams,
+		Body:        req.Body,
+		Result:      &StandardHostResult{},
 	})
 }
 

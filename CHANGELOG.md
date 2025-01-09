@@ -1,5 +1,9 @@
 ## Unreleased
 
+NOTES:
+
+* Add support for HPE VM Essentials host maintenance and placement
+
 ## 0.5.1 (September 10, 2024)
 
 NOTES:
