@@ -14,6 +14,22 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
+type clientOptions struct {
+	debug bool
+}
+
+type ClientOption func(*clientOptions)
+
+// WithDebug allows users to enable dumping
+// of http requests and responses to stderr.
+// Note: This is not recommended for production use - it
+// may output sensitive data to logs.
+func WithDebug(debug bool) ClientOption {
+	return func(options *clientOptions) {
+		options.debug = debug
+	}
+}
+
 type Client struct {
 	Url             string
 	Username        string
@@ -34,6 +50,7 @@ type Client struct {
 	requestCount int64
 	successCount int64
 	errorCount   int64
+	debug        bool
 }
 
 // func (client * Client) String() string {
@@ -85,11 +102,18 @@ func parseJsonToResult(data []byte, output interface{}) error {
 	return err
 }
 
-func NewClient(url string) (client *Client) {
+func NewClient(url string, options ...ClientOption) (client *Client) {
 	var userAgent = "morpheus-terraform-plugin v0.1"
+
+	opts := clientOptions{}
+	for _, opt := range options {
+		opt(&opts)
+	}
+
 	return &Client{
 		Url:       url,
 		UserAgent: userAgent,
+		debug:     opts.debug,
 	}
 }
 
@@ -162,11 +186,7 @@ func (client *Client) Execute(req *Request) (*Response, error) {
 	//var url string = client.Url + req.Path
 	// construct resty.Client
 	restyClient := resty.New()
-
-	// Enable debug mode
-	// this might be handy
-	// meh, let's use net/http instead
-	// restyClient.SetDebug(true)
+	restyClient.SetDebug(client.debug)
 
 	// always ignore ssl cert errors for now...
 	// todo: make this is a config setting
